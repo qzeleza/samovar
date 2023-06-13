@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+app_name=kotomka.app
+cur_path=$(pwd)
+run_path=$(dirname "$(find ./.kotomka -type f | grep  ${app_name})")
+cd "${run_path}" || exit 1
+./${app_name} "${*}" && cd "${cur_path}" || exit 1

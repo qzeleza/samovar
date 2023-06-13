@@ -1,0 +1,8 @@
+#!/bin/sh
+#addgroup www-data
+#adduser -H -D -G www-data -s /bin/sh www-data
+#mkdir -p /opt/var/log/nginx/
+#chown -R www-data:www-data /opt/var/www/ /opt/var/log/nginx/
+#mv /opt/etc/nginx/nginx.conf /opt/etc/nginx/nginx.conf.orig
+mv /opt/etc/nginx/conf.d/nginx.conf /opt/etc/nginx/nginx.conf
+/opt/etc/init.d/S80nginx restart

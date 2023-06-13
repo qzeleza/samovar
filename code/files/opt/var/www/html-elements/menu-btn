@@ -1,0 +1,19 @@
+<div class="d-inline-flex">
+    <div class="dropdown">
+        <a href="#" class="text-body" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- Иконка вкладки -->
+            <i class="ph-text-align-justify  ph-lg bg-opacity-10 rounded p-1"></i>
+            <!-- /Иконка вкладки -->
+        </a>
+        <div class="dropdown-menu dropdown-menu-end" style="">
+            <a href="#" class="dropdown-item">
+                Добавить
+                <i class="ph-plus ms-auto"></i>
+            </a>
+            <a href="#" class="dropdown-item">
+                Удалить
+                <i class="ph-minus ms-auto"></i>
+            </a>
+        </div>
+    </div>
+</div>

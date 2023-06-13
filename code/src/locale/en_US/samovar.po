@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-10 17:58+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en_EN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: api.cpp:12
+msgid "POST запрос успешно принят."
+msgstr "POST request successfully accepted."
+
+#: loging.cpp:19
+msgid "Запрос не распознан!"
+msgstr "Request not recognized!"
+
+#: loging.cpp:25
+msgid "Запрос не разрешен!"
+msgstr "The request is not allowed!"
+
+#: loging.cpp:31
+msgid "Внутренняя ошибка в коде на сервере!"
+msgstr "Internal bug in the code on the server!"
+
+#: samovar.cpp:33
+msgid "Error: no arguments to start."
+msgstr "Ошибка: отсутствуют aргументы для запуска."
+
+#: samovar.cpp:34
+#, fuzzy
+msgid "Ошибка: Номер 1 запуска."
+msgstr "fdfsdf dsg dfgdfsg dfg"
+
+#: samovar.cpp:43
+msgid "Настройка REST API запущена..."
+msgstr "REST API configuration is running..."
+
+#: samovar.cpp:45
+msgid "Настройка REST API завершена..."
+msgstr "REST API configuration completed..."
+
+#: samovar.cpp:49
+msgid "Сервер REST API запущен успешно."
+msgstr "The REST API server started successfully."
+
+#: samovar.cpp:51
+msgid "ОШИБКА: Сервер REST API остановлен."
+msgstr "ERROR: The REST API server is stopped."
+
+#: samovar.cpp:58
+msgid "ОШИБКА: Остановка сервера REST API провалилась."
+msgstr "ERROR: REST API server halt failed."
+
+#: samovar.cpp:60
+msgid "Сервер REST API остановлен успешно."
+msgstr "The REST API server is stopped successfully."
+
+#: samovar.cpp:63
+msgid "Сервер REST API НЕ был запущен."
+msgstr "The REST API server has NOT been started."
+
+#: samovar.cpp:65
+msgid "Ошибка: aргумент ["
+msgstr "Error: argument ["
+
+#: samovar.cpp:65
+msgid "] не обнаружен."
+msgstr "] not found."
+
+#: setup.cpp:25
+msgid "Ошибка при выполнении команды"
+msgstr "Error when executing the command"
+
+#: setup.cpp:35 setup.cpp:41
+msgid "Группа"
+msgstr "The group"
+
+#: setup.cpp:35
+msgid " успешно добавлена."
+msgstr " has been successfully added."
+
+#: setup.cpp:37
+msgid "Ошибка при добавлении группы"
+msgstr "Error when adding a group."
+
+#: setup.cpp:41
+msgid " уже существует, ее ID "
+msgstr " already exists, its ID "

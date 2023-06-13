@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Bing</title>
+    <g id="Bing" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#F4BD27" cx="32" cy="32" r="32"></circle>
+        <polyline id="Path" fill="#FFFFFF" fill-rule="nonzero" points="29.1392578 22.8457558 32.9573437 31.2354541 38.5992187 33.8215859 18.2490234 44.6714169 26.5873828 37.1390123 26.5873828 15.6659354 18 13 18 44.9370722 26.5347656 51 48 38.0430956 48 28.7026432 29.1392578 22.8457558"></polyline>
+    </g>
+</svg>

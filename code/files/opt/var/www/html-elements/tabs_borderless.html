@@ -1,0 +1,415 @@
+<!-- Ряд, одна большая карточка с вкладками соединений -->
+<div class="card card-body">
+
+    <!-- Вкладки VPN СОЕДИНЕНИЙ-->
+    <ul class="nav nav-tabs rounded-top-2 mb-3 ms-0" role="tablist">
+        <!-- Вкладка VPN соединения 1-->
+        <li class="nav-item me-2 " role="presentation">
+            <a href="#js-tab1" class="nav-link active ps-2" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">
+                <div class="d-flex align-items-center">
+                    <i class="ph-globe ph-lg bg-primary text-primary bg-opacity-10 rounded p-2 me-3"></i>
+                    <div>
+                        <div class="fw-semibold">VPN-1</div>
+                        <span class="opacity-50">Настройки VPN соединения</span>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <!-- /Вкладка VPN соединения 1-->
+
+        <!-- Вкладка VPN соединения 2-->
+        <li class="nav-item me-2 rounded-top-end" role="presentation">
+            <a href="#js-tab2" class="nav-link ps-2" data-bs-toggle="tab" aria-selected="true" role="tab">
+                <div class="d-flex align-items-center">
+                    <i class="ph-globe ph-lg bg-primary text-primary bg-opacity-10 rounded p-2 me-3"></i>
+                    <div>
+                        <div class="fw-semibold">VPN-2</div>
+                        <span class="opacity-50">Настройки VPN соединения</span>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <!-- /Вкладка VPN соединения 2-->
+
+        <!-- Вкладка VPN соединения 3-->
+        <li class="nav-item me-2" role="presentation">
+            <a href="#js-tab3" class="nav-link ps-2" data-bs-toggle="tab" aria-selected="true" role="tab">
+                <div class="d-flex align-items-center">
+                    <i class="ph-globe ph-lg bg-primary text-primary bg-opacity-10 rounded p-2 me-3"></i>
+                    <div>
+                        <div class="fw-semibold">Shadowsocks-1</div>
+                        <span class="opacity-50">Настройки прокси соединения</span>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <!-- /Вкладка VPN соединения 3-->
+
+    </ul>
+    <!-- /Вкладки VPN СОЕДИНЕНИЙ-->
+
+
+    <!-- Содержимое вкладок VPN СОЕДИНЕНИЙ-->
+    <div class="tab-content">
+
+        <!-- Содержимое вкладки VPN 1-->
+        <div class="tab-pane fade active show" id="js-tab1" role="tabpanel">
+
+            <!-- Start row sortable-card -->
+            <div class="row sortable-card">
+
+                <!-- Start column 1/2 screen's width -->
+                <div class="col-lg-8">
+
+
+
+                    <!-- Start sortable-card 1 (drag-and-drop) -->
+                    <div class="card">
+                        <div class="card-header d-flex bg-success bg-opacity-10 align-items-center">
+                            <h5 class="mb-0">Доступные подключения</h5>
+                            <div class="hstack gap-2 ms-auto">
+                                <a class="text-body" data-card-action="collapse">
+                                    <i class="ph-caret-down"></i>
+                                </a>
+                                <a class="text-body" data-card-action="reload">
+                                    <i class="ph-arrows-clockwise"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="collapse show">
+                            <div class="card-body">
+                                Данные службы используются для работы с Белым списком. Более подробно можно посмотреть ниже.
+                            </div>
+
+                            <!-- Start basic table -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Источник</th>
+                                            <th>Название</th>
+                                            <th>Домены</th>
+                                            <th>IP адреса</th>
+                                            <th>IP интервалы</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-primary">
+                                            <td>
+                                                <div class="ms-sm-auto my-sm-auto">
+                                                    <div class="wmin-sm-200">
+                                                        <select class="form-control form-control-select2">
+
+                                                            <option value="AK">Alaska</option>
+                                                            <option value="HI">Hawaii</option>
+                                                            <option value="CA">California</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="cr_vpn" id="cr_vpn-1" checked="">
+                                                    <label class="form-check-label" for="cr_vpn-1">VPN-1</label>
+                                                </div>
+                                            </td>
+                                            <td>20 шт.</td>
+                                            <td>2 шт.</td>
+                                            <td>0 шт.</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>0 шт.</td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="cr_vpn" id="cr_vpn-2">
+                                                    <label class="form-check-label" for="cr_vpn-2">VPN-1</label>
+                                                </div>
+                                            </td>
+                                            <td>0 шт.</td>
+                                            <td>0 шт.</td>
+                                            <td>0 шт.</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>0 шт.</td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="cr_vpn" id="cr_vpn-3">
+                                                    <label class="form-check-label" for="cr_vpn-3">Shadowsocks-1</label>
+                                                </div>
+                                            </td>
+                                            <td>0 шт.</td>
+                                            <td>0 шт.</td>
+                                            <td>0 шт.</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>0 шт.</td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="cr_vpn" id="cr_vpn-4">
+                                                    <label class="form-check-label" for="cr_vpn-4">Shadowsocks-2</label>
+                                                </div>
+                                            </td>
+                                            <td>0 шт.</td>
+                                            <td>0 шт.</td>
+                                            <td>0 шт.</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /basic table -->
+                        </div>
+                    </div>
+                    <!-- End sortable-card 1 (drag-and-drop) -->
+
+
+
+                    <!-- Start sortable-card 1 (drag-and-drop) -->
+<!--								<div class="card">-->
+
+<!--									<div class="card-header d-sm-flex pt-sm-0 pb-0 bg-success bg-opacity-10">-->
+<!--										<h6 class="align-self-sm-center mb-sm-0">VPN подключения</h6>-->
+
+<!--										<div class="ms-sm-auto">-->
+
+<!--											&lt;!&ndash;Заголовки вкладок &ndash;&gt;-->
+<!--											<ul class="nav nav-tabs nav-tabs-highlight card-header-tabs mb-0" role="tablist">-->
+
+<!--&lt;!&ndash;											В активном подключении &ndash;&gt;-->
+<!--&lt;!&ndash;												1. к классу "nav-link" подключаем классы "active fw-bold text-primary"&ndash;&gt;-->
+<!--&lt;!&ndash;												2. меняем иконку к заголовку вкладки на <i class="ph-power me-2"></i> &ndash;&gt;-->
+<!--&lt;!&ndash;												3. во вторую колонку к тексту выводим бейдж <span class="badge bg-success .border-end.rounded-end-0">Активно</span>&ndash;&gt;-->
+
+<!--&lt;!&ndash;											В НЕ активном подключении&ndash;&gt;-->
+<!--&lt;!&ndash;												1. из класса "nav-link" убираем класс "active", а класс "fw-bold" меняем на класс "fw-lighter"&ndash;&gt;-->
+<!--&lt;!&ndash;												2. меняем иконку к заголовку вкладки на <i class="ph-prohibit me-2"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;												3. очищаем втору колонку, убираем от туда бейдж "Активно".&ndash;&gt;-->
+
+<!--												&lt;!&ndash;VPN-Смольный подключение&ndash;&gt;-->
+<!--												<li class="nav-item" role="presentation">-->
+
+<!--													<a href="#card-tab1" class="nav-link active text-primary" data-bs-toggle="tab" aria-selected="true" role="tab">-->
+<!--&lt;!&ndash;														<span class="badge bg-success rounded-pill me-2 mb-1">122</span>&ndash;&gt;-->
+<!--														<i class="ph-power me-2"></i>-->
+<!--														 VPN-Смольный-->
+<!--													</a>-->
+<!--												</li>-->
+<!--												&lt;!&ndash;/VPN-Смольный подключение&ndash;&gt;-->
+
+<!--												&lt;!&ndash;VPN-2 подключение&ndash;&gt;-->
+<!--												<li class="nav-item" role="presentation">-->
+<!--													<a href="#card-tab2" class="nav-link fw-lighter" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">-->
+<!--														<i class="ph-prohibit me-2"></i>-->
+<!--														VPN-2-->
+<!--&lt;!&ndash;														<span class="badge bg-danger rounded-pill me-2">Нет</span>&ndash;&gt;-->
+
+<!--													</a>-->
+<!--												</li>-->
+<!--												&lt;!&ndash; /VPN-2 подключение&ndash;&gt;-->
+
+<!--												&lt;!&ndash;Shadowsocks подключение&ndash;&gt;-->
+<!--												<li class="nav-item" role="presentation">-->
+<!--													<a href="#card-tab3" class="nav-link fw-lighter " data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">-->
+<!--														<i class="ph-prohibit me-2"></i>-->
+<!--														Shadowsocks-->
+<!--&lt;!&ndash;														<span class="badge bg-danger rounded-pill me-2">Нет</span>&ndash;&gt;-->
+
+<!--													</a>-->
+<!--												</li>-->
+<!--												&lt;!&ndash; /Shadowsocks подключение&ndash;&gt;-->
+
+<!--											</ul>-->
+<!--											&lt;!&ndash;Заголовки вкладок &ndash;&gt;-->
+
+<!--										</div>-->
+
+<!--									</div>-->
+
+<!--									&lt;!&ndash; Тело карточки&ndash;&gt;-->
+<!--									<div class="card-body tab-content">-->
+
+<!--										&lt;!&ndash; Вкладка №1 &ndash;&gt;-->
+<!--										<div class="tab-pane fade active show" id="card-tab1" role="tabpanel">-->
+<!--											<div class="row mb-2 me-2">-->
+<!--												<div class="col-lg-8 ms-3">-->
+<!--													Данное соединение является текущим.-->
+<!--												</div>-->
+<!--												<div class="col-lg-2 ms-auto text-end">-->
+<!--													<span class="badge bg-success .border-end.rounded-end-0 px-3">Активно</span>-->
+<!--												</div>-->
+<!--											</div>-->
+<!--											<div class="row">-->
+
+<!--													<div class="chart-container text-center">-->
+<!--														<div class="card-body">-->
+
+<!--															<div class="mb-3">-->
+<!--																<div class="d-flex align-items-center mb-1">IP интервалов <span class="text-muted ms-auto">0 шт.</span></div>-->
+<!--																<div class="progress" style="height: 0.375rem;">-->
+<!--																	<div class="progress-bar bg-danger" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--																</div>-->
+<!--															</div>-->
+
+<!--															<div class="mb-3">-->
+<!--																<div class="d-flex align-items-center mb-1">IP адреса<span class="text-muted ms-auto">20 шт.</span></div>-->
+<!--																<div class="progress" style="height: 0.375rem;">-->
+<!--																	<div class="progress-bar bg-success" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--																</div>-->
+<!--															</div>-->
+
+
+<!--															<div class="mb-3">-->
+<!--																<div class="d-flex align-items-center mb-1">Доменные имена <span class="text-muted ms-auto">60 шт.</span></div>-->
+<!--																<div class="progress" style="height: 0.375rem;">-->
+<!--																	<div class="progress-bar bg-primary" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--																</div>-->
+<!--															</div>-->
+
+<!--														</div>-->
+<!--													</div>-->
+
+<!--											</div>-->
+<!--										</div>-->
+<!--										&lt;!&ndash; /Вкладка №1 &ndash;&gt;-->
+
+<!--										&lt;!&ndash; Вкладка №2 &ndash;&gt;-->
+<!--										<div class="tab-pane fade" id="card-tab2" role="tabpanel">-->
+<!--											<div class="row align-content-center m-2">-->
+<!--												<div class="col-lg-9 text-danger fw-lighter">-->
+<!--													Подключение не активировано. <br>-->
+<!--													Для его подключения активируйте выключатель с права.-->
+<!--												</div>-->
+<!--												<div class="col-lg-3">-->
+<!--													<div class="form-check form-switch form-check-reverse">-->
+<!--														<input type="checkbox" class="form-check-input" id="sc_rs_vpn2" >-->
+<!--														<label class="form-check-label" for="sc_rs_vpn2">Включить</label>-->
+<!--													</div>-->
+
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										&lt;!&ndash; /Вкладка №2 &ndash;&gt;-->
+
+<!--										&lt;!&ndash; Вкладка №3 &ndash;&gt;-->
+<!--										<div class="tab-pane fade" id="card-tab3" role="tabpanel">-->
+<!--											<div class="row align-content-center m-2">-->
+<!--												<div class="col-lg-9 text-danger fw-lighter">-->
+<!--													Подключение не активировано. <br>-->
+<!--													Для его подключения активируйте выключатель с права.-->
+<!--												</div>-->
+<!--												<div class="col-lg-3 ">-->
+<!--													<div class="form-check form-switch form-check-reverse mb-2 me-3">-->
+<!--														<input type="checkbox" class="form-check-input" id="sc_rs_ssr" >-->
+<!--														<label class="form-check-label" for="sc_rs_ssr">Включить</label>-->
+<!--													</div>-->
+
+<!--												</div>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--										&lt;!&ndash; /Вкладка №3 &ndash;&gt;-->
+
+<!--									</div>-->
+<!--									&lt;!&ndash; /Тело карточки&ndash;&gt;-->
+
+<!--								</div>-->
+                    <!-- End sortable-card 1 (drag-and-drop) -->
+
+                </div>
+                <!-- Start column 1/2 screen's width -->
+
+                <!-- Start column 1/2 screen's width -->
+                <div class="col-lg-4">
+
+                    <!-- Start sortable-card 2 (drag-and-drop) -->
+                    <div class="card">
+                        <div class="card-header d-flex bg-success bg-opacity-10 align-items-center">
+                            <h5 class="mb-0">Используемые сервисы</h5>
+                            <div class="hstack gap-2 ms-auto">
+                                <a class="text-body" data-card-action="collapse">
+                                    <i class="ph-caret-down"></i>
+                                </a>
+                                <a class="text-body" data-card-action="reload">
+                                    <i class="ph-arrows-clockwise"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="collapse show">
+                            <div class="card-body">
+                                Данные службы используются для работы с Белым списком. Более подробно можно посмотреть ниже.
+                            </div>
+
+                            <!-- Start basic table -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Eugene</td>
+                                            <td>Kopyov</td>
+                                            <td>@Kopyov</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Victoria</td>
+                                            <td>Baker</td>
+                                            <td>@Vicky</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>James</td>
+                                            <td>Alexander</td>
+                                            <td>@Alex</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Franklin</td>
+                                            <td>Morrison</td>
+                                            <td>@Frank</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /basic table -->
+                        </div>
+                    </div>
+                    <!-- End sortable-card 2 (drag-and-drop) -->
+
+                </div>
+                <!-- Start column 1/2 screen's width -->
+
+            </div>
+            <!-- End row sortable-card -->
+
+        </div>
+        <!-- /Содержимое вкладки VPN 1-->
+
+        <!-- Содержимое вкладки VPN 2-->
+        <div class="tab-pane fade" id="js-tab2" role="tabpanel">
+            Это некоторый контент-заполнитель, связанный со <strong>вторым </strong>вкладкой
+        </div>
+        <!-- /Содержимое вкладки VPN 2-->
+
+        <!-- Содержимое вкладки VPN 3-->
+        <div class="tab-pane fade" id="js-tab3" role="tabpanel">
+            This is some placeholder content the <strong>third</strong> tab's associated content
+        </div>
+        <!-- /Содержимое вкладки VPN 3-->
+
+    </div>
+    <!-- /Содержимое вкладок VPN СОЕДИНЕНИЙ-->
+
+
+</div>
+<!-- Ряд, одна большая карточка с вкладками соединений -->

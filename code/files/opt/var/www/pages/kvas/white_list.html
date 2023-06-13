@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+
+<html lang="ru" dir="ltr">
+
+
+	<!-- Заголовок проекта  -->
+	<head>
+
+
+		<!-- Мета заголовки проекта  -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Самовар - переварим все!</title>
+		<!-- /Мета заголовки проекта  -->
+
+		<!-- Глобальные стили -->
+		<link rel="shortcut icon" type="image/png" href="../../favicon.png">
+		<link href="../../assets/fonts/inter/inter.css" rel="stylesheet" type="text/css">
+		<link href="../../assets/icons/phosphor/styles.min.css" rel="stylesheet" type="text/css">
+		<link href="../../extensions/css/all.min.css" id="stylesheet" rel="stylesheet" type="text/css">
+		<link href="../../extensions/css/custom.css" rel="stylesheet" type="text/css">
+		<!-- /Глобальные стили -->
+
+		<!-- Файлы JS скриптов -->
+
+		<script src="../../extensions/js/pages/all/configurator.js"></script>
+		<script src="../../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+
+		<!-- /Файлы JS скриптов -->
+
+		<!-- Файлы скриптов JS для отрисовки элементов UI -->
+		<script src="../../assets/js/jquery/jquery.min.js"></script>
+		<script src="../../assets/js/vendor/tables/datatables.min.js"></script>
+		<script src="../../assets/js/vendor/tables/extensions/select.min.js"></script>
+		<script src="../../assets/js/vendor/tables/extensions/buttons.min.js"></script>
+		<script src="../../assets/js/vendor/tables/extensions/responsive.min.js"></script>
+<!--		<script src="../../assets/js/vendor/tables/extensions/col_reorder.min.js"></script>-->
+		<!-- /Файлы скриптов JS для отрисовки элементов UI -->
+
+		<!-- Файлы скриптов JS для отрисовки темы -->
+		<script src="../../extensions/js/pages/all/apps.js"></script>
+		<script src="../../extensions/js/pages/wlist/data_tables.js"></script>
+		<script src="../../extensions/js/pages/wlist/guest_nets.js"></script>
+		<!-- /Файлы скриптов JS для отрисовки темы -->
+
+	</head>
+	<!-- /Заголовок проекта  -->
+
+	<!-- Тело проекта  -->
+	<body>
+
+		<!-- Горизонтальная верхняя панель навигации -->
+		<div class="navbar navbar-dark navbar-expand-lg navbar-static border-bottom border-bottom-white border-opacity-10">
+
+			<!-- Тело горизонтальной верхней панели навигации -->
+			<div class="container-fluid h-80px">
+
+				<!-- Кнопка в панели навигации для мобильных устройств -->
+				<div class="d-flex d-lg-none me-2">
+					<button type="button" class="navbar-toggler sidebar-mobile-main-toggle rounded">
+						<i class="ph-list"></i>
+					</button>
+				</div>
+				<!-- Кнопка в панели навигации для мобильных устройств -->
+
+				<!-- Блок логотипа в панели навигации -->
+				<div class="navbar-brand">
+
+					<!-- Картинки логотипа в панели навигации -->
+					<a href="../../index.html" class="d-inline-flex align-items-center">
+						<img src="../../assets/images/logo_icon_main_gold.svg" alt="" class="logo_image_size" >
+						<img src="../../assets/images/logo_text_main_gold.svg" class="logo_text_size offcanvas-size-xs d-none d-sm-inline-block" alt="">
+					</a>
+					<!-- /Картинки логотипа в панели навигации -->
+
+				</div>
+				<!-- /Блок логотипа в панели навигации -->
+			</div>
+			<!-- /Тело горизонтальной верхней панели навигации -->
+
+		</div>
+		<!-- /Горизонтальная верхняя панель навигации -->
+
+		<!-- Содержание страницы -->
+		<div class="page-content">
+
+			<!-- Боковое меню -->
+			<div class="sidebar sidebar-dark sidebar-main sidebar-expand-lg">
+
+				<!-- Содержимое бокового меню -->
+				<div class="sidebar-content ">
+
+					<!-- Основной уровень бокового меню -->
+					<div class="sidebar-section border-top border-top-white border-top-width-1">
+
+						<!-- Блок пунктов бокового меню -->
+						<ul class="nav nav-sidebar " data-nav-type="accordion">
+
+							<li class="nav-item">
+								<a href="../../index.html" class="nav-link">
+									<i class="ph-house"></i>
+
+									<span>
+										СПИСОК РАСШИРЕНИЙ
+										<span class="d-block fw-normal opacity-50">Описание функционала</span>
+									</span>
+
+								</a>
+							</li>
+							<li class="nav-item-divider"></li>
+
+							<!-- Название меню -->
+							<li class="nav-item-header mb-1">
+								<span class="h-24px text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Основное меню</span>
+								<i class="ph-dots-three sidebar-resize-show"></i>
+							</li>
+							<!-- /Название меню -->
+
+							<li class="nav-item nav-item-submenu nav-item-open">
+								<a href="#" class="nav-link">
+									<i class="ph-list-bullets"></i>
+									<span>Квас</span>
+								</a>
+								<!-- Пункты меню плугина -->
+								<ul class="nav-group-sub collapse show">
+									<li class="nav-item"><a href="../../pages/kvas/services.html" class="nav-link fw-light ">Службы</a></li>
+									<li class="nav-item"><a href="#" class="nav-link fw-light active">Белый список</a></li>
+									<li class="nav-item"><a href="../../pages/kvas/debug.html" class="nav-link fw-light">Отладка</a></li>
+									<li class="nav-item-divider"></li>
+								</ul>
+								<!-- Пункты меню плугина -->
+							</li>
+
+
+						</ul>
+						<!-- /Блок пунктов бокового меню -->
+
+					</div>
+					<!-- /Основной уровень бокового меню -->
+
+					<!-- Блок кнопки сокрытия бокового меню -->
+					<div class="sidebar-section sidebar-hide-icon border-top border-top-white border-top-width-1">
+
+						<!-- Тело блока кнопки сокрытия бокового меню -->
+						<div class="sidebar-section-body d-flex justify-content-center">
+
+							<!-- Название кнопки сокрытия бокового меню -->
+							<span class="sidebar-resize-hide flex-grow-1 mt-1 text-center">СКРЫТЬ МЕНЮ</span>
+
+							<!-- Кнопки сокрытия бокового меню -->
+							<div class="justify-content-between ">
+
+								<!-- Кнопка сокрытия бокового меню для компьютера -->
+								<button type="button" class="btn btn-flat-white btn-icon btn-sm border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
+									<i class="ph-arrows-left-right"></i>
+								</button>
+								<!-- /Кнопка сокрытия бокового меню для компьютера -->
+
+								<!-- Кнопка сокрытия бокового меню для мобильных устройств -->
+								<button type="button" class="btn btn-flat-white btn-icon btn-sm  border-transparent sidebar-mobile-main-toggle d-lg-none">
+									<i class="ph-x"></i>
+								</button>
+								<!-- Кнопка сокрытия бокового меню для мобильных устройств -->
+
+							</div>
+							<!-- /Кнопки сокрытия бокового меню -->
+
+						</div>
+						<!-- /Тело блока кнопки сокрытия бокового меню -->
+
+					</div>
+					<!-- /Блок кнопки сокрытия бокового меню -->
+
+
+				</div>
+				<!-- /Содержимое бокового меню -->
+
+			</div>
+			<!-- Боковое меню -->
+
+			<!-- Основной контейнер страницы -->
+			<div class="content-wrapper">
+
+				<!-- Заголовок страницы -->
+				<div class="page-header page-header-light border ">
+
+					<div class="page-header-content d-lg-flex ms-3 d-lg-block d-none">
+						<div class="d-flex">
+							<div class="page-title">
+								<h1 class="display-6 mb-0 text-uppercase fw-bold ">Квас</h1>
+								<div class="text-muted mt-1">Список доменных имен и IP адресов, к которым доступ осуществляется через текущее VPN соединение.</div>
+							</div>
+						</div>
+
+
+					</div>
+
+					<!-- Путь к текущей странице -->
+					<div class="page-header-content border-top border-top-primary border-top-width-1">
+						<div class="breadcrumb ms-3">
+
+							<a href="#" class="breadcrumb-item py-2">Квас</a>
+<!--							<span class="breadcrumb-item py-2">Настройки</span>-->
+							<span class="breadcrumb-item active py-2">Белый список</span>
+<!--							<span class="breadcrumb-item active py-2">Просмотр</span>-->
+						</div>
+					</div>
+					<!-- /Путь к текущей странице -->
+
+				</div>
+				<!-- /Заголовок страницы -->
+
+                <!-- Внутреннее содержимое страницы -->
+				<div class="content-inner ps-2 bg-white bg-opacity-10">
+
+					<!-- Содержимое страницы -->
+					<div class="content pt-2">
+
+						<!-- Ряд для хроники -->
+						<div class="row">
+
+							<!-- Задаем ширину всего блока с вкладками -->
+							<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-4">
+
+								<!-- Основной блок с вкладками -->
+
+
+									<!-- Описание вкладок основного блока -->
+									<ul class="nav nav-tabs nav-tabs-underline justify-content-center justify-content-sm-start nav-pills-toolbar bg-body mb-3 pt-0 border-0 no-links-padding-xy" role="tablist">
+
+										<!-- Заголовок вкладки 1 с иконкой -->
+										<li class="nav-item elem-header " role="presentation">
+
+											<!-- Ссылка на заголовок вкладки -->
+											<a href="#js-tab1" class="nav-link active" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">
+
+												<!-- Содержание заголовка вкладки -->
+												<div class="d-flex align-items-center ">
+
+													<!-- Иконка вкладки -->
+													<i class="ph-shield-check ph-lg text-primary bg-opacity-10 rounded p-1 me-1"></i>
+													<!-- /Иконка вкладки -->
+
+													<!-- Заголовок вкладки -->
+													<div class="align-content-start">
+														<!-- Основной заголовок вкладки -->
+														<div class="fw-semibold elem-text">VPN-1</div>
+														<!-- /Основной заголовок вкладки -->
+
+													</div>
+													<!-- /Заголовок вкладки -->
+
+												</div>
+												<!-- Содержание заголовка вкладки -->
+
+
+											</a>
+											<!-- /Ссылка на заголовок вкладки -->
+
+										</li>
+										<!-- /Заголовок вкладки 1 с иконкой -->
+
+										<!-- Заголовок вкладки 2 с иконкой -->
+										<li class="nav-item elem-header" role="presentation">
+
+											<!-- Ссылка на заголовок вкладки -->
+											<a href="#js-tab2" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">
+
+												<!-- Содержание заголовка вкладки -->
+												<div class="d-flex align-items-center">
+
+													<!-- Иконка вкладки -->
+													<i class="ph-shield-check ph-lg text-primary bg-opacity-10 rounded p-1 me-1"></i>
+													<!-- /Иконка вкладки -->
+
+													<!-- Заголовок вкладки -->
+													<div class="align-content-start">
+														<!-- Основной заголовок вкладки -->
+														<div class="fw-semibold elem-text">VPN-2</div>
+														<!-- /Основной заголовок вкладки -->
+
+													</div>
+													<!-- /Заголовок вкладки -->
+
+												</div>
+												<!-- Содержание заголовка вкладки -->
+
+											</a>
+											<!-- /Ссылка на заголовок вкладки -->
+
+										</li>
+										<!-- /Заголовок вкладки 2 с иконкой -->
+
+										<!-- Заголовок вкладки 3 с иконкой -->
+										<li class="nav-item elem-header" role="presentation">
+
+											<!-- Ссылка на заголовок вкладки -->
+											<a href="#js-tab3" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">
+
+												<!-- Содержание заголовка вкладки -->
+												<div class="d-flex align-items-center">
+
+													<!-- Иконка вкладки -->
+													<i class="ph-shield-check ph-lg text-primary bg-opacity-10 rounded p-1 me-1"></i>
+													<!-- /Иконка вкладки -->
+
+													<!-- Заголовок вкладки -->
+													<div class="align-content-start">
+														<!-- Основной заголовок вкладки -->
+														<div class="fw-semibold elem-text">SHADOWSOCKS-1</div>
+														<!-- /Основной заголовок вкладки -->
+
+													</div>
+													<!-- /Заголовок вкладки -->
+
+												</div>
+												<!-- Содержание заголовка вкладки -->
+
+											</a>
+											<!-- /Ссылка на заголовок вкладки -->
+
+										</li>
+										<!-- /Заголовок вкладки 3 с иконкой -->
+
+									</ul>
+									<!-- /Описание вкладок основного блока -->
+									<div class="card">
+<!--									<div class="card-body border border-width-1">-->
+										<!-- Содержимое вкладок основного блока -->
+										<div class="tab-content">
+
+											<!-- Содержимое первой вкладки -->
+											<div class="tab-pane fade active show" id="js-tab1" role="tabpanel">
+
+												<div class="accordion " id="accordion_collapsed">
+
+													<div class="accordion-item border-top-0 border-end-0 border-start-0 rounded-0 ">
+
+														<h2 class="accordion-header ps-1 pe-3 lift-up-10 ">
+															<button class="accordion-button fw-semibold collapsed ms-2 pt-0 pb-0 mb-1 mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#vpn_item_1"  id="vpn_item_header_1">
+
+																<div class="flex-fill pe-5 pb-1 pt-3">
+																	<h5 class="mb-2">Доменные имена</h5>
+																	<span class="fw-light text-muted d-lg-block d-none" >
+																		Добавляйте, удаляйте и редактируйте доменные имена и IP адреса для выбранного VPN соединения. <br>
+																		Чтобы произвести действия с записями в таблице нажмите на правую клавишу, наведя мышку на одну из записей.
+																	</span>
+																</div>
+
+															</button>
+
+														</h2>
+
+
+														<!-- Контекстное меню -->
+														<div id="vpn_item_1" class="accordion-collapse collapse show border-top border-top-white border-top-width-3" data-bs-parent="#accordion_collapsed">
+
+															<div class="accordion-body p-0">
+
+																<!-- Контекстное меню действий при нажатии на таблицу -->
+																<div class="dropdown-menu dropdown-menu-end" id="contextMenuVPN" >
+
+																	<div class="dropdown-header bg-light d-flex align-items-center py-2">
+																		<i class="ph-text-indent me-2"></i>Добавить
+																	</div>
+
+																	<div class="py-0">
+																		<a href="#" class="dropdown-item">Запись<i class="ph-plus ms-auto text-success"></i></a>
+																		<a href="#" class="dropdown-item">Из файла<i class="ph-file-arrow-down ms-auto text-success"></i></a>
+																	</div>
+
+																	<div class="dropdown-header bg-light d-flex align-items-center py-2">
+																		<i class="ph-asterisk me-2"></i>Поддомены
+																	</div>
+																	<div class="py-0">
+																		<a href="#" class="dropdown-item">Включить <i class="ph-toggle-right ms-auto text-success "></i></a>
+																		<a href="#" class="dropdown-item">Отключить <i class="ph-toggle-left ms-auto text-warning "></i></a>
+
+																	</div>
+
+																	<div class="dropdown-header bg-light d-flex align-items-center py-2">
+																		<i class="ph-text-indent me-2"></i>Выбранные
+																	</div>
+																	<div class="py-0">
+																		<a href="#" class="dropdown-item">Обновить IP<i class="ph-arrows-clockwise ms-auto text-warning"></i></a>
+																		<a href="#" class="dropdown-item">Удалить <i class="ph-minus ms-auto text-danger"></i></a>
+																		<a href="#" class="dropdown-item">Сохранить в файл<i class="ph-file-arrow-up ms-auto text-success"></i></a>
+																	</div>
+
+																</div>
+																<!-- /Контекстное меню действий при нажатии на таблицу -->
+
+
+																<!-- Таблица с данными -->
+																<table id="domain_table_vpn_1" class="table datatable-select-checkbox table-hover nowrap" >
+																	<thead>
+																		<tr>
+																			<th><input id="select_all_rows_input" type="checkbox" class="form-check-input"></th>
+																			<th>Название</th>
+																			<th><i class="ph-folder-open me-1 ph-1_3x"></i></th>
+																			<th>Домен</th>
+																			<th>IP основной</th>
+																			<th>Весь список IP:</th>
+<!--																			<th></th>-->
+																		</tr>
+																	</thead>
+																	<tbody>
+
+																		<tr>
+																			<td><span class="placeholder col-7"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+<!--																			<td><span class="placeholder col-9"></span></td>-->
+																		</tr>
+																		<tr>
+																			<td><span class="placeholder col-7"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+<!--																			<td><span class="placeholder col-9"></span></td>-->
+																		</tr>
+																		<tr>
+																			<td><span class="placeholder col-7"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+																			<td><span class="placeholder col-9"></span></td>
+<!--																			<td><span class="placeholder col-9"></span></td>-->
+																		</tr>
+
+																	</tbody>
+
+																</table>
+																<!-- Таблица с данными -->
+
+															</div>
+
+														</div>
+														<!-- /Контекстное меню -->
+
+													</div>
+
+													<div class="accordion-item border-top-0 border-end-0 border-start-0 rounded-0">
+
+														<h2 class="accordion-header ps-2 p-3">
+															<button class="accordion-button fw-semibold collapsed ms-2 pt-0 pb-0 mb-1" type="button" data-bs-toggle="collapse" data-bs-target="#vpn_item_2">
+
+																<div class="flex-fill pe-2">
+																	<h5 class="pt-1 mb-2">Гостевые сети</h5>
+																	<span class="fw-light text-muted d-lg-block d-none" >
+																		Присоединяйте и отсоединяйте гостевые сети к выбранному VPN соединению,<br>
+																		через которое они будут ходить в сеть Интернет.
+																	</span>
+																</div>
+
+															</button>
+														</h2>
+														<div id="vpn_item_2" class="accordion-collapse collapse" data-bs-parent="#accordion_collapsed">
+
+															<div class="accordion-body p-0">
+
+																<div class="row">
+																	<div class="col-9">
+
+																		<!-- Список гостевых сетей -->
+																		<div class="table-responsive p-4 ms-2 me-5">
+
+																			<table class="table table-inbox rows-no-borders ">
+																				<tbody>
+																					<tr class="unread">
+																						<td class="table-inbox-checkbox">
+																							<input type="checkbox" class="form-check-input">
+																						</td>
+																						<td class="table-inbox-star">
+																							<a href="#">
+																								<i class="ph-wifi-high "></i>
+																							</a>
+																						</td>
+																						<td class="table-inbox-name w-15">
+																							<a href="mail_read.html">
+																								<div class="letter-icon-title text-body">weth-1</div>
+																							</a>
+																						</td>
+																						<td class="text-truncate">
+																							<span class="text-muted fw-normal">WIFI сеть </span>
+																						</td>
+
+																					</tr>
+
+																					<tr class="unread">
+																						<td class="table-inbox-checkbox">
+																							<input type="checkbox" class="form-check-input">
+																						</td>
+																						<td class="table-inbox-star">
+																							<a href="#">
+																								<i class="ph-wifi-high text-muted opacity-25"></i>
+																							</a>
+																						</td>
+																						<td class="table-inbox-name">
+																							<a href="mail_read.html">
+																								<div class="letter-icon-title text-body">weth-2</div>
+																							</a>
+																						</td>
+																						<td class="text-truncate">
+																							<span class="text-muted fw-normal">WIFI сеть </span>
+																						</td>
+
+																					</tr>
+
+																					<tr class="unread">
+																						<td class="table-inbox-checkbox">
+																							<input type="checkbox" class="form-check-input">
+																						</td>
+																						<td class="table-inbox-star">
+																							<a href="#">
+																								<i class="ph-link-simple text-muted opacity-25"></i>
+																							</a>
+																						</td>
+																						<td class="table-inbox-name">
+																							<a href="mail_read.html">
+																								<div class="letter-icon-title text-body">eth-1</div>
+																							</a>
+																						</td>
+																						<td class="text-truncate">
+																							<span class="text-muted fw-normal">Ethernet сеть, подключенная по кабелю </span>
+																						</td>
+
+																					</tr>
+
+																				</tbody>
+
+																			</table>
+
+																		</div>
+																		<!-- /Список гостевых сетей -->
+
+																	</div>
+
+																	<div class="col-3 d-flex flex-column justify-content-between position-relative">
+																		<div class="row text-end">
+																			<a href="#" class="text-body position-absolute top-0 end-0 me-4 mt-4">
+																				<i class="ph-arrows-clockwise"></i>
+																			</a>
+																		</div>
+																		<div class="row  text-end">
+
+																			<div class="btn-group position-absolute bottom-0 start-0 me-5 pe-4 mb-4">
+																				<button type="button" class="btn btn-light ms-5">
+																					<i class="ph-floppy-disk"></i>
+																					<span class="d-none d-lg-inline-block ms-2">Сохранить</span>
+																				</button>
+																			</div>
+
+																		</div>
+
+																	</div>
+
+																</div>
+
+															</div>
+														</div>
+													</div>
+
+												</div>
+
+											</div>
+											<!-- /Содержимое первой вкладки -->
+
+											<!-- Содержимое второй вкладки -->
+											<div class="tab-pane fade" id="js-tab2" role="tabpanel">
+												This is some placeholder content the <strong>second</strong> tab's associated content
+											</div>
+											<!-- /Содержимое второй вкладки -->
+
+											<!-- Содержимое третьей вкладки -->
+											<div class="tab-pane fade" id="js-tab3" role="tabpanel">
+												This is some placeholder content the <strong>third</strong> tab's associated content
+											</div>
+											<!-- /Содержимое третьей вкладки -->
+
+										</div>
+										<!-- /Содержимое вкладок основного блока -->
+
+
+
+									</div>
+									<!-- /Основной блок с вкладками -->
+
+							</div>
+							<!-- /Задаем ширину всего блока с вкладками -->
+
+						</div>
+						<!-- /Ряд для хроники -->
+
+					</div>
+					<!-- /Содержимое страницы -->
+
+				</div>
+				<!-- /Внутреннее содержимое страницы -->
+
+				<!-- Кнопка возврата к верху страницы -->
+				<div class="btn-to-top">
+					<button class="btn btn-secondary btn-icon rounded-pill" type="button">
+						<i class="ph-arrow-up"></i>
+					</button>
+				</div>
+				<!-- /Кнопка возврата к верху страницы -->
+
+			</div>
+			<!-- /Основной контейнер страницы -->
+
+		</div>
+		<!-- Содержание страницы -->
+
+	</body>
+	<!-- /Тело проекта  -->
+
+</html>

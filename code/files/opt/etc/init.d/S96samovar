@@ -1,0 +1,67 @@
+#!/bin/sh
+
+app_name=samovar
+NameApp=Самовар
+prefix="/opt"
+PATH=${prefix}/bin:${prefix}/sbin:/sbin:/bin:/usr/sbin:/usr/bin
+RESULT_OK=ГОТОВО
+RESULT_ER=ОШИБКА
+
+ready_to_drink() {
+	ip=$(/opt/sbin/ip a | grep ": br0:" -A4 | grep 'inet ' | tr -s ' ' | cut -d' ' -f3 | cut -d'/' -f1)
+	port=$(cat /opt/etc/nginx/conf.d/wui.conf | sed '/^[[:space:]]*$/d' | grep listen | cut -d'n' -f2 | sed 's/[ ;]//g')
+	echo "Чай наливают здесь -> http://${ip}:${port}"
+}
+
+setup() {
+        echo -n "Запущен процесс настройки ${NameApp}а..."
+        /opt/sbin/${app_name} setup && echo "${RESULT_OK}" || echo "${RESULT_ER}"
+}
+
+start() {
+        echo -n "Нагреваем ${NameApp}..."
+        /opt/sbin/${app_name} start &
+        if [ $? = 0 ]; then
+        	echo "${RESULT_OK}"
+        	ready_to_drink
+        else
+        	echo "${RESULT_ER}"
+        fi
+}
+
+stop() {
+        echo -n "Остужаем ${NameApp}..."
+        killall ${app_name} &>/dev/null && echo "${RESULT_OK}" || echo "${RESULT_ER}"
+        }
+
+status() {
+		pid=$(pgrep samovar)
+        if [ -n "${pid}" ]; then
+                echo "${NameApp} горячий [${pid}]. Пейте на здоровье."
+                ready_to_drink
+        else
+                echo "${NameApp} остыл."
+        fi
+        }
+
+case "$1" in
+        start)
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        restart)
+                stop
+                sleep 1
+                start
+                ;;
+        status) status
+                ;;
+        *)
+                echo "Команды: ${NameApp}а (setup|start|stop|restart|status)"
+                exit 1
+                ;;
+esac
+
+exit 0

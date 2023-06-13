@@ -1,0 +1,260 @@
+@media screen and (max-width: 801px) {
+  .navbar-brand, .content {
+    position: absolute !important;
+  }
+}
+
+.navbar-brand {
+  position: relative;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 50% ;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+
+
+.elem-header {
+  margin-right: 5px;
+}
+
+.dataTable tr td.child>ul {
+  display: table-row !important;
+}
+
+.bg-azure {
+    background-color: azure !important;
+}
+
+.rows-no-borders tbody tr {
+  border-style: hidden !important;
+}
+
+.w-15 {
+  width: 15% !important;
+}
+
+.dt-buttons {
+  margin-left: auto !important;
+}
+
+#contextMenuVPN {
+  display: none;
+  position: fixed;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* отрабатываем нажатие на элемент с классом toggle-all
+   и открывает все элементы аккордеон, работает в связке с
+   писанием класса в custom.js
+*/
+a.toggle-all {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  color: #4B5563;
+}
+
+a.toggle-all i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  scale: 1.5;
+  transition: transform 0.2s ease-in-out;
+}
+
+a.toggle-all i.ph-arrow-fat-lines-up {
+  transform: translateY(-100%);
+}
+
+a.toggle-all.clicked i.ph-arrow-fat-lines-up {
+  transform: translateY(0);
+}
+
+a.toggle-all.clicked i.ph-arrow-fat-lines-down {
+  transform: translateY(100%);
+}
+
+/* конец toggle-all */
+
+/* Цвет золотой кнопки */
+.btn-gold {
+  --btn-color: #fff;
+  --btn-bg: #dfc77e;
+  --btn-border-color: #dfc77e;
+  --btn-hover-color: #fff;
+  --btn-hover-bg: #C7A94C;
+  --btn-hover-border-color: #C7A94C;
+  --btn-focus-shadow-rgb: 48,150,255;
+  --btn-active-color: #fff;
+  --btn-active-bg: #A68521;
+  --btn-active-border-color: #A68521;
+  --btn-active-shadow: inset 0 0 0 0 transparent;
+  --btn-disabled-color: #fff;
+  --btn-disabled-bg: #dfc77e;
+  --btn-disabled-border-color: #dfc77e;
+}
+
+/* Цвет золотого фона */
+.bg-gold {
+    --bg-opacity: 1;
+    background-color: rgba(#dfc77e, var(--bg-opacity)) !important;
+}
+
+/* Цвет золотой текст */
+.text-gold {
+    --bg-opacity: 1;
+    color: rgba(#dfc77e, var(--bg-opacity)) !important;
+}
+
+/* Размеры иконки логотипа */
+.logo_image_size {
+  height: 60px !important;
+  width: 60px !important;
+  margin-left: 10px;
+}
+
+/* Размеры текста логотипа */
+.logo_text_size {
+  height: 55px !important;
+  float: left;
+}
+
+/* Преобразование блока закрытия бокового меню */
+.sidebar-hide-icon {
+  position: absolute;
+  bottom: 0 !important;
+  left: 0;
+  width: -webkit-fill-available;
+}
+
+/* Размеры кнопки бокового меню - спрятать меню */
+.sidebar-section-body {
+  padding-bottom: 10px !important;
+  padding-top: 10px !important;
+}
+
+/* Цвет фона горизонтального меню сверху страницы */
+.navbar {
+  background-color: #004c69 !important;
+  height: 106px !important;
+}
+
+/* Цвет фона вертикального меню слева страницы */
+.sidebar-dark {
+  background-color: #3d4957ff !important;
+}
+
+/* Цвет фона главного контейнера на странице Системный монитор */
+.bg-main-card {
+  background-color: #ecebfbff !important;
+}
+
+/* Левое выравнивание текста в заголовке закладки */
+.nav-item .a .div {
+  text-align: left !important;
+}
+
+
+/* Прозрачный текст под текстом в timeline элементах (там, где текст) */
+.card .timeline-time {
+  background-color: transparent;
+}
+
+/* Убираем границу на кружке с иконками timeline */
+.card .timeline-icon {
+  /*border: 2px !important;*/
+  border-color: #ecebfbff;
+  opacity: 0.9;
+}
+
+/* Делаем меньше по высоте заголовок в карточке */
+.card .card-header {
+  padding-bottom: 10px !important;
+  padding-top: 10px !important;
+}
+
+/* Увеличиваем в 1.5 раза иконку в заголовке аккардиона */
+.accordion-header button div div i {
+    transform: scale(1.5);
+}
+
+/* Увеличиваем в 1.5 раза иконку в заголовке карточки */
+.card-header div div i {
+  transform: scale(1.5);
+}
+
+.ph-1_3x {
+  transform: scale(1.3);
+}
+.ph-1_5x {
+  transform: scale(1.5);
+}
+
+/* Классы для подъема текста выше и ниже его текущего состояния */
+.lift-up-5 {
+  position: relative;
+  top: -5px;
+}
+
+.lift-up-10 {
+  position: relative;
+  top: -10px;
+}
+
+.lift-up-15 {
+  position: relative;
+  top: -15px;
+}
+
+.lift-up-20 {
+  position: relative;
+  top: -20px;
+}
+
+.lift-up-25 {
+  position: relative;
+  top: -25px;
+}
+
+.lift-up-50 {
+  position: relative;
+  top: -50px;
+}
+
+.lift-down-5 {
+  position: relative;
+  top: 5px;
+}
+
+.lift-down-10 {
+  position: relative;
+  top: 10px;
+}
+
+.lift-down-15 {
+  position: relative;
+  top: 15px;
+}
+
+.lift-down-20 {
+  position: relative;
+  top: 20px;
+}
+
+.lift-down-25 {
+  position: relative;
+  top: 25px;
+}
+
+.lift-down-30 {
+  position: relative;
+  top: 30px;
+}
+/* \Классы для подъема текста выше и ниже его текущего состояния */

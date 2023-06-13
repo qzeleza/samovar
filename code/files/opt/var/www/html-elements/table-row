@@ -1,0 +1,36 @@
+                                                        <tr>
+                                                            <td></td>
+                                                            <td>Кинозал</td>
+                                                            <td><a href="#">kinozal.tv</a></td>
+                                                            <td>
+                                                                <div class="form-check form-switch">
+                                                                    <input type="radio" class="form-check-input" name="sr_lss" id="sr_lss_c" checked="">
+                                                                </div>
+                                                            </td>
+                                                            <td>122.333.112.344 122.333.112.344 122.333.112.344 122.333.112.344 122.333.112.344 122.333.112.344</td>
+                                                            <td class="text-center">
+
+                                                                <!-- Меню действий для каждой записи-->
+                                                                <div class="d-inline-flex">
+                                                                    <div class="dropdown">
+                                                                        <a href="#" class="text-body" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                            <!-- Иконка вкладки -->
+                                                                            <i class="ph-text-align-justify  ph-lg bg-opacity-10 rounded p-1"></i>
+                                                                            <!-- /Иконка вкладки -->
+                                                                        </a>
+                                                                        <div class="dropdown-menu dropdown-menu-end" style="">
+                                                                            <a href="#" class="dropdown-item">
+                                                                                Добавить
+                                                                                <i class="ph-plus ms-auto"></i>
+                                                                            </a>
+                                                                            <a href="#" class="dropdown-item">
+                                                                                Удалить
+                                                                                <i class="ph-minus ms-auto"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- /Меню действий для каждой записи-->
+
+                                                            </td>
+                                                        </tr>

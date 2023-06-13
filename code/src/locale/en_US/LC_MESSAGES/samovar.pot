@@ -1,0 +1,183 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-22 16:57+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: api.cpp:18
+msgid "POST запрос успешно принят."
+msgstr "POST request successfully accepted."
+
+#: api.cpp:33
+#, c-format
+msgid "ЗАПРОС: %s"
+msgstr "REQUEST: %s"
+
+#: api.cpp:37
+#, c-format
+msgid "ОШИБКА В ЗАПРОСЕ: %s"
+msgstr "REQUEST ERROR: %s"
+
+#: api.cpp:44
+#, c-format
+msgid "Запрос '%s' не распознан!"
+msgstr "Request '%s' not recognized!"
+
+#: api.cpp:61
+#, c-format
+msgid ""
+"Запрос не разрешен:\n"
+"%s\n"
+"Используемый метод: %s\n"
+"Тело запроса: %s\n"
+"%s\n"
+"%s\n"
+"$s"
+msgstr ""
+"Request not resolved:\n"
+"%s\n"
+"Method used: %s\n"
+"Request body: %s\n"
+"%s\n"
+"%s\n"
+"$s"
+
+#: api.cpp:69
+#, c-format
+msgid "Запрос '%s' НЕ распознан!"
+msgstr "Query '%s' is NOT recognized!"
+
+#: locale.cpp:20
+#, c-format
+msgid "Ошибка при установке языка '%s'"
+msgstr "Error setting language '%s'"
+
+#: locale.cpp:23
+#, c-format
+msgid "'%s' установлен языком по умолчанию."
+msgstr "'%s' is set to the default language."
+
+#: server.cpp:29
+msgid "Запускаем API сервер..."
+msgstr "Starting API server..."
+
+#: server.cpp:38
+msgid "API сервер успешно запущен."
+msgstr "API server successfully started."
+
+#: server.cpp:54
+msgid "API сервер успешно остановлен."
+msgstr "API server successfully stopped."
+
+#: setup.cpp:41
+#, c-format
+msgid "Сервис %s успешно остановлен!"
+msgstr "Service %s successfully stopped!"
+
+#: setup.cpp:43
+#, c-format
+msgid "Сервис %s успешно запущен!"
+msgstr "Service %s successfully started!"
+
+#: setup.cpp:46
+#, c-format
+msgid "Приложение %s запущено!"
+msgstr "Application %s is running!"
+
+#: setup.cpp:48
+#, c-format
+msgid "Ошибка: %s сбой при запуске приложения!"
+msgstr "Error: %s application failed to start!"
+
+#: setup.cpp:54
+#, c-format
+msgid "Ошибка: %s сбой при запуске сервиса!"
+msgstr "Error: %s service failed to start!"
+
+#: setup.cpp:60
+#, c-format
+msgid "Ошибка: %s сбой при остановке сервиса!"
+msgstr "Error: %s service stopped!"
+
+#: setup.cpp:66
+#, c-format
+msgid "Ошибка: %s, тест НЕ пройден."
+msgstr "Error: %s, test failed."
+
+#: system.cpp:75
+#, c-format
+msgid "Ошибка создания директории '%s'!"
+msgstr "Error: %s directory creation error!"
+
+#: system.cpp:114
+#, c-format
+msgid "Ошибка: директория '%s' НЕ существует!"
+msgstr "Error: directory '%s' does not exist!"
+
+#: system.cpp:122
+#, c-format
+msgid "Ошибка установки прав доступа для '%s'"
+msgstr "Error setting permissions for '%s'."
+
+#: system.cpp:127
+#, c-format
+msgid "Ошибка установки владельцев для директории '%s'"
+msgstr "Error setting owners for directory '%s'"
+
+#: system.cpp:141 system.cpp:286
+#, c-format
+msgid "Ошибка: файл '%s' НЕ существует!"
+msgstr "Error: file '%s' does not exist!"
+
+#: system.cpp:146
+#, c-format
+msgid "Ошибка: при попытке изменить файл '%s'!"
+msgstr "Error: trying to modify file '%s'!"
+
+#: system.cpp:182
+#, c-format
+msgid "Ошибка: проблема исполнения команды '%s' при запуске сервиса '%s'!"
+msgstr "Error: problem executing command '%s' while starting service '%s'!"
+
+#: system.cpp:187
+#, c-format
+msgid "Ошибка: приложение '%s' НЕ существует!"
+msgstr "Error: application '%s' does NOT exist!"
+
+#: system.cpp:208
+#, c-format
+msgid "Ошибка при завершении приложения '%s'"
+msgstr "Error terminating '%s' application!"
+
+#: system.cpp:213
+#, c-format
+msgid "Данное приложение '%s' не запущено"
+msgstr "This '%s' application is not running"
+
+#: system.cpp:252
+#, c-format
+msgid "Ошибка: программа '%s' не найдена."
+msgstr "Error: program '%s' not found."
+
+#: system.cpp:266
+#, c-format
+msgid "Ошибка: невозможно запустить приложение '%s'"
+msgstr "Error: Cannot start '%s' application"
+
+#: system.cpp:282
+#, c-format
+msgid "Ошибка: невозможно отобразить лог-файл '%s'"
+msgstr "Error: Cannot display log file '%s'"
