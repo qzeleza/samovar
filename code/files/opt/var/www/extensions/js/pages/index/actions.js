@@ -6,7 +6,7 @@ news.on('click', function(event) {
     event.preventDefault();
     collapse_news.addClass('show');
     $('#smv-scroll-box').animate({
-        scrollTop: latest.offset().top
+        scrollTop: 0
     }, 1000);
 
 });
