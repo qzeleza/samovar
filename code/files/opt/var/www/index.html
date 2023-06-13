@@ -66,14 +66,15 @@
 
 					<!-- Картинки логотипа в панели навигации -->
 					<a href="index.html" class="d-inline-flex align-items-center">
-						<img src="assets/images/logo_icon_main_gold.svg" alt="" class="logo_image_size" >
-						<img src="assets/images/logo_text_main_gold.svg" class="logo_text_size offcanvas-size-xs d-none d-sm-inline-block" alt="">
+						<img src="assets/images/logo/logo_icon_main_gold.svg" alt="" class="logo_image_size" >
+						<img src="assets/images/logo/logo_text_main_gold.svg" class="logo_text_size offcanvas-size-xs d-none d-sm-inline-block" alt="">
 					</a>
 					<!-- /Картинки логотипа в панели навигации -->
 
 				</div>
 				<!-- /Блок логотипа в панели навигации -->
 
+				<!-- Кнопка вызова правого меню -->
 				<ul class="nav flex-row text-start">
 					<li class="nav-item nav-item-dropdown-lg dropdown">
 						<a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-pill" data-bs-toggle="offcanvas" data-bs-target="#panel_right">
@@ -81,25 +82,25 @@
 						</a>
 					</li>
 				</ul>
+				<!-- /Кнопка вызова правого меню -->
 
 			</div>
 			<!-- /Тело горизонтальной верхней панели навигации -->
 
 		</div>
-
 		<!-- /Горизонтальная верхняя панель навигации -->
 
 		<!-- Правая панель настроек Самовара -->
-		<div id="panel_right" class="offcanvas offcanvas-end" tabindex="-1" aria-modal="true" role="dialog">
-			<div class="offcanvas-header">
-				<h5 class="offcanvas-title fw-semibold">САМОВАР</h5>
+		<div id="panel_right" class="offcanvas offcanvas-end offcanvas-resizable" data-min-width="250" data-max-width="600" tabindex="-1">
+			<div class="offcanvas-resize-handle"></div>
+			<div class="offcanvas-header ">
+				<h3 class="offcanvas-title fw-semibold">САМОВАР</h3>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
 			</div>
-
 			<div class="offcanvas-body p-0">
 				<div class="text-center px-3 mb-3">
 					<a href="#" class="d-inline-block mb-3">
-						<img src="./assets/images/logo-samovar-color.svg"  width="100" height="100" alt="">
+						<img src="assets/images/logo/logo-samovar-color.svg" width="100" height="100" alt="">
 					</a>
 					<h6 class="mb-0">Настройки</h6>
 					<div>Текущая версия 0.0.1</div>
@@ -285,7 +286,7 @@
 													<span class="border border-width-4 border-info rounded-pill me-2"></span>
 													Обновить
 												</a>
-												<a href="#" class="dropdown-item" id="smv_new_ver">
+												<a href="#" class="dropdown-item" id="smv_new_ver" data-bs-toggle="modal" data-bs-target="#modal_scrollable">
 													<span class="border border-width-4 border-primary rounded-pill me-2"></span>
 													Что нового?
 												</a>
@@ -430,8 +431,42 @@
 		</div>
 		<!-- Содержание страницы -->
 
+		<!-- Модальное окно "Что нового в Квасе? -->
+		<div id="modal_scrollable" class="modal fade" tabindex="-1">
+			<div class="modal-dialog modal-dialog-scrollable ">
+				<div class="modal-content">
+
+					<div class="modal-header bg-primary bg-opacity-20">
+						<h5 class="modal-title">Что нового?</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+
+					<div class="modal-body">
+
+						<h6>Версия 1.1.4</h6>
+
+						<ul class="flex-column">
+							<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+							<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+							<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+							<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+							<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+						</ul>
+						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-link" data-bs-dismiss="modal">Закрыть</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Модальное окно "Что нового в Квасе? -->
+
+
 		<script src="./extensions/js/pages/debug/scrolling.js"></script>
-		<script src="./extensions/js/pages/index/actions.js"></script>
+
 
 	</body>
 	<!-- /Тело проекта  -->

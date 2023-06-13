@@ -589,6 +589,52 @@ const App = function () {
         }
     }
 
+       //
+       // Функция для изменения ширины правого меню, вызываемого по кнопке
+       //
+       const offcanvasResize = function() {
+        const element = document.querySelector('.offcanvas-resizable');
+        const minimum_size = element.getAttribute('data-min-width');
+        const maximum_size = element.getAttribute('data-max-width');
+
+        let original_width = 0;
+        let original_x = 0;
+        let original_mouse_x = 0;
+
+        if(element) {
+            ['mousedown', 'touchstart'].forEach(function(e) {
+                element.querySelector('.offcanvas-resize-handle').addEventListener(e, startResize);
+            });
+        }
+
+        function startResize(e) {
+            e.preventDefault()
+            original_width = parseFloat(getComputedStyle(element, null).getPropertyValue('width').replace('px', ''));
+            original_x = element.getBoundingClientRect().left;
+            original_mouse_x = e.pageX;
+
+            ['mousemove', 'touchmove'].forEach(function(e) {
+                window.addEventListener(e, resize);
+            });
+            ['mouseup', 'touchend'].forEach(function(e) {
+                window.addEventListener(e, stopResize);
+            });
+        }
+
+        function resize(e) {
+            const mouse_h_position = e.pageX - original_mouse_x;
+            const width = element.classList.contains('offcanvas-start') ? original_width + mouse_h_position : original_width - mouse_h_position;
+            if (width > minimum_size && width < maximum_size) {
+                element.style.width = width + 'px';
+            }
+        }
+
+        function stopResize() {
+            ['mousemove', 'touchmove'].forEach(function(e) {
+                window.removeEventListener(e, resize);
+            });
+        }
+    };
 
     //
     // Return objects assigned to module
@@ -611,6 +657,7 @@ const App = function () {
             componentTooltip();
             componentPopover();
             componentToTopButton();
+            offcanvasResize();
         },
 
         // Initialize all sidebars

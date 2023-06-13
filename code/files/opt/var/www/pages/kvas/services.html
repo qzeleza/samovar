@@ -67,20 +67,67 @@
 
 					<!-- Картинки логотипа в панели навигации -->
 					<a href="../../index.html" class="d-inline-flex align-items-center">
-						<img src="../../assets/images/logo_icon_main_gold.svg" alt="" class="logo_image_size" >
-						<img src="../../assets/images/logo_text_main_gold.svg" class="logo_text_size offcanvas-size-xs d-none d-sm-inline-block" alt="">
+						<img src="../../assets/images/logo/logo_icon_main_gold.svg" alt="" class="logo_image_size" >
+						<img src="../../assets/images/logo/logo_text_main_gold.svg" class="logo_text_size offcanvas-size-xs d-none d-sm-inline-block" alt="">
 					</a>
 					<!-- /Картинки логотипа в панели навигации -->
 
 				</div>
 				<!-- /Блок логотипа в панели навигации -->
 
+				<!-- Кнопка вызова правого меню -->
+				<ul class="nav flex-row text-start">
+					<li class="nav-item nav-item-dropdown-lg dropdown">
+						<a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-pill" data-bs-toggle="offcanvas" data-bs-target="#panel_right">
+							<i class="ph-faders"></i>
+						</a>
+					</li>
+				</ul>
+				<!-- /Кнопка вызова правого меню -->
 
 			</div>
 			<!-- /Тело горизонтальной верхней панели навигации -->
 
 		</div>
 		<!-- /Горизонтальная верхняя панель навигации -->
+
+		<!-- Правая панель настроек Самовара -->
+		<div id="panel_right" class="offcanvas offcanvas-end offcanvas-resizable" data-min-width="250" data-max-width="600" tabindex="-1">
+			<div class="offcanvas-resize-handle"></div>
+			<div class="offcanvas-header">
+				<h3 class="offcanvas-title fw-semibold">САМОВАР</h3>
+				<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+			</div>
+
+			<div class="offcanvas-body p-0">
+				<div class="text-center px-3 mb-3">
+					<a href="#" class="d-inline-block mb-3">
+						<img src="../../assets/images/logo/logo-samovar-color.svg" width="100" height="100" alt="">
+					</a>
+					<h6 class="mb-0">Настройки</h6>
+					<div>Текущая версия 0.0.1</div>
+				</div>
+
+				<div class="bg-light text-muted py-2 px-3">Задачи</div>
+				<div class="list-group list-group-borderless py-2">
+					<a href="#" class="list-group-item list-group-item-action">
+						<i class="ph-arrows-clockwise me-3"></i>
+						Обновить
+						<div class="badge bg-primary text-white rounded-pill ms-auto">0.0.2</div>
+					</a>
+					<a href="#" class="list-group-item list-group-item-action d-flex align-items-start">
+						<i class="ph-x me-3"></i>
+						Удалить
+					</a>
+					<a href="#" class="list-group-item list-group-item-action">
+						<i class="ph-check me-3"></i>
+						Проверить
+					</a>
+				</div>
+
+			</div>
+		</div>
+		<!-- /Правая панель настроек Самовара -->
 
 		<!-- Содержание страницы -->
 		<div class="page-content">
