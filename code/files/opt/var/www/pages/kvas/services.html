@@ -33,6 +33,7 @@
 
 		<!-- Файлы скриптов JS для отрисовки темы -->
 		<script src="../../extensions/js/pages/all/apps.js"></script>
+		<script src="../../extensions/js/pages/services/accordion.js"></script>
 
 
 <!--		<script src="../../data/js/vendors/draggable.js"></script>-->
@@ -414,7 +415,7 @@
 														<div class="accordion" id="accordion_expanded">
 
 															<!-- Выбор VPN подключения -->
-															<div class="accordion-item shadow-none rounded-0 border-start-0 border-end-0">
+															<div class="accordion-item shadow-none rounded-0 border-start-0 border-end-0 mb-0">
 
 																<h2 class="accordion-header bg-success bg-opacity-10 pe-2">
 
@@ -437,7 +438,7 @@
 
 																	<div class="accordion-body">
 																		<!-- Свойство проверки VPN сервиса: "Сервис" -->
-																		<div class="d-flex align-items-start mb-1 ps-4">
+																		<div class="d-flex align-items-start mb-0 ps-4">
 
 																			<!-- Индикатор проверки VPN сервиса: зеленый или красный -->
 																			<div class="status-indicator-container me-3">
@@ -458,16 +459,25 @@
 																					</a>
 																					<!-- /Строка заголовка Выбор VPN сервиса -->
 
+
 																					<!-- Список выбора VPN сервиса -->
-																					<div class="ms-auto me-3 lift-down-10">
-																						<select class="form-control select2">
+																					<div class="ms-auto me-2 lift-down-10">
+																						<select id="collapse-select" class="form-control select2 wmin-200 text-center">
 																							<option value="V1">VPN-1</option>
 																							<option value="V2">VPN-2</option>
-																							<option value="SRR-1" selected="selected">Shadowsocks-1</option>
-																							<option value="SRR-2">Shadowsocks-2</option>
+																							<option value="SSR-1" selected="selected">Shadowsocks-1</option>
+																							<option value="SSR-2">Shadowsocks-2</option>
 																						</select>
 																					</div>
 																					<!-- /Список выбора VPN сервиса -->
+
+																					<!-- Кнопка для редактирования SSR данных сервиса -->
+
+																					<a id="ssr-call-setup" href="#" class="btn btn-icon p-2 rounded-3 btn-sm ms-0 mt-1 lift-down-5" data-bs-toggle="modal" data-bs-target="#modal_form_ssr_data"  data-bs-popup="tooltip-samovar" title="" data-bs-original-title="Изменить">
+																						<i class="ph-gear text-secondary" id="ssr-call-icon"></i>
+																					</a>
+																					<!-- /Кнопка для редактирования SSR данных сервиса -->
+
 
 																				</div>
 																				<!-- /Основная строка выбора VPN сервиса -->
@@ -485,6 +495,7 @@
 																		<!-- /Свойство проверки VPN сервиса: "Сервис" -->
 																	</div>
 																</div>
+
 															</div>
 															<!-- /Выбор VPN подключения-->
 
@@ -1085,7 +1096,114 @@
 		</div>
 		<!-- Содержание страницы -->
 
-		<script src="../../extensions/js/pages/services/accordion.js"></script>
+		<!-- Модальные окна -->
+
+		<!-- Форма ввода SSR данных -->
+		<div id="modal_form_ssr_data" class="modal fade" tabindex="-1">
+
+			<div class="modal-dialog">
+
+				<div class="modal-content ">
+
+					<!-- Заголовок формы -->
+					<div class="modal-header mb-lg-4">
+
+						<!-- Индикатор проверки VPN сервиса: зеленый или красный -->
+						<div class="status-indicator-container me-3 mt-0 mb-3 lift-down-3">
+							<i class="me-3"></i>
+							<span class="status-indicator bg-success"></span>
+						</div>
+						<!-- Индикатор проверки VPN сервиса: зеленый или красный -->
+
+						<h5 class="modal-title">Настройки Shadowsock</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<!-- /Заголовок формы -->
+
+					<!-- Тело формы -->
+					<form action="#">
+
+						<!-- Поля для редактирования данных SSR соединения -->
+						<div class="modal-body ms-lg-2 me-lg-2">
+
+							<div class="row mb-1">
+								<label class="col-form-label offset-0 col-lg-3 mt-2 text-start">
+									Сервер
+									<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-9 d-flex align-items-center">
+									<div class="form-floating me-1 flex-grow-1">
+										<input type="text" class="form-control" required placeholder="Placeholder" />
+										<label>IP</label>
+									</div>
+									<div class="me-1">:</div>
+									<div class="form-floating flex-grow-1">
+										<input type="text" class="form-control" required placeholder="Placeholder" />
+										<label>Порт</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-1">
+
+								<label class="col-form-label offset-0 col-lg-3 mt-2 text-start">
+									Пароль<span class="text-danger">*</span>
+								</label>
+
+								<div class="col-lg-9">
+									<div class="form-floating">
+										<input type="password" class="form-control" required placeholder="Placeholder" />
+										<label>Введите пароль</label>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="row mb-1 ">
+								<label class="col-form-label mе-2 mt-1 offset-0 col-lg-3 text-start">
+								  Шифрование<span class="text-danger">*</span>
+								</label>
+								<div class="col-lg-9">
+								  	<div class="form-floating">
+										<select class="form-select ">
+											<option value="1">aes-256-cfb</option>
+											<option value="2">chacha20-ietf-poly1305</option>
+										</select>
+										<label>Метод шифрования</label>
+								  	</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- /Поля для редактирования данных SSR соединения -->
+
+						<!-- Фундамент формы -->
+						<div class="modal-footer mt-lg-4">
+
+							<button type="submit" class="btn btn-link text-start">
+							  <i class="ph-arrow-counter-clockwise ms-2"></i>
+							</button>
+							<button type="button" class="btn btn-link ms-auto" data-bs-dismiss="modal">Скрыть</button>
+							<button type="submit" class="btn btn-light">
+							  Сохранить<i class="ph-floppy-disk ms-2"></i>
+							</button>
+
+						</div>
+						<!-- /Фундамент формы -->
+
+					</form>
+					<!-- /Тело формы -->
+
+				</div>
+
+			</div>
+
+		</div>
+		<!-- Форма ввода SSR данных -->
+
+		<!-- Модальные окна -->
+
+
 
 	</body>
 	<!-- /Тело проекта  -->

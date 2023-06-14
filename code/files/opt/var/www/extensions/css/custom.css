@@ -239,6 +239,11 @@ a.toggle-all.clicked i.ph-arrow-fat-lines-down {
   top: 5px;
 }
 
+.lift-down-3 {
+  position: relative;
+  top: 3px;
+}
+
 .lift-down-10 {
   position: relative;
   top: 10px;

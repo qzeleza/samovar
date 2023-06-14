@@ -43,7 +43,7 @@ const App = function () {
               customScrollbarsClass = 'custom-scrollbars';
 
         // Add class if OS is windows
-        windowsPlatforms.indexOf(platform) != -1 && document.documentElement.classList.add(customScrollbarsClass);
+        windowsPlatforms.indexOf(platform) !== -1 && document.documentElement.classList.add(customScrollbarsClass);
     };
 
 
@@ -589,10 +589,10 @@ const App = function () {
         }
     }
 
-       //
-       // Функция для изменения ширины правого меню, вызываемого по кнопке
-       //
-       const offcanvasResize = function() {
+        //
+        // Функция для изменения ширины правого меню, вызываемого по кнопке
+        //
+        const offcanvasResize = function() {
         const element = document.querySelector('.offcanvas-resizable');
         const minimum_size = element.getAttribute('data-min-width');
         const maximum_size = element.getAttribute('data-max-width');
@@ -709,11 +709,11 @@ const Tooltips = function () {
 
     // Custom tooltip color
     const _componentTooltipCustomColor = function() {
-		const customTooltipElement = document.querySelector('[data-bs-popup=tooltip-custom]');
+		const customTooltipElement = document.querySelector('[data-bs-popup=tooltip-samovar]');
 		if(customTooltipElement) {
 			new bootstrap.Tooltip(customTooltipElement, {
 				customClass: 'tooltip-samovar',
-				template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow border-teal"></div><div class="tooltip-inner bg-teal text-white"></div></div>'
+				template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow border-info border-opacity-70"></div><div class="tooltip-inner bg-info bg-opacity-70"></div></div>'
 			});
 		}
     };
