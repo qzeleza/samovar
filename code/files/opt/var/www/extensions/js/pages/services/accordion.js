@@ -18,7 +18,7 @@
 
 const Services = function () {
 
-    const toogleAccardion = function() {
+    const toggleAccordion = function() {
 
         let firstTurn = true;
         let toggle_all = $('.toggle-all');
@@ -83,7 +83,7 @@ const Services = function () {
 
     return {
         init: function() {
-            toogleAccardion();
+            toggleAccordion();
             setupSelect();
         }
     }

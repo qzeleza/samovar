@@ -132,7 +132,7 @@ const DatatableSelect = function() {
             dom: '<"datatable-header bg-success bg-opacity-20 justify-content-start"f<"ms-sm-start"l><"ms-sm-3"B><"ms-auto save-button ">><"datatable-scroll-wrap"t><"datatable-footer bg-success bg-opacity-20"ip>',
             language: {
                 // url: "../../assets/localisation/ru.json",
-                search: '<span class="me-3">Найти:</span> <div class="form-control-feedback form-control-feedback-end flex-fill">_INPUT_<div class="form-control-feedback-icon"><i class="ph-magnifying-glass opacity-50"></i></div></div>',
+                search: '<span class="me-3">Найти:</span> <div class="form-control-feedback form-control-feedback-end flex-fill tooltip-info" data-bs-popup="tooltip" data-bs-original-title="В случае отсутствия искомого домена, создается запрос на добавление доменного имени.">_INPUT_<div class="form-control-feedback-icon"><i class="ph-magnifying-glass opacity-50"></i></div></div>',
                 searchPlaceholder: 'Поиск...',
                 info: "Показано: _TOTAL_",
                 infoFiltered: "из _MAX_.",
@@ -174,7 +174,7 @@ const DatatableSelect = function() {
                     // 1. Нумерация
                     orderable: true,
                     className: 'text-center',
-                    targets: 0
+                    targets: 0,
                 },
                 {
                     // 2. Название
@@ -230,9 +230,11 @@ const DatatableSelect = function() {
                     text: selectRecordsTag + allRecordsText,
                     attr: {
                         id: selectMeButtonId,
+                        'data-bs-popup': 'tooltip',
+                        'data-bs-original-title': 'Отмечаем записи в списке',
                     },
                     autoClose: true,
-                    className: 'btn btn-light btn-icon dropdown-toggle pe-2',
+                    className: 'btn btn-light btn-icon dropdown-toggle pe-2 tooltip-info',
                     buttons: [
                          {
                             text: allRecordsText + " Все записи",
@@ -243,12 +245,15 @@ const DatatableSelect = function() {
                                 this.rows().select();
                                 $('#' + selectMeButtonId).html(selectRecordsTag + allRecordsText);
                                 $('#' + filterMeButtonId).html(filterRecordsTag + allRecordsText);
+                                $('#' + idSelectAllRowsInput).prop('checked', true);
+
                             }
                         },
                         {
 
                             text: domainSelectText + " Домены",
                             action: function ( e, dt, node, config ) {
+                                $('#' + idSelectAllRowsInput).prop('checked', false);
                                 this.columns().search('').draw().rows().deselect();
                                 this
                                     .column('.domain-filter' )
@@ -261,6 +266,7 @@ const DatatableSelect = function() {
                         {
                             text: subDomainIsSelectText + " Поддомены",
                             action: function ( e, dt, node, config ) {
+                                $('#' + idSelectAllRowsInput).prop('checked', false);
                                 this.columns().search('').draw().rows().deselect();
                                 this
                                     .column('.sub-domain-filter')
@@ -274,6 +280,7 @@ const DatatableSelect = function() {
                         {
                             text: subDomainNotInSelectText + " Без поддоменов",
                             action: function ( e, dt, node, config ) {
+                                $('#' + idSelectAllRowsInput).prop('checked', false);
                                 this.columns().search('').draw().rows().deselect();
                                 this
                                     .column('.sub-domain-filter')
@@ -287,6 +294,7 @@ const DatatableSelect = function() {
                         {
                             text: ipSelectText + " адреса",
                             action: function ( e, dt, node, config ) {
+                                $('#' + idSelectAllRowsInput).prop('checked', false);
                                 this.columns().search('').draw().rows().deselect();
                                 this
                                     .column( '.domain-filter',)
@@ -300,6 +308,7 @@ const DatatableSelect = function() {
                         {
                             text: ipRangeSelectText + " интервалы",
                             action: function ( e, dt, node, config ) {
+                                $('#' + idSelectAllRowsInput).prop('checked', false);
                                 this.columns().search('').draw().rows().deselect();
                                 this
                                     .column( '.domain-filter')
@@ -320,10 +329,12 @@ const DatatableSelect = function() {
                     text: filterRecordsTag + allRecordsText,
                     attr: {
                         id: filterMeButtonId,
+                        'data-bs-popup': 'tooltip',
+                        'data-bs-original-title': 'Фильтр записей',
                     },
                     name: 'filter_buttons',
                     autoClose: true,
-                    className: 'btn btn-light btn-icon dropdown-toggle pe-2',
+                    className: 'btn btn-light btn-icon dropdown-toggle pe-2 tooltip-info',
                     buttons: [
                          {
                             text: allRecordsText + " Все",
@@ -332,6 +343,7 @@ const DatatableSelect = function() {
                                 this.columns().search('').draw();
                                 $('#' + filterMeButtonId).html(filterRecordsTag + allRecordsText);
                                 $('#' + selectMeButtonId).html(selectRecordsTag + allRecordsText);
+                                $('#' + idSelectAllRowsInput).prop('checked', false);
                             }
                         },
                         {
@@ -344,6 +356,7 @@ const DatatableSelect = function() {
                                     .draw();
                                 $('#' + filterMeButtonId).html(filterRecordsTag + domainSelectText);
                                 $('#' + selectMeButtonId).html(selectRecordsTag + allRecordsText);
+                                $('#' + idSelectAllRowsInput).prop('checked', false);
                             }
                         },
 
@@ -358,6 +371,7 @@ const DatatableSelect = function() {
                                     .draw()
                                 $('#' + filterMeButtonId).html(filterRecordsTag + subDomainIsSelectText);
                                 $('#' + selectMeButtonId).html(selectRecordsTag + allRecordsText);
+                                $('#' + idSelectAllRowsInput).prop('checked', false);
                             }
                         },
 
@@ -372,6 +386,7 @@ const DatatableSelect = function() {
                                     .draw()
                                 $('#' + filterMeButtonId).html(filterRecordsTag + subDomainNotInSelectText);
                                 $('#' + selectMeButtonId).html(selectRecordsTag + allRecordsText);
+                                $('#' + idSelectAllRowsInput).prop('checked', false);
                             }
                         },
 
@@ -385,6 +400,7 @@ const DatatableSelect = function() {
                                     .draw()
                                 $('#' + filterMeButtonId).html(filterRecordsTag + ipSelectText);
                                 $('#' + selectMeButtonId).html(selectRecordsTag + allRecordsText);
+                                $('#' + idSelectAllRowsInput).prop('checked', false);
                             }
                         },
                         {
@@ -397,31 +413,11 @@ const DatatableSelect = function() {
                                     .draw();
                                 $('#' + filterMeButtonId).html(filterRecordsTag + ipRangeSelectText);
                                 $('#' + selectMeButtonId).html(selectRecordsTag + allRecordsText);
+                                $('#' + idSelectAllRowsInput).prop('checked', false);
                             }
                         }
                     ]
                 },
-                // {
-                    // Кнопка Сохранить
-                    // name:'save_command',
-                    // text: '<i class="ph-floppy-disk ps-1 pe-2"></i>',
-                    // attr: {
-                    //     id: saveMeButtonId,
-                    // },
-                    // className: 'btn btn-light disabled ms-auto',
-                    // action: function (e, dt, node, config) {
-                    //     alert('Custom button activated')
-                    // }
-                // },
-                // {
-                //     // Кнопка Справка
-                //     text: '<i class="ph-info"></i>',
-                //     className: 'btn btn-light ',
-                //     action: function (e, dt, node, config) {
-                //         alert('Custom button activated')
-                //     }
-                // },
-
 
             ],
 
@@ -498,20 +494,22 @@ const DatatableSelect = function() {
                     text: '<i class="ph-floppy-disk ps-1 pe-2"></i>',
                     attr: {
                         id: saveMeButtonId,
+                        'data-bs-popup': 'tooltip',
+                        'data-bs-original-title': 'Сохраняем изменения',
                     },
-                    className: 'btn btn-light disabled ms-auto',
+                    className: 'btn btn-light disabled ms-auto tooltip-info',
                     action: function (e, dt, node, config) {
                         alert('Custom button activated')
                     }
                 },
-                {
-                    // Кнопка Справка
-                    text: '<i class="ph-info"></i>',
-                    className: 'btn btn-light ',
-                    action: function (e, dt, node, config) {
-                        alert('Custom button activated')
-                    }
-                },
+                // {
+                //     // Кнопка Справка
+                //     text: '<i class="ph-info"></i>',
+                //     className: 'btn btn-light ',
+                //     action: function (e, dt, node, config) {
+                //         alert('Custom button activated')
+                //     }
+                // },
             ]
          });
          //

@@ -1,3 +1,6 @@
+.tooltip-inner, .tooltip-info + .tooltip > .tooltip-inner {
+    background-color: #9f811a;
+}
 
 #ver_nav {
   /*margin-top: 30px !important;*/

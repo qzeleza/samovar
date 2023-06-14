@@ -78,7 +78,8 @@
 
 				<!-- Кнопка вызова правого меню -->
 				<ul class="nav flex-row text-start">
-					<li class="nav-item nav-item-dropdown-lg dropdown">
+					<li class="nav-item nav-item-dropdown-lg dropdown tooltip-info" data-bs-popup="tooltip" data-bs-original-title="Меню настроек Самовара">
+
 						<a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-pill" data-bs-toggle="offcanvas" data-bs-target="#panel_right">
 							<i class="ph-faders"></i>
 						</a>
@@ -95,40 +96,61 @@
 		<!-- Правая панель настроек Самовара -->
 		<div id="panel_right" class="offcanvas offcanvas-end offcanvas-resizable" data-min-width="250" data-max-width="600" tabindex="-1">
 			<div class="offcanvas-resize-handle"></div>
-			<div class="offcanvas-header">
-				<h3 class="offcanvas-title fw-semibold">САМОВАР</h3>
+			<div class="offcanvas-header ">
+				<h5 class="offcanvas-title fw-semibold"></h5>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
 			</div>
-
 			<div class="offcanvas-body p-0">
 				<div class="text-center px-3 mb-3">
 					<a href="#" class="d-inline-block mb-3">
 						<img src="../../assets/images/logo/logo-samovar-color.svg" width="100" height="100" alt="">
 					</a>
-					<h6 class="mb-0">Настройки</h6>
+					<h3 class="mb-0">САМОВАР</h3>
 					<div>Текущая версия 0.0.1</div>
 				</div>
+				<ul class="nav nav-tabs nav-tabs-underline nav-justified mb-0">
+					<li class="nav-item">
+						<a href="#bottom-justified-tab1" class="nav-link active" data-bs-toggle="tab">Действия</a>
+					</li>
+					<li class="nav-item">
+						<a href="#bottom-justified-tab2" class="nav-link" data-bs-toggle="tab">Настройки</a>
+					</li>
+				</ul>
 
-				<div class="bg-light text-muted py-2 px-3">Задачи</div>
-				<div class="list-group list-group-borderless py-2">
-					<a href="#" class="list-group-item list-group-item-action">
-						<i class="ph-arrows-clockwise me-3"></i>
-						Обновить
-						<div class="badge bg-primary text-white rounded-pill ms-auto">0.0.2</div>
-					</a>
-					<a href="#" class="list-group-item list-group-item-action d-flex align-items-start">
-						<i class="ph-x me-3"></i>
-						Удалить
-					</a>
-					<a href="#" class="list-group-item list-group-item-action">
-						<i class="ph-check me-3"></i>
-						Проверить
-					</a>
+				<div class="tab-content offcanvas-body ">
+					<div class="tab-pane fade show active" id="bottom-justified-tab1">
+<!--						<div class="bg-light text-muted py-2 px-3">Доступные действия</div>-->
+						<div class="list-group list-group-borderless py-2">
+							<a href="#" class="list-group-item list-group-item-action">
+								<i class="ph-arrows-clockwise me-3"></i>
+								Обновить
+								<div class="badge bg-primary text-white rounded-pill ms-auto">0.0.2</div>
+							</a>
+							<a href="#" class="list-group-item list-group-item-action d-flex align-items-start">
+								<i class="ph-x me-3"></i>
+								Удалить
+							</a>
+							<a href="#" class="list-group-item list-group-item-action">
+								<i class="ph-check me-3"></i>
+								Проверить
+							</a>
+						</div>
+					</div>
+
+					<div class="tab-pane offcanvas-body fade" id="bottom-justified-tab2">
+						<div class="form-check form-switch mb-2">
+							<input type="checkbox" class="form-check-input" id="samovar_tooltip" checked="">
+							<label class="form-check-label" for="samovar_tooltip">Включить подсказки</label>
+						</div>
+					</div>
+
 				</div>
 
 			</div>
 		</div>
 		<!-- /Правая панель настроек Самовара -->
+
+
 
 		<!-- Содержание страницы -->
 		<div class="page-content">
@@ -429,7 +451,9 @@
 																		</div>
 																		<!-- /Значок в виде сердца доступности интернета-->
 
-																		<div class="strike mb-0">VPN подключение</div>
+																		<div class="strike ms-1 mb-0 tooltip-info" data-bs-popup="tooltip" data-bs-original-title="Выберите VPN подключение через данного провайдера.">
+																			VPN подключение
+																		</div>
 
 																	</button>
 																</h2>
@@ -454,14 +478,16 @@
 																				<div class="d-flex justify-content-between">
 
 																					<!-- Строка заголовка Выбор VPN сервиса -->
-																					<a href="#" class="tooltip-samovar" data-bs-popup="tooltip" data-bs-placement="auto" data-bs-original-title="Выберите VPN из списка">
+
+																					<a href="#" >
 																						<h6 class="mb-0">VPN сервис</h6>
 																					</a>
 																					<!-- /Строка заголовка Выбор VPN сервиса -->
 
 
 																					<!-- Список выбора VPN сервиса -->
-																					<div class="ms-auto me-2 lift-down-10">
+
+																					<div class="ms-auto me-2 lift-down-10" data-bs-popup="tooltip"  data-bs-placement="auto" data-bs-original-title="Выберите VPN из списка">
 																						<select id="collapse-select" class="form-control select2 wmin-200 text-center">
 																							<option value="V1">VPN-1</option>
 																							<option value="V2">VPN-2</option>
@@ -469,11 +495,12 @@
 																							<option value="SSR-2">Shadowsocks-2</option>
 																						</select>
 																					</div>
+
 																					<!-- /Список выбора VPN сервиса -->
 
 																					<!-- Кнопка для редактирования SSR данных сервиса -->
 
-																					<a id="ssr-call-setup" href="#" class="btn btn-icon p-2 rounded-3 btn-sm ms-0 mt-1 lift-down-5" data-bs-toggle="modal" data-bs-target="#modal_form_ssr_data"  data-bs-popup="tooltip-samovar" title="" data-bs-original-title="Изменить">
+																					<a id="ssr-call-setup" href="#" class="btn btn-icon p-2 rounded-3 btn-sm ms-0 mt-1 lift-down-5" data-bs-toggle="modal" data-bs-target="#modal_form_ssr_data"  data-bs-popup="tooltip" data-bs-placement="auto" data-bs-original-title="Изменить">
 																						<i class="ph-gear text-secondary" id="ssr-call-icon"></i>
 																					</a>
 																					<!-- /Кнопка для редактирования SSR данных сервиса -->
@@ -512,7 +539,7 @@
 																		</div>
 																		<!-- /Значок в виде сердца доступности интернета-->
 
-																		<h6 class="mb-0">Отключение DNS провайдера</h6>
+																		<div class="strike mb-0" data-bs-popup="tooltip" data-bs-placement="auto" data-bs-original-title="Отключаем DNS прослушку провайдера.">Отключение DNS провайдера</div>
 
 																		<!-- Проверка доступности интернета-->
 <!--																		<div class="ms-auto">-->
@@ -590,7 +617,7 @@
 																		</div>
 																		<!-- /Значок в виде сердца доступности интернета-->
 
-																		<div class="strike mb-0">Доступность интернета</div>
+																		<div class="strike mb-0 tooltip-info" data-bs-popup="tooltip" data-bs-original-title="Проверяем доступность соединения с провайдером">Доступность интернета</div>
 
 																		<!-- Проверка доступности интернета-->
 <!--																		<div class="text-end ">-->
@@ -689,7 +716,9 @@
 																		</div>
 																		<!-- /Значек DNS сервера -->
 
-																		<h6 class="ms-1 mb-0">Доступность DNS сервера </h6>
+																		<div class="ms-1 strike mb-0 tooltip-info" data-bs-popup="tooltip" data-bs-original-title="Проверяем доступность DNS сервера Кваса">Доступность DNS сервера</div>
+
+
 
 																		<!-- Проверка доступности DNS сервера -->
 <!--																		<div class="ms-auto">-->
@@ -816,7 +845,11 @@
 																		</div>
 																		<!-- /Значек DNS сервера -->
 
-																		<h6 class="ms-1 mb-0">Наличие таблиц и правил обхода</h6>
+
+																		<div class="ms-1 strike mb-0 tooltip-info" data-bs-popup="tooltip" data-bs-original-title="Проверяем на наличие необходимых для работы Кваса таблиц и правил обхода">
+																			Наличие таблиц и правил обхода
+																		</div>
+
 
 																		<!-- Проверка доступности VPN сервер -->
 <!--																		<div class="ms-auto">-->
@@ -979,7 +1012,9 @@
 																		</div>
 																		<!-- /Значек DNS сервера -->
 
-																		<h6 class="ms-1 mb-0">Доступность доменных имен </h6>
+																		<div class="ms-1 strike mb-0 tooltip-info" data-bs-popup="tooltip" data-bs-original-title="Здесь можем проверить выбранный домен на доступ через VPN соединение.">
+																			Доступность доменных имен
+																		</div>
 
 																		<!-- Проверка доступности VPN сервер -->
 <!--																		<div class="ms-auto">-->

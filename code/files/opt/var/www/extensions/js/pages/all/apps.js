@@ -709,10 +709,11 @@ const Tooltips = function () {
 
     // Custom tooltip color
     const _componentTooltipCustomColor = function() {
-		const customTooltipElement = document.querySelector('[data-bs-popup=tooltip-samovar]');
+		const customTooltipElement = document.querySelector('[data-bs-popup=tooltip-custom]');
 		if(customTooltipElement) {
 			new bootstrap.Tooltip(customTooltipElement, {
-				customClass: 'tooltip-samovar',
+                boundary: '.page-content',
+				customClass: 'tooltip-custom',
 				template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow border-info border-opacity-70"></div><div class="tooltip-inner bg-info bg-opacity-70"></div></div>'
 			});
 		}
@@ -854,7 +855,20 @@ const Tooltips = function () {
 			});
 		}
     };
+    const tooltipToggle = function() {
 
+        let toggleSwitch = $('#samovar_tooltip');
+        let $toolTips = $('[data-bs-popup="tooltip"]');
+        function toggleSwitcher() {
+                if (toggleSwitch.is(':checked')) {
+                    $toolTips.tooltip('enable');
+                } else {
+                    $toolTips.tooltip('disable');
+                }
+        }
+        $toolTips.tooltip();
+        toggleSwitch.on('change', toggleSwitcher);
+    }
 
     //
     // Return objects assigned to module
@@ -865,6 +879,10 @@ const Tooltips = function () {
             _componentTooltipCustomColor();
             _componentTooltipEvents();
             _componentTooltipMethods();
+
+        },
+        initTooltips: function (){
+            tooltipToggle();
         }
     }
 }();
@@ -885,4 +903,5 @@ document.addEventListener('DOMContentLoaded', function() {
 // When page is fully loaded
 window.addEventListener('load', function() {
     App.initAfterLoad();
+    Tooltips.initTooltips();
 });

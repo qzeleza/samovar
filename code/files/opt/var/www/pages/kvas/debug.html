@@ -33,7 +33,7 @@
 
 		<!-- Файлы скриптов JS для отрисовки темы -->
 		<script src="../../extensions/js/pages/all/apps.js"></script>
-
+		<script src="../../extensions/js/pages/debug/scrolling.js"></script>
 
 
 <!--		<script src="../../data/js/vendors/draggable.js"></script>-->
@@ -78,7 +78,8 @@
 
 				<!-- Кнопка вызова правого меню -->
 				<ul class="nav flex-row text-start">
-					<li class="nav-item nav-item-dropdown-lg dropdown">
+					<li class="nav-item nav-item-dropdown-lg dropdown tooltip-info" data-bs-popup="tooltip" data-bs-original-title="Меню настроек Самовара">
+
 						<a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-pill" data-bs-toggle="offcanvas" data-bs-target="#panel_right">
 							<i class="ph-faders"></i>
 						</a>
@@ -95,36 +96,54 @@
 		<!-- Правая панель настроек Самовара -->
 		<div id="panel_right" class="offcanvas offcanvas-end offcanvas-resizable" data-min-width="250" data-max-width="600" tabindex="-1">
 			<div class="offcanvas-resize-handle"></div>
-
-			<div class="offcanvas-header">
-				<h3 class="offcanvas-title fw-semibold">САМОВАР</h3>
+			<div class="offcanvas-header ">
+				<h5 class="offcanvas-title fw-semibold"></h5>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
 			</div>
-
 			<div class="offcanvas-body p-0">
 				<div class="text-center px-3 mb-3">
 					<a href="#" class="d-inline-block mb-3">
 						<img src="../../assets/images/logo/logo-samovar-color.svg" width="100" height="100" alt="">
 					</a>
-					<h6 class="mb-0">Настройки</h6>
+					<h3 class="mb-0">САМОВАР</h3>
 					<div>Текущая версия 0.0.1</div>
 				</div>
+				<ul class="nav nav-tabs nav-tabs-underline nav-justified mb-0">
+					<li class="nav-item">
+						<a href="#bottom-justified-tab1" class="nav-link active" data-bs-toggle="tab">Действия</a>
+					</li>
+					<li class="nav-item">
+						<a href="#bottom-justified-tab2" class="nav-link" data-bs-toggle="tab">Настройки</a>
+					</li>
+				</ul>
 
-				<div class="bg-light text-muted py-2 px-3">Задачи</div>
-				<div class="list-group list-group-borderless py-2">
-					<a href="#" class="list-group-item list-group-item-action">
-						<i class="ph-arrows-clockwise me-3"></i>
-						Обновить
-						<div class="badge bg-primary text-white rounded-pill ms-auto">0.0.2</div>
-					</a>
-					<a href="#" class="list-group-item list-group-item-action d-flex align-items-start">
-						<i class="ph-x me-3"></i>
-						Удалить
-					</a>
-					<a href="#" class="list-group-item list-group-item-action">
-						<i class="ph-check me-3"></i>
-						Проверить
-					</a>
+				<div class="tab-content offcanvas-body ">
+					<div class="tab-pane fade show active" id="bottom-justified-tab1">
+<!--						<div class="bg-light text-muted py-2 px-3">Доступные действия</div>-->
+						<div class="list-group list-group-borderless py-2">
+							<a href="#" class="list-group-item list-group-item-action">
+								<i class="ph-arrows-clockwise me-3"></i>
+								Обновить
+								<div class="badge bg-primary text-white rounded-pill ms-auto">0.0.2</div>
+							</a>
+							<a href="#" class="list-group-item list-group-item-action d-flex align-items-start">
+								<i class="ph-x me-3"></i>
+								Удалить
+							</a>
+							<a href="#" class="list-group-item list-group-item-action">
+								<i class="ph-check me-3"></i>
+								Проверить
+							</a>
+						</div>
+					</div>
+
+					<div class="tab-pane offcanvas-body fade" id="bottom-justified-tab2">
+						<div class="form-check form-switch mb-2">
+							<input type="checkbox" class="form-check-input" id="samovar_tooltip" checked="">
+							<label class="form-check-label" for="samovar_tooltip">Включить подсказки</label>
+						</div>
+					</div>
+
 				</div>
 
 			</div>
@@ -388,8 +407,9 @@
 															<div class="card">
 																<div class="card-header d-flex align-items-center">
 																	<h4 class="mb-1 mt-1">Отчет о работе Кваса</h4>
+
 																	<div class="dropdown ms-auto">
-																		<a href="#" class="text-body" data-bs-toggle="dropdown" aria-expanded="false">
+																		<a href="#" class="text-body" data-bs-toggle="dropdown" aria-expanded="false" data-bs-popup="tooltip" data-bs-original-title="Действия с отчетом">
 																			<i class="ph-list"></i>
 																		</a>
 
@@ -667,7 +687,6 @@
 		</div>
 		<!-- Содержание страницы -->
 
-		<script src="../../extensions/js/pages/debug/scrolling.js"></script>
 
 	</body>
 	<!-- /Тело проекта  -->
