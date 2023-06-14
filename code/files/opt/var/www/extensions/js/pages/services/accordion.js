@@ -81,10 +81,34 @@ const Services = function () {
 
     };
 
+    const switchToggle = function() {
+
+        let $Switchers = $('input[id^="sc_"]');
+        // let $Indicators = $('span[id^="ind_"]');
+
+        function switcherToggle() {
+            let indicator = $('#' + 'ind_' + $(this).attr('id'));
+            if ($(this).is(':checked')) {
+                $('label[for="' + $(this).attr('id') + '"]').text('ВКЛ');
+                indicator.removeClass('bg-danger')
+                indicator.addClass('bg-success')
+            } else {
+                $('label[for="' + $(this).attr('id') + '"]').text('ВЫКЛ');
+                indicator.removeClass('bg-success')
+                indicator.addClass('bg-danger')
+            }
+        }
+
+        $Switchers.on('change', switcherToggle);
+
+    };
+
+
     return {
         init: function() {
             toggleAccordion();
             setupSelect();
+            switchToggle();
         }
     }
 }();

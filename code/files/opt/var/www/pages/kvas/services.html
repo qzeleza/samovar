@@ -771,7 +771,7 @@
 																			<!-- Индикатор статуса доступности Шифрования -->
 																			<div class="status-indicator-container me-3">
 																				<i class="me-3 mt-1"></i>
-																				<span class="status-indicator bg-success"></span>
+																				<span class="status-indicator bg-success" id="ind_sc_crypt" ></span>
 																			</div>
 																			<!-- /Индикатор статуса доступности Шифрования -->
 
@@ -782,8 +782,8 @@
 																						<h6 class="mt-1 mb-0">Шифрование</h6>
 																					</a>
 																					<div class="form-check form-switch ms-auto  form-check-reverse me-3 lift-down-25">
-																						<label class="form-check-label fw-bold" for="sc_ls_1">ВКЛ.</label>
-																						<input type="checkbox" class="form-check-input" id="sc_ls_1" checked="">
+																						<label class="form-check-label fw-bold" for="sc_crypt">ВКЛ.</label>
+																						<input type="checkbox" class="form-check-input" id="sc_crypt" checked="">
 																					</div>
 																				</div>
 
@@ -802,7 +802,7 @@
 																			<!-- Индикатор статуса доступности Антиреклама -->
 																			<div class="status-indicator-container me-3">
 																				<i class="me-3 mt-1"></i>
-																				<span class="status-indicator bg-danger"></span>
+																				<span class="status-indicator bg-danger" id="ind_sc_block_adv"></span>
 																			</div>
 																			<!-- /Индикатор статуса доступности Антиреклама -->
 
@@ -813,8 +813,8 @@
 																						<h6 class="mb-0">Блокировка рекламы</h6>
 																					</a>
 																					<div class="form-check form-switch form-check-reverse ms-auto me-3 lift-down-25">
-																						<label class="form-check-label fw-bold" for="sc_ls_2">ВЫКЛ.</label>
-																						<input type="checkbox" class="form-check-input" id="sc_ls_2" >
+																						<label class="form-check-label fw-bold" for="sc_block_adv">ВЫКЛ.</label>
+																						<input type="checkbox" class="form-check-input" id="sc_block_adv" >
 																					</div>
 																				</div>
 
@@ -1141,7 +1141,7 @@
 				<div class="modal-content ">
 
 					<!-- Заголовок формы -->
-					<div class="modal-header mb-lg-4">
+					<div class="modal-header mb-0 pb-1 pt-1">
 
 						<!-- Индикатор проверки VPN сервиса: зеленый или красный -->
 						<div class="status-indicator-container me-3 mt-0 mb-3 lift-down-3">
@@ -1213,14 +1213,19 @@
 						<!-- /Поля для редактирования данных SSR соединения -->
 
 						<!-- Фундамент формы -->
-						<div class="modal-footer mt-lg-4">
+						<div class="modal-footer  pb-1 pt-1 ">
 
 							<button type="submit" class="btn btn-link text-start">
-							  <i class="ph-arrow-counter-clockwise ms-2"></i>
+							  	<i class="ph-arrow-counter-clockwise me-2"></i>
+								Проверить
 							</button>
-							<button type="button" class="btn btn-link ms-auto" data-bs-dismiss="modal">Скрыть</button>
-							<button type="submit" class="btn btn-light">
-							  Сохранить<i class="ph-floppy-disk ms-2"></i>
+							<button type="button" class="btn btn-link ms-auto" data-bs-dismiss="modal">
+								<i class="ph-x me-2"></i>
+								Скрыть
+							</button>
+							<button type="submit" class="btn btn-link">
+								<i class="ph-floppy-disk me-2"></i>
+							  	Сохранить
 							</button>
 
 						</div>
