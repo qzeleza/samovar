@@ -1,12 +1,14 @@
+/* Цвет фона в сплывающих подсказок */
 .tooltip-inner, .tooltip-info + .tooltip > .tooltip-inner {
     background-color: #9f811a;
 }
 
+/* отступ сверху для быстрого перехода по версиям */
 #ver_nav {
-  /*margin-top: 30px !important;*/
   padding-top: 100px !important;
 }
 
+/* изменение позиционирования панели навигации при малых разрешениях */
 @media screen and (max-width: 801px) {
   .navbar-brand, .content {
     position: absolute !important;
@@ -26,23 +28,27 @@
 }
 
 
-
+/* Заголовок с отсnупом в 5px */
 .elem-header {
   margin-right: 5px;
 }
+
 
 .dataTable tr td.child>ul {
   display: table-row !important;
 }
 
+/* Цвет лазурный */
 .bg-azure {
     background-color: azure !important;
 }
 
+/* Прячем границы строк в таблице */
 .rows-no-borders tbody tr {
   border-style: hidden !important;
 }
 
+/* Ширина элемента в 15% */
 .w-15 {
   width: 15% !important;
 }
@@ -51,6 +57,7 @@
   margin-left: auto !important;
 }
 
+/* Контекстное меню для таблицы со списком доменных имен */
 #contextMenuVPN {
   display: none;
   position: fixed;
@@ -160,16 +167,10 @@ a.toggle-all.clicked i.ph-arrow-fat-lines-down {
   background-color: #3d4957ff !important;
 }
 
-/* Цвет фона главного контейнера на странице Системный монитор */
-.bg-main-card {
-  background-color: #ecebfbff !important;
-}
-
 /* Левое выравнивание текста в заголовке закладки */
 .nav-item .a .div {
   text-align: left !important;
 }
-
 
 /* Прозрачный текст под текстом в timeline элементах (там, где текст) */
 .card .timeline-time {
@@ -189,7 +190,7 @@ a.toggle-all.clicked i.ph-arrow-fat-lines-down {
   padding-top: 10px !important;
 }
 
-/* Увеличиваем в 1.5 раза иконку в заголовке аккардиона */
+/* Увеличиваем в 1.5 раза иконку в заголовке аккордеона */
 .accordion-header button div div i {
     transform: scale(1.5);
 }
