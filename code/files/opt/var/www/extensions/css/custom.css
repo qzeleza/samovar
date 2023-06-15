@@ -1,3 +1,17 @@
+@media screen and (max-width: 1801px) {
+  .main-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 70%;
+  }
+  .debug-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 90%;
+  }
+}
+
+
 /* Цвет фона в сплывающих подсказок */
 .tooltip-inner, .tooltip-info + .tooltip > .tooltip-inner {
     background-color: #9f811a;
