@@ -80,8 +80,8 @@
 				<ul class="nav flex-row text-start">
 					<li class="nav-item nav-item-dropdown-lg dropdown tooltip-info" data-bs-popup="tooltip" data-bs-original-title="Меню настроек Самовара">
 
-						<a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-pill" data-bs-toggle="offcanvas" data-bs-target="#panel_right">
-							<i class="ph-faders"></i>
+						<a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-3 " data-bs-toggle="offcanvas" data-bs-target="#panel_right">
+							<i class="ph-faders ph-1_3x"></i>
 						</a>
 					</li>
 				</ul>
@@ -95,12 +95,22 @@
 
 		<!-- Правая панель настроек Самовара -->
 		<div id="panel_right" class="offcanvas offcanvas-end offcanvas-resizable" data-min-width="250" data-max-width="600" tabindex="-1">
+
+			<!-- Элемент для js настройки ширины правого меню -->
 			<div class="offcanvas-resize-handle"></div>
-			<div class="offcanvas-header ">
+			<!-- /Элемент для js настройки ширины правого меню -->
+
+			<!-- Кнопка закрытия правого меню -->
+			<div class="offcanvas-header">
 				<h5 class="offcanvas-title fw-semibold"></h5>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
 			</div>
+			<!-- /Кнопка закрытия правого меню -->
+
+			<!-- Тело правого меню -->
 			<div class="offcanvas-body p-0">
+
+				<!-- Лого и версия Самовара в правом меню -->
 				<div class="text-center px-3 mb-3">
 					<a href="#" class="d-inline-block mb-3">
 						<img src="../../assets/images/logo/logo-samovar-color.svg" width="100" height="100" alt="">
@@ -108,6 +118,9 @@
 					<h3 class="mb-0">САМОВАР</h3>
 					<div>Текущая версия 0.0.1</div>
 				</div>
+				<!-- /Лого и версия Самовара в правом меню -->
+
+				<!-- Вкладки правого меню -->
 				<ul class="nav nav-tabs nav-tabs-underline nav-justified mb-0">
 					<li class="nav-item">
 						<a href="#bottom-justified-tab1" class="nav-link active" data-bs-toggle="tab">Действия</a>
@@ -116,8 +129,12 @@
 						<a href="#bottom-justified-tab2" class="nav-link" data-bs-toggle="tab">Настройки</a>
 					</li>
 				</ul>
+				<!-- /Вкладки правого меню -->
 
+				<!-- Содержание вкладок Самовара -->
 				<div class="tab-content offcanvas-body ">
+
+					<!-- Содержание вкладки Действий Самовара -->
 					<div class="tab-pane fade show active" id="bottom-justified-tab1">
 <!--						<div class="bg-light text-muted py-2 px-3">Доступные действия</div>-->
 						<div class="list-group list-group-borderless py-2">
@@ -136,21 +153,69 @@
 							</a>
 						</div>
 					</div>
+					<!-- Содержание вкладки Действий Самовара -->
 
+
+					<!-- Содержание вкладки Настроек Самовара -->
 					<div class="tab-pane offcanvas-body fade" id="bottom-justified-tab2">
-						<div class="form-check form-switch mb-2">
+						<div class="form-check form-switch pb-3">
 							<input type="checkbox" class="form-check-input" id="samovar_tooltip" checked="">
-							<label class="form-check-label" for="samovar_tooltip">Включить подсказки</label>
+							<label class="form-check-label" for="samovar_tooltip">Всплывающие подсказки</label>
+						</div>
+						<div class="pt-3 border-top">
+							<div class="fw-semibold mb-2">Цвет темы</div>
+							<div class="list-group mb-3">
+								<label class="list-group-item list-group-item-action form-check border-width-1 rounded mb-2">
+									<div class="d-flex flex-fill my-1">
+										<div class="form-check-label d-flex me-2">
+											<i class="ph-sun ph-lg me-3"></i>
+											<div>
+												<span class="fw-bold">Светлая тема</span>
+												<div class="fs-sm text-muted">Установить светлую тему </div>
+											</div>
+										</div>
+										<input type="radio" class="form-check-input cursor-pointer ms-auto" name="main-theme" value="light" checked="">
+									</div>
+								</label>
+
+								<label class="list-group-item list-group-item-action form-check border-width-1 rounded mb-2 bg-primary bg-opacity-10 border-primary">
+									<div class="d-flex flex-fill my-1">
+										<div class="form-check-label d-flex me-2">
+											<i class="ph-moon ph-lg me-3"></i>
+											<div>
+												<span class="fw-bold">Темная тема</span>
+												<div class="fs-sm text-muted">Установить темную тему</div>
+											</div>
+										</div>
+										<input type="radio" class="form-check-input cursor-pointer ms-auto" name="main-theme" value="dark">
+									</div>
+								</label>
+
+								<label class="list-group-item list-group-item-action form-check border-width-1 rounded mb-0">
+									<div class="d-flex flex-fill my-1">
+										<div class="form-check-label d-flex me-2">
+											<i class="ph-globe ph-lg me-3"></i>
+											<div>
+												<span class="fw-bold">Системная (авто)</span>
+												<div class="fs-sm text-muted">Установить системную тему</div>
+											</div>
+										</div>
+										<input type="radio" class="form-check-input cursor-pointer ms-auto" name="main-theme" value="auto">
+									</div>
+								</label>
+							</div>
 						</div>
 					</div>
+					<!-- /Содержание вкладки Настроек Самовара -->
 
 				</div>
+				<!-- /Содержание вкладок Самовара -->
 
 			</div>
+			<!-- /Тело правого меню -->
+
 		</div>
 		<!-- /Правая панель настроек Самовара -->
-
-
 
 		<!-- Содержание страницы -->
 		<div class="page-content">
@@ -190,14 +255,14 @@
 									<i class="ph-list-bullets"></i>
 									<span>Квас</span>
 								</a>
-								<!-- Пункты меню плугина -->
+								<!-- Пункты меню расширения -->
 								<ul class="nav-group-sub collapse show">
 									<li class="nav-item"><a href="../../pages/kvas/services.html" class="nav-link fw-light active">Службы</a></li>
 									<li class="nav-item"><a href="white_list.html" class="nav-link fw-light">Белый список</a></li>
 									<li class="nav-item"><a href="../../pages/kvas/debug.html" class="nav-link fw-light">Отладка</a></li>
 									<li class="nav-item-divider"></li>
 								</ul>
-								<!-- Пункты меню плугина -->
+								<!-- Пункты меню расширения -->
 							</li>
 
 
@@ -291,7 +356,7 @@
 							<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-4">
 
 								<!-- Описание вкладок основного блока -->
-								<ul class="nav nav-tabs nav-tabs-underline border-0 nav-pills-toolbar bg-body mb-3 no-links-padding-xy" role="tablist">
+								<ul class="nav nav-tabs nav-tabs-underline border-0 nav-pills-toolbar mb-3 no-links-padding-xy" role="tablist">
 
 									<!-- Заголовок вкладки 1 с иконкой -->
 									<li class="nav-item elem-header" role="presentation">
@@ -417,7 +482,6 @@
 															</div>
 
 															<!-- Кнопка "Открыть/Закрыть все" -->
-
 															<div class="ms-auto mt-3 mb-2 text-center align-content-center ">
 																<a href="#" class="toggle-all btn-icon rounded-pill border border-light rounded-pill p-3 ms-2 me-2 mb-1">
 																	<i class="ph-arrow-fat-lines-down p-2"></i>

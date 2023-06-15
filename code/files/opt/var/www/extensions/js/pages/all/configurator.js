@@ -12,7 +12,7 @@
 
 (function () {
     ((localStorage.getItem('theme') == 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorage.getItem('theme') == 'dark') && document.documentElement.setAttribute('data-color-theme', 'dark');
-    localStorage.getItem('direction') == 'rtl' && document.getElementById("stylesheet").setAttribute('href', 'assets/css/rtl/all.min.css');
+    localStorage.getItem('direction') == 'rtl' && document.getElementById("stylesheet").setAttribute('href', '../../../assets/css/rtl/all.min.css');
     localStorage.getItem('direction') == 'rtl' && document.documentElement.setAttribute('dir', 'rtl');
 })();
 
@@ -38,6 +38,7 @@ const themeSwitcher = function() {
         // Changes the active radiobutton
         function indicateTheme(mode) {
             for(var i = colorscheme.length; i--; ) {
+
                 if(colorscheme[i].value == mode) {
                     colorscheme[i].checked = true;
                     colorscheme[i].closest('.list-group-item').classList.add('bg-primary', 'bg-opacity-10', 'border-primary');
@@ -120,11 +121,11 @@ const themeSwitcher = function() {
 
             function resetDir() {
                 if (dirSwitch.checked) {
-                    document.getElementById("stylesheet").setAttribute('href', 'assets/css/rtl/all.min.css');
+                    document.getElementById("stylesheet").setAttribute('href', '../../../assets/css/rtl/all.min.css');
                     document.documentElement.setAttribute("dir", "rtl");
                     localStorage.setItem("direction", "rtl");
                 } else {
-                    document.getElementById("stylesheet").setAttribute('href', 'assets/css/ltr/all.min.css');
+                    document.getElementById("stylesheet").setAttribute('href', '../../../assets/css/ltr/all.min.css');
                     document.documentElement.setAttribute("dir", "ltr");
                     localStorage.removeItem("direction");
                 }

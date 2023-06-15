@@ -857,16 +857,30 @@ const Tooltips = function () {
     };
     const tooltipToggle = function() {
 
-        let toggleSwitch = $('#samovar_tooltip');
+        const tooltipKey = 'samovar_tooltip';
+        const _enable = "enable";
+        const _disable = "disable";
+
+        let toggleSwitch = $('#' + tooltipKey);
         let $toolTips = $('[data-bs-popup="tooltip"]');
+
         function toggleSwitcher() {
                 if (toggleSwitch.is(':checked')) {
-                    $toolTips.tooltip('enable');
+                    $toolTips.tooltip(_enable);
+                    localStorage.setItem(tooltipKey, _enable);
                 } else {
-                    $toolTips.tooltip('disable');
+                    $toolTips.tooltip(_disable);
+                    localStorage.setItem(tooltipKey, _disable);
                 }
         }
-        $toolTips.tooltip();
+        function loadToggleSwitcher() {
+            const state = localStorage.getItem(tooltipKey);
+            if (state) {
+                $toolTips.tooltip(state);
+            }
+        }
+
+        loadToggleSwitcher();
         toggleSwitch.on('change', toggleSwitcher);
     }
 
@@ -888,7 +902,23 @@ const Tooltips = function () {
 }();
 
 
+const Settings = function () {
 
+    const tooltipToggle = function() {
+
+    }
+
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        init: function() {
+
+        },
+    }
+
+}();
 
 
 // Initialize module
