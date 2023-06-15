@@ -136,7 +136,10 @@ a.toggle-all.clicked i.ph-arrow-fat-lines-down {
     --bg-opacity: 1;
     background-color: rgba(#dfc77e, var(--bg-opacity)) !important;
 }
-
+.bg-nav {
+  --bg-opacity: 1;
+  background-color: #006386 !important;
+}
 /* Цвет золотой текст */
 .text-gold {
     --bg-opacity: 1;
