@@ -877,6 +877,11 @@ const Tooltips = function () {
             const state = localStorage.getItem(tooltipKey);
             if (state) {
                 $toolTips.tooltip(state);
+                if (state === 'enable'){
+                    toggleSwitch.prop('checked', true);
+                } else {
+                    toggleSwitch.prop('checked', false);
+                }
             }
         }
 
