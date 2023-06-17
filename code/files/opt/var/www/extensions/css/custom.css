@@ -1,9 +1,133 @@
+
+.scroll-item {
+  padding-left: 20px;
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+/* настройка отступов в заголовке страницы */
+.page-title {
+  padding-top: 1vh;
+  margin-top: 1vh;
+  padding-bottom: 1vh;
+  margin-bottom: 0;
+  padding-left: 1.4vw;
+}
+
+.page-title .text-muted {
+  padding-top: 0.9vh;
+}
+
+/* выделяем кнопку настроек при наведении на нее */
+.nav a.btn {
+  background-color: transparent;
+  color: inherit;
+}
+.nav a.btn:hover {
+  background-color: #f8f9fa;
+  color: #0d6efd;
+}
+
+/* регулировка высоты каждого изх пунктов левого меню навигации */
+.nav-sidebar .nav-link {
+  padding-top: 1.2vh !important;
+  padding-bottom: 1.2vh !important;
+}
+
+.btn-menu-hide  {
+  padding-top: 10px;
+}
+
+/* регулировка высоты заголовка каждой из карточек card */
+.card .card-header {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 2vw;
+  padding-right: 1vw;
+}
+
+/* отступы для логотипа с изображением */
+.sidebar-logo-image {
+  padding-right: 10px;
+  padding-left: 10px;
+  height: 40px;
+}
+
+/* задаем высоту и цвет строки с логотипом*/
+.sidebar-logo {
+  background-color: #004c69 !important;
+  height: 96px;
+  padding-bottom: 5px;
+}
+
+/* отступы для логотипа с текстом */
+.sidebar-logo-text {
+  width: 160px;
+  /*margin-left: auto !important;*/
+  padding-right: 0.8vw !important;
+  padding-top: 8px;
+  padding-left: 10px;
+}
+
+
+
+
+
+/* Новый более мелкий размер текста для заголовков */
+.display-7 {
+  font-size: calc(1.275rem + 1.2vw);
+  font-weight: 250;
+  line-height: 1.2715;
+}
+@media (min-width: 1200px) {
+  .display-7 {
+    font-weight: 150;
+    font-size: 2rem;
+  }
+}
+
 /* Устанавливаем ширину основной карточки для дисплеев ноутбуков с высоким разрешением */
-@media screen and (max-width: 1801px) {
-  .main-card {
+.content .row .main-card {
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: 90%;
+}
+.debug-card {
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: 100%;
+}
+@media screen and (max-width: 4030px) {
+  .content .row .main-card {
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
-    width: 70%;
+    width: 60%;
+  }
+  .debug-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 2030px) {
+  .content .row .main-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 55%;
+  }
+  .debug-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 1830px) {
+  .content .row .main-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 65%;
   }
   .debug-card {
     -ms-flex: 0 0 auto;
@@ -12,6 +136,18 @@
   }
 }
 
+@media screen and (max-width: 1530px) {
+  .content .row .main-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 80%;
+  }
+  .debug-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}
 
 /* Цвет фона в сплывающих подсказок */
 .tooltip-inner, .tooltip-info + .tooltip > .tooltip-inner {
@@ -24,7 +160,7 @@
 }
 
 /* изменение позиционирования панели навигации при малых разрешениях */
-@media screen and (max-width: 801px) {
+@media screen and (max-width: 1200px) {
   .navbar-brand, .content {
     position: absolute !important;
   }
@@ -160,19 +296,6 @@ a.toggle-all.clicked i.ph-arrow-fat-lines-down {
     color: rgba(#dfc77e, var(--bg-opacity)) !important;
 }
 
-/* Размеры иконки логотипа */
-.logo_image_size {
-  height: 60px !important;
-  width: 60px !important;
-  margin-left: 10px;
-}
-
-/* Размеры текста логотипа */
-.logo_text_size {
-  height: 55px !important;
-  float: left;
-}
-
 /* Преобразование блока закрытия бокового меню */
 .sidebar-hide-icon {
   position: absolute;
@@ -213,12 +336,6 @@ a.toggle-all.clicked i.ph-arrow-fat-lines-down {
   /*border: 2px !important;*/
   border-color: #ecebfbff;
   opacity: 0.9;
-}
-
-/* Делаем меньше по высоте заголовок в карточке */
-.card .card-header {
-  padding-bottom: 10px !important;
-  padding-top: 10px !important;
 }
 
 /* Увеличиваем в 1.5 раза иконку в заголовке аккордеона */

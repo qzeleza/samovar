@@ -907,10 +907,13 @@ const Tooltips = function () {
 }();
 
 
-const Settings = function () {
+const SettingSetup = function () {
 
-    const tooltipToggle = function() {
+    let setupButton = $('a[data-bs-target="#panel_right"]')
 
+    const setupCall = function() {
+        $('.nav-link.active').removeClass('active');
+        setupButton.addClass('active');
     }
 
     //
@@ -919,7 +922,7 @@ const Settings = function () {
 
     return {
         init: function() {
-
+            setupButton.on('click', setupCall);
         },
     }
 
@@ -933,10 +936,12 @@ const Settings = function () {
 document.addEventListener('DOMContentLoaded', function() {
     App.initCore();
     Tooltips.init();
+    SettingSetup.init();
 });
 
 // When page is fully loaded
 window.addEventListener('load', function() {
     App.initAfterLoad();
     Tooltips.initTooltips();
+    SettingSetup.init();
 });
