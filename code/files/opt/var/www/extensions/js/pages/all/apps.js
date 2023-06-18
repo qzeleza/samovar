@@ -910,87 +910,52 @@ const Tooltips = function () {
 }();
 
 //
-// const LogoHiding = function () {
-//
-//     let imageLogo;
-//     let sideBarLogo;
-//     let sideBar;
-//     let sidebarControl;
-//     let pushedFlag;
-//
-//     const isSideBarUnfolded = function() {
-//         return sideBar.hasClass('sidebar-main-unfold') || sideBar.width() > 100;
-//     }
-//
-//     const isSideBarNotFoldedAndNotFixed = function() {
-//         return sideBar.hasClass('sidebar-main-unfold') && sideBar.hasClass('sidebar-main-resized') ;
-//     }
-//
-//     const isSideBarFoldedButNotFixed = function() {
-//         return (!sideBar.hasClass('sidebar-main-unfold')) && sideBar.hasClass('sidebar-main-resized') ;
-//     }
-//     const foldSideBar = function() {
-//         sideBarLogo.removeClass('bg-sidebar-logo');
-//         imageLogo.removeClass();
-//     }
-//     const unfoldSideBar = function() {
-//         sideBarLogo.addClass('bg-sidebar-logo');
-//         imageLogo.hide();
-//     }
-//
-//     const SideBarClicked = function() {
-//         if (isSideBarUnfolded()) {
-//             unfoldSideBar();
-//         } else {
-//             foldSideBar();
-//         }
-//     }
-//     const showOrHideLogoImage = function() {
-//         if (isSideBarFoldedButNotFixed()) {
-//             unfoldSideBar();
-//         } else{
-//             if (isSideBarUnfolded()) {
-//                 unfoldSideBar();
-//             } else {
-//                 foldSideBar();
-//             }
-//         }
-//     }
-//
-//     const showLogoImageWhenHoverOut = function() {
-//         if (isSideBarNotFoldedAndNotFixed()) {
-//             foldSideBar();
-//         } else{
-//             if (!isSideBarUnfolded()) {
-//                 foldSideBar();
-//             }
-//         }
-//     }
-//     //
-//     // Return objects assigned to module
-//     //
-//
-//     return {
-//         init: function() {
-//             imageLogo = $('.sidebar-logo-hidden');
-//             sideBarLogo = $('.sidebar-logo');
-//             sideBar = $('.sidebar');
-//             sidebarControl = $('.sidebar-control');
-//
-//             imageLogo.hide();
-//             sidebarControl.on('click', SideBarClicked);
-//             sideBar.on('mouseenter',showOrHideLogoImage);
-//             sideBar.on('mouseleave',showLogoImageWhenHoverOut);
-//         },
-//     };
-//
-// }();
+const templete = function () {
 
+    let templateVal;
 
-// Initialize module
+    const isTemplateVal = function() {
+        return true;
+    }
+
+    const makeSomethingWhenTrue = function() {
+        return true;
+    }
+    const makeSomethingWhenFalse = function() {
+        return true;
+    }
+
+    const functionTemplate = function() {
+        if (isTemplateVal()) {
+            makeSomethingWhenTrue();
+        } else {
+            makeSomethingWhenFalse();
+        }
+    }
+
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        init: function() {
+            templateVal = $('.class_of-some-element');
+            // что-то делаем, когда нажали на элемент
+            templateVal.on('click', functionTemplate);
+            // что-то делаем, когда навели мышь на элемент
+            templateVal.on('mouseenter',functionTemplate);
+            // что-то делаем, когда убрали мышь с элемента
+            templateVal.on('mouseleave',functionTemplate);
+        },
+    };
+
+}();
+
+//
+// Устанавливаем в загрузку страницы
 // ------------------------------
 
-// When content is loaded
+// Когда страница загружена When content is loaded
 document.addEventListener('DOMContentLoaded', function() {
     App.initCore();
     Tooltips.init();
@@ -1000,26 +965,4 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('load', function() {
     App.initAfterLoad();
     Tooltips.initTooltips();
-    // LogoHiding.init();
-    // $('.nav-sidebar .nav-link').on('click', ( function (){
-    //     $('.nav-sidebar .nav-link.active').removeClass('active');
-    //     $(this).addClass('active');
-    // }));
-
-    // $('.sidebar-logo').height($('.page-header').outerHeight());
-
-
-
-
 });
-// $(document).on('keydown', function(e) {
-//     if ((e.ctrlKey || e.metaKey) && (e.which === 107 || e.which === 187)) {
-//         // Код для обработки нажатия Ctrl + '+'
-//         $('.sidebar-logo').height($('.page-header').outerHeight());
-//         location.reload();
-//     } else if ((e.ctrlKey || e.metaKey) && (e.which === 109 || e.which === 189)) {
-//         // Код для обработки нажатия Ctrl + '-'
-//         $('.sidebar-logo').height($('.page-header').outerHeight());
-//         location.reload();
-//     }
-// });

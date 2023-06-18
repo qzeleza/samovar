@@ -1,45 +1,57 @@
 //
 // Замедленная, плавная прокрутка
-// для этого необходимо чтобы элемента с содержимым (текстом)
-// был класса 'scroll-content', а оглавление каждый
-// из его указателей имел класс 'scroll-pointer'
-// так же, каждый из id должен начинаться с префикса 'scll_'
+// для этого необходимо чтобы элемент с содержимым (текстом)
+// был класса 'scroll-content', у которого потомок только один div
+// в котором и содержится заголовок и сам текст
+// переход к главам и активация соответствующего пункта в оглавлении
+// работает по принципу переход по индексу начиная сверху вниз
 //
 const Scrolling = function () {
 
-    let elementScroll = $('.scroll-content');
-    const pointer = $('.scroll-pointer');
-    // let $scrollItems = $('a[href^="#"]');
+    let scrollContent;
+    let scrollPointers ;
+    let contentElements ;
 
     const smoothScrolling = function(event) {
-        let target = $(this.getAttribute('href'));
-        if (target.length) {
-            event.preventDefault();
-            const marginBottom = parseInt(target.css('margin-bottom'), 10);
-            const paddingBottom = parseInt(target.css('padding-bottom'), 10);
-            const offset = marginBottom + paddingBottom;
-            elementScroll.stop().animate({
-                scrollTop: target.position().top + elementScroll.scrollTop() - offset
-            }, 1000);
-        }
+        event.preventDefault();
+        let index = $(this).closest('li').index();
+        let target = contentElements.eq(index);
+        scrollContent.animate({
+            scrollTop: target.offset().top - scrollContent.offset().top + scrollContent.scrollTop()
+        }, 1000);
+
     }
     //
     //  Функция для переключения фокуса ввода при наведении мыши
     //  на соответствующий параграф внутри элемента прокрутки
     //
-    const scrollContent = function(event) {
-        const pointer_href = pointer.map(function() {
-            return $($(this).attr('href'));
-        });
-        pointer.each(function(index) {
-            let href = pointer_href[index];
-            href.on('mouseenter', () => {
+    const scrollContentFunc = function(event) {
+
+        contentElements.each(function(index) {
+            let content = $(this);
+
+            content.on('mouseenter', () => {
+                let $pointers, pointer, subPointers;
+                $pointers = scrollPointers.find('a');
+
+                $pointers.removeClass('active');
+                pointer = $pointers.eq(index);
+                subPointers = pointer.find('li').length;
+                if (subPointers === 0 ){
+                    pointer.addClass('active');
+                }
+
+
+
+            });
+            content.on('mouseleave', () => {
+                let $pointers, pointer, ind, $subPointers;
+                $pointers = scrollPointers.find('a');
+                ind =$(this).index();
+                pointer = $pointers.eq(ind);
                 pointer.removeClass('active');
-                $(this).addClass('active');
             });
-            href.on('mouseleave', () => {
-                $(this).removeClass('active');
-            });
+
         });
     }
 
@@ -51,9 +63,12 @@ const Scrolling = function () {
 
     return {
         init: function() {
-            $('a[href^="#scll_"]').on('click',smoothScrolling);
-            elementScroll.on('mousemove', scrollContent);
-            $('a[href^="#scll_device_info"]').trigger('click');
+            scrollContent = $('.scroll-content');
+            scrollPointers = $('.nav.nav-scrollspy li');
+            contentElements = $('.scroll-content > div');
+
+            $('.nav.nav-scrollspy .nav-link').on('click', smoothScrolling);
+            scrollContent.on('scroll',scrollContentFunc);
         },
     }
 

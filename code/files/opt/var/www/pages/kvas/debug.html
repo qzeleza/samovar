@@ -33,6 +33,7 @@
 
 		<!-- Файлы скриптов JS для отрисовки темы -->
 		<script src="../../extensions/js/pages/all/apps.js"></script>
+		<script src="../../extensions/js/pages/all/scrolling.js"></script>
 
 
 
@@ -500,7 +501,7 @@
 																<div class="scroll-content card-body overflow-auto" style="height: 70vh">
 
 																	<!-- Информация об устройстве -->
-																	<div id="scll_device_info" class="scroll-item border-bottom-width-1 border-bottom">
+																	<div class=" border-bottom-width-1 border-bottom">
 																		<h6 class="fw-semibold text-secondary pb-1">Информация об устройстве</h6>
 																		<div class="ps-3">
 																			<div class="mt-2">Версия пакета: <b>1.1.3</b></div>
@@ -520,7 +521,7 @@
 
 
 																	<!-- Системный журнал  -->
-																	<div id="scll_sys_errors" class="scroll-item border-bottom-width-1 border-bottom">
+																	<div class=" border-bottom-width-1 border-bottom">
 																		<h6  class="fw-semibold text-secondary pb-1">Системный журнал (ошибки)</h6>
 																		<div class="ps-3">
 																			<div class=""><b>Июн 2 17:10:01</b> <b>КВАС</b> Запущен файл /opt/etc/cron.5mins/ipset.kvas</div>
@@ -536,7 +537,7 @@
 
 
 																	<!-- AdGuard (блок ipset) -->
-																	<div id="scll_adguard_ipset" class="scroll-item border-bottom-width-1 border-bottom">
+																	<div class=" border-bottom-width-1 border-bottom">
 																		<h6 class="fw-semibold text-secondary pb-1">AdGuard (блок ipset)</h6>
 																		<div class="ms-4">ipset:
 																			<div class="ps-2">
@@ -560,7 +561,7 @@
 																	<!-- /AdGuard (блок ipset) -->
 
 																	<!-- AdGuard (журнал загрузки) -->
-																	<div id="scll_adguard_log" class="scroll-item border-bottom-width-1 border-bottom">
+																	<div class=" border-bottom-width-1 border-bottom">
 																		<h6 class="fw-semibold text-secondary pb-1">AdGuard (журнал)</h6>
 																		<div class="ms-4">
 																			<div class="">2023/05/31 21:00:20 [info] tls: using default ciphers</div>
@@ -586,7 +587,7 @@
 
 
 																	<!-- VPN маршруты -->
-																	<div id="scll_vpn_routers" class="scroll-item border-bottom-width-1 border-bottom">
+																	<div class=" border-bottom-width-1 border-bottom">
 																		<h6 class="fw-semibold text-secondary pb-1" >VPN маршруты</h6>
 																		<div class="ms-4">Состояние vpn соединения VPS-new: <b>ПОДКЛЮЧЕНО</b>
 																			<div class="mt-1 mb-1">Таблица заполнения маршрутов VPN списка <b>id=1001:</b></div>
@@ -604,7 +605,7 @@
 
 
 																	<!-- Таблица правил маршрутизации -->
-																	<div id="scll_ip_rules_routers" class="scroll-item border-bottom-width-1 border-bottom">
+																	<div class=" border-bottom-width-1 border-bottom">
 																		<h6 class="fw-semibold text-secondary  pb-1" >Таблица правил маршрутизации IP</h6>
 																		<div class="mt-1 mb-1">Таблица правил маршрутизации VPN списка <b>id=1001:</b>
 																			<div class="ms-4">
@@ -620,7 +621,7 @@
 
 
 																	<!-- VPN маршруты -->
-																	<div id="scll_iptables_rules_routers" class="scroll-item border-bottom-width-1 border-bottom">
+																	<div class=" border-bottom-width-1 border-bottom">
 																		<h6 class="fw-semibold text-secondary pb-1">Правила перенаправления iptables</h6>
 																		<div class="ms-4">Переустановка iptables для vpn завершена : <b>УСПЕШНО</b>
 																			<div class="mt-1 mb-1">Правила перенаправления трафика unblock в iptables</div>
@@ -637,7 +638,7 @@
 																	<!-- /VPN маршруты -->
 
 																	<!-- Список разблокировки-->
-																	<div id="scll_white_list" class="scroll-item border-bottom-width-1 border-bottom">
+																	<div class=" border-bottom-width-1 border-bottom">
 																		<h6 class="fw-semibold text-secondary pb-1">Список разблокировки</h6>
 																		<div class="ms-4">
 																			<div class="">*t.co</div>
@@ -657,7 +658,7 @@
 
 
 																	<!-- VPN маршруты -->
-																	<div id="scll_ipset_list" class="scroll-item border-bottom-width-1 border-bottom">
+																	<div class=" border-bottom-width-1 border-bottom">
 																		<h6 class="fw-semibold text-secondary pb-1" >Заполнение ipset списка</h6>
 																		<div class="ms-4">DNS сервер, используемый в ipset: <b>10.0.71.1:53</b>
 																			<div class="mt-1 mb-1">Таблица ipset <b>20 записей:</b></div>
@@ -685,21 +686,21 @@
 														<div class="sticky-lg-top order-1 order-lg-2 wmin-lg-300 ms-lg-3 mb-3 d-xl-block d-none" id="page_nav">
 															<h6 class="fw-semibold text-secondary mt-lg-3 mb-3">Быстрый переход</h6>
 
-															<ul class="nav nav-scrollspy flex-column">
-																<li class="nav-item"><a href="#scll_device_info" class="nav-link active scroll-pointer">Информация об устройстве</a></li>
-																<li class="nav-item"><a href="#scll_sys_errors" class="nav-link scroll-pointer">Системный журнал (ошибки)</a></li>
+															<ul class="nav nav-scrollspy flex-column ">
+																<li class="nav-item"><a href="#" class="nav-link active ">Информация об устройстве</a></li>
+																<li class="nav-item"><a href="#" class="nav-link ">Системный журнал (ошибки)</a></li>
 																<li class="nav-item">
-																	<a href="#scll_adguard_ipset" class="nav-link scroll-pointer">AdGuard Home</a>
+																	<a href="#" class="nav-link">AdGuard Home</a>
 																	<ul class="nav nav-scrollspy flex-column">
-																		<li class="nav-item"><a href="#scll_adguard_ipset" class="nav-link scroll-pointer">Конфигурация ipset</a></li>
-																		<li class="nav-item"><a href="#scll_adguard_log" class="nav-link scroll-pointer">Журнал</a></li>
+																		<li class="nav-item"><a href="#" class="nav-link ">Конфигурация ipset</a></li>
+																		<li class="nav-item"><a href="#" class="nav-link ">Журнал</a></li>
 																	</ul>
 																</li>
-																<li class="nav-item"><a href="#scll_vpn_routers" class="nav-link scroll-pointer">VPN маршруты</a></li>
-																<li class="nav-item"><a href="#scll_ip_rules_routers" class="nav-link scroll-pointer">IP маршрутизация </a></li>
-																<li class="nav-item"><a href="#scll_iptables_rules_routers" class="nav-link scroll-pointer">Правила iptables </a></li>
-																<li class="nav-item"><a href="#scll_white_list" class="nav-link scroll-pointer">Список разблокировки</a></li>
-																<li class="nav-item"><a href="#scll_ipset_list" class="nav-link scroll-pointer">Заполнение ipset списка</a></li>
+																<li class="nav-item"><a href="#" class="nav-link ">VPN маршруты</a></li>
+																<li class="nav-item"><a href="#" class="nav-link ">IP маршрутизация </a></li>
+																<li class="nav-item"><a href="#" class="nav-link ">Правила iptables </a></li>
+																<li class="nav-item"><a href="#" class="nav-link ">Список разблокировки</a></li>
+																<li class="nav-item"><a href="#" class="nav-link ">Заполнение ipset списка</a></li>
 
 															</ul>
 														</div>
@@ -753,7 +754,7 @@
 
 		</div>
 		<!-- Содержание страницы -->
-		<script src="../../extensions/js/pages/all/scrolling.js"></script>
+
 
 	</body>
 	<!-- /Тело проекта  -->

@@ -1,5 +1,5 @@
 
-.scroll-item {
+.scroll-content > div {
   padding-left: 20px;
   padding-top: 30px;
   padding-bottom: 40px;
@@ -74,7 +74,7 @@
   height: calc(var(--spacer) * 3.99 + var(--icon-font-size));
   padding-bottom: 5px;
 }
-.bg-sidebar-logo {
+.bg-logo {
   --bg-opacity: 1;
   background-color: #006386 !important;
   /*background-color: #004c69 !important;*/
