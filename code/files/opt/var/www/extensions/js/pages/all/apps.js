@@ -888,7 +888,7 @@ const Tooltips = function () {
         loadToggleSwitcher();
         toggleSwitch.on('change', toggleSwitcher);
     }
-
+    
     //
     // Return objects assigned to module
     //
@@ -902,31 +902,89 @@ const Tooltips = function () {
         },
         initTooltips: function (){
             tooltipToggle();
+            // $('.sidebar-logo-hidden').hide();
+            // $('.sidebar-control.sidebar-main-resize').on('click', showLogoImageWhenHideMenu);
+
         }
     }
 }();
 
-
-const SettingSetup = function () {
-
-    let setupButton = $('a[data-bs-target="#panel_right"]')
-
-    const setupCall = function() {
-        $('.nav-link.active').removeClass('active');
-        setupButton.addClass('active');
-    }
-
-    //
-    // Return objects assigned to module
-    //
-
-    return {
-        init: function() {
-            setupButton.on('click', setupCall);
-        },
-    }
-
-}();
+//
+// const LogoHiding = function () {
+//
+//     let imageLogo;
+//     let sideBarLogo;
+//     let sideBar;
+//     let sidebarControl;
+//     let pushedFlag;
+//
+//     const isSideBarUnfolded = function() {
+//         return sideBar.hasClass('sidebar-main-unfold') || sideBar.width() > 100;
+//     }
+//
+//     const isSideBarNotFoldedAndNotFixed = function() {
+//         return sideBar.hasClass('sidebar-main-unfold') && sideBar.hasClass('sidebar-main-resized') ;
+//     }
+//
+//     const isSideBarFoldedButNotFixed = function() {
+//         return (!sideBar.hasClass('sidebar-main-unfold')) && sideBar.hasClass('sidebar-main-resized') ;
+//     }
+//     const foldSideBar = function() {
+//         sideBarLogo.removeClass('bg-sidebar-logo');
+//         imageLogo.removeClass();
+//     }
+//     const unfoldSideBar = function() {
+//         sideBarLogo.addClass('bg-sidebar-logo');
+//         imageLogo.hide();
+//     }
+//
+//     const SideBarClicked = function() {
+//         if (isSideBarUnfolded()) {
+//             unfoldSideBar();
+//         } else {
+//             foldSideBar();
+//         }
+//     }
+//     const showOrHideLogoImage = function() {
+//         if (isSideBarFoldedButNotFixed()) {
+//             unfoldSideBar();
+//         } else{
+//             if (isSideBarUnfolded()) {
+//                 unfoldSideBar();
+//             } else {
+//                 foldSideBar();
+//             }
+//         }
+//     }
+//
+//     const showLogoImageWhenHoverOut = function() {
+//         if (isSideBarNotFoldedAndNotFixed()) {
+//             foldSideBar();
+//         } else{
+//             if (!isSideBarUnfolded()) {
+//                 foldSideBar();
+//             }
+//         }
+//     }
+//     //
+//     // Return objects assigned to module
+//     //
+//
+//     return {
+//         init: function() {
+//             imageLogo = $('.sidebar-logo-hidden');
+//             sideBarLogo = $('.sidebar-logo');
+//             sideBar = $('.sidebar');
+//             sidebarControl = $('.sidebar-control');
+//
+//             imageLogo.hide();
+//             sidebarControl.on('click', SideBarClicked);
+//             sideBar.on('mouseenter',showOrHideLogoImage);
+//             sideBar.on('mouseleave',showLogoImageWhenHoverOut);
+//         },
+//     };
+//
+// }();
 
 
 // Initialize module
@@ -936,12 +994,32 @@ const SettingSetup = function () {
 document.addEventListener('DOMContentLoaded', function() {
     App.initCore();
     Tooltips.init();
-    SettingSetup.init();
 });
 
 // When page is fully loaded
 window.addEventListener('load', function() {
     App.initAfterLoad();
     Tooltips.initTooltips();
-    SettingSetup.init();
+    // LogoHiding.init();
+    // $('.nav-sidebar .nav-link').on('click', ( function (){
+    //     $('.nav-sidebar .nav-link.active').removeClass('active');
+    //     $(this).addClass('active');
+    // }));
+
+    // $('.sidebar-logo').height($('.page-header').outerHeight());
+
+
+
+
 });
+// $(document).on('keydown', function(e) {
+//     if ((e.ctrlKey || e.metaKey) && (e.which === 107 || e.which === 187)) {
+//         // Код для обработки нажатия Ctrl + '+'
+//         $('.sidebar-logo').height($('.page-header').outerHeight());
+//         location.reload();
+//     } else if ((e.ctrlKey || e.metaKey) && (e.which === 109 || e.which === 189)) {
+//         // Код для обработки нажатия Ctrl + '-'
+//         $('.sidebar-logo').height($('.page-header').outerHeight());
+//         location.reload();
+//     }
+// });

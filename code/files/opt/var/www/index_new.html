@@ -27,11 +27,6 @@
 		<script src="./assets/js/jquery/jquery.min.js"></script>
 		<!-- /Файлы JS скриптов -->
 
-		<!-- Файлы скриптов JS для отрисовки элементов UI -->
-<!--		<script src="./assets/js/vendor/ui/dragula.min.js"></script>-->
-<!--		<script src="./assets/js/vendor/selects/select2.min.js"></script>-->
-		<!-- /Файлы скриптов JS для отрисовки элементов UI -->
-
 		<!-- Файлы скриптов JS для отрисовки темы -->
 		<script src="extensions/js/pages/all/apps.js"></script>
 <!--		<script src="kvas/js/vendors/draggable.js"></script>-->
@@ -46,41 +41,6 @@
 
 	<!-- Тело проекта  -->
 	<body class="no-transitions">
-
-		<!-- Горизонтальная верхняя панель навигации -->
-<!--		<div class="navbar navbar-dark navbar-expand-lg navbar-static border-bottom border-bottom-white border-opacity-10">-->
-
-<!--			&lt;!&ndash; Тело горизонтальной верхней панели навигации &ndash;&gt;-->
-<!--			<div class="container-fluid h-80px">-->
-
-<!--				&lt;!&ndash; Кнопка в панели навигации для мобильных устройств &ndash;&gt;-->
-<!--				<div class="d-flex d-lg-none me-2">-->
-<!--					<button type="button" class="navbar-toggler sidebar-mobile-main-toggle rounded">-->
-<!--						<i class="ph-list"></i>-->
-<!--					</button>-->
-<!--				</div>-->
-<!--				&lt;!&ndash; Кнопка в панели навигации для мобильных устройств &ndash;&gt;-->
-
-<!--				&lt;!&ndash; Блок логотипа в панели навигации &ndash;&gt;-->
-<!--				<div class="navbar-brand">-->
-
-<!--					&lt;!&ndash; Картинки логотипа в панели навигации &ndash;&gt;-->
-<!--					<a href="./index.html" class="d-inline-flex align-items-center">-->
-<!--						<img src="./assets/images/logo/logo_icon_main_gold.svg" alt="" class="logo_image_size" >-->
-<!--						<img src="./assets/images/logo/logo_text_main_gold.svg" class="logo_text_size offcanvas-size-xs d-none d-sm-inline-block" alt="">-->
-<!--					</a>-->
-<!--					&lt;!&ndash; /Картинки логотипа в панели навигации &ndash;&gt;-->
-
-<!--				</div>-->
-<!--				&lt;!&ndash; /Блок логотипа в панели навигации &ndash;&gt;-->
-
-
-
-<!--			</div>-->
-<!--			&lt;!&ndash; /Тело горизонтальной верхней панели навигации &ndash;&gt;-->
-
-<!--		</div>-->
-		<!-- /Горизонтальная верхняя панель навигации -->
 
 		<!-- Правая панель настроек Самовара -->
 		<div id="panel_right" class="offcanvas offcanvas-end offcanvas-resizable" data-min-width="250" data-max-width="600" tabindex="-1">
@@ -115,7 +75,7 @@
 						<a href="#bottom-justified-tab1" class="nav-link active" data-bs-toggle="tab">Действия</a>
 					</li>
 					<li class="nav-item">
-						<a href="#bottom-justified-tab2" class="nav-link" data-bs-toggle="tab">Настройки</a>
+						<a href="#bottom-justified-tab2" class="nav-link " data-bs-toggle="tab">Установки</a>
 					</li>
 				</ul>
 				<!-- /Вкладки правого меню -->
@@ -218,10 +178,12 @@
 					<!-- Основной уровень бокового меню -->
 					<div class="sidebar-section border-top border-top-white border-top-width-1">
 
-						<div class="sidebar-logo d-flex navbar-dark justify-content-start align-items-center align-items-start">
+						<div class="sidebar-logo bg-sidebar-logo d-flex navbar-dark justify-content-center align-items-center align-items-start">
 							<!-- Картинки логотипа в панели навигации -->
 							<a href="./index.html" class="d-inline-flex align-items-center py-3">
-								<img src="./assets/images/logo/logo_image_gold.svg" alt="" class="sidebar-logo-image" >
+								<img src="./assets/images/logo/logo_image_gold.svg" alt="" class="sidebar-logo-full sidebar-resize-hide" >
+								<img src="./assets/images/logo/logo_image_small_white.svg" alt="" class="justify-content-center sidebar-resize-show sidebar-logo-small" >
+
 								<img src="./assets/images/logo/logo_text_gold.svg"  class="sidebar-resize-hide sidebar-logo-text" alt="">
 							</a>
 
@@ -248,13 +210,11 @@
 						<!-- Блок пунктов бокового меню -->
 						<ul class="nav nav-sidebar" data-nav-type="accordion">
 
-
-							<li class="nav-item pt-0 pb-0 nav-item-submenu ">
+							<li class="nav-item nav-item-submenu nav-item-open">
 								<a href="index.html" class="nav-link ">
-									<i class="ph-house"></i>
-
+									<i class="ph-house ph-1_5x lift-down-3"></i>
 									<span class="">
-										<span class="text-uppercase">Самовар</span>
+										<span class="text-uppercase">Настройки</span>
 <!--										<span class="d-block fw-normal opacity-50">Расширения и настройки</span>-->
 									</span>
 
@@ -262,14 +222,14 @@
 								<!-- Пункты меню плугина -->
 								<ul class="nav-group-sub collapse show">
 									<li class="nav-item"><a href="./index_new.html" class="nav-link fw-light active">Расширения</a></li>
-									<li class="nav-item"><a href="#" class="nav-link fw-light" data-bs-toggle="offcanvas" data-bs-target="#panel_right">Настройки</a></li>
+									<li class="nav-item"><a href="#" class="nav-link fw-light" data-bs-toggle="offcanvas" data-bs-target="#panel_right">Установки</a></li>
 <!--									<li class="nav-item-divider"></li>-->
 								</ul>
 								<!-- Пункты меню плугина -->
+
 							</li>
 
-
-							<li class="nav-item-divider mt-0"></li>
+<!--							<li class="nav-item-divider mt-0"></li>-->
 
 							<!-- Название меню -->
 							<li class="nav-item-header mb-1">
@@ -280,8 +240,8 @@
 
 							<li class="nav-item nav-item-submenu ">
 								<a href="#" class="nav-link">
-									<i class="ph-list-bullets"></i>
-									<span>Квас
+									<i class="ph-list-bullets ph-1_5x lift-down-3"></i>
+									<span class="text-uppercase">Квас
 <!--									<span class="d-block fw-normal opacity-50">Белый список</span>-->
 									</span>
 								</a>
@@ -289,8 +249,15 @@
 								<ul class="nav-group-sub collapse ">
 									<li class="nav-item"><a href="./pages/kvas/services.html" class="nav-link fw-light">Службы</a></li>
 									<li class="nav-item"><a href="./pages/kvas/white_list.html" class="nav-link fw-light">Белый список</a></li>
-									<li class="nav-item"><a href="./pages/kvas/debug.html" class="nav-link fw-light">Отладка</a></li>
-									<li class="nav-item-divider"></li>
+									<li class="nav-item nav-item-submenu">
+										<a href="#" class="nav-link">Журналы</a>
+										<ul class="nav-group-sub collapse " style="">
+											<li class="nav-item"><a href="#" class="nav-link">Система</a></li>
+											<li class="nav-item"><a href="./pages/kvas/debug.html" class="nav-link">Квас</a></li>
+										</ul>
+									</li>
+									<li class="nav-item"><a href="./pages/kvas/white_list.html" class="nav-link fw-light">История версий </a></li>
+<!--									<li class="nav-item-divider"></li>-->
 								</ul>
 								<!-- Пункты меню плугина -->
 							</li>
@@ -302,6 +269,23 @@
 					</div>
 					<!-- /Основной уровень бокового меню -->
 
+					<!-- Сообщение об обновлении расширения или Самовара  -->
+					<div class="alert bg-secondary bg-opacity-20 sidebar-resize-hide rounded p-3 m-3">
+						<div class="d-flex mb-2">
+							<div class="d-inline-flex bg-white bg-opacity-10 lh-1 rounded-pill p-2">
+								<i class="ph-lock-key-open"></i>
+							</div>
+							<button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="alert"></button>
+						</div>
+						<div class="mb-2">
+							Upgrade to <span class="fw-bold">Pro plan</span> to unlock all available features
+						</div>
+						<a href="#" class="d-inline-flex align-items-center mt-1" data-color-theme="dark">
+							Upgrade now
+							<i class="ph-arrow-circle-right ms-2"></i>
+						</a>
+					</div>
+					<!-- /Сообщение об обновлении расширения или Самовара  -->
 
 				</div>
 				<!-- /Содержимое бокового меню -->
@@ -318,7 +302,7 @@
 					<div class="page-header-content d-lg-flex d-none d-lg-block">
 						<div class="d-flex justify-content-between align-items-center w-100">
 							<div class="page-title ">
-								<div class="display-7 text-uppercase fw-bold">Библиотека</div>
+								<div class="display-7 text-uppercase fw-bold">Расширения</div>
 								<div class="text-muted lift-up-10">Подробное описание расширений, которые представлены в проекте.</div>
 							</div>
 

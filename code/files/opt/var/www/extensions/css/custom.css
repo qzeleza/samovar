@@ -29,7 +29,7 @@
 }
 
 /* регулировка высоты каждого изх пунктов левого меню навигации */
-.nav-sidebar .nav-link {
+.nav-sidebar .nav-item a span span  {
   padding-top: 1.2vh !important;
   padding-bottom: 1.2vh !important;
 }
@@ -45,28 +45,59 @@
   padding-left: 2vw;
   padding-right: 1vw;
 }
-
-/* отступы для логотипа с изображением */
-.sidebar-logo-image {
-  padding-right: 10px;
-  padding-left: 10px;
-  height: 40px;
+.card .card-footer {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 2vw;
+  padding-right: 1vw;
 }
+
+.sidebar {
+  --sidebar-width: 23rem;
+}
+
+/*.page-header {*/
+/*  --page-header-padding-x: 3.25rem !important;*/
+/*}*/
+/*.page-header-content .page-title {*/
+/*  !*padding-left: 2.4vw !important;*!*/
+/*}*/
+/*@media (min-width:992px) {*/
+/*  .sidebar-expand-lg.sidebar-main-resized:not(.sidebar-collapsed):not(.sidebar-main-unfold) {*/
+/*    --sidebar-width: calc(var(--spacer) * 3 + var(--icon-font-size));*/
+/*  }*/
+/*}*/
 
 /* задаем высоту и цвет строки с логотипом*/
 .sidebar-logo {
-  background-color: #004c69 !important;
-  height: 96px;
+  /*background-color: #004c69 !important;*/
+  height: calc(var(--spacer) * 3.99 + var(--icon-font-size));
   padding-bottom: 5px;
+}
+.bg-sidebar-logo {
+  --bg-opacity: 1;
+  background-color: #006386 !important;
+  /*background-color: #004c69 !important;*/
+}
+
+/* отступы для логотипа с изображением */
+.sidebar-logo-full {
+  /*padding-right: calc(var(--spacer) );*/
+  padding-left: calc(var(--spacer) );
+  height: calc(var(--spacer) * 1.8 + var(--icon-font-size));
+}
+
+.sidebar-logo-small {
+  height: calc(var(--spacer) * 0.6 + var(--icon-font-size));
 }
 
 /* отступы для логотипа с текстом */
 .sidebar-logo-text {
-  width: 160px;
+  height: calc(var(--spacer) * 2.6 + var(--icon-font-size));
   /*margin-left: auto !important;*/
-  padding-right: 0.8vw !important;
-  padding-top: 8px;
-  padding-left: 10px;
+  padding-right: 0.9vw !important;
+  padding-top: calc(var(--spacer) * 0.5);
+  padding-left: calc(var(--spacer) * 1.5);
 }
 
 
