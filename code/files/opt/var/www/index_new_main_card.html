@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+
+<html lang="ru" dir="ltr" data-color-theme="dark" >
+
+
+	<!-- Заголовок проекта  -->
+	<head>
+
+		<!-- Мета заголовки проекта  -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Самовар - переварим все!</title>
+		<!-- /Мета заголовки проекта  -->
+
+		<!-- Глобальные стили -->
+		<link rel="shortcut icon" type="image/png" href="favicon.png">
+		<link href="./assets/fonts/inter/inter.css" rel="stylesheet" type="text/css">
+		<link href="./assets/icons/phosphor/styles.min.css" rel="stylesheet" type="text/css">
+		<link href="extensions/css/all.min.css" id="stylesheet" rel="stylesheet" type="text/css">
+		<link href="extensions/css/custom.css" rel="stylesheet" type="text/css">
+		<!-- /Глобальные стили -->
+
+		<!-- Файлы JS скриптов -->
+		<script src="extensions/js/pages/all/configurator.js"></script>
+		<script src="./assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+		<script src="./assets/js/jquery/jquery.min.js"></script>
+		<!-- /Файлы JS скриптов -->
+
+		<!-- Файлы скриптов JS для отрисовки темы -->
+		<script src="extensions/js/pages/all/apps.js"></script>
+		<script src="./extensions/js/pages/all/scrolling.js"></script>
+<!--		<script src="kvas/js/vendors/draggable.js"></script>-->
+		<!-- /Файлы скриптов JS для отрисовки темы -->
+
+		<!-- Файлы поддержки иконок  -->
+		<link rel="shortcut icon" type="image/x-icon" href="">
+		<!-- /Файлы поддержки иконок  -->
+
+	</head>
+	<!-- /Заголовок проекта  -->
+
+	<!-- Тело проекта  -->
+	<body class="no-transitions">
+
+		<!-- Правая панель настроек Самовара -->
+		<div id="panel_right" class="offcanvas offcanvas-end offcanvas-resizable" data-min-width="250" data-max-width="600" tabindex="-1">
+
+			<!-- Элемент для js настройки ширины правого меню -->
+			<div class="offcanvas-resize-handle"></div>
+			<!-- /Элемент для js настройки ширины правого меню -->
+
+			<!-- Кнопка закрытия правого меню -->
+			<div class="offcanvas-header">
+				<h5 class="offcanvas-title fw-semibold"></h5>
+				<button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+			</div>
+			<!-- /Кнопка закрытия правого меню -->
+
+			<!-- Тело правого меню -->
+			<div class="offcanvas-body p-0">
+
+				<!-- Лого и версия Самовара в правом меню -->
+				<div class="text-center px-3 mb-3">
+					<a href="#" class="d-inline-block mb-3">
+						<img src="./assets/images/logo/logo-samovar-color.svg" width="100" height="100" alt="">
+					</a>
+					<h3 class="mb-0">САМОВАР</h3>
+					<div>Текущая версия 0.0.1</div>
+				</div>
+				<!-- /Лого и версия Самовара в правом меню -->
+
+				<!-- Вкладки правого меню -->
+				<ul class="nav nav-tabs nav-tabs-underline nav-justified mb-0">
+					<li class="nav-item">
+						<a href="#bottom-justified-tab1" class="nav-link active" data-bs-toggle="tab">Действия</a>
+					</li>
+					<li class="nav-item">
+						<a href="#bottom-justified-tab2" class="nav-link " data-bs-toggle="tab">Установки</a>
+					</li>
+				</ul>
+				<!-- /Вкладки правого меню -->
+
+				<!-- Содержание вкладок Самовара -->
+				<div class="tab-content offcanvas-body ">
+
+					<!-- Содержание вкладки Действий Самовара -->
+					<div class="tab-pane fade show active" id="bottom-justified-tab1">
+<!--						<div class="bg-light text-muted py-2 px-3">Доступные действия</div>-->
+						<div class="list-group list-group-borderless py-2">
+							<a href="#" class="list-group-item list-group-item-action">
+								<i class="ph-arrows-clockwise me-3"></i>
+								Обновить
+								<div class="badge bg-primary text-white rounded-pill ms-auto">0.0.2</div>
+							</a>
+							<a href="#" class="list-group-item list-group-item-action d-flex align-items-start">
+								<i class="ph-x me-3"></i>
+								Удалить
+							</a>
+
+						</div>
+					</div>
+					<!-- Содержание вкладки Действий Самовара -->
+
+
+					<!-- Содержание вкладки Настроек Самовара -->
+					<div class="tab-pane offcanvas-body fade" id="bottom-justified-tab2">
+						<div class="form-check form-switch pb-3">
+							<input type="checkbox" class="form-check-input" id="samovar_tooltip" checked="">
+							<label class="form-check-label" for="samovar_tooltip">Всплывающие подсказки</label>
+						</div>
+						<div class="pt-3 border-top">
+							<div class="fw-semibold mb-2">Цвет темы</div>
+							<div class="list-group mb-3">
+								<label class="list-group-item list-group-item-action form-check border-width-1 rounded mb-2">
+									<div class="d-flex flex-fill my-1">
+										<div class="form-check-label d-flex me-2">
+											<i class="ph-sun ph-lg me-3"></i>
+											<div>
+												<span class="fw-bold">Светлая тема</span>
+												<div class="fs-sm text-muted">Установить светлую тему </div>
+											</div>
+										</div>
+										<input type="radio" class="form-check-input cursor-pointer ms-auto" name="main-theme" value="light" checked="">
+									</div>
+								</label>
+
+								<label class="list-group-item list-group-item-action form-check border-width-1 rounded mb-2 bg-primary bg-opacity-10 border-primary">
+									<div class="d-flex flex-fill my-1">
+										<div class="form-check-label d-flex me-2">
+											<i class="ph-moon ph-lg me-3"></i>
+											<div>
+												<span class="fw-bold">Темная тема</span>
+												<div class="fs-sm text-muted">Установить темную тему</div>
+											</div>
+										</div>
+										<input type="radio" class="form-check-input cursor-pointer ms-auto" name="main-theme" value="dark">
+									</div>
+								</label>
+
+								<label class="list-group-item list-group-item-action form-check border-width-1 rounded mb-0">
+									<div class="d-flex flex-fill my-1">
+										<div class="form-check-label d-flex me-2">
+											<i class="ph-globe ph-lg me-3"></i>
+											<div>
+												<span class="fw-bold">Системная (авто)</span>
+												<div class="fs-sm text-muted">Установить системную тему</div>
+											</div>
+										</div>
+										<input type="radio" class="form-check-input cursor-pointer ms-auto" name="main-theme" value="auto">
+									</div>
+								</label>
+							</div>
+						</div>
+					</div>
+					<!-- /Содержание вкладки Настроек Самовара -->
+
+				</div>
+				<!-- /Содержание вкладок Самовара -->
+
+			</div>
+			<!-- /Тело правого меню -->
+
+		</div>
+		<!-- /Правая панель настроек Самовара -->
+
+		<!-- Содержание страницы -->
+		<div class="page-content">
+
+			<!-- Боковое меню -->
+			<div class="sidebar sidebar-dark sidebar-main sidebar-expand-lg">
+
+				<!-- Содержимое бокового меню -->
+				<div class="sidebar-content ">
+
+					<!-- Основной уровень бокового меню -->
+					<div class="sidebar-section border-top border-top-white border-top-width-1">
+
+						<div class="sidebar-logo bg-sidebar-logo d-flex navbar-dark justify-content-center align-items-center align-items-start">
+							<!-- Картинки логотипа в панели навигации -->
+							<a href="./index.html" class="d-inline-flex align-items-center py-3">
+								<img src="./assets/images/logo/logo_image_gold.svg" alt="" class="sidebar-logo-full sidebar-resize-hide" >
+								<img src="./assets/images/logo/logo_image_gold.svg" alt="" class="justify-content-center sidebar-resize-show sidebar-logo-small" >
+
+								<img src="./assets/images/logo/logo_text_gold.svg"  class="sidebar-resize-hide sidebar-logo-text" alt="">
+							</a>
+
+							<div class="sidebar-resize-hide ms-auto pe-3">
+								<!-- Кнопки сокрытия бокового меню -->
+								<div class="justify-content-between btn-menu-hide ">
+
+									<!-- Кнопка сокрытия бокового меню для компьютера -->
+									<button type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex"
+											data-bs-popup="tooltip" data-bs-placement="right" data-bs-original-title="Спрятать меню">
+										<i class="ph-arrows-left-right"></i>
+									</button>
+									<!-- /Кнопка сокрытия бокового меню для компьютера -->
+
+									<!-- Кнопка сокрытия бокового меню для мобильных устройств -->
+									<button type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-lg-none">
+										<i class="ph-x"></i>
+									</button>
+									<!-- Кнопка сокрытия бокового меню для мобильных устройств -->
+
+
+
+								</div>
+								<!-- /Кнопки сокрытия бокового меню -->
+							</div>
+
+						</div>
+						<!-- Блок пунктов бокового меню -->
+						<ul class="nav nav-sidebar" data-nav-type="accordion">
+
+							<!-- Название меню -->
+							<li class="nav-item-header">
+								<span class="h-24px text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Самовар</span>
+								<i class="ph-dots-nine sidebar-resize-show"></i>
+							</li>
+							<!-- /Название меню -->
+							<li class="nav-item">
+								<a href="./index.html" class="nav-link active ">
+									<i class="ph-book-open ph-1_5x mt-1"></i>
+									<div class="sidebar-resize-hide">
+										<span class="text-uppercase fs-3">Библиотека</span>
+<!--										<span class="d-block fw-normal opacity-50">Расширения и настройки</span>-->
+									</div>
+
+								</a>
+								<div style="top: 10.7rem" class="position-absolute bottom-0 end-0 pe-3 sidebar-resize-hide">
+									<!-- Кнопка вызова правого меню -->
+									<button type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent d-none d-lg-inline-flex tooltip-info"
+											data-bs-toggle="offcanvas"
+											data-bs-target="#panel_right"
+											data-bs-popup="tooltip"
+											data-bs-placement="right"
+											data-bs-original-title="Меню настроек Самовара">
+										<i class="ph-caret-double-right"></i>
+									</button>
+									<!-- /Кнопка вызова правого меню -->
+
+								</div>
+							</li>
+<!--							<li class="nav-item-divider mt-0"></li>-->
+
+							<!-- Название меню -->
+							<li class="nav-item-header ">
+								<span class="h-24px text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Установлено</span>
+								<i class="ph-dots-nine sidebar-resize-show"></i>
+							</li>
+							<!-- /Название меню -->
+
+							<li class="nav-item nav-item-submenu ">
+								<a href="#" class="nav-link">
+									<i class="ph-shield-chevron lift-down-5"></i>
+									<span class="text-uppercase fs-3">Квас
+<!--									<span class="d-block fw-normal opacity-50 tex fs-base">Белый список</span>-->
+									</span>
+								</a>
+								<!-- Пункты меню плугина -->
+								<ul class="nav-group-sub collapsed ">
+									<li class="nav-item">
+										<a href="./pages/kvas/services.html" class="nav-link fw-light">
+											<i class="ph-stack"> </i>
+											Службы
+										</a>
+									</li>
+									<li class="nav-item"><a href="./pages/kvas/white_list.html" class="nav-link fw-light">
+										<i class="ph-list-checks"></i>
+										Белый список</a></li>
+<!--									<li class="nav-item-divider"></li>-->
+									<li class="nav-item nav-item-submenu">
+										<a href="#" class="nav-link">
+											<i class="ph-terminal"></i>
+											Отладка
+										</a>
+										<ul class="nav-group-sub collapse " style="">
+											<li class="nav-item"><a href="#" class="nav-link">Система</a></li>
+											<li class="nav-item"><a href="./pages/kvas/debug.html" class="nav-link">Расширение</a></li>
+										</ul>
+									</li>
+									<li class="nav-item-divider"></li>
+								</ul>
+								<!-- Пункты меню плугина -->
+							</li>
+
+						</ul>
+						<!-- /Блок пунктов бокового меню -->
+
+					</div>
+					<!-- /Основной уровень бокового меню -->
+
+					<!-- Сообщение об обновлении расширения или Самовара  -->
+					<div class="alert bg-secondary bg-opacity-20 sidebar-resize-hide rounded p-3 m-3">
+						<div class="d-flex mb-2">
+							<div class="d-inline-flex bg-white bg-opacity-10 lh-1 rounded-pill p-2">
+								<i class="ph-arrows-clockwise"></i>
+							</div>
+							<button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="alert"></button>
+						</div>
+						<div class="mb-2 pt-2">
+							Доступна новая версия <span class="fw-bold">Самовара</span>.<br>
+							Текущая: <span class="fw-bold">0.0.1 beta</span>,
+							новая: <span class="fw-bold">0.0.3 beta</span>.
+						</div>
+						<div class="d-flex">
+							<a href="#" class="d-inline-flex align-items-center mt-1 ms-auto" data-color-theme="dark">
+								Обновить
+								<i class="ph-arrow-circle-right ms-2"></i>
+							</a>
+						</div>
+					</div>
+
+					<!-- /Сообщение об обновлении расширения или Самовара  -->
+
+				</div>
+				<!-- /Содержимое бокового меню -->
+
+			</div>
+			<!-- Боковое меню -->
+
+			<!-- Основной контейнер страницы -->
+			<div class="content-wrapper ">
+
+				<!-- Заголовок страницы -->
+				<div class="page-header page-header-light border ">
+
+					<div class=" d-lg-flex d-none d-lg-block ps-3 pt-1 pb-1">
+						<div class="d-flex justify-content-between align-items-center w-100">
+							<div class="page-title">
+								<div class="display-7 text-uppercase fw-bold">Библиотека</div>
+								<div class="text-muted lift-up-5">Включает в себя, те инструменты, которые востребованы
+									пользователями<br> роутеров Keenetic и которые, по тем или
+									иным причинам, не реализованы пока в основной прошивке.</div>
+							</div>
+
+
+
+						</div>
+					</div>
+
+					<!-- Путь к текущей странице -->
+					<div class="page-header-content border-top border-top-primary border-top-width-1">
+						<div class="breadcrumb ms-3">
+
+							<a href="#" class="breadcrumb-item text-uppercase py-2">Самовар</a>
+							<span class="breadcrumb-item py-2">Расширения</span>
+
+						</div>
+					</div>
+					<!-- /Путь к текущей странице -->
+
+				</div>
+				<!-- /Заголовок страницы -->
+
+                <!-- Внутреннее содержимое страницы -->
+				<div class="content-inner pt-2 bg-white bg-opacity-10">
+
+					<!-- Содержимое страницы -->
+					<div class="content">
+
+						<!-- Основной ряд -->
+						<div class="row">
+
+							<!-- Окно основное -->
+							<div class="main-card">
+
+								<!-- Окно карточки о расширении  -->
+								<div class="card blog-horizontal">
+
+									<!-- Тело карточки -->
+									<div class="card-body ">
+
+										<!-- Окно видео-предосмотра в карточке -->
+										<div class="card-img-actions me-sm-3 mb-3 mb-sm-0">
+											<a href="#course_preview" class="d-inline-block position-relative" data-bs-toggle="modal">
+												<img src="./assets/images/logo/logo-samovar-full-color.png" class="img-fluid card-img pb-1 pe-1" alt="">
+												<div class="d-inline-flex bg-dark bg-opacity-50 text-white position-absolute start-50 top-50 translate-middle rounded-pill p-2">
+													<i class="ph-play"></i>
+												</div>
+												<span class="bg-dark bg-opacity-50 text-white fs-xs lh-1 rounded-1 position-absolute top-0 start-0 p-1 mt-2 ms-2 mb-2">38:46</span>
+											</a>
+										</div>
+										<!-- /Окно видео-предосмотра в карточке -->
+
+										<!-- Информация о расширении в карточке -->
+										<div class="mb-1 ">
+
+											<!-- Заголовок расширения в карточке -->
+											<div class="d-flex flex-nowrap my-1 ">
+												<!-- Флаг установки расширения в карточке -->
+												<div class="pt-1 pe-2 pb-0">
+													<i class="ph-check text-white p-1 rounded-pill bg-success bg-opacity-50"></i>
+												</div>
+												<!-- /Флаг установки расширения в карточке -->
+												<a href="#" class="me-2 text-uppercase fs-1">Квас</a>
+
+											</div>
+
+											<!-- Заголовок расширения в карточке -->
+
+											<!-- Меню расширенное самого расширения в карточке -->
+											<div class="position-absolute top-0 end-0 translate-middle-y ps-2 pe-3 pt-4 mt-3 zindex-1">
+												<div class="dropdown ">
+													<a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+														<i class="ph-list ph-1_5x"></i>
+													</a>
+													<div class="dropdown-menu dropdown-menu-end " style="">
+														<a href="#" class="dropdown-item">
+															<i class="ph-arrows-clockwise"> </i>
+															Обновить
+														</a>
+														<a href="#" class="dropdown-item">
+															<i class="ph-x"></i>
+															Отключить
+														</a>
+
+														<div class="dropdown-divider"></div>
+														<a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal_scrollable">
+															<i class="ph-clock"></i>
+															История версий
+														</a>
+														<div class="dropdown-divider"></div>
+														<a target="_blank" class="dropdown-item" href="https://forum.keenetic.com/topic/14415-пробуем-квас-shadowsocks-и-другие-vpn-клиенты/">
+															<i class="ph-user"></i>
+															Форум
+														</a>
+														<a target="_blank" class="dropdown-item" href="https://github.com/qzeleza/kvas">
+															<i class="ph-github-logo"></i>
+															Github
+														</a>
+														<a target="_blank" class="dropdown-item" href="https://github.com/qzeleza/kvas/wiki">
+															<i class="ph-book-open"></i>
+															Документация
+														</a>
+
+
+													</div>
+												</div>
+											</div>
+											<!-- /Меню расширенное самого расширения в карточке -->
+
+											<!-- Автор и дата выпуска расширения в карточке -->
+											<ul class="list-inline list-inline-bullet text-muted mb-0">
+												<li class="list-inline-item">Автор: <a href="mailto:mail@zeleza.ru" class="text-body fw-semibold">Zeleza</a></li>
+												<li class="list-inline-item">01 Июля 2023</li>
+											</ul>
+											<!-- Автор и дата выпуска расширения в карточке -->
+
+										</div>
+										<!-- /Информация о расширении в карточке -->
+
+
+										<!-- Описание расширения в карточке -->
+										<p class="pe-4 pb-0 mb-0">
+
+											Данный пакет позволяет осуществлять контроль и поддерживать в актуальном состоянии
+											список разблокировки хостов или "Белый список". При обращении к любому хосту из этого списка,
+											весь трафик будет идти через фактически любое VPN соединение, заранее настроенное на роутере,
+											или через Shadowsocks соединение.
+										</p>
+										<!-- /Описание расширения в карточке -->
+
+									</div>
+									<!-- /Тело карточки -->
+
+									<!-- Основание карточки -->
+									<div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
+
+										<!-- Общая информация о расширении в карточке -->
+										<ul class="list-inline mt-4">
+
+
+
+											<!-- Версия расширения в карточке -->
+											<li class="list-inline-item me-2 mb-2">
+												<span class="badge bg-success bg-opacity-75 ">v0.1.3</span>
+											</li>
+											<!-- /Версия расширения в карточке -->
+
+											<!-- Рейтинг расширения в карточке -->
+											<li class="list-inline-item mb-3">
+												<i class="ph-star fs-base lh-base align-top text-warning "></i>
+												<i class="ph-star fs-base lh-base align-top text-warning"></i>
+												<i class="ph-star fs-base lh-base align-top text-warning"></i>
+												<i class="ph-star fs-base lh-base align-top text-warning"></i>
+												<i class="ph-star fs-base lh-base align-top text-warning"></i>
+												<span class="text-muted ms-1">(49)</span>
+											</li>
+											<!-- /Рейтинг расширения в карточке -->
+
+										</ul>
+										<!-- Общая информация о расширении в карточке -->
+
+										<!-- Меню расширенное самого расширения в карточке -->
+										<div class="mt-1 mt-sm-0 zindex-auto">
+											<div class="dropdown ">
+												<a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="ph-sliders me-1"></i>
+													<span>Настроить</span>
+													<i class="ph-arrow-right ms-1 "></i>
+												</a>
+												<div class="dropdown-menu dropdown-menu-end " style="">
+													<a href="#" class="dropdown-item">
+														<i class="ph-stack"> </i>
+														Службы
+													</a>
+													<a href="#" class="dropdown-item">
+														<i class="ph-list-checks"></i>
+														Белый список
+													</a>
+
+													<div class="dropdown-divider"></div>
+													<a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal_scrollable">
+														<i class="ph-terminal"></i>
+														Отладка
+													</a>
+
+												</div>
+											</div>
+										</div>
+										<!-- /Меню расширенное самого расширения в карточке -->
+
+
+									</div>
+									<!-- Основание карточки -->
+
+								</div>
+								<!-- /Окно карточки о расширении  -->
+
+
+
+
+							</div>
+							<!-- /Окно основное -->
+
+
+						</div>
+						<!-- /Ряд для хроники -->
+
+					</div>
+					<!-- /Содержимое страницы -->
+
+				</div>
+				<!-- /Внутреннее содержимое страницы -->
+
+			</div>
+			<!-- /Основной контейнер страницы -->
+
+		</div>
+		<!-- Содержание страницы -->
+
+		<!-- Модальное окно "История версий" -->
+		<div id="modal_scrollable" class="modal fade" tabindex="-1">
+
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+
+					<div class="modal-header bg-primary bg-opacity-20 ps-3 pe-3 pt-2 pb-2">
+						<h5 class="modal-title ps-2">История версий</h5>
+						<button type="button" class="btn-close " data-bs-dismiss="modal"></button>
+					</div>
+
+					<div class="modal-body">
+
+						<div class="row">
+
+							<div class="col-9">
+
+								<div class="scroll-content overflow-auto position-relative ps-4 pe-3" style="height: 40vh;" tabindex="0">
+									<!--																<div class="" >-->
+									<div class="pb-1">
+
+										<h6>Версия 1.1.3</h6>
+
+										<ul class="flex-column">
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+										</ul>
+										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+
+									</div>
+
+									<div class="pb-1">
+										<h6>Версия 1.1.2</h6>
+										<ul class="flex-column">
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+										</ul>
+										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+
+									</div>
+
+									<div class="pb-1">
+										<h6>Версия 1.1.1</h6>
+										<ul class="flex-column">
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+											<li class="">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</li>
+										</ul>
+										Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+
+									</div>
+									<!--																</div>-->
+								</div>
+
+							</div>
+							<!-- Right sidebar component -->
+							<div class="col">
+								<div class="lift-down-10 sticky-lg-top order-1 order-lg-2 mb-3 d-xl-block d-none" id="ver_nav">
+									<!--															<h6 class="fw-semibold text-secondary mt-lg-3 ">Версии</h6>-->
+									<ul class="nav nav-scrollspy flex-column ">
+										<li class="nav-item"><a href="#" class="nav-link index active">1.1.3 alfa</a></li>
+										<li class="nav-item"><a href="#" class="nav-link index">1.1.2</a></li>
+										<li class="nav-item"><a href="#" class="nav-link index">1.1.1</a></li>
+									</ul>
+								</div>
+							</div>
+							<!-- /right sidebar component -->
+
+						</div>
+
+					</div>
+
+					<div class="modal-footer p-0">
+						<button type="button" class="btn btn-link" data-bs-dismiss="modal">Закрыть</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- /Модальное окно "История версий" -->
+
+		<!-- Модальное окно "видео о расширении" -->
+		<div class="modal fade" id="course_preview" tabindex="-1">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header pt-3 pb-3 bg-info bg-opacity-20 ">
+						<h6 class="modal-title fs-3">Видео-обзор расширения</h6>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+
+					<div class="modal-body pb-0">
+						<div class="ratio ratio-16x9">
+							<iframe class="rounded" src="./assets/media/samovar.mov" allowfullscreen></iframe>
+						</div>
+					</div>
+
+					<div class="modal-footer mt-3 pt-0 pb-1 bg-info bg-opacity-20 ">
+						<button type="button" class="btn btn-link" data-bs-dismiss="modal">Закрыть</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /course preview modal -->
+
+	</body>
+	<!-- /Тело проекта  -->
+
+</html>

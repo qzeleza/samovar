@@ -1,9 +1,25 @@
-
-.scroll-content > div {
-  padding-left: 20px;
-  padding-top: 30px;
-  padding-bottom: 40px;
+/*.collapsible-indicator {*/
+/*  position: relative;*/
+/*  top: 2px !important;*/
+/*}*/
+.collapsed .collapsible-indicator {
+  position: relative;
+  top: -2px !important;
 }
+/*.card-header .app-version {*/
+  /*margin-left: 4vw;*/
+  /*margin-top: 8vw;*/
+/*}*/
+.dropdown .dropdown-item i {
+  padding-right: 15px;
+  font-size: small;
+}
+
+/*.scroll-content > div {*/
+/*  padding-left: 20px;*/
+/*  padding-top: 30px;*/
+/*  padding-bottom: 40px;*/
+/*}*/
 
 /* настройка отступов в заголовке страницы */
 .page-title {
@@ -28,53 +44,44 @@
   color: #0d6efd;
 }
 
+/* позиционирование и размер иконки в боковом меню */
+.sidebar-section .nav-sidebar .nav-item .nav-link i {
+  transform: scale(1.5);
+}
+.sidebar-section .nav-sidebar .nav-item .nav-link.active {
+  padding-top: 15px;
+  padding-bottom: 12px;
+}
+
 /* регулировка высоты каждого изх пунктов левого меню навигации */
 .nav-sidebar .nav-item a span span  {
-  padding-top: 1.2vh !important;
-  padding-bottom: 1.2vh !important;
+  /*padding-top: 1.2vh !important;*/
+  /*padding-bottom: 1.2vh !important;*/
 }
 
 .btn-menu-hide  {
   padding-top: 10px;
 }
 
-/* регулировка высоты заголовка каждой из карточек card */
-.card .card-header {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  padding-left: 2vw;
-  padding-right: 1vw;
-}
+/* регулировка высоты основания каждой из карточек card */
 .card .card-footer {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  padding-left: 2vw;
-  padding-right: 1vw;
+  height: 3.2vw;
+}
+.card .card-header .position-relative {
+  top: 18px;
 }
 
 .sidebar {
   --sidebar-width: 23rem;
 }
 
-/*.page-header {*/
-/*  --page-header-padding-x: 3.25rem !important;*/
-/*}*/
-/*.page-header-content .page-title {*/
-/*  !*padding-left: 2.4vw !important;*!*/
-/*}*/
-/*@media (min-width:992px) {*/
-/*  .sidebar-expand-lg.sidebar-main-resized:not(.sidebar-collapsed):not(.sidebar-main-unfold) {*/
-/*    --sidebar-width: calc(var(--spacer) * 3 + var(--icon-font-size));*/
-/*  }*/
-/*}*/
-
 /* задаем высоту и цвет строки с логотипом*/
 .sidebar-logo {
   /*background-color: #004c69 !important;*/
-  height: calc(var(--spacer) * 3.99 + var(--icon-font-size));
+  height: calc(var(--spacer) * 4.7 + var(--icon-font-size));
   padding-bottom: 5px;
 }
-.bg-logo {
+.bg-sidebar-logo {
   --bg-opacity: 1;
   background-color: #006386 !important;
   /*background-color: #004c69 !important;*/
@@ -107,13 +114,25 @@
 /* Новый более мелкий размер текста для заголовков */
 .display-7 {
   font-size: calc(1.275rem + 1.2vw);
-  font-weight: 250;
+  font-weight: 350;
   line-height: 1.2715;
 }
 @media (min-width: 1200px) {
   .display-7 {
-    font-weight: 150;
+    font-weight: 250;
     font-size: 2rem;
+  }
+}
+
+.display-8 {
+  font-size: calc(0.975rem + 1.1vw);
+  font-weight: 300;
+  line-height: 1.9715;
+}
+@media (min-width: 1200px) {
+  .display-8 {
+    font-weight: 250;
+    font-size: 1.5rem;
   }
 }
 
@@ -122,6 +141,7 @@
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   width: 90%;
+  padding-left: 30px;;
 }
 .debug-card {
   -ms-flex: 0 0 auto;
@@ -186,9 +206,9 @@
 }
 
 /* отступ сверху для быстрого перехода по версиям */
-#ver_nav {
-  padding-top: 100px !important;
-}
+/*#ver_nav {*/
+/*  padding-top: 100px !important;*/
+/*}*/
 
 /* изменение позиционирования панели навигации при малых разрешениях */
 @media screen and (max-width: 1200px) {
@@ -314,12 +334,12 @@ a.toggle-all.clicked i.ph-arrow-fat-lines-down {
 
 /* Цвет золотого фона */
 .bg-gold {
-    --bg-opacity: 1;
+    /*--bg-opacity: 1;*/
     background-color: rgba(#dfc77e, var(--bg-opacity)) !important;
 }
 .bg-nav {
   --bg-opacity: 1;
-  background-color: #006386 !important;
+  background-color: rgba(#006386, var(--bg-opacity)) !important;
 }
 /* Цвет золотой текст */
 .text-gold {
@@ -342,15 +362,15 @@ a.toggle-all.clicked i.ph-arrow-fat-lines-down {
 }
 
 /* Цвет фона горизонтального меню сверху страницы */
-.navbar {
-  background-color: #004c69 !important;
-  height: 106px !important;
-}
+/*.navbar {*/
+/*  background-color: #004c69 !important;*/
+/*  height: 106px !important;*/
+/*}*/
 
 /* Цвет фона вертикального меню слева страницы */
-.sidebar-dark {
-  background-color: #3d4957ff !important;
-}
+/*.sidebar-dark {*/
+/*  background-color: #3d4957ff !important;*/
+/*}*/
 
 /* Левое выравнивание текста в заголовке закладки */
 .nav-item .a .div {
@@ -380,7 +400,7 @@ a.toggle-all.clicked i.ph-arrow-fat-lines-down {
 }
 
 .ph-1_3x {
-  transform: scale(1.3);
+  transform: scale(1.3) !important;
 }
 .ph-1_5x {
   transform: scale(1.5);
@@ -391,7 +411,14 @@ a.toggle-all.clicked i.ph-arrow-fat-lines-down {
   position: relative;
   top: -5px;
 }
-
+.lift-up-3 {
+  position: relative;
+  top: -3px;
+}
+.lift-up-base {
+  position: relative;
+  top: -2px;
+}
 .lift-up-10 {
   position: relative;
   top: -10px;
@@ -450,5 +477,10 @@ a.toggle-all.clicked i.ph-arrow-fat-lines-down {
 .lift-down-30 {
   position: relative;
   top: 30px;
+}
+
+.lift-down-40 {
+  position: relative;
+  top: 40px;
 }
 /* \Классы для подъема текста выше и ниже его текущего состояния */

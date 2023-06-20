@@ -211,26 +211,28 @@
 						<!-- Блок пунктов бокового меню -->
 						<ul class="nav nav-sidebar" data-nav-type="accordion">
 
-							<li class="nav-item nav-item-submenu nav-item-open">
-								<a href="index.html" class="nav-link ">
+<!--							<li class="nav-item nav-item-submenu nav-item-open">-->
+							<li class="nav-item ">
+								<a href="./index.html" class="nav-link active">
 									<i class="ph-house ph-1_5x lift-down-3"></i>
-									<span class="">
-										<span class="text-uppercase">Настройки</span>
-<!--										<span class="d-block fw-normal opacity-50">Расширения и настройки</span>-->
-									</span>
+									<div class="">
+										<span class="text-uppercase">Библиотека</span>
+										<span class="d-block fw-normal opacity-50">Расширения и настройки</span>
+									</div>
 
 								</a>
+
 								<!-- Пункты меню плугина -->
-								<ul class="nav-group-sub collapse show">
-									<li class="nav-item"><a href="./index_new.html" class="nav-link fw-light active">Расширения</a></li>
-									<li class="nav-item"><a href="#" class="nav-link fw-light" data-bs-toggle="offcanvas" data-bs-target="#panel_right">Установки</a></li>
+<!--								<ul class="nav-group-sub collapse show">-->
+<!--									<li class="nav-item"><a href="./index_new.html" class="nav-link fw-light active">Расширения</a></li>-->
+<!--									<li class="nav-item"><a href="#" class="nav-link fw-light" data-bs-toggle="offcanvas" data-bs-target="#panel_right">Установки</a></li>-->
 <!--									<li class="nav-item-divider"></li>-->
-								</ul>
+<!--								</ul>-->
 								<!-- Пункты меню плугина -->
 
 							</li>
 
-<!--							<li class="nav-item-divider mt-0"></li>-->
+							<li class="nav-item-divider mt-0"></li>
 
 							<!-- Название меню -->
 							<li class="nav-item-header mb-1">
@@ -250,6 +252,7 @@
 								<ul class="nav-group-sub collapse ">
 									<li class="nav-item"><a href="./pages/kvas/services.html" class="nav-link fw-light">Службы</a></li>
 									<li class="nav-item"><a href="./pages/kvas/white_list.html" class="nav-link fw-light">Белый список</a></li>
+									<li class="nav-item-divider"></li>
 									<li class="nav-item nav-item-submenu">
 										<a href="#" class="nav-link">Журналы</a>
 										<ul class="nav-group-sub collapse " style="">
@@ -258,7 +261,7 @@
 										</ul>
 									</li>
 									<li class="nav-item"><a href="./pages/kvas/white_list.html" class="nav-link fw-light">История версий </a></li>
-<!--									<li class="nav-item-divider"></li>-->
+									<li class="nav-item-divider"></li>
 								</ul>
 								<!-- Пункты меню плугина -->
 							</li>
@@ -343,52 +346,90 @@
 
 								<div class="card ms-3 no-links-padding-xy">
 
-									<div class="card-header d-flex bg-primary bg-opacity-20">
+<!--									<div class="card-header d-flex bg-primary bg-opacity-20">-->
 
-										<h5 class="lift-down-10">КВАС</h5>
-<!--										<span class="badge bg-success bg-opacity-20 text-secondary mb-2 mt-2 me-2">вер. 1.13</span>-->
-										<div class="dropdown ms-0 ms-sm-auto mb-1 mt-2 me-2 ">
+<!--										<h5 class="lift-down-10">КВАС</h5>-->
+<!--&lt;!&ndash;										<span class="badge bg-success bg-opacity-20 text-secondary mb-2 mt-2 me-2">вер. 1.13</span>&ndash;&gt;-->
+<!--										<div class="dropdown ms-0 ms-sm-auto mb-1 mt-2 me-2 ">-->
 
-											<a href="#" class="badge bg-indigo bg-opacity-20 text-indigo d-inline-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown">Обновление</a>
+<!--											<a href="#" class="badge bg-indigo bg-opacity-20 text-indigo d-inline-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown">-->
 
-											<div class="dropdown-menu dropdown-menu-end">
-												<a href="#" class="dropdown-item" id="smv_update">
-													<span class="border border-width-4 border-info rounded-pill me-2"></span>
-													Обновить
+<!--											</a>-->
+
+<!--											<div class="dropdown-menu dropdown-menu-end">-->
+<!--												<a target="_blank" href="https://forum.keenetic.com/topic/14415-пробуем-квас-shadowsocks-и-другие-vpn-клиенты/" class="dropdown-item">Форум</a>-->
+<!--												<a target="_blank" href="https://github.com/qzeleza/kvas" class="dropdown-item">Github</a>-->
+<!--												<a target="_blank" href="https://github.com/qzeleza/kvas/wiki" class="dropdown-item">Документация</a>-->
+												<a href="#collapse-link" class="dropdown-item" data-bs-toggle="collapse" aria-expanded="true" id="history_view">Версии</a>
+
+<!--												<a href="#" class="dropdown-item" id="smv_update">-->
+<!--													<span class="border border-width-4 border-info rounded-pill me-2"></span>-->
+<!--													Обновить-->
+<!--												</a>-->
+<!--												<a href="#" class="dropdown-item" id="smv_new_ver" data-bs-toggle="modal" data-bs-target="#modal_scrollable">-->
+<!--													<span class="border border-width-4 border-primary rounded-pill me-2"></span>-->
+<!--													Что нового?-->
+<!--												</a>-->
+<!--											</div>-->
+<!--										</div>-->
+
+<!--									</div>-->
+
+									<div class="card-header d-flex align-items-center">
+										<h5 class="mb-0">КВАС</h5>
+										<div class="d-inline-flex ms-auto">
+											<span class="badge bg-success rounded-pill">версия 1.2</span>
+											<div class="dropdown d-inline-flex ms-3">
+												<a href="#" class="text-body d-inline-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="ph-gear"></i>
 												</a>
-												<a href="#" class="dropdown-item" id="smv_new_ver" data-bs-toggle="modal" data-bs-target="#modal_scrollable">
-													<span class="border border-width-4 border-primary rounded-pill me-2"></span>
-													Что нового?
-												</a>
+												<div class="dropdown-menu dropdown-menu-end" style="">
+													<a href="#" class="dropdown-item">
+														<i class="ph-arrows-clockwise me-2"></i>
+														Форум
+													</a>
+													<a href="#" class="dropdown-item">
+														<i class="ph-list-dashes me-2"></i>
+														Github
+													</a>
+													<a href="#" class="dropdown-item">
+														<i class="ph-chart-line me-2"></i>
+														Документация
+													</a>
+													<div class="dropdown-divider"></div>
+													<a href="#" class="dropdown-item">
+														<i class="ph-eraser me-2"></i>
+														Версии
+													</a>
+												</div>
 											</div>
 										</div>
-
 									</div>
 
+<!--									<div class="card-body d-flex flex-column flex-lg-row ">-->
+									<div class="card-body d-sm-flex align-items-sm-center justify-content-sm-between flex-sm-wrap">
 
-									<div class="card-body d-flex flex-column flex-lg-row ">
+<!--										<div class="me-lg-3 mb-2 mb-lg-0 lift-up-25 d-none d-lg-block">-->
+<!--											<a href="#">-->
+<!--												<div class="d-inline-flex  rounded-pill p-2 mb-3 mt-1">-->
+<!--														<i class="ph-shield-plus text-secondary ph-3x m-1"></i>-->
+<!--													</div>-->
+<!--											</a>-->
+<!--										</div>-->
 
-										<div class="me-lg-3 mb-2 mb-lg-0 lift-up-25 d-none d-lg-block">
-											<a href="#">
-												<div class="d-inline-flex  rounded-pill p-2 mb-3 mt-1">
-														<i class="ph-shield-plus text-secondary ph-3x m-1"></i>
-													</div>
-											</a>
-										</div>
+<!--										<div class="flex-fill me-3 ms-1 mb-1 ">-->
 
-										<div class="flex-fill me-3 ms-1 mb-1 ">
+<!--												<h4 class="mb-3">Выборочный обход блокировок</h4>-->
+<!--												<p class="text-break d-none d-sm-block">-->
+<!--													Данный пакет позволяет осуществлять контроль и поддерживать в актуальном состоянии-->
+<!--																	список разблокировки хостов или "Белый список". При обращении к любому хосту из этого списка,-->
+<!--																	весь трафик будет идти через фактически любое VPN соединение, заранее настроенное на роутере,-->
+<!--																	или через Shadowsocks соединение.-->
+<!--												</p>-->
 
-												<h4 class="mb-3">Выборочный обход блокировок</h4>
-												<p class="text-break d-none d-sm-block">
-													Данный пакет позволяет осуществлять контроль и поддерживать в актуальном состоянии
-																	список разблокировки хостов или "Белый список". При обращении к любому хосту из этого списка,
-																	весь трафик будет идти через фактически любое VPN соединение, заранее настроенное на роутере,
-																	или через Shadowsocks соединение.
-												</p>
-
-												<div class="text-break mt-2 pb-2 fw-bold">
-													САМОВАР предоставляет управляющий web-интерфейс для данного пакета.
-												</div>
+<!--												<div class="text-break mt-2 pb-2 fw-bold">-->
+<!--													САМОВАР предоставляет управляющий web-интерфейс для данного пакета.-->
+<!--												</div>-->
 
 
 
@@ -458,7 +499,46 @@
 													</div>
 
 												</div>
+<!--											</div>-->
+<!--										<div class="card-body d-sm-flex align-items-sm-center justify-content-sm-between flex-sm-wrap">-->
+										<div class="d-flex align-items-center mb-3 mb-sm-0">
+											<div id="campaigns-donut"><svg width="44" height="44"><g transform="translate(22,22)"><g class="d3-arc d3-slice-border" style="cursor: pointer;"><path d="M1.2246467991473533e-15,20A20,20 0 0,1 -14.789625517336402,13.463542515138872L-7.394812758668201,6.731771257569436A10,10 0 0,0 6.123233995736766e-16,10Z" style="fill: rgb(102, 187, 106);"></path></g><g class="d3-arc d3-slice-border" style="cursor: pointer;"><path d="M-14.789625517336402,13.463542515138872A20,20 0 0,1 0.6835130502519166,-19.988316835344975L0.3417565251259583,-9.994158417672487A10,10 0 0,0 -7.394812758668201,6.731771257569436Z" style="fill: rgb(149, 117, 205);"></path></g><g class="d3-arc d3-slice-border" style="cursor: pointer;"><path d="M0.6835130502519166,-19.988316835344975A20,20 0 0,1 6.123233995736766e-15,20L3.061616997868383e-15,10A10,10 0 0,0 0.3417565251259583,-9.994158417672487Z" transform="" style="fill: rgb(255, 112, 67);"></path></g></g></svg></div>
+											<div class="ms-3">
+												<div class="d-flex align-items-center">
+													<h5 class="mb-0">38,289</h5>
+													<span class="text-success ms-2">
+												<i class="ph-arrow-up fs-base lh-base align-top"></i>
+												(+16.2%)
+											</span>
+												</div>
+												<span class="d-inline-block bg-success rounded-pill p-1 me-1"></span>
+												<span class="text-muted">May 12, 12:30 am</span>
 											</div>
+										</div>
+
+										<div class="d-flex align-items-center mb-3 mb-sm-0">
+											<div id="campaign-status-pie"><svg width="44" height="44"><g transform="translate(22,22)"><g class="d3-arc d3-slice-border" style="cursor: pointer;"><path d="M1.2246467991473533e-15,20A20,20 0 0,1 -10.563961394570233,-16.98242384508259L-5.281980697285117,-8.491211922541295A10,10 0 0,0 6.123233995736766e-16,10Z" style="fill: rgb(41, 182, 246);"></path></g><g class="d3-arc d3-slice-border" style="cursor: pointer;"><path d="M-10.563961394570233,-16.98242384508259A20,20 0 0,1 18.265316209260767,-8.14728321440441L9.132658104630384,-4.073641607202205A10,10 0 0,0 -5.281980697285117,-8.491211922541295Z" style="fill: rgb(239, 83, 80);"></path></g><g class="d3-arc d3-slice-border" style="cursor: pointer;"><path d="M18.265316209260767,-8.14728321440441A20,20 0 0,1 15.306158799579311,12.873286402549306L7.653079399789656,6.436643201274653A10,10 0 0,0 9.132658104630384,-4.073641607202205Z" style="fill: rgb(129, 199, 132);"></path></g><g class="d3-arc d3-slice-border" style="cursor: pointer;"><path d="M15.306158799579311,12.873286402549306A20,20 0 0,1 6.123233995736766e-15,20L3.061616997868383e-15,10A10,10 0 0,0 7.653079399789656,6.436643201274653Z" style="fill: rgb(153, 153, 153);"></path></g></g></svg></div>
+											<div class="ms-3">
+												<div class="d-flex align-items-center">
+													<h5 class="mb-0">2,458</h5>
+													<span class="text-danger ms-2">
+												<i class="ph-arrow-down fs-base lh-base align-top"></i>
+												(-4.9%)
+											</span>
+												</div>
+												<span class="d-inline-block bg-danger rounded-pill p-1 me-1"></span>
+												<span class="text-muted">Jun 4, 4:00 am</span>
+											</div>
+										</div>
+
+											<div>
+												<a href="#" class="btn btn-indigo">
+													<i class="ph-file-pdf me-2"></i>
+													Перейти
+												</a>
+											</div>
+<!--										</div>-->
+
 
 
 
@@ -466,20 +546,97 @@
 
 
 									<div class="card-footer d-sm-flex">
-										<ul class="list-inline ms-0 ms-lg-5 ps-0 ps-lg-5 mb-2 mb-lg-0 mt-0 mt-lg-1  justify-content-center justify-content-sm-start">
-											<li class="list-inline-item elem-header"><a target="_blank" href="https://forum.keenetic.com/topic/14415-пробуем-квас-shadowsocks-и-другие-vpn-клиенты/" class="elem-text">Форум</a></li>
-											<li class="list-inline-item elem-header"><a target="_blank" href="https://github.com/qzeleza/kvas" class="elem-text">Github</a></li>
-											<li class="list-inline-item elem-header"><a target="_blank" href="https://github.com/qzeleza/kvas/wiki" class="elem-text">Документация</a></li>
-											<li class="list-inline-item elem-header"><a href="#collapse-link" class="elem-text" data-bs-toggle="collapse" aria-expanded="true" id="history_view">Версии</a></li>
-										</ul>
 
-										<div class="list-inline mt-sm-0 me-2 ms-auto">
+<!--										<div class="list-inline mt-sm-0 me-2 ms-auto">-->
 
-											<button type="button" onclick="window.location.href='./pages/kvas/services.html';" class="btn btn-primary mt-sm-0 w-100 h-40px w-sm-auto">Перейти</button>
+<!--											<button type="button" onclick="window.location.href='./pages/kvas/services.html';" class="btn btn-primary mt-sm-0 w-100 h-40px w-sm-auto">Перейти</button>-->
+
+<!--										</div>-->
+
+									</div>
+
+								</div>
+
+
+								<div class="card ms-1 ">
+
+									<div class="card-header border-bottom-0">
+
+										<div class="position-relative">
+
+											<div class="position-absolute top-50 end-0 translate-middle-y pe-2">
+												<div class="dropdown">
+													<a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+														<i class="ph-list fs-base"></i>
+													</a>
+													<div class="dropdown-menu dropdown-menu-end " style="">
+														<a href="#" class="dropdown-item">
+															<i class="ph-arrows-clockwise"> </i>
+															Обновить
+														</a>
+														<a href="#" class="dropdown-item">
+															<i class="ph-x"></i>
+															Отключить
+														</a>
+
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="row align-items-sm-center justify-content-sm-start">
+
+
+											<div class="col-4 align-items-sm-center d-flex">
+
+												<i class="ms-3 ph-check text-success ph-1_5x"></i>
+												<a href="#" class="ms-4 text-uppercase  text-body letter-icon-title mb-0 me-1">
+													<h4 class="mb-0 fw-light">КВАС</h4>
+
+												</a>
+												<div class="text-end ms-auto d-none d-xl-inline pe-2">
+													<span class="badge bg-success bg-opacity-75">v0.1.3</span>
+												</div>
+											</div>
+
+											<div class="col-7">
+												<div  >
+													<a data-bs-toggle="collapse" class="collapsed align-items-center text-body" href="#collapsible-about-app1" >
+														<span class="fw-semibold " data-bs-popup="tooltip"  data-bs-placement="top"  data-bs-original-title="Открыть детали">
+															Выборочный обход блокировок
+														</span>
+														<i class="ph-spinner collapsible-indicator ph-1_5x ms-1"></i>
+														<!--													<span class="text-muted">Данный пакет позволяет осуществлять контроль...</span>-->
+													</a>
+												</div>
+											</div>
 
 										</div>
 
 									</div>
+
+
+									<div id="collapsible-about-app1" class="collapse bg-success bg-opacity-10 " style="">
+										<div class="card-body ps-5  pt-3 pb-3 pe-3 overflow-auto " style="height: 150px;" >
+											Данный пакет позволяет осуществлять контроль и поддерживать в актуальном состоянии
+											список разблокировки хостов или "Белый список". При обращении к любому хосту из этого списка,
+											весь трафик будет идти через фактически любое VPN соединение, заранее настроенное на роутере,
+											или через Shadowsocks соединение.
+										</div>
+										<div class="card-footer d-sm-flex bg-white justify-content-end border-0 ">
+											<ul class="list-inline  justify-content-sm-end">
+												<li class="list-inline-item "><a target="_blank" href="https://forum.keenetic.com/topic/14415-пробуем-квас-shadowsocks-и-другие-vpn-клиенты/" class="elem-text">Форум</a></li>
+												<li class="list-inline-item "><a target="_blank" href="https://github.com/qzeleza/kvas" class="elem-text">Github</a></li>
+												<li class="list-inline-item "><a target="_blank" href="https://github.com/qzeleza/kvas/wiki" class="elem-text">Документация</a></li>
+												<li class="list-inline-item "><a href="#" data-bs-toggle="modal" data-bs-target="#modal_scrollable">Версии</a></li>
+											</ul>
+										</div>
+
+
+									</div>
+
+
+
 
 								</div>
 
