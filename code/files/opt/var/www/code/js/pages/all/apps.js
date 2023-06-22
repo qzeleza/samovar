@@ -592,7 +592,7 @@ const App = function () {
         //
         // Функция для изменения ширины правого меню, вызываемого по кнопке
         //
-        const offcanvasResize = function() {
+    const offcanvasResize = function() {
         const element = document.querySelector('.offcanvas-resizable');
         const minimum_size = element.getAttribute('data-min-width');
         const maximum_size = element.getAttribute('data-max-width');
@@ -651,13 +651,14 @@ const App = function () {
         // Enable transitions when page is fully loaded
         initAfterLoad: function() {
             transitionsEnabled();
+            offcanvasResize();
         },
         // Initialize all components
         initComponents: function() {
             componentTooltip();
             componentPopover();
             componentToTopButton();
-            offcanvasResize();
+
         },
 
         // Initialize all sidebars
@@ -910,59 +911,79 @@ const Tooltips = function () {
 }();
 
 //
-const templete = function () {
-
-    let templateVal;
-
-    const isTemplateVal = function() {
-        return true;
-    }
-
-    const makeSomethingWhenTrue = function() {
-        return true;
-    }
-    const makeSomethingWhenFalse = function() {
-        return true;
-    }
-
-    const functionTemplate = function() {
-        if (isTemplateVal()) {
-            makeSomethingWhenTrue();
-        } else {
-            makeSomethingWhenFalse();
-        }
-    }
-
-    //
-    // Return objects assigned to module
-    //
-
-    return {
-        init: function() {
-            templateVal = $('.class_of-some-element');
-            // что-то делаем, когда нажали на элемент
-            templateVal.on('click', functionTemplate);
-            // что-то делаем, когда навели мышь на элемент
-            templateVal.on('mouseenter',functionTemplate);
-            // что-то делаем, когда убрали мышь с элемента
-            templateVal.on('mouseleave',functionTemplate);
-        },
-    };
-
-}();
+// const templete = function () {
+//
+//     let templateVal;
+//
+//     const isTemplateVal = function() {
+//         return true;
+//     }
+//
+//     const makeSomethingWhenTrue = function() {
+//         return true;
+//     }
+//     const makeSomethingWhenFalse = function() {
+//         return true;
+//     }
+//
+//     const functionTemplate = function() {
+//         if (isTemplateVal()) {
+//             makeSomethingWhenTrue();
+//         } else {
+//             makeSomethingWhenFalse();
+//         }
+//     }
+//
+//
+//     //
+//     // Return objects assigned to module
+//     //
+//
+//     return {
+//         init: function() {
+//             templateVal = $('.class_of-some-element');
+//             // что-то делаем, когда нажали на элемент
+//             templateVal.on('click', functionTemplate);
+//             // что-то делаем, когда навели мышь на элемент
+//             templateVal.on('mouseenter',functionTemplate);
+//             // что-то делаем, когда убрали мышь с элемента
+//             templateVal.on('mouseleave',functionTemplate);
+//         },
+//     };
+//
+// }();
 
 //
 // Устанавливаем в загрузку страницы
 // ------------------------------
 
-// Когда страница загружена When content is loaded
+// Во время загрузки страница
 document.addEventListener('DOMContentLoaded', function() {
-    App.initCore();
-    Tooltips.init();
+
+    $("#panel_right").load("./pages/general/elements/setup.html", function() {
+        $("#sidebar_panel").load("./pages/general/elements/sidebar.html", function() {
+
+            $("#setup_button").load("./pages/general/elements/setup_button.html");
+            $("#delete_simple").load("./pages/general/modals/simple_del.html");
+            $("#delete_full").load("./pages/general/modals/full_del.html");
+
+            App.initCore();
+            Tooltips.init();
+
+            // вызываем событие appReady по этому
+            // триггеру будут другие js файлы следующие
+            // в загрузке за app.js будут загружать свое тело.
+            $(document).trigger("appReady");
+
+        });
+    });
+
 });
 
-// When page is fully loaded
+//  Когда страница полностью уже загружена
 window.addEventListener('load', function() {
+    // загружаем общие модули из файлов
     App.initAfterLoad();
     Tooltips.initTooltips();
+
 });

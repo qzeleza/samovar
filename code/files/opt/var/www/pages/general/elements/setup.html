@@ -1,0 +1,148 @@
+<!-- Правая панель настроек Самовара -->
+
+  <!-- Элемент для js настройки ширины правого меню -->
+  <div class="offcanvas-resize-handle"></div>
+  <!-- /Элемент для js настройки ширины правого меню -->
+
+  <!-- Кнопка закрытия правого меню -->
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title fw-semibold"></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <!-- /Кнопка закрытия правого меню -->
+
+  <!-- Тело правого меню -->
+  <div class="offcanvas-body p-0">
+
+    <!-- Лого и версия Самовара в правом меню -->
+    <div class="text-center px-3 mb-3">
+      <a href="#" class="d-inline-block mb-3">
+        <img src="./assets/images/logo/logo-samovar-color.svg" width="100" height="100" alt="">
+      </a>
+      <div class="mb-0 display-7">САМОВАР</div>
+      <div class="fw-semibold">Текущая версия 0.0.1</div>
+    </div>
+    <!-- /Лого и версия Самовара в правом меню -->
+
+    <!-- Вкладки правого меню -->
+    <ul class="nav nav-tabs nav-tabs-underline nav-justified mb-0">
+
+      <li class="nav-item">
+        <a href="#bottom-justified-tab1" class="nav-link active" data-bs-toggle="tab">Настройки</a>
+      </li>
+      <li class="nav-item">
+        <a href="#bottom-justified-tab2" class="nav-link " data-bs-toggle="tab">Удалить</a>
+      </li>
+
+    </ul>
+    <!-- /Вкладки правого меню -->
+
+    <!-- Содержание вкладок Самовара -->
+    <div class="tab-content offcanvas-body ">
+
+      <!-- Содержание вкладки Настроек Самовара -->
+      <div class="tab-pane offcanvas-body fade show active" id="bottom-justified-tab1">
+        <div class="form-check form-switch pb-3">
+          <input type="checkbox" class="form-check-input" id="samovar_tooltip" checked="">
+          <label class="form-check-label" for="samovar_tooltip">Всплывающие подсказки</label>
+        </div>
+        <div class="pt-3 border-top">
+          <div class="fw-semibold mb-2">Цвет темы</div>
+          <div class="list-group mb-3">
+            <label class="list-group-item list-group-item-action form-check border-width-1 rounded mb-2">
+              <div class="d-flex flex-fill my-1">
+                <div class="form-check-label d-flex me-2">
+                  <i class="ph-sun ph-lg me-3"></i>
+                  <div>
+                    <span class="fw-bold">Светлая тема</span>
+                    <div class="fs-sm text-muted">Установить светлую тему </div>
+                  </div>
+                </div>
+                <input type="radio" class="form-check-input cursor-pointer ms-auto" name="main-theme" value="light" checked="">
+              </div>
+            </label>
+
+            <label class="list-group-item list-group-item-action form-check border-width-1 rounded mb-2 bg-primary bg-opacity-10 border-primary">
+              <div class="d-flex flex-fill my-1">
+                <div class="form-check-label d-flex me-2">
+                  <i class="ph-moon ph-lg me-3"></i>
+                  <div>
+                    <span class="fw-bold">Темная тема</span>
+                    <div class="fs-sm text-muted">Установить темную тему</div>
+                  </div>
+                </div>
+                <input type="radio" class="form-check-input cursor-pointer ms-auto" name="main-theme" value="dark">
+              </div>
+            </label>
+
+            <label class="list-group-item list-group-item-action form-check border-width-1 rounded mb-0">
+              <div class="d-flex flex-fill my-1">
+                <div class="form-check-label d-flex me-2">
+                  <i class="ph-globe ph-lg me-3"></i>
+                  <div>
+                    <span class="fw-bold">Системная (авто)</span>
+                    <div class="fs-sm text-muted">Установить системную тему</div>
+                  </div>
+                </div>
+                <input type="radio" class="form-check-input cursor-pointer ms-auto" name="main-theme" value="auto">
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- /Содержание вкладки Настроек Самовара -->
+
+      <!-- Содержание вкладки Действий Самовара -->
+      <div class="tab-pane fade" id="bottom-justified-tab2">
+        <div class="list-group list-group-borderless ">
+          <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#delete_simple">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+              <div>
+                <i class="ph-x-square ph-1_3x "></i>
+                <span class="ms-3">Пакет Самовар</span>
+              </div>
+              <!--									<div class="badge bg-primary text-white rounded-pill">0.0.2</div>-->
+            </div>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action d-flex align-items-start" data-bs-toggle="modal" data-bs-target="#delete_full">
+            <i class="ph-x me-3 mt-1 ph-1_3x"></i>
+            Пакет и данные
+          </a>
+        </div>
+      </div>
+      <!-- Содержание вкладки Действий Самовара -->
+
+
+      <!-- Сообщение об обновлении расширения или Самовара  -->
+      <div class="alert bg-secondary sidebar-resize-hide rounded p-3 m-3">
+
+        <div class=" text-white d-flex">
+          <div class="d-inline-flex bg-white bg-opacity-10 lh-1 rounded-pill p-2 ">
+            <i class="ph-arrows-clockwise text-white"></i>
+          </div>
+          <span class="fs-3 ms-2 mt-1 text-uppercase">Обновление</span>
+
+          <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="alert"></button>
+        </div>
+        <div class="mb-2 pt-3 ps-2 text-white">
+          Вышла новая версия: <span class="fw-bold">0.0.3 beta</span>.<br>
+          <!--							Текущая: <span class="fw-bold">0.0.1 beta</span>.-->
+        </div>
+        <div class="d-flex pt-2">
+          <a href="#" class="d-inline-flex align-items-center mt-1 ms-auto" data-color-theme="dark">
+            Обновить
+            <i class="ph-arrow-circle-right ms-2"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- /Сообщение об обновлении расширения или Самовара  -->
+
+
+    </div>
+    <!-- /Содержание вкладок Самовара -->
+
+  </div>
+  <!-- /Тело правого меню -->
+
+<!-- /Правая панель настроек Самовара -->

@@ -591,3 +591,4 @@ $(document).ready(function() {
     }, 600); // 3000 milliseconds = 3 seconds
 
 });
+

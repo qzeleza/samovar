@@ -25,7 +25,7 @@ const Scrolling = function () {
     //  Функция для переключения фокуса ввода при наведении мыши
     //  на соответствующий параграф внутри элемента прокрутки
     //
-    const scrollContentFunc = function(event) {
+    const scrollContentFunc = function() {
 
         contentElements.each(function(index) {
             let content = $(this);
@@ -45,7 +45,7 @@ const Scrolling = function () {
 
             });
             content.on('mouseleave', () => {
-                let $pointers, pointer, ind, $subPointers;
+                let $pointers, pointer, ind;
                 $pointers = scrollPointers.find('a');
                 ind =$(this).index();
                 pointer = $pointers.eq(ind);
@@ -79,10 +79,23 @@ const Scrolling = function () {
 // ------------------------------
 
 // When content is loaded
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', function() {
+// });
+//
+// // When page is fully loaded
+window.addEventListener('load', function() {
+    // Scrolling.init();
 });
 
-// When page is fully loaded
-window.addEventListener('load', function() {
-    Scrolling.init();
+// Загружаем данные только после загрузки app.js
+// который отвечает за загрузку данных из других файлов в один
+$(document).on("appReady", function() {
+    $("#kvas_history").load("./pages/extensions/modals/history.html", function() {
+        $("#kvas_preview").load("./pages/extensions/modals/preview.html", function() {
+            // сюда пишем загружаемые модули
+            Scrolling.init();
+        });
+    });
+    // ваш код здесь
+
 });

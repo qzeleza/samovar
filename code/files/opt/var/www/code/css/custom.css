@@ -1,7 +1,17 @@
-/*.collapsible-indicator {*/
-/*  position: relative;*/
-/*  top: 2px !important;*/
-/*}*/
+.modal-header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.modal-body {
+  padding: 30px 55px;
+}
+
+.modal-footer {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .collapsed .collapsible-indicator {
   position: relative;
   top: -2px !important;
@@ -16,7 +26,7 @@
 }
 
 /*.scroll-content > div {*/
-/*  padding-left: 20px;*/
+/*  padding-right: 15px;
 /*  padding-top: 30px;*/
 /*  padding-bottom: 40px;*/
 /*}*/
