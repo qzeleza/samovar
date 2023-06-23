@@ -1,3 +1,10 @@
+/* позволяет закрашивать часть звездочки для рейтинга */
+
+.noty_layout {
+  --noty-width: 30rem !important;
+  --noty-bg: var(--body-bg) !important;
+  --noty-color: black;
+}
 .modal-header {
   padding-top: 10px;
   padding-bottom: 10px;

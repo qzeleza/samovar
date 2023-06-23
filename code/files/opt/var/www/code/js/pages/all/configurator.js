@@ -47,26 +47,33 @@ const themeSwitcher = function() {
                     colorscheme[i].closest('.list-group-item').classList.remove('bg-primary', 'bg-opacity-10', 'border-primary');
                 }
             }
-        };
+        }
 
         // Turns alt stylesheet on/off
         function applyTheme(mode) {
+            // получаем элемент html
             let st = document.documentElement;
+            // если mode равен primaryTheme
             if (mode === primaryTheme) {
-                st.removeAttribute('data-color-theme');
+                st.removeAttribute('data-color-theme'); // удаляем атрибут data-color-theme
+                $('#right_call_button button').removeClass('btn-flat-white').addClass('btn-flat-dark');
             }
-            else if (mode === secondaryTheme) {
-                st.setAttribute('data-color-theme', 'dark');
+            else if (mode === secondaryTheme) { // если mode равен secondaryTheme
+                st.setAttribute('data-color-theme', 'dark'); // устанавливаем атрибут data-color-theme со значением 'dark'
+                $('#right_call_button button').removeClass('btn-flat-dark').addClass('btn-flat-white');
             }
-            else {
-                if (!mql.matches) {
-                    st.setAttribute('data-color-theme', 'dark');
+            else { // в противном случае
+                if (!mql.matches) { // если mql не совпадает
+                    st.setAttribute('data-color-theme', 'dark'); // устанавливаем атрибут data-color-theme со значением 'dark'
+                    $('#right_call_button button').removeClass('btn-flat-dark').addClass('btn-flat-white');
                 }
-                else {
-                    st.removeAttribute('data-color-theme');
+                else { // иначе
+                    st.removeAttribute('data-color-theme'); // удаляем атрибут data-color-theme
+                    $('#right_call_button button').removeClass('btn-flat-white').addClass('btn-flat-dark');
                 }
             }
-        };
+        }
+
 
         // Handles radiobutton clicks
         function setTheme(e) {
@@ -80,7 +87,7 @@ const themeSwitcher = function() {
             }
             // When the auto button was clicked the auto-switcher needs to kick in
             autoTheme(mql);
-        };
+        }
 
         // Handles the media query evaluation, so it expects a media query as parameter
         function autoTheme(e) {
@@ -153,14 +160,11 @@ const themeSwitcher = function() {
 // Initialize module
 // ------------------------------
 
-// Загружаем данные только после загрузки app.js
+// Загружаем данные только после загрузки loader.js
 // который отвечает за загрузку данных из других файлов в один
 $(document).on("appReady", function() {
     // ваш код здесь
     themeSwitcher.init();
 });
 
-// document.addEventListener('DOMContentLoaded', function() {
-//
-// });
 

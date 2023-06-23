@@ -910,7 +910,7 @@ const Tooltips = function () {
     }
 }();
 
-//
+// шаблон для создания класса
 // const templete = function () {
 //
 //     let templateVal;
@@ -957,33 +957,12 @@ const Tooltips = function () {
 // Устанавливаем в загрузку страницы
 // ------------------------------
 
-// Во время загрузки страница
-document.addEventListener('DOMContentLoaded', function() {
-
-    $("#panel_right").load("./pages/general/elements/setup.html", function() {
-        $("#sidebar_panel").load("./pages/general/elements/sidebar.html", function() {
-
-            $("#setup_button").load("./pages/general/elements/setup_button.html");
-            $("#delete_simple").load("./pages/general/modals/simple_del.html");
-            $("#delete_full").load("./pages/general/modals/full_del.html");
-
-            App.initCore();
-            Tooltips.init();
-
-            // вызываем событие appReady по этому
-            // триггеру будут другие js файлы следующие
-            // в загрузке за app.js будут загружать свое тело.
-            $(document).trigger("appReady");
-
-        });
-    });
-
-});
-
-//  Когда страница полностью уже загружена
-window.addEventListener('load', function() {
-    // загружаем общие модули из файлов
+// Загружаем данные только после загрузки loader.js
+// который отвечает за загрузку данных из других файлов в один
+$(document).on("appReady", function() {
+    App.initCore();
+    Tooltips.init();
     App.initAfterLoad();
     Tooltips.initTooltips();
-
 });
+

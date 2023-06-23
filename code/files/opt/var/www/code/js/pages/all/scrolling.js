@@ -75,27 +75,9 @@ const Scrolling = function () {
 }();
 
 
-// Initialize module
-// ------------------------------
-
-// When content is loaded
-// document.addEventListener('DOMContentLoaded', function() {
-// });
-//
-// // When page is fully loaded
-window.addEventListener('load', function() {
-    // Scrolling.init();
-});
-
-// Загружаем данные только после загрузки app.js
+// Загружаем данные только после загрузки loader.js
 // который отвечает за загрузку данных из других файлов в один
 $(document).on("appReady", function() {
-    $("#kvas_history").load("./pages/extensions/modals/history.html", function() {
-        $("#kvas_preview").load("./pages/extensions/modals/preview.html", function() {
-            // сюда пишем загружаемые модули
-            Scrolling.init();
-        });
-    });
-    // ваш код здесь
+    Scrolling.init();
 
 });
