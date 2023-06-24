@@ -15,12 +15,31 @@
   <div class="offcanvas-body p-0">
 
     <!-- Лого и версия Самовара в правом меню -->
-    <div class="text-center px-3 mb-3">
-      <a href="#" class="d-inline-block mb-3">
+    <div class="text-center px-3 mb-4 ">
+      <a href="#" class="d-inline-block mb-2">
         <img src="./assets/images/logo/logo-samovar-color.svg" width="100" height="100" alt="">
       </a>
       <div class="mb-0 display-7">САМОВАР</div>
-      <div class="fw-semibold">Текущая версия 0.0.1</div>
+      <div class="fw-semibold ps-1 mt-0">Текущая версия 0.0.1</div>
+      <!-- Блок загружаемый js: Рейтинг расширения в карточке -->
+      <li id="samovar_rating" class="list-inline-item mt-1 mb-2 ps-4">
+        <!-- Рейтинг расширения в карточке -->
+        <i class="ph-star fs-base lh-base align-top "></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top "></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <span id="samovar_voted" class="text-muted ms-1">(90)</span>
+        <!-- /Рейтинг расширения в карточке -->
+      </li>
+      <!-- /Блок загружаемый js: Рейтинг расширения в карточке -->
+
+
     </div>
     <!-- /Лого и версия Самовара в правом меню -->
 
@@ -31,7 +50,7 @@
         <a href="#bottom-justified-tab1" class="nav-link active" data-bs-toggle="tab">Настройки</a>
       </li>
       <li class="nav-item">
-        <a href="#bottom-justified-tab2" class="nav-link " data-bs-toggle="tab">Удалить</a>
+        <a href="#bottom-justified-tab2" class="nav-link " data-bs-toggle="tab">Действия</a>
       </li>
 
     </ul>
@@ -94,20 +113,26 @@
 
       <!-- Содержание вкладки Действий Самовара -->
       <div class="tab-pane fade" id="bottom-justified-tab2">
+
         <div class="list-group list-group-borderless ">
-          <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#delete_simple">
-            <div class="d-flex w-100 justify-content-between align-items-center">
-              <div>
-                <i class="ph-x-square ph-1_3x "></i>
-                <span class="ms-3">Пакет Самовар</span>
-              </div>
-              <!--									<div class="badge bg-primary text-white rounded-pill">0.0.2</div>-->
-            </div>
+
+          <a href="#" id="send_feedback" class="list-group-item list-group-item-action d-flex align-items-start">
+            <i class="ph-chat-text me-3 mt-1 ph-1_3x"></i>
+            Отправить отзыв
           </a>
+          <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#delete_simple">
+<!--            <div class="d-flex w-100 justify-content-between align-items-center">-->
+                <i class="ph-lightning ph-1_3x "></i>
+                <span class="ms-3">Удалить Самовар</span>
+              <!--									<div class="badge bg-primary text-white rounded-pill">0.0.2</div>-->
+<!--            </div>-->
+          </a>
+
           <a href="#" class="list-group-item list-group-item-action d-flex align-items-start" data-bs-toggle="modal" data-bs-target="#delete_full">
             <i class="ph-x me-3 mt-1 ph-1_3x"></i>
-            Пакет и данные
+            Удалить пакет и данные
           </a>
+
         </div>
       </div>
       <!-- Содержание вкладки Действий Самовара -->

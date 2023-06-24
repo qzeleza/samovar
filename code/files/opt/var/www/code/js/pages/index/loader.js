@@ -23,15 +23,15 @@ function loadGeneralModules() {
 // Загрузка данные, используемые только для index.html
 function loadIndexModules() {
     return new Promise((resolve) => {
+        // карточка описания Кваса
+        $("#app_kvas_card").load("./pages/library/kvas/library/card.html", resolve);
         // модальное окно истории Кваса из файла
-        $("#kvas_history").load("./pages/index/modals/kvas/history.html", resolve);
+        $("#kvas_history").load("./pages/library/kvas/library/history.html", resolve);
         // модальное окно видео-предосмотра Кваса из файла
-        $("#kvas_preview").load("./pages/index/modals/kvas/preview.html", resolve);
+        $("#kvas_preview").load("./pages/library/kvas/library/preview.html", resolve);
     });
 }
 
-// после загрузки страницы
-// document.addEventListener('load', function() {
 
 // Загружаем данные в процессе загрузки loads.js
 // который отвечает за загрузку данных из других файлов в один
@@ -49,3 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
 });
+
+// после загрузки страницы
+// document.addEventListener('load', function() {

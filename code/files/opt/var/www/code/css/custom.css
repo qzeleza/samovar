@@ -1,5 +1,8 @@
 /* позволяет закрашивать часть звездочки для рейтинга */
 
+.h-200 {
+  height: 200px;
+}
 .noty_layout {
   --noty-width: 30rem !important;
   --noty-bg: var(--body-bg) !important;

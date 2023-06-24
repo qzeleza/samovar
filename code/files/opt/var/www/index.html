@@ -21,21 +21,28 @@
 		<link href="code/css/custom.css" rel="stylesheet" type="text/css">
 		<!-- /Глобальные стили -->
 
-		<!-- Файлы JS скриптов -->
-
+		<!-- Файлы JS библиотек -->
 		<script src="./assets/js/bootstrap/bootstrap.bundle.min.js"></script>
 		<script src="./assets/js/jquery/jquery.min.js"></script>
 		<script src="./assets/js/vendor/notifications/noty.min.js"></script>
+		<script src="./assets/js/vendor/validation/validate.min.js"></script>
+		<script src="./assets/js/vendor/selects/select2.min.js"></script>
+<!--		<script src="./assets/js/vendor/ui/dragula.min.js"></script>-->
 		<!-- /Файлы JS скриптов -->
 
 		<!-- Скрипты для index.html -->
 		<script src="code/js/pages/index/loader.js"></script>
-		<script src="code/js/pages/index/ratings.js"></script>
 		<!-- Общие скрипты для всех страниц -->
+		<script src="code/js/vendors/form_validation_library.js"></script>
+		<script src="code/js/vendors/form_validation_styles.js"></script>
 		<script src="code/js/pages/all/apps.js"></script>
+		<script src="code/js/pages/all/feedback.js"></script>
 		<script src="code/js/pages/all/configurator.js"></script>
 		<script src="code/js/pages/all/scrolling.js"></script>
-		<!--		<script src="kvas/js/vendors/draggable.js"></script>-->
+		<script src="code/js/pages/index/ratings.js"></script>
+		<script src="code/js/pages/index/actions.js"></script>
+
+
 		<!-- /Файлы скриптов JS для отрисовки темы -->
 
 		<!-- Файлы поддержки иконок  -->
@@ -111,168 +118,7 @@
 							<div class="main-card">
 
 								<!-- Окно карточки о расширении  -->
-								<div class="card blog-horizontal">
-
-									<!-- Тело карточки -->
-									<div class="card-body ">
-
-										<!-- Окно видео-предосмотра в карточке -->
-										<div class="card-img-actions me-sm-3 mb-3 mb-sm-0">
-											<a href="#kvas_preview" class="d-inline-block position-relative" data-bs-toggle="modal">
-												<img src="./assets/images/logo/logo-samovar-full-color.png" class="img-fluid card-img pb-1 pe-1" alt="">
-												<div class="d-inline-flex bg-dark bg-opacity-50 text-white position-absolute start-50 top-50 translate-middle rounded-pill p-2">
-													<i class="ph-play"></i>
-												</div>
-												<span class="bg-dark bg-opacity-50 text-white fs-xs lh-1 rounded-1 position-absolute top-0 start-0 p-1 mt-2 ms-2 mb-2">38:46</span>
-											</a>
-										</div>
-										<!-- /Окно видео-предосмотра в карточке -->
-
-										<!-- Информация о расширении в карточке -->
-										<div class="mb-1 ">
-
-											<!-- Заголовок расширения в карточке -->
-											<div class="d-flex align-items-center">
-												<div class="pe-2 ">
-													<i class="ph-check text-white p-1 rounded-pill bg-success bg-opacity-50"></i>
-												</div>
-												<a href="#" class="me-2 text-uppercase fs-1 ">Квас</a>
-											</div>
-
-
-											<!-- Заголовок расширения в карточке -->
-
-											<!-- Меню расширенное самого расширения в карточке -->
-											<div class="position-absolute top-0 end-0 translate-middle-y ps-2 pe-3 pt-4 mt-3 zindex-1">
-												<div class="dropdown ">
-													<a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-														<i class="ph-list ph-1_5x"></i>
-													</a>
-													<div class="dropdown-menu dropdown-menu-end " style="">
-														<a href="#" class="dropdown-item">
-															<i class="ph-arrows-clockwise"> </i>
-															Обновить
-														</a>
-														<a href="#" class="dropdown-item">
-															<i class="ph-x"></i>
-															Отключить
-														</a>
-
-														<div class="dropdown-divider"></div>
-														<a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#kvas_history">
-															<i class="ph-clock"></i>
-															История версий
-														</a>
-														<div class="dropdown-divider"></div>
-														<a target="_blank" class="dropdown-item" href="https://forum.keenetic.com/topic/14415-пробуем-квас-shadowsocks-и-другие-vpn-клиенты/">
-															<i class="ph-user"></i>
-															Форум
-														</a>
-														<a target="_blank" class="dropdown-item" href="https://github.com/qzeleza/kvas">
-															<i class="ph-github-logo"></i>
-															Github
-														</a>
-														<a target="_blank" class="dropdown-item" href="https://github.com/qzeleza/kvas/wiki">
-															<i class="ph-book-open"></i>
-															Документация
-														</a>
-
-													</div>
-												</div>
-											</div>
-											<!-- /Меню расширенное самого расширения в карточке -->
-
-											<!-- Автор и дата выпуска расширения в карточке -->
-											<ul class="list-inline list-inline-bullet text-muted mb-0">
-												<li class="list-inline-item">Автор: <a href="mailto:mail@zeleza.ru" class="text-body fw-semibold">Zeleza</a></li>
-												<li class="list-inline-item">01 Июля 2023</li>
-											</ul>
-											<!-- Автор и дата выпуска расширения в карточке -->
-
-										</div>
-										<!-- /Информация о расширении в карточке -->
-
-										<!-- Описание расширения в карточке -->
-										<p class="pe-4 pb-0 mb-0">
-
-											Данный пакет позволяет осуществлять контроль и поддерживать в актуальном состоянии
-											список разблокировки хостов или "Белый список". При обращении к любому хосту из этого списка,
-											весь трафик будет идти через фактически любое VPN соединение, заранее настроенное на роутере,
-											или через Shadowsocks соединение.
-										</p>
-										<!-- /Описание расширения в карточке -->
-
-									</div>
-									<!-- /Тело карточки -->
-
-									<!-- Основание карточки -->
-									<div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
-
-										<!-- Общая информация о расширении в карточке -->
-										<ul class="list-inline mt-4">
-
-
-
-											<!-- Версия расширения в карточке -->
-											<li class="list-inline-item me-3 mb-2">
-												<span class="badge bg-success bg-opacity-75 ">v0.1.3</span>
-											</li>
-											<!-- /Версия расширения в карточке -->
-
-											<!-- Рейтинг расширения в карточке -->
-											<li class="list-inline-item mb-3">
-												<i class="ph-star fs-base lh-base align-top "></i>
-												<i class="ph-star fs-base lh-base align-top"></i>
-												<i class="ph-star fs-base lh-base align-top"></i>
-												<i class="ph-star fs-base lh-base align-top"></i>
-												<i class="ph-star fs-base lh-base align-top"></i>
-												<i class="ph-star fs-base lh-base align-top "></i>
-												<i class="ph-star fs-base lh-base align-top"></i>
-												<i class="ph-star fs-base lh-base align-top"></i>
-												<i class="ph-star fs-base lh-base align-top"></i>
-												<i class="ph-star fs-base lh-base align-top"></i>
-												<span class="text-muted ms-1">(49)</span>
-											</li>
-											<!-- /Рейтинг расширения в карточке -->
-
-										</ul>
-
-										<!-- Общая информация о расширении в карточке -->
-
-										<!-- Меню расширенное самого расширения в карточке -->
-										<div class="mt-1 mt-sm-0 zindex-auto">
-											<div class="dropdown ">
-												<a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-													<i class="ph-sliders me-1"></i>
-													<span>Настроить</span>
-													<i class="ph-arrow-right ms-1 "></i>
-												</a>
-												<div class="dropdown-menu dropdown-menu-end " style="">
-													<a href="#" class="dropdown-item">
-														<i class="ph-stack"> </i>
-														Службы
-													</a>
-													<a href="#" class="dropdown-item">
-														<i class="ph-list-checks"></i>
-														Белый список
-													</a>
-
-													<div class="dropdown-divider"></div>
-													<a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal_scrollable">
-														<i class="ph-terminal"></i>
-														Отладка
-													</a>
-
-												</div>
-											</div>
-										</div>
-										<!-- /Меню расширенное самого расширения в карточке -->
-
-
-									</div>
-									<!-- Основание карточки -->
-
-								</div>
+								<div id="app_kvas_card" class="card"></div>
 								<!-- /Окно карточки о расширении  -->
 
 							</div>

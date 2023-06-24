@@ -596,6 +596,7 @@ const App = function () {
         const element = document.querySelector('.offcanvas-resizable');
         const minimum_size = element.getAttribute('data-min-width');
         const maximum_size = element.getAttribute('data-max-width');
+        const storageKey = 'right_panel_width';
 
         let original_width = 0;
         let original_x = 0;
@@ -605,6 +606,7 @@ const App = function () {
             ['mousedown', 'touchstart'].forEach(function(e) {
                 element.querySelector('.offcanvas-resize-handle').addEventListener(e, startResize);
             });
+            element.style.width = localStorage.getItem(storageKey);
         }
 
         function startResize(e) {
@@ -633,6 +635,7 @@ const App = function () {
             ['mousemove', 'touchmove'].forEach(function(e) {
                 window.removeEventListener(e, resize);
             });
+            localStorage.setItem(storageKey, element.style.width);
         }
     };
 

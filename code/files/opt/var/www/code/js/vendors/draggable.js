@@ -116,6 +116,7 @@ const CardsDraggable = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', function() {
+$(document).on("appReady", function() {
     CardsDraggable.init();
 });

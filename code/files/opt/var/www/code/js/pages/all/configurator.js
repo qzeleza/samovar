@@ -165,6 +165,11 @@ const themeSwitcher = function() {
 $(document).on("appReady", function() {
     // ваш код здесь
     themeSwitcher.init();
-});
 
+    const appName = 'Самовар';
+    const appVersion = '0.0.3';
+    new FeedBack('send_feedback', appName, appVersion)
+    new Rating('samovar_rating', appName, appVersion );
+
+});
 

@@ -283,6 +283,7 @@ var Select2Selects = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', function() {
+$(document).on("appReady", function() {
     Select2Selects.init();
 });
