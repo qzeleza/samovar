@@ -162,14 +162,10 @@ const themeSwitcher = function() {
 
 // Загружаем данные только после загрузки loader.js
 // который отвечает за загрузку данных из других файлов в один
-$(document).on("appReady", function() {
+// $(document).on("appReady", function() {
     // ваш код здесь
-    themeSwitcher.init();
+// $(document).ready(function() {
 
-    const appName = 'Самовар';
-    const appVersion = '0.0.3';
-    new FeedBack('send_feedback', appName, appVersion)
-    new Rating('samovar_rating', appName, appVersion );
 
-});
+// });
 

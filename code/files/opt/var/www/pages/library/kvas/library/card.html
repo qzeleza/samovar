@@ -1,146 +1,150 @@
-<!-- Тело карточки -->
-<div class="card-body blog-horizontal">
+<!-- Окно карточки о расширении  -->
+<div class="card">
+<!-- /Окно карточки о расширении  -->
+  <!-- Тело карточки -->
+  <div class="card-body blog-horizontal">
 
-  <!-- Окно видео-предосмотра в карточке -->
-  <div class="card-img-actions me-sm-3 mb-3 mb-sm-0">
-    <a href="#kvas_preview" class="d-inline-block position-relative" data-bs-toggle="modal">
-      <img src="./assets/images/logo/logo-samovar-full-color.png" class="img-fluid card-img pb-1 pe-1" alt="">
-      <div class="d-inline-flex bg-dark bg-opacity-50 text-white position-absolute start-50 top-50 translate-middle rounded-pill p-2">
-        <i class="ph-play"></i>
-      </div>
-      <span class="bg-dark bg-opacity-50 text-white fs-xs lh-1 rounded-1 position-absolute top-0 start-0 p-1 mt-2 ms-2 mb-2">38:46</span>
-    </a>
-  </div>
-  <!-- /Окно видео-предосмотра в карточке -->
-
-  <!-- Информация о расширении в карточке -->
-  <div class="mb-1 ">
-
-    <!-- Заголовок расширения в карточке -->
-    <div class="d-flex align-items-center pb-2">
-
-      <div class="me-2 text-uppercase display-7 text-primary">Квас</div>
-    </div>
-
-
-    <!-- Заголовок расширения в карточке -->
-
-    <!-- Блок загружаемый js: меню расширенное самого расширения в карточке -->
-    <div id="kvas_actions" class="position-absolute top-0 end-0 translate-middle-y ps-2 pe-3 pt-4 mt-3 zindex-1">
-      <!-- Меню расширенное самого расширения в карточке -->
-      <div class="dropdown ">
-        <a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="ph-list ph-1_5x"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-end " style="">
-          <a href="#" class="dropdown-item">
-            <i class="ph-arrows-clockwise"> </i>
-            Обновить
-          </a>
-          <a href="#" class="dropdown-item">
-            <i class="ph-x"></i>
-            Отключить
-          </a>
-
-          <a id="kvas_send_feedback" href="#" class="dropdown-item">
-            <i class="ph-chat-text"></i>
-            Оставить отзыв
-          </a>
-
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#kvas_history">
-            <i class="ph-clock"></i>
-            История версий
-          </a>
-          <div class="dropdown-divider"></div>
-          <a target="_blank" class="dropdown-item" href="https://forum.keenetic.com/topic/14415-пробуем-квас-shadowsocks-и-другие-vpn-клиенты/">
-            <i class="ph-user"></i>
-            Форум
-          </a>
-          <a target="_blank" class="dropdown-item" href="https://github.com/qzeleza/kvas">
-            <i class="ph-github-logo"></i>
-            Github
-          </a>
-          <a target="_blank" class="dropdown-item" href="https://github.com/qzeleza/kvas/wiki">
-            <i class="ph-book-open"></i>
-            Документация
-          </a>
-
+    <!-- Окно видео-предосмотра в карточке -->
+    <div class="card-img-actions me-sm-3 mb-3 mb-sm-0">
+      <a href="#kvas_preview" class="d-inline-block position-relative" data-bs-toggle="modal">
+        <img src="./assets/images/logo/logo-samovar-full-color.png" class="img-fluid card-img " alt="">
+        <div class="d-inline-flex bg-dark bg-opacity-50 text-white position-absolute start-50 top-50 translate-middle rounded-pill p-2">
+          <i class="ph-play"></i>
         </div>
-      </div>
-      <!-- /Меню расширенное самого расширения в карточке -->
+        <span class="bg-dark bg-opacity-50 text-white fs-xs lh-1 rounded-1 position-absolute top-0 start-0 p-1 mt-2 ms-2 mb-2">38:46</span>
+      </a>
     </div>
-    <!-- /Блок загружаемый js: меню расширенное самого расширения в карточке -->
+    <!-- /Окно видео-предосмотра в карточке -->
 
-    <!-- Автор и дата выпуска расширения в карточке -->
-<!--    <ul class="list-inline list-inline-bullet text-muted mb-3">-->
-<!--      <li class="list-inline-item">Автор: <a href="mailto:mail@zeleza.ru" class="text-body fw-semibold">Zeleza</a></li>-->
-<!--      <li class="list-inline-item">01 Июля 2023</li>-->
-<!--    </ul>-->
-    <!-- Автор и дата выпуска расширения в карточке -->
+    <!-- Информация о расширении в карточке -->
+    <div class="mb-1 ">
+
+      <!-- Заголовок расширения в карточке -->
+      <div class="d-flex align-items-end mb-0">
+        <!-- Меню расширенное самого расширения в карточке -->
+        <div class=" mt-sm-0 ">
+          <h1 class="me-2 text-uppercase fw-semibold text-primary mb-0">Квас</h1>
+        </div>
+        <!-- /Меню расширенное самого расширения в карточке -->
+
+
+      </div>
+      <!-- Автор и дата выпуска расширения в карточке -->
+      <ul class="list-inline list-inline-bullet text-muted mb-2">
+        <li class="list-inline-item">Автор: <a href="mailto:mail@zeleza.ru" class="text-body fw-semibold">Zeleza</a></li>
+        <li class="list-inline-item">01 Июля 2023</li>
+      </ul>
+      <!-- Автор и дата выпуска расширения в карточке -->
+
+      <!-- Заголовок расширения в карточке -->
+
+      <!-- Блок загружаемый js: меню расширенное самого расширения в карточке -->
+      <div id="kvas_actions" class="position-absolute top-0 end-0 translate-middle-y ps-2 pe-3 pt-4 mt-3 zindex-1">
+        <!-- Меню расширенное самого расширения в карточке -->
+        <div class="dropdown ">
+          <a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="ph-list ph-1_5x"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end " style="">
+            <a href="#" class="dropdown-item">
+              <i class="ph-arrows-clockwise"> </i>
+              Обновить
+            </a>
+            <a href="#" class="dropdown-item">
+              <i class="ph-x"></i>
+              Отключить
+            </a>
+
+            <a id="kvas_send_feedback" href="#" class="dropdown-item">
+              <i class="ph-chat-text"></i>
+              Оставить отзыв
+            </a>
+
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#kvas_history">
+              <i class="ph-clock"></i>
+              История версий
+            </a>
+            <div class="dropdown-divider"></div>
+            <a target="_blank" class="dropdown-item" href="https://forum.keenetic.com/topic/14415-пробуем-квас-shadowsocks-и-другие-vpn-клиенты/">
+              <i class="ph-user"></i>
+              Форум
+            </a>
+            <a target="_blank" class="dropdown-item" href="https://github.com/qzeleza/kvas">
+              <i class="ph-github-logo"></i>
+              Github
+            </a>
+            <a target="_blank" class="dropdown-item" href="https://github.com/qzeleza/kvas/wiki">
+              <i class="ph-book-open"></i>
+              Документация
+            </a>
+
+          </div>
+        </div>
+        <!-- /Меню расширенное самого расширения в карточке -->
+      </div>
+      <!-- /Блок загружаемый js: меню расширенное самого расширения в карточке -->
+
+
+
+    </div>
+    <!-- /Информация о расширении в карточке -->
+
+    <!-- Описание расширения в карточке -->
+    <p class="pe-4 pb-0 mb-0">
+
+      Данный пакет позволяет осуществлять контроль и поддерживать в актуальном состоянии
+      список разблокировки хостов или "Белый список". При обращении к любому хосту из этого списка,
+      весь трафик будет идти через фактически любое VPN соединение, заранее настроенное на роутере,
+      или через Shadowsocks соединение.
+    </p>
+    <!-- /Описание расширения в карточке -->
 
   </div>
-  <!-- /Информация о расширении в карточке -->
+  <!-- /Тело карточки -->
 
-  <!-- Описание расширения в карточке -->
-  <p class="pe-4 pb-0 mb-0">
-
-    Данный пакет позволяет осуществлять контроль и поддерживать в актуальном состоянии
-    список разблокировки хостов или "Белый список". При обращении к любому хосту из этого списка,
-    весь трафик будет идти через фактически любое VPN соединение, заранее настроенное на роутере,
-    или через Shadowsocks соединение.
-  </p>
-  <!-- /Описание расширения в карточке -->
-
-</div>
-<!-- /Тело карточки -->
-
-<!-- Основание карточки -->
-<div class="card-footer d-sm-flex justify-content-sm-start align-items-sm-center">
-
-  <div class="pe-3 pb-1">
-    <i class="ph-check text-success ph-1_5x"></i>
-  </div>
-
-  <!-- Общая информация о расширении в карточке -->
-  <ul class="list-inline mt-3">
-
-    <!-- Версия расширения в карточке -->
-    <li class="list-inline-item me-2 mb-2">
-      <span class="badge bg-success ">v0.1.3</span>
-    </li>
-    <!-- /Версия расширения в карточке -->
-
-    <!-- Блок загружаемый js: Рейтинг расширения в карточке -->
-    <li id="kvas_rating" class="list-inline-item mt-1">
-      <!-- Рейтинг расширения в карточке -->
-      <i class="ph-star fs-base lh-base align-top "></i>
-      <i class="ph-star fs-base lh-base align-top"></i>
-      <i class="ph-star fs-base lh-base align-top"></i>
-      <i class="ph-star fs-base lh-base align-top"></i>
-      <i class="ph-star fs-base lh-base align-top"></i>
-      <i class="ph-star fs-base lh-base align-top "></i>
-      <i class="ph-star fs-base lh-base align-top"></i>
-      <i class="ph-star fs-base lh-base align-top"></i>
-      <i class="ph-star fs-base lh-base align-top"></i>
-      <i class="ph-star fs-base lh-base align-top"></i>
-      <span id="kvas_voted" class="text-muted ms-1">(49)</span>
-      <!-- /Рейтинг расширения в карточке -->
-    </li>
-    <!-- /Блок загружаемый js: Рейтинг расширения в карточке -->
-
-  </ul>
-
-  <!-- Общая информация о расширении в карточке -->
+  <!-- Основание карточки -->
+  <div class="card-footer d-sm-flex justify-content-sm-start align-items-sm-center">
 
 
-  <!-- Меню расширенное самого расширения в карточке -->
-  <div class="mt-1 mt-sm-0 zindex-auto ms-auto">
-    <div class="dropdown">
+
+    <!-- Общая информация о расширении в карточке -->
+    <ul class="list-inline mt-3">
+
+      <!-- Версия расширения в карточке -->
+      <li class="list-inline-item me-2 mb-2">
+        <span class="badge bg-success ">v0.1.3</span>
+      </li>
+      <!-- /Версия расширения в карточке -->
+
+      <!-- Блок загружаемый js: Рейтинг расширения в карточке -->
+      <li id="kvas_rating" class="list-inline-item mt-1">
+        <!-- Рейтинг расширения в карточке -->
+        <i class="ph-star fs-base lh-base align-top "></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top "></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <i class="ph-star fs-base lh-base align-top"></i>
+        <span id="kvas_voted" class="text-muted ms-1">(49)</span>
+        <!-- /Рейтинг расширения в карточке -->
+      </li>
+      <!-- /Блок загружаемый js: Рейтинг расширения в карточке -->
+
+    </ul>
+
+    <!-- Общая информация о расширении в карточке -->
+    <div class="dropdown ms-auto">
       <a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="ph-faders ps-1 pe-1 ph-1_3x"></i>
-<!--        <span>Настроить</span>-->
-<!--        <i class="ph-arrow-right ms-1 "></i>-->
+        <!--              <i class="ph-faders ps-1 pe-1 ph-1_3x"></i>-->
+        <div class=" pb-1 ">
+          <i class="ph-check text-success ph-1_3x rounded-pill p-1 bg-success bg-opacity-75 text-white"></i>
+        </div>
+        <!--        <i class="ph-arrow-right ms-1 "></i>-->
       </a>
       <div class="dropdown-menu dropdown-menu-end " style="">
         <a href="./pages/library/kvas/services/services.html" class="dropdown-item">
@@ -160,9 +164,7 @@
 
       </div>
     </div>
+
   </div>
-  <!-- /Меню расширенное самого расширения в карточке -->
-
-
+  <!-- Основание карточки -->
 </div>
-<!-- Основание карточки -->

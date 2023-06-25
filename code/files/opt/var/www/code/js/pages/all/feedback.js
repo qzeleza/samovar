@@ -12,6 +12,7 @@ class FeedBack {
     sendFeedBack() {
 
         // const error_mess = 'Поле обязательно для заполнения';
+        // https://ned.im/noty/#/options
         let notyConfirm = new Noty({
             text: "" +
                 '<div class="ps-3 pb-1 form-validate">' +

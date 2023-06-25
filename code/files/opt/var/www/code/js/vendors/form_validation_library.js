@@ -173,6 +173,6 @@ const FormValidation = function() {
 // ------------------------------
 
 // document.addEventListener('DOMContentLoaded', function() {
-$(document).on("appReady", function() {
-    FormValidation.init();
-});
+// $(document).on("appReady", function() {
+//
+// });

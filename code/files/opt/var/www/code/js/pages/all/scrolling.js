@@ -19,6 +19,8 @@ const Scrolling = function () {
         scrollContent.animate({
             scrollTop: target.offset().top - scrollContent.offset().top + scrollContent.scrollTop()
         }, 1000);
+        scrollPointers.find('a').removeClass('active')
+        $(this).addClass('active');
 
     }
     //
@@ -77,7 +79,7 @@ const Scrolling = function () {
 
 // Загружаем данные только после загрузки loader.js
 // который отвечает за загрузку данных из других файлов в один
-$(document).on("appReady", function() {
-    Scrolling.init();
+// $(document).on("appReady", function() {
 
-});
+
+// });

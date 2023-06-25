@@ -962,10 +962,7 @@ const Tooltips = function () {
 
 // Загружаем данные только после загрузки loader.js
 // который отвечает за загрузку данных из других файлов в один
-$(document).on("appReady", function() {
-    App.initCore();
-    Tooltips.init();
-    App.initAfterLoad();
-    Tooltips.initTooltips();
-});
+// $(document).on("appReady", function() {
+
+// });
 

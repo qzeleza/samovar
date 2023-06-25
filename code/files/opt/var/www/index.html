@@ -31,18 +31,11 @@
 		<!-- /Файлы JS скриптов -->
 
 		<!-- Скрипты для index.html -->
-		<script src="code/js/pages/index/loader.js"></script>
+<!--		<script src="code/js/pages/all/loader.js"></script>-->
+		<script src="code/js/pages/library/builder.js"></script>
+
 		<!-- Общие скрипты для всех страниц -->
-		<script src="code/js/vendors/form_validation_library.js"></script>
-		<script src="code/js/vendors/form_validation_styles.js"></script>
-		<script src="code/js/pages/all/apps.js"></script>
-		<script src="code/js/pages/all/feedback.js"></script>
-		<script src="code/js/pages/all/configurator.js"></script>
-		<script src="code/js/pages/all/scrolling.js"></script>
-		<script src="code/js/pages/index/ratings.js"></script>
-		<script src="code/js/pages/index/actions.js"></script>
-
-
+<!--		<script src="code/js/pages/all/configurator.js"></script>-->
 		<!-- /Файлы скриптов JS для отрисовки темы -->
 
 		<!-- Файлы поддержки иконок  -->
@@ -72,35 +65,31 @@
 				<!-- Заголовок страницы -->
 				<div class="page-header page-header-light border ">
 
+					<!-- Блок заголовка страницы -->
 					<div class=" d-lg-flex d-none d-lg-block ps-3 pt-1 pb-1">
+
+						<!--  Основной заголовок страницы и кнопка вызова правого меню -->
 						<div class="d-flex justify-content-between align-items-center w-100">
-							<div class="page-title">
-								<div class="display-7 text-uppercase fw-bold">
-									Библиотека
-								</div>
-								<div class="text-muted lift-up-5">Включает в себя, те инструменты, которые востребованы
-									пользователями<br> роутеров Keenetic и которые, по тем или
-									иным причинам, не реализованы пока в основной прошивке.
-								</div>
-							</div>
+
+							<!--  Основной заголовок страницы -->
+							<div id="page_header" class="page-title"></div>
+							<!--  /Основной заголовок страницы -->
 
 							<!-- Кнопка вызова правого меню -->
 							<div id="right_call_button" class="position-absolute btn-outline-success top-0 end-0 pe-5 pt-4 "></div>
 							<!-- /Кнопка вызова правого меню -->
 
 						</div>
+						<!--  /Основной заголовок страницы и кнопка вызова правого меню -->
+
 					</div>
+					<!-- Блок заголовка страницы -->
 
 					<!-- Путь к текущей странице -->
-					<div class="page-header-content border-top border-top-primary border-top-width-1">
-						<div class="breadcrumb ms-3">
-
-							<a href="#" class="breadcrumb-item text-uppercase py-2">Самовар</a>
-							<span class="breadcrumb-item py-2">Расширения</span>
-
-						</div>
-					</div>
+					<div id="page_breadcrumb" class="page-header-content border-top border-top-primary border-top-width-1"></div>
 					<!-- /Путь к текущей странице -->
+
+					<!-- /Блок заголовка страницы -->
 
 				</div>
 				<!-- /Заголовок страницы -->
@@ -115,13 +104,7 @@
 						<div class="row">
 
 							<!-- Окно основное -->
-							<div class="main-card">
-
-								<!-- Окно карточки о расширении  -->
-								<div id="app_kvas_card" class="card"></div>
-								<!-- /Окно карточки о расширении  -->
-
-							</div>
+							<div id="app_kvas_card" class="main-card"></div>
 							<!-- /Окно основное -->
 
 						</div>
@@ -133,11 +116,21 @@
 				</div>
 				<!-- /Внутреннее содержимое страницы -->
 
+				<!-- Кнопка возврата к верху страницы -->
+				<div class="btn-to-top">
+					<button class="btn btn-secondary btn-icon rounded-pill" type="button">
+						<i class="ph-arrow-up"></i>
+					</button>
+				</div>
+				<!-- /Кнопка возврата к верху страницы -->
+
 			</div>
 			<!-- /Основной контейнер страницы -->
 
 		</div>
 		<!-- Содержание страницы -->
+
+		<!-- МОДАЛЬНЫЕ ФОРМЫ ДЛЯ КОНКРЕТНОЙ СТРАНИЦЫ -->
 
 		<!-- Блок загружаемый js: модальные окна для показа истории по Квасу -->
 		<div id="kvas_history" class="modal fade" tabindex="-1"></div>
@@ -147,10 +140,19 @@
 		<div id="kvas_preview" class="modal fade" tabindex="-1"></div>
 		<!-- Блок загружаемый js: модальные окна для показа видео по Квасу -->
 
+		<!-- /МОДАЛЬНЫЕ ФОРМЫ ДЛЯ КОНКРЕТНОЙ СТРАНИЦЫ -->
+
+
+
+		<!-- ВНИМАНИЕ! НЕ УДАЛЯТЬ, ТАК КАК ЭТО ОКНА ОБЩИЕ ДЛЯ ВСЕХ СТРАНИЦ -->
+
 		<!-- Блок загружаемый js: модальные окна для запросов на удаление Самовара -->
 		<div id="delete_simple" class="modal fade " tabindex="-1" aria-labelledby="delete_simple_label" aria-hidden="true"></div>
 		<div id="delete_full" class="modal fade " tabindex="-1" aria-labelledby="delete_full_label" aria-hidden="true"></div>
 		<!-- /Блок загружаемый js: модальные окна для запросов на удаление Самовара -->
+
+		<!-- /ВНИМАНИЕ! НЕ УДАЛЯТЬ, ТАК КАК ЭТО ОКНА ОБЩИЕ ДЛЯ ВСЕХ СТРАНИЦ -->
+
 
 	</body>
 	<!-- /Тело проекта  -->

@@ -56,6 +56,7 @@ class Rating {
                     "<span class='pb-2'>Поставить оценку повторно можно, лишь для следующей версии приложения.</span>" +
                 "</div>";
 
+            // https://ned.im/noty/#/options
             new Noty({
                 text: html,
                 closeWith: ['button', 'click'],
@@ -70,6 +71,7 @@ class Rating {
             const key = this.storageKey;
             const rating = this.index;
             // отправляем данные при первой оценке
+            // https://ned.im/noty/#/options
             let notyConfirm = new Noty({
                 text:   '<div class="pt-3 ps-3 pe-1 pb-1">' +
                     '<h4 class="mb-3">Спасибо за Вашу оценку ('+ this.rating + '/' + this.stars.length + ')</h4>' +
@@ -106,9 +108,8 @@ class Rating {
     }
 }
 
-$(document).on("appReady", function() {
+// $(document).on("appReady", function() {
 
-    const kvas = new Rating('kvas_rating', 'Квас', 'v1.1.3' );
 
     // Убираем в рабочей версии и добавляем при обновлении пакетов
     // samovar.clearRating();
@@ -116,4 +117,4 @@ $(document).on("appReady", function() {
 
 
 
-});
+// });
