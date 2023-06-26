@@ -212,12 +212,15 @@ function buildMainTemplatePage(root){
     pageLoader.addModule('#right_panel',root + 'pages/all/modules/right_panel.html',{
         '#logo_samovar_color':{src: root + 'assets/images/logo/logo-samovar-color.svg'},
     });
+
+    pageLoader.addModule('#samovar_history', 'pages/library/modules/samovar/history.html');
     pageLoader.addModule('#delete_simple',root + 'pages/all/modals/simple_del.html');
     pageLoader.addModule('#delete_full',root + 'pages/all/modals/full_del.html');
 
     pageLoader.addScript(root + 'code/js/pages/all/apps.js');
     pageLoader.addScript(root + 'code/js/pages/all/configurator.js');
     // pageLoader.addScript(root + 'code/js/pages/all/select2.js');
+    pageLoader.addScript(root + 'code/js/pages/all/scrolling.js');
     pageLoader.addScript(root + 'code/js/pages/all/form_validation_library.js');
     pageLoader.addScript(root + 'code/js/pages/all/ratings.js');
     pageLoader.addScript(root + 'code/js/pages/all/feedback.js');

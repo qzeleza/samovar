@@ -20,7 +20,9 @@
         <img id="logo_samovar_color" src="" width="100" height="100" alt="">
       </a>
       <div class="mb-0 display-7">САМОВАР</div>
-      <div class="fw-semibold ps-1 mt-0">Текущая версия 0.0.1</div>
+      <a href="#" data-bs-toggle="modal" data-bs-target="#samovar_history">
+        <div class="fw-semibold ps-1 mt-0">Текущая версия 0.0.1</div>
+      </a>
       <!-- Блок загружаемый js: Рейтинг расширения в карточке -->
       <li id="samovar_rating" class="list-inline-item mt-1 mb-2 ps-4">
         <!-- Рейтинг расширения в карточке -->
@@ -57,11 +59,11 @@
     <!-- /Вкладки правого меню -->
 
     <!-- Содержание вкладок Самовара -->
-    <div class="tab-content offcanvas-body ">
+    <div class="tab-content offcanvas-body p-0">
 
       <!-- Содержание вкладки Настроек Самовара -->
       <div class="tab-pane offcanvas-body fade show active" id="bottom-justified-tab1">
-        <div class="form-check form-switch pb-3">
+        <div class="form-check form-switch pb-3 pt-2">
           <input type="checkbox" class="form-check-input" id="samovar_tooltip" checked="">
           <label class="form-check-label" for="samovar_tooltip">Всплывающие подсказки</label>
         </div>
@@ -116,10 +118,18 @@
 
         <div class="list-group list-group-borderless ">
 
+          <div class="bg-light text-muted py-2 px-3">Общее</div>
+
           <a href="#" id="send_feedback" class="list-group-item list-group-item-action d-flex align-items-start">
             <i class="ph-chat-text me-3 mt-1 ph-1_3x"></i>
             Отправить отзыв
           </a>
+          <a href="#" class="list-group-item list-group-item-action d-flex align-items-start" data-bs-toggle="modal" data-bs-target="#samovar_history">
+            <i class="ph-clock me-3 mt-1 ph-1_3x"></i>
+            История версий
+          </a>
+          <div class="bg-light text-muted py-2 px-3">Удаление</div>
+
           <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#delete_simple">
 <!--            <div class="d-flex w-100 justify-content-between align-items-center">-->
                 <i class="ph-lightning ph-1_3x "></i>

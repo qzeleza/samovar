@@ -21,8 +21,8 @@ $(document).ready(function() {
         pageLoader.addModule('#page_header', 'pages/library/modules/header.html');
         pageLoader.addModule('#page_breadcrumb', 'pages/library/modules/breadcrumb.html');
         pageLoader.addModule('#app_kvas_card', 'pages/library/modules/card.html');
-        pageLoader.addModule('#kvas_history', 'pages/library/modules/history.html');
-        pageLoader.addModule('#kvas_preview', 'pages/library/modules/preview.html');
+        pageLoader.addModule('#kvas_history', 'pages/library/modules/kvas/history.html');
+        pageLoader.addModule('#kvas_preview', 'pages/library/modules/kvas/preview.html');
 
         pageLoader.addScript('code/js/pages/all/select2.js');
 
