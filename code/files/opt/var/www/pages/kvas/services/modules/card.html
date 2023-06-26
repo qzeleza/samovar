@@ -114,14 +114,14 @@
         <!-- Колонка Выбор VPN сервиса -->
         <div class="col-12 ">
 
-          <div class="">
-            <div class="pt-1 mb-2 me-2 d-flex ">
+          <div class="bg-indigo bg-opacity-20 pb-2">
+            <div class="pt-1 me-2 d-flex ">
 
               <div class="flex-fill ms-4 mt-3">
-                <h5 class="fw-bold ">Основные службы</h5>
+                <h3 class=" ">Основные службы</h3>
                 <span class="text-muted lift-up-15">
-																		Ниже перечислены все службы, которые участвуют в работе Кваса.
-																</span>
+                  Ниже перечислены все службы, которые участвуют в работе Кваса.
+                </span>
               </div>
 
               <!-- Кнопка "Открыть/Закрыть все" -->
@@ -196,7 +196,7 @@
                           <!-- Список выбора VPN сервиса -->
 
                           <div class="ms-auto me-2 lift-down-10" data-bs-popup="tooltip"  data-bs-placement="auto" data-bs-original-title="Выберите VPN из списка">
-                            <select id="collapse-select" class="form-control select2 wmin-200 text-center">
+                            <select id="collapse-select" class="form-control select text-center"  data-width="200" >
                               <option value="V1">VPN-1</option>
                               <option value="V2">VPN-2</option>
                               <option value="SSR-1" selected="selected">Shadowsocks-1</option>
@@ -457,7 +457,7 @@
                             <h6 class="mt-1 mb-0">Тип DNS сервера</h6>
                           </a>
                           <div class="ms-auto me-3 mb-0 lift-down-10">
-                            <select class="form-control select2" data-width="450" data-minimum-results-for-search="Infinity">
+                            <select class="form-control select" data-width="150"  data-minimum-results-for-search="Infinity">
                               <option value="AZ">AdGuard</option>
                               <option value="CO">dnsmasq</option>
                             </select>
@@ -755,7 +755,7 @@
                             <h6 class="mt-1 mb-0">Проверяемый домен/IP</h6>
                           </a>
                           <div class="ms-auto me-3 lift-down-10">
-                            <select class="form-control select2" data-width="450" data-minimum-results-for-search="Infinity">
+                            <select class="form-control select " data-width="150" data-minimum-results-for-search="Infinity">
                               <option value="2ip.ru">2ip.ru</option>
                               <option value="122.44.11.2">122.44.11.2</option>
                             </select>

@@ -12,14 +12,11 @@ $(document).ready(function() {
         // Добавление дополнительных модулей
         const pageLoader = buildMainTemplatePage(root);
 
-        pageLoader.addModule('#page_header', root + 'pages/kvas/services/modules/header.html');
-        pageLoader.addModule('#page_breadcrumb', root + 'pages/kvas/services/modules/breadcrumb.html');
-        pageLoader.addModule('#app_kvas_card', root + 'pages/kvas/services/modules/card.html');
-        pageLoader.addModule('#modal_form_ssr_data', root + 'pages/kvas/services/modules/ssr_setup.html');
+        pageLoader.addModule('#page_header', root + 'pages/kvas/reports/modules/header.html');
+        pageLoader.addModule('#page_breadcrumb', root + 'pages/kvas/reports/modules/breadcrumb.html');
+        pageLoader.addModule('#app_kvas_card', root + 'pages/kvas/reports/modules/card.html');
 
-        // Добавление дополнительных функций
         pageLoader.addScript(root + 'code/js/pages/all/scrolling.js');
-        pageLoader.addScript(root + "code/js/pages/services/accordion.js");
         pageLoader.addScript(root + 'code/js/pages/all/select2.js');
 
         pageLoader.loadPageModules()
@@ -28,7 +25,7 @@ $(document).ready(function() {
                 $('#sidebar_menu .nav-group-sub').addClass('collapse show')
                 $('#sidebar_kvas_menu').addClass('collapsed').addClass('nav-item-open');
 
-                $('#sidebar_kvas_services').addClass('active');
+                $('#sidebar_kvas_reports').addClass('active');
 
                 // Установка триггера для других js файлов
                 $(document).trigger("appReady");

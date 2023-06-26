@@ -49,6 +49,6 @@ let GuestList = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
-    GuestList.init();
-});
+// document.addEventListener('DOMContentLoaded', function() {
+GuestList.init();
+// });

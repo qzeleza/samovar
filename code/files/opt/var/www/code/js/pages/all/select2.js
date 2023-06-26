@@ -20,7 +20,7 @@ var Select2Selects = function() {
     // Select2 examples
     var _componentSelect2 = function() {
         if (!$().select2) {
-            console.warn('Warning - select2.min.js is not loaded.');
+            console.warn('Внимание - select2.min.js не загружен!');
             return;
         }
 
@@ -284,6 +284,6 @@ var Select2Selects = function() {
 // ------------------------------
 
 // document.addEventListener('DOMContentLoaded', function() {
-$(document).on("appReady", function() {
-    Select2Selects.init();
-});
+// $(document).on("appReady", function() {
+Select2Selects.init();
+// });

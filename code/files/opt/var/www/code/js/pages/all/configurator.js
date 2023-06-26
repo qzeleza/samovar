@@ -156,6 +156,7 @@ const themeSwitcher = function() {
     }
 }();
 
+themeSwitcher.init();
 
 // Initialize module
 // ------------------------------

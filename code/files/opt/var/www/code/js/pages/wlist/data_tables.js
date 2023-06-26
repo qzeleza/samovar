@@ -579,16 +579,16 @@ const DatatableSelect = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
-    DatatableSelect.init();
-});
+// document.addEventListener('DOMContentLoaded', function() {
+DatatableSelect.init();
+// });
 
-$(document).ready(function() {
+// $(document).ready(function() {
 
+$('#vpn_item_header_1').trigger('click');
+setTimeout(function() {
     $('#vpn_item_header_1').trigger('click');
-    setTimeout(function() {
-        $('#vpn_item_header_1').trigger('click');
-    }, 600); // 3000 milliseconds = 3 seconds
+}, 600); // 3000 milliseconds = 3 seconds
 
-});
+// });
 

@@ -39,7 +39,7 @@
 
       </div>
       <!-- Блок пунктов бокового меню -->
-      <ul class="nav nav-sidebar" data-nav-type="accordion">
+      <ul id="sidebar_menu" class="nav nav-sidebar" data-nav-type="accordion">
 
         <!-- Название меню -->
         <li class="nav-item-header">
@@ -48,7 +48,7 @@
         </li>
         <!-- /Название меню -->
         <li class="nav-item">
-          <a href="./index.html" class="nav-link active ">
+          <a id="lib_link" href="" class="nav-link">
             <i class="ph-book-open ph-1_5x mt-1"></i>
             <div class="sidebar-resize-hide">
               <span class="text-uppercase fs-5">Библиотека</span>
@@ -59,7 +59,7 @@
 
         </li>
 
-        <li class="nav-item-divider mt-0"></li>
+        <li class="nav-item-divider mt-3"></li>
 
         <!-- Название меню -->
         <li class="nav-item-header ">
@@ -68,34 +68,37 @@
         </li>
         <!-- /Название меню -->
 
-        <li class="nav-item nav-item-submenu ">
+        <li id="sidebar_kvas_menu" class="nav-item nav-item-submenu ">
           <a href="#" class="nav-link">
             <i class="ph-shield-chevron lift-down-5"></i>
-            <span class="text-uppercase fs-5">Квас
+            <span class="text-uppercase fs-5">
+              Квас
               <!--									<span class="d-block fw-normal opacity-50 tex fs-base">Белый список</span>-->
-									</span>
+            </span>
           </a>
           <!-- Пункты меню плугина -->
-          <ul class="nav-group-sub collapse">
+          <ul class="nav-group-sub">
             <li class="nav-item">
-              <a href="pages/kvas/services/services.html" class="nav-link fw-light">
+              <a id="sidebar_kvas_services" href="" class="nav-link fw-light">
                 <i class="ph-stack"> </i>
                 Службы
               </a>
             </li>
-            <li class="nav-item"><a href="pages/kvas/lists/white_list.html" class="nav-link fw-light">
+            <li class="nav-item">
+              <a  id="sidebar_kvas_wlist" href="" class="nav-link fw-light">
               <i class="ph-list-checks"></i>
               Белый список</a></li>
             <!--									<li class="nav-item-divider"></li>-->
-            <li class="nav-item nav-item-submenu">
-              <a href="#" class="nav-link">
-                <i class="ph-terminal"></i>
-                Отладка
+<!--            <li class="nav-item nav-item-submenu">-->
+            <li class="nav-item">
+              <a  id="sidebar_kvas_reports"  href="#" class="nav-link">
+                <i class="ph-notepad"></i>
+                Отчеты
               </a>
-              <ul class="nav-group-sub collapse " style="">
-                <li class="nav-item"><a href="#" class="nav-link">Система</a></li>
-                <li class="nav-item"><a href="pages/kvas/debugs/debug.html" class="nav-link">Расширение</a></li>
-              </ul>
+<!--              <ul class="nav-group-sub collapse " style="">-->
+<!--                <li class="nav-item"><a href="#" class="nav-link">Система</a></li>-->
+<!--                <li class="nav-item"><a href="pages/kvas/debugs/debug.html" class="nav-link">Расширение</a></li>-->
+<!--              </ul>-->
             </li>
             <li class="nav-item-divider"></li>
           </ul>

@@ -81,5 +81,6 @@ const Scrolling = function () {
 // который отвечает за загрузку данных из других файлов в один
 // $(document).on("appReady", function() {
 
+Scrolling.init();
 
 // });

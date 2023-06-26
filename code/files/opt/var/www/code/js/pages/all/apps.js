@@ -249,9 +249,9 @@ const App = function () {
                     }
 
                     // Accordion
-                    if (link.closest(`.${navContainerClass}`).getAttribute('data-nav-type') == 'accordion') {
+                    if (link.closest(`.${navContainerClass}`).getAttribute('data-nav-type') === 'accordion') {
                         for (let sibling of link.parentNode.parentNode.children) {
-                            if (sibling != link.parentNode && sibling.classList.contains(navItemOpenClass)) {
+                            if (sibling !== link.parentNode && sibling.classList.contains(navItemOpenClass)) {
                                 sibling.querySelectorAll(`:scope > .${navSubmenuClass}`).forEach(function(submenu) {
                                     new bootstrap.Collapse(submenu).hide();
                                     sibling.classList.remove(navItemOpenClass);
@@ -517,7 +517,7 @@ const App = function () {
 
                     // When submenu is shown, hide others in all siblings
                     for (let sibling of link.parentNode.parentNode.children) {
-                        if (sibling != link.parentNode) {
+                        if (sibling !== link.parentNode) {
                             sibling.classList.remove(showClass);
                             sibling.querySelectorAll(`.${showClass}`).forEach(function(submenu) {
                                 submenu.classList.remove(showClass);
@@ -530,7 +530,7 @@ const App = function () {
             // Hide all levels when parent dropdown is closed
             document.querySelectorAll(`.${menuClass}`).forEach(function(link) {
                 if(!link.parentElement.classList.contains(submenuClass)) {
-                    link.parentElement.addEventListener('hidden.bs.dropdown', function(e) {
+                    link.parentElement.addEventListener('hidden.bs.dropdown', function() {
                         link.querySelectorAll(`.${menuClass}.${showClass}`).forEach(function(children) {
                             children.classList.remove(showClass);
                         });
@@ -734,7 +734,7 @@ const Tooltips = function () {
 
 		// onShow event
 		if(onShowTooltipElement) {
-			const onShowTooltip = new bootstrap.Tooltip(onShowTooltipElement, {
+			new bootstrap.Tooltip(onShowTooltipElement, {
 				title: 'Tooltip title',
 				trigger: 'click'
 			});
@@ -746,7 +746,7 @@ const Tooltips = function () {
 
 		// onShown event
 		if(onShownTooltipElement) {
-			const onShownTooltip = new bootstrap.Tooltip(onShownTooltipElement, {
+			new bootstrap.Tooltip(onShownTooltipElement, {
 				title: 'Tooltip title',
 				trigger: 'click'
 			});
@@ -758,7 +758,7 @@ const Tooltips = function () {
 
 		// onHide event
 		if(onHideTooltipElement) {
-			const onHideTooltip = new bootstrap.Tooltip(onHideTooltipElement, {
+			new bootstrap.Tooltip(onHideTooltipElement, {
 				title: 'Tooltip title',
 				trigger: 'click'
 			});
@@ -770,7 +770,7 @@ const Tooltips = function () {
 
 		// onHidden event
 		if(onHiddenTooltipElement) {
-			const onHiddenTooltip = new bootstrap.Tooltip(onHiddenTooltipElement, {
+			new bootstrap.Tooltip(onHiddenTooltipElement, {
 				title: 'Tooltip title',
 				trigger: 'click'
 			});
@@ -912,6 +912,11 @@ const Tooltips = function () {
         }
     }
 }();
+
+App.initCore();
+App.initAfterLoad();
+Tooltips.init();
+Tooltips.initTooltips();
 
 // шаблон для создания класса
 // const templete = function () {

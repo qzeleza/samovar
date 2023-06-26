@@ -117,11 +117,11 @@ const Services = function () {
 // ------------------------------
 
 // When content is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    Services.init();
-});
-
-// When page is fully loaded
-window.addEventListener('load', function() {
-
-});
+// document.addEventListener('DOMContentLoaded', function() {
+Services.init();
+// });
+//
+// // When page is fully loaded
+// window.addEventListener('load', function() {
+//
+// });
