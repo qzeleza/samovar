@@ -6,35 +6,34 @@
 // переход к главам и активация соответствующего пункта в оглавлении
 // работает по принципу переход по индексу начиная сверху вниз
 //
-const Scrolling = function () {
+class Scrolling {
+    constructor(id) {
+        this.scrollContent = $(id + ' .scroll-content');
+        this.scrollPointers = $(id + ' .nav.nav-scrollspy li');
+        this.contentElements = $(id + ' .scroll-content > div');
 
-    let scrollContent;
-    let scrollPointers ;
-    let contentElements ;
-
-    const smoothScrolling = function(event) {
-        event.preventDefault();
-        let index = $(this).closest('li').index();
-        let target = contentElements.eq(index);
-        scrollContent.animate({
-            scrollTop: target.offset().top - scrollContent.offset().top + scrollContent.scrollTop()
-        }, 1000);
-        scrollPointers.find('a').removeClass('active')
-        $(this).addClass('active');
-
+        $(id + ' .nav.nav-scrollspy .nav-link').on('click', (event) => {this.smoothScrolling(event)});
+        $(id + ' .scroll-content').on('scroll', () => {this.scrollContentFunc()});
     }
-    //
-    //  Функция для переключения фокуса ввода при наведении мыши
-    //  на соответствующий параграф внутри элемента прокрутки
-    //
-    const scrollContentFunc = function() {
 
-        contentElements.each(function(index) {
-            let content = $(this);
+    smoothScrolling(event) {
+        event.preventDefault();
+        let index = $(event.target).closest('li').index();
+        let target = this.contentElements.eq(index);
+        this.scrollContent.animate({
+            scrollTop: target.offset().top - this.scrollContent.offset().top + this.scrollContent.scrollTop()
+        }, 1000);
+        this.scrollPointers.find('a').removeClass('active')
+        $(event.target).addClass('active');
+    }
+
+    scrollContentFunc() {
+        this.contentElements.each((index, element) => {
+            let content = $(element);
 
             content.on('mouseenter', () => {
                 let $pointers, pointer, subPointers;
-                $pointers = scrollPointers.find('a');
+                $pointers = this.scrollPointers.find('a');
 
                 $pointers.removeClass('active');
                 pointer = $pointers.eq(index);
@@ -42,45 +41,14 @@ const Scrolling = function () {
                 if (subPointers === 0 ){
                     pointer.addClass('active');
                 }
-
-
-
             });
             content.on('mouseleave', () => {
                 let $pointers, pointer, ind;
-                $pointers = scrollPointers.find('a');
-                ind =$(this).index();
+                $pointers = this.scrollPointers.find('a');
+                ind =$(element).index();
                 pointer = $pointers.eq(ind);
                 pointer.removeClass('active');
             });
-
         });
     }
-
-
-
-    //
-    // Return objects assigned to module
-    //
-
-    return {
-        init: function() {
-            scrollContent = $('.scroll-content');
-            scrollPointers = $('.nav.nav-scrollspy li');
-            contentElements = $('.scroll-content > div');
-
-            $('.nav.nav-scrollspy .nav-link').on('click', smoothScrolling);
-            scrollContent.on('scroll',scrollContentFunc);
-        },
-    }
-
-}();
-
-
-// Загружаем данные только после загрузки loader.js
-// который отвечает за загрузку данных из других файлов в один
-// $(document).on("appReady", function() {
-
-Scrolling.init();
-
-// });
+}

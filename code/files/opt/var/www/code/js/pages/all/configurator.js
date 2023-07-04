@@ -37,7 +37,7 @@ const themeSwitcher = function() {
 
         // Changes the active radiobutton
         function indicateTheme(mode) {
-            for(var i = colorscheme.length; i--; ) {
+            for(let i = colorscheme.length; i--; ) {
 
                 if(colorscheme[i].value === mode) {
                     colorscheme[i].checked = true;
@@ -120,7 +120,7 @@ const themeSwitcher = function() {
 
     // Direction
     const layoutDirection = function() {
-        var dirSwitch = document.querySelector('[name="layout-direction"]');
+        let dirSwitch = document.querySelector('[name="layout-direction"]');
 
         if (dirSwitch) {
             dirSwitch.checked = localStorage.getItem("direction") !== null && localStorage.getItem("direction") === "rtl";

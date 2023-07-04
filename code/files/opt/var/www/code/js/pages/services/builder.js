@@ -3,40 +3,46 @@
 // ------------------------------
 // Загрузка данные, используемые только для index.html
 
-const root = '../../../';
+
+// const root = '';
 
 // Файл основной страницы HTML
 $(document).ready(function() {
 
-    $.getScript(root + "code/js/pages/all/1Loader.js", function (){
-        // Добавление дополнительных модулей
-        const pageLoader = buildMainTemplatePage(root);
+    const root = '../../../';
 
-        pageLoader.addModule('#page_header', root + 'pages/kvas/services/modules/header.html');
-        pageLoader.addModule('#page_breadcrumb', root + 'pages/kvas/services/modules/breadcrumb.html');
-        pageLoader.addModule('#app_kvas_card', root + 'pages/kvas/services/modules/card.html');
-        pageLoader.addModule('#modal_form_ssr_data', root + 'pages/kvas/services/modules/ssr_setup.html');
+    try {
 
-        // Добавление дополнительных функций
-        pageLoader.addScript(root + 'code/js/pages/all/scrolling.js');
-        pageLoader.addScript(root + "code/js/pages/services/accordion.js");
-        pageLoader.addScript(root + 'code/js/pages/all/select2.js');
+        const servicePageLoader = buildMainTemplatePage(root);
 
-        pageLoader.loadPageModules()
-            .then(() => pageLoader.loadJScripts())
-            .then(() => {
-                $('#sidebar_menu .nav-group-sub').addClass('collapse show')
-                $('#sidebar_kvas_menu').addClass('collapsed').addClass('nav-item-open');
+        servicePageLoader.add({id:'#page_header', file: root + 'pages/kvas/services/modules/header.html'});
+        servicePageLoader.add({id:'#page_breadcrumb', file: root + 'pages/kvas/services/modules/breadcrumb.html'});
+        servicePageLoader.add({id:'#app_kvas_card', file: root + 'pages/kvas/services/modules/card.html'});
+        servicePageLoader.add({id:'#modal_form_ssr_data', file: root + 'pages/kvas/services/modules/ssr_setup.html'});
 
-                $('#sidebar_kvas_services').addClass('active');
+        servicePageLoader.add(root + 'code/js/pages/all/select2.js');
+        servicePageLoader.add(root + "code/js/pages/services/accordion.js");
 
-                // Установка триггера для других js файлов
-                $(document).trigger("appReady");
-            })
-            .catch((error) => {
-                // Обработка ошибок при загрузке модулей и скриптов
-                console.error(error);
-            });
-    });
+        // Загрузка всех данных из стека вызовов
+        servicePageLoader.load().then(() => {
+
+            // открываем в боковом меню пункт Сервисы
+            $('#sidebar_menu .nav-group-sub').addClass('collapse show')
+            $('#sidebar_kvas_menu').addClass('collapsed').addClass('nav-item-open');
+            $('#sidebar_kvas_services').addClass('active');
+
+            // Установка триггера для других js файлов
+            $(document).trigger("appReady");
+
+            // console.log('Все данные загружены');
+
+        }).catch((error) => {
+            console.error(error);
+        });
+
+
+    } catch(error){
+        console.error(error);
+    }
 
 });

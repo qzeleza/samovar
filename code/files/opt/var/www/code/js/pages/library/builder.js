@@ -2,7 +2,7 @@
 // Устанавливаем в загрузку страницы
 // ------------------------------
 // Загрузка данные, используемые только для index.html
-
+const root = '';
 function addKvasEvents(){
 
     let appName = 'Квас';
@@ -14,28 +14,31 @@ function addKvasEvents(){
 // Файл основной страницы HTML
 $(document).ready(function() {
 
-    $.getScript("code/js/pages/all/1Loader.js", function (){
+    try {
         // Добавление дополнительных модулей
-        const pageLoader = buildMainTemplatePage('');
+        const libraryPageLoader = buildMainTemplatePage(root);
 
-        pageLoader.addModule('#page_header', 'pages/library/modules/header.html');
-        pageLoader.addModule('#page_breadcrumb', 'pages/library/modules/breadcrumb.html');
-        pageLoader.addModule('#app_kvas_card', 'pages/library/modules/card.html');
-        pageLoader.addModule('#kvas_history', 'pages/library/modules/kvas/history.html');
-        pageLoader.addModule('#kvas_preview', 'pages/library/modules/kvas/preview.html');
+        libraryPageLoader.add({id:'#page_header', file: root + 'pages/library/modules/header.html'});
+        libraryPageLoader.add({id:'#page_breadcrumb', file: root + 'pages/library/modules/breadcrumb.html'});
+        libraryPageLoader.add({id:'#app_kvas_card', file: root + 'pages/library/modules/card.html'});
+        libraryPageLoader.add({id:'#kvas_preview', file: root + 'pages/library/modules/kvas/preview.html'});
+        libraryPageLoader.add({id:'#kvas_history', file: root + 'pages/library/modules/kvas/history.html'});
 
-        pageLoader.addScript('code/js/pages/all/select2.js');
+        libraryPageLoader.add(root + 'code/js/pages/all/select2.js');
 
         // Добавление дополнительных функций
-        pageLoader.addCallback(addKvasEvents);
+        libraryPageLoader.add(addKvasEvents);
+        libraryPageLoader.add(() => {
+            new Scrolling('#kvas_history_list');
+        });
 
-        pageLoader.loadPageModules()
-            .then(() => pageLoader.loadJScripts())
+        libraryPageLoader.load()
             .then(() => {
 
                 // Установка пунктов левого меню - sidebar
                 // Выбираем пункт Библиотека
-                $('#lib_link').addClass('active')
+                $('#lib_link').addClass('active');
+                $('#sidebar_menu .nav-group-sub').addClass('collapse show')
 
                 // Установка триггера для других js файлов
                 $(document).trigger("appReady");
@@ -44,6 +47,8 @@ $(document).ready(function() {
                 // Обработка ошибок при загрузке модулей и скриптов
                 console.error(error);
             });
-    });
+    } catch(error){
+        console.error(error);
+    }
 
 });

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var Select2Selects = function() {
+let Select2Selects = function() {
 
 
     //
@@ -18,7 +18,7 @@ var Select2Selects = function() {
     //
 
     // Select2 examples
-    var _componentSelect2 = function() {
+    let _componentSelect2 = function() {
         if (!$().select2) {
             console.warn('Внимание - select2.min.js не загружен!');
             return;
@@ -52,9 +52,9 @@ var Select2Selects = function() {
 
         // Format icon
         function iconFormat(icon) {
-            var originalOption = icon.element;
+            let originalOption = icon.element;
             if (!icon.id) { return icon.text; }
-            var $icon = '<i class="ph-' + $(icon.element).data('icon') + '"></i>' + icon.text;
+            let $icon = '<i class="ph-' + $(icon.element).data('icon') + '"></i>' + icon.text;
 
             return $icon;
         }
@@ -96,7 +96,7 @@ var Select2Selects = function() {
         //
 
         // Data
-        var array_data = [
+        let array_data = [
             {id: 0, text: 'enhancement'},
             {id: 1, text: 'bug'},
             {id: 2, text: 'duplicate'},
@@ -120,7 +120,7 @@ var Select2Selects = function() {
         function formatRepo (repo) {
             if (repo.loading) return repo.text;
 
-            var markup = '<div class="select2-result-repository clearfix">' +
+            let markup = '<div class="select2-result-repository clearfix">' +
                 '<div class="select2-result-repository__avatar"><img src="' + repo.owner.avatar_url + '" /></div>' +
                 '<div class="select2-result-repository__meta">' +
                 '<div class="select2-result-repository__title">' + repo.full_name + '</div>';

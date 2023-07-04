@@ -1,3 +1,4 @@
+
 /* позволяет закрашивать часть звездочки для рейтинга */
 .card-body.scroll-content .border-bottom {
   margin-top: 30px;
@@ -73,10 +74,10 @@
 .sidebar-section .nav-sidebar .nav-item .nav-link i {
   transform: scale(1.5);
 }
-.sidebar-section .nav-sidebar .nav-item .nav-link.active {
-  padding-top: 15px;
-  padding-bottom: 12px;
-}
+/*.sidebar-section .nav-sidebar .nav-item .nav-link.active {*/
+  /*padding-top: 15px;*/
+  /*padding-bottom: 12px;*/
+/*}*/
 
 /* регулировка высоты каждого изх пунктов левого меню навигации */
 .nav-sidebar .nav-item a span span  {
@@ -103,7 +104,7 @@
 /* задаем высоту и цвет строки с логотипом*/
 .sidebar-logo {
   /*background-color: #004c69 !important;*/
-  height: calc(var(--spacer) * 4.7 + var(--icon-font-size));
+  height: calc(var(--spacer) * 4.9 + var(--icon-font-size));
   padding-bottom: 5px;
 }
 .bg-sidebar-logo {

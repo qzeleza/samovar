@@ -8,20 +8,19 @@ const root = '../../../';
 // Файл основной страницы HTML
 $(document).ready(function() {
 
-    $.getScript(root + "code/js/pages/all/1Loader.js", function (){
+    try {
         // Добавление дополнительных модулей
-        const pageLoader = buildMainTemplatePage(root);
+        const wlistPageLoader = buildMainTemplatePage(root);
 
-        pageLoader.addModule('#page_header', root + 'pages/kvas/wlist/modules/header.html');
-        pageLoader.addModule('#page_breadcrumb', root + 'pages/kvas/wlist/modules/breadcrumb.html');
-        pageLoader.addModule('#app_kvas_card', root + 'pages/kvas/wlist/modules/card.html');
+        wlistPageLoader.add({id:'#page_header', file: root + 'pages/kvas/wlist/modules/header.html'});
+        wlistPageLoader.add({id:'#page_breadcrumb', file: root + 'pages/kvas/wlist/modules/breadcrumb.html'});
+        wlistPageLoader.add({id:'#app_kvas_card', file: root + 'pages/kvas/wlist/modules/card.html'});
 
         // Добавление дополнительных функций
-        pageLoader.addScript(root + "code/js/pages/wlist/data_tables.js");
-        pageLoader.addScript(root + "code/js/pages/wlist/guest_nets.js");
+        wlistPageLoader.add(root + "code/js/pages/wlist/data_tables.js");
+        wlistPageLoader.add(root + "code/js/pages/wlist/guest_nets.js");
 
-        pageLoader.loadPageModules()
-            .then(() => pageLoader.loadJScripts())
+        wlistPageLoader.load()
             .then(() => {
                 // Закрываем пункты Кваса
                 $('#sidebar_menu .nav-group-sub').addClass('collapse show')
@@ -37,6 +36,9 @@ $(document).ready(function() {
                 console.error(error);
 
             });
-    });
+
+    } catch(error){
+        console.error(error);
+    }
 
 });

@@ -1,14 +1,14 @@
 /**
  * Класс для отправки POST-запросов
  */
-class PostRequest {
+class ServerRequester {
     /**
      * Конструктор класса
      * @param {string} url - URL для отправки запросов
      * @param {number} port - Номер порта для отправки запросов
      * @param {Object} headers - Заголовки для отправки запросов
      */
-    constructor(url, port, headers) {
+    constructor(url = '', port= 8166, headers = {}) {
         // Сохранение параметров в свойствах класса
         this.url = url;
         this.port = port;
@@ -72,7 +72,7 @@ class PostRequest {
      * @param {Object} data - Данные для проверки
      * @returns {boolean} - Результат проверки (true - данные корректны, false - данные некорректны)
      */
-    _validateData(data) {
+    validateData(data) {
         // Здесь можно добавить код для проверки входных данных
         // Например, проверить, что data является объектом и содержит необходимые ключи и значения
         // Если данные корректны, вернуть true, иначе вернуть false
@@ -86,11 +86,11 @@ class PostRequest {
      * @param {function} callback - Функция обратного вызова, в случае подучения данных
      * @returns {Object} - Результат запроса
      */
-    sendRequest(path, data= {}, callback = null) {
+    sendData(path, data= {}, callback = null) {
         let result;
         // Проверка входных данных
-        if (this._validateData(data)) {
-            // Если sendRequest была вызвана напрямую
+        if (this.validateData(data)) {
+            // Если sendData была вызвана напрямую
             // без использования очереди вызовов
             if (this.queue.length === 0) this.spinIndicatorNoty.show();
             // Отправка POST-запроса с помощью jQuery.ajax
@@ -131,11 +131,11 @@ class PostRequest {
 
     /**
      * Получение данных по ключу из кеша или с сервера
-     * @param {string} key - Ключ для получения данных в виде пути запроса данных на сервер, он одинаков path в sendRequest
+     * @param {string} key - Ключ для получения данных в виде пути запроса данных на сервер, он одинаков path в sendData
      * @param {boolean} [force=false] - Флаг принудительного обновления данных с сервера (true - обновить данные с сервера, false - использовать данные из кеша)
      * @returns {Object} - Данные по ключу
      */
-    async getData(key, force = false) {
+    async getDataFromQueue(key, force = false) {
         // Проверка корректности ключа
         if (typeof key !== 'string' || key.length === 0) {
             // Если ключ некорректен, вернуть null
@@ -153,7 +153,7 @@ class PostRequest {
             if (force) {
                 // Если установлен флаг принудительного обновления данных или в кеше нет данных по ключу,
                 // выполнить запрос к серверу и обновить данные в кеше
-                this.sendRequest(key, this.data[key]);
+                this.sendData(key, this.data[key]);
             }
             // Вернуть данные из кеша по ключу
             return this.cache[key];
@@ -172,9 +172,9 @@ class PostRequest {
      * @param {Object} data - Данные в виде JSON-структуры
      * @param {function} [callback] - Функция обратного вызова, которая будет вызвана после получения ответа от сервера
      */
-    addToQueue(path, data, callback) {
+    addRequestToQueue(path, data, callback) {
         // Добавление функции отправки запроса в очередь
-        this.queue.push(() => this.sendRequest(path, data, callback));
+        this.queue.push(() => this.sendData(path, data, callback));
     }
 
     /**
@@ -207,18 +207,18 @@ class PostRequest {
 
 // Пример общего применения
 
-// sendRequest.addToQueue('/api/v1/samovar/info');
-// sendRequest.addToQueue('/api/v1/samovar/info/version');
-// sendRequest.addToQueue('/api/v1/samovar/update');
-// sendRequest.executeQueue();
+// sendData.addToQueue('/api/v1/samovar/info');
+// sendData.addToQueue('/api/v1/samovar/info/version');
+// sendData.addToQueue('/api/v1/samovar/update');
+// sendData.executeQueue();
 //
-// const lib1_data = sendRequest.getData('/api/v1/samovar/info');
+// const lib1_data = sendData.getData('/api/v1/samovar/info');
 // $('exp_1').html(lib1_data['version']);
 //
-// const lib1_data = sendRequest.getData('/api/v1/samovar/info/version');
+// const lib1_data = sendData.getData('/api/v1/samovar/info/version');
 // $('exp_1').html(lib1_data['value']);
 //
-// const lib2_data = sendRequest.getData('/api/v1/samovar/update');
+// const lib2_data = sendData.getData('/api/v1/samovar/update');
 // $('exp_3').html(lib2_data['status']);
 
 
@@ -233,7 +233,7 @@ class PostRequest {
 // let newData = postRequest.getData('/path/to/data', true);
 
 // Пример использования вызова callback функции в postRequest
-// postRequest.sendRequest('/path/to/data', {}, (data) => {
+// postRequest.sendData('/path/to/data', {}, (data) => {
 //     console.log('Received data:', data);
 // });
 

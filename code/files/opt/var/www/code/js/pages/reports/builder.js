@@ -8,20 +8,22 @@ const root = '../../../';
 // Файл основной страницы HTML
 $(document).ready(function() {
 
-    $.getScript(root + "code/js/pages/all/1Loader.js", function (){
+    try {
         // Добавление дополнительных модулей
-        const pageLoader = buildMainTemplatePage(root);
+        const reportPageLoader = buildMainTemplatePage(root);
 
-        pageLoader.addModule('#page_header', root + 'pages/kvas/reports/modules/header.html');
-        pageLoader.addModule('#page_breadcrumb', root + 'pages/kvas/reports/modules/breadcrumb.html');
-        pageLoader.addModule('#app_kvas_card', root + 'pages/kvas/reports/modules/card.html');
+        reportPageLoader.add({id:'#page_header', file: root + 'pages/kvas/reports/modules/header.html'});
+        reportPageLoader.add({id:'#page_breadcrumb', file: root + 'pages/kvas/reports/modules/breadcrumb.html'});
+        reportPageLoader.add({id:'#app_kvas_card', file: root + 'pages/kvas/reports/modules/card.html'});
 
-        pageLoader.addScript(root + 'code/js/pages/all/scrolling.js');
-        pageLoader.addScript(root + 'code/js/pages/all/select2.js');
+        reportPageLoader.add(root + 'code/js/pages/all/select2.js');
+        reportPageLoader.add(() => {
+            new Scrolling('#report_list');
+        });
 
-        pageLoader.loadPageModules()
-            .then(() => pageLoader.loadJScripts())
+        reportPageLoader.load()
             .then(() => {
+
                 $('#sidebar_menu .nav-group-sub').addClass('collapse show')
                 $('#sidebar_kvas_menu').addClass('collapsed').addClass('nav-item-open');
 
@@ -34,6 +36,8 @@ $(document).ready(function() {
                 // Обработка ошибок при загрузке модулей и скриптов
                 console.error(error);
             });
-    });
+    } catch(error){
+        console.error(error);
+    }
 
 });
