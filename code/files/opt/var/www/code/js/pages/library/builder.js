@@ -6,9 +6,9 @@ const root = '';
 function addKvasEvents(){
 
     let appName = 'Квас';
-    let appVersion = '1.1.3';
-    new FeedBack('kvas_send_feedback', appName, appVersion)
-    new Rating('kvas_rating', appName, appVersion );
+    let appVersion = 'latest';
+    // new FeedBack('kvas_send_feedback', appName, appVersion)
+    // new Rating('kvas_rating', 'kvas', appVersion );
 
 }
 // Файл основной страницы HTML
@@ -39,6 +39,15 @@ $(document).ready(function() {
                 // Выбираем пункт Библиотека
                 $('#lib_link').addClass('active');
                 $('#sidebar_menu .nav-group-sub').addClass('collapse show')
+
+
+                new Rating('kvas_rating', 'kvas', "latest" );
+                // const router = new ServerRequester();
+                // router.send('')
+
+                // const apiPath = "/apps/api";
+                // const server = new ServerRequester('http://api.zeleza.ru', 51153);
+                // server.send(apiPath + '')
 
                 // Установка триггера для других js файлов
                 $(document).trigger("appReady");

@@ -67,7 +67,13 @@ async def add_rating():
     review = data.get('review')
     rating = data.get('rating')
     version = data.get('version')
-    if app_name and name and email and review and rating and version:
+
+    # проверяем передан ли номер версии программы
+    if not version or version == 'latest':
+        # если не передан, то находим крайнюю из тех что есть
+        version = db.session.query(db.func.max(Rating.version)).scalar()
+
+    if app_name and rating and version:
         new_rating = Rating(app_name, name, email, review, rating, version)
         db.session.add(new_rating)
         db.session.commit()
@@ -84,17 +90,23 @@ def get_rating():
         ratings = Rating.query.all()
         apps = {}
         for r in ratings:
-            if r.app_name not in apps:
-                apps[r.app_name] = []
-            apps[r.app_name].append(r.rating)
+            app_key = (r.app_name, r.version)
+            if app_key not in apps:
+                apps[app_key] = []
+            apps[app_key].append(r.rating)
         avg_ratings = {}
-        for app_name, app_ratings in apps.items():
-            avg_ratings[app_name] = math.ceil(sum(app_ratings) / len(app_ratings))
+        for app_key, app_ratings in apps.items():
+            avg_ratings[app_key] = {
+                'avg_rating': math.ceil(sum(app_ratings) / len(app_ratings)),
+                'num_votes': len(app_ratings)
+            }
 
+        sorted_avg_ratings = sorted(avg_ratings.items(), key=lambda x: (x[0][0], x[0][1]), reverse=True)
 
-        return render_template(rating_html_template, ratings=avg_ratings)
+        return render_template(rating_html_template, ratings=sorted_avg_ratings)
     else:
         return jsonify({'success': False})
+
 
 # Маршрут для получения подсчитанного рейтинга для конкретного приложения
 @app.route(root_request + '/statistic', methods=['POST'])
@@ -102,6 +114,7 @@ async def avg_rating():
     data = request.get_json()
     app_name = data.get('app_name')
     app_version = data.get('version')
+    #await bot.send_message(chat_id=CHAT_ID, text=f'{app_name}\n{app_version}')
     # проверяем передан ли номер версии программы
     if not app_version or app_version == 'latest':
         # если не передан, то находим крайнюю из тех что есть
@@ -112,7 +125,7 @@ async def avg_rating():
     if ratings:
         voted = len(ratings)
         avg_rating = math.ceil(sum([r.rating for r in ratings]) / voted)
-        await bot.send_message(chat_id=CHAT_ID, text=f'Статистика {app_name}:\nСредняя оценка: {avg_rating}\nЧисло голосов: {voted}')
+        #await bot.send_message(chat_id=CHAT_ID, text=f'Статистика по {app_name}:\nСредняя оценка: {avg_rating}\nЧисло голосов: {voted}')
         return jsonify({
             'rating': avg_rating,
             'voted': voted,
@@ -120,7 +133,6 @@ async def avg_rating():
         })
     else:
         return jsonify({'rating': None, 'voted': None, 'version': None})
-
 
 # Маршрут для получения списка всех отзывов для конкретного приложения
 @app.route(root_request + '/show/reviews', methods=['POST'])

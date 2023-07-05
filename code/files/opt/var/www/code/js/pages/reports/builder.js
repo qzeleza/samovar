@@ -26,7 +26,6 @@ $(document).ready(function() {
 
                 $('#sidebar_menu .nav-group-sub').addClass('collapse show')
                 $('#sidebar_kvas_menu').addClass('collapsed').addClass('nav-item-open');
-
                 $('#sidebar_kvas_reports').addClass('active');
 
                 // Установка триггера для других js файлов

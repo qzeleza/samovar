@@ -5,14 +5,22 @@ class FeedBack {
         this.elementId = elementId;
         this.appName = appName;
         this.appVersion = appCurrentVersion;
+        this.storageKey = elementId + '_rating';
+        this.ratingServer = new ServerRequester('http://api.zeleza.ru', 51153);
         this.element = $(`#${this.elementId}`);
-
         this.element.on('click', this.sendFeedBack.bind(this));
     }
     sendFeedBack() {
 
+        const server = this.ratingServer;
+        const appName = this.appName;
+        const appVersion = this.appVersion;
+        const rating = localStorage.getItem(this.storageKey);
+
         // const error_mess = 'Поле обязательно для заполнения';
-        // https://ned.im/noty/#/options
+        // Документация по Noty
+        // https://ned.im/noty/v2/options.html
+        //
         let notyConfirm = new Noty({
             text: "" +
                 '<div class="ps-3 pb-1 form-validate">' +
@@ -21,10 +29,10 @@ class FeedBack {
                         "<div class='badge bg-success bg-opacity-75 lift-up-3'>" + this.appVersion  + "</div>" +
                     "</div>" +
                     '<div class="mb-2">Пишите по существу и самое главное</div>' +
-                    '<textarea class="form-control  h-200" placeholder="Суть Вашего предложения или замечений."></textarea>' +
+                    '<textarea id="user_review" class="form-control  h-200" placeholder="Суть Вашего предложения или замечений."></textarea>' +
                     '<div style="display: flex;" class="pt-1 input-group" >' +
-                        '</span><input type="text" class="form-control" required placeholder="Как к Вам обращаться?" >' +
-                        '</span><input type="email" class="form-control" required placeholder="Ваш Email" >' +
+                        '</span><input id="user_name" type="text" class="form-control" required placeholder="Как к Вам обращаться?" >' +
+                        '</span><input id="user_email" type="email" class="form-control" required placeholder="Ваш Email" >' +
                     '</div>' +
                 '</div>',
             timeout: false,
@@ -33,18 +41,36 @@ class FeedBack {
             closeWith: ['button'],
             type: 'confirm',
             buttons: [
-                Noty.button('Отменить', 'btn btn-link', function () {
-                    notyConfirm.close();
-                }),
+                {
+                    addClass: 'btn btn-outline-primary me-3',
+                    text: 'Отправить <i class="ph-paper-plane-tilt ms-2"></i>',
+                    onClick: function($noty) {
+                        // this = button element
+                        // $noty = $noty element
 
-                Noty.button('Отправить <i class="ph-paper-plane-tilt ms-2"></i>', 'btn btn-outline-primary me-3', function () {
-                        alert('Отправлено!');
-                        // здесь размещаем код по отправке
-                        // обратной связи по расширению
-                        notyConfirm.close();
-                    },
-                    {id: 'kvas_send_feedback', 'data-status': 'ok'}
-                )
+                        // console.log($noty.$bar.find('input#example').val());
+                        server.send('/api/server/send/review', null, {
+                            'app_name': appName,
+                            'version': appVersion,
+                            'name': $noty.$bar.find('input#user_name').val(),
+                            'email': $noty.$bar.find('input#user_email').val(),
+                            'review': $noty.$bar.find('input#user_review').val(),
+                            'rating': rating,
+                        });
+
+                        // закрываем окно и сообщаем об отправке
+                        $noty.close();
+                        notyConfirm({text: 'Данные успешно отправлены', type: 'success'});
+                    }
+                },
+                {
+                    addClass: 'btn btn-link',
+                    text: 'Отменить', onClick: function($noty) {
+                        // если нажали кнопку отмены
+                        $noty.close();
+                        // notyConfirm({text: 'You clicked "Cancel" button', type: 'error'});
+                    }
+                }
             ]
         }).show();
     }

@@ -20,6 +20,7 @@ class ServerRequester {
             type: 'error',
             layout: 'topRight',
             theme: 'bootstrap-v4',
+            modal: true,
             timeout: 3000,
             killer: true
         });
@@ -30,13 +31,13 @@ class ServerRequester {
             layout: 'center',
             theme: 'bootstrap-v4',
             text:
-                '<i class="fas fa-spinner fa-spin"></i> ' + textLoading+ '<br>' +
+                '<i class="fas fa-spinner fa-spin pe-3"></i> ' + textLoading+ '<br>' +
                 '<div class="progress">' +
                     '<div class="progress-bar progress-bar-striped progress-bar-animated" ' +
                     'role="progressbar" aria-valuenow="0" aria-valuemin="0" ' +
                     'aria-valuemax="100" style="width: 0%"></div>' +
                 '</div>',
-            closeWith: [],
+            closeWith: [],  // ['click', 'button', 'hover', 'backdrop']
             killer: true,
             modal: true,
             animation: {
@@ -51,10 +52,10 @@ class ServerRequester {
             theme: 'bootstrap-v4',
             text:
                 '<div class="d-flex align-items-center">' +
-                    '<div class="spinner-border text-primary mr-3" role="status"></div>' +
-                    '<div>' + textLoading+ '</div>' +
+                    '<div class="spinner-border text-primary" role="status"></div>' +
+                    '<div class="ps-3">' + textLoading+ '</div>' +
                 '</div>',
-            closeWith: [],
+            closeWith: [],   // ['click', 'button', 'hover', 'backdrop']
             killer: true,
             modal: true,
             animation: {
@@ -68,16 +69,50 @@ class ServerRequester {
     }
 
     /**
-     * Проверка входных данных
+     * Проверка входных данных до отправки на сервер
      * @param {Object} data - Данные для проверки
      * @returns {boolean} - Результат проверки (true - данные корректны, false - данные некорректны)
      */
-    validateData(data) {
+    validateDataRequest(data) {
         // Здесь можно добавить код для проверки входных данных
         // Например, проверить, что data является объектом и содержит необходимые ключи и значения
         // Если данные корректны, вернуть true, иначе вернуть false
         return true;
     }
+
+    /**
+     * Проверка входных данных после получения с сервера
+     * @param {Object} data - Данные для проверки
+     * @returns {boolean} - Результат проверки (true - данные корректны, false - данные некорректны)
+     */
+    validateDataResponse(data) {
+        // Здесь можно добавить код для проверки входных данных
+        // Например, проверить, что data является объектом и содержит необходимые ключи и значения
+        // Если данные корректны, вернуть true, иначе вернуть false
+        return true;
+    }
+    /**
+     * Добавление POST-запроса в очередь на исполнение
+     * @param {string} path - Путь запроса
+     * @param {Object} data - Данные в виде JSON-структуры
+     * @param {function} [callback] - Функция обратного вызова, которая будет вызвана после получения ответа от сервера
+     * @param {boolean} useQueue - если true, то загружаемся из очереди и нужен вызов executeQueue и в=затем getDataFromQueue
+     *                             если false, то просто запрашиваем данные и сразу получаем ответ.
+     */
+    send(path,  callback = null, data = {}, useQueue = false ) {
+        let result = null;
+        if (this.validateDataRequest(data)) {
+            if (useQueue) {
+                this.queue.push(() => this.sendData(path, data, callback));
+            } else {
+                result = this.sendData(path, data, callback);
+            }
+        } else {
+            console.error("Неверные данные");
+        }
+        return result;
+    }
+
 
     /**
      * Отправка POST-запроса
@@ -88,39 +123,81 @@ class ServerRequester {
      */
     sendData(path, data= {}, callback = null) {
         let result;
+        let self = this;
         // Проверка входных данных
-        if (this.validateData(data)) {
+        if (this.validateDataRequest(data)) {
             // Если sendData была вызвана напрямую
             // без использования очереди вызовов
+            this.progressBarIndicatorNoty.close();
             if (this.queue.length === 0) this.spinIndicatorNoty.show();
             // Отправка POST-запроса с помощью jQuery.ajax
             $.ajax({
-                type: 'POST',
                 url: `${this.url}:${this.port}${path}`,
-                data: data,
-                headers: this.headers,
-                dataType: 'json',
-                async: true,
-                success: (data) => {
-                    // Сохранение результата запроса в кеше по ключу path
-                    this.cache[path] = data;
-                    this.data[path] = data;
-                    result = data;
-
-                    // Вызов функции обратного вызова, если она передана
-                    if (callback && typeof callback === 'function') {
-                        callback(data);
+                type: 'POST',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: (response) => {
+                    if (self.validateDataResponse(response)) {
+                        // обработка успешного ответа
+                        // Вызов функции обратного вызова, если она передана
+                        if (callback && typeof callback === 'function') {
+                            callback(response);
+                        }
+                        // Закрываем индикатор ожидания
+                        if (self.queue.length === 0) self.spinIndicatorNoty.close();
+                        // сохранение ответа в кэше
+                        self.cache[path] = response;
+                        result = response;
+                    } else {
+                        console.error("Неверный ответ от сервера");
                     }
-                    // Закрываем индикатор ожидания
-                    if (this.queue.length === 0) this.spinIndicatorNoty.close();
                 },
-                error: (jqXHR, textStatus, errorThrown) => {
+                error: function (error) {
+                    // обработка ошибки
                     // Закрываем индикатор ожидания
-                    if (this.queue.length === 0) this.spinIndicatorNoty.close();
+                    if (self.queue.length === 0) self.spinIndicatorNoty.close();
                     // Отображение сообщения об ошибке с помощью Noty
-                    this.errorNoty.setText(`Ошибка: ${textStatus} ${errorThrown}`).show();
+                    const err_mess = "Ошибка при отправке запроса: " + error.statusText + ' (' + error.status + ')';
+                    self.errorNoty.setText().show(err_mess);
+                    console.error(err_mess);
+                },
+                complete: function () {
+                    // всегда выполняется после завершения запроса
+                    // например, можно скрыть индикатор загрузки
+                    self.spinIndicatorNoty.close()
+                    self.errorNoty.close();
                 }
             });
+
+            // $.ajax({
+            //     type: 'POST',
+            //     url: `${this.url}:${this.port}${path}`,
+            //     data: data,
+            //     headers: this.headers,
+            //     dataType: 'json',
+            //     async: true,
+            //     success: (data) => {
+            //         // Сохранение результата запроса в кеше по ключу path
+            //         this.cache[path] = data;
+            //         this.data[path] = data;
+            //         result = data;
+            //
+            //         // Вызов функции обратного вызова, если она передана
+            //         if (callback && typeof callback === 'function') {
+            //             callback(data);
+            //         }
+            //         // Закрываем индикатор ожидания
+            //         if (this.queue.length === 0) this.spinIndicatorNoty.close();
+            //     },
+            //     error: (jqXHR, textStatus, errorThrown) => {
+            //         // Закрываем индикатор ожидания
+            //         if (this.queue.length === 0) this.spinIndicatorNoty.close();
+            //         // Отображение сообщения об ошибке с помощью Noty
+            //         this.errorNoty.setText(`Ошибка: ${textStatus} ${errorThrown}`).show();
+            //     },
+            //     always: () => {
+            //     }
+            // });
         } else {
             // если не прошли проверку на ошибки
             // Отображение сообщения об ошибке с помощью Noty
@@ -166,16 +243,8 @@ class ServerRequester {
 
     }
 
-    /**
-     * Добавление POST-запроса в очередь на исполнение
-     * @param {string} path - Путь запроса
-     * @param {Object} data - Данные в виде JSON-структуры
-     * @param {function} [callback] - Функция обратного вызова, которая будет вызвана после получения ответа от сервера
-     */
-    addRequestToQueue(path, data, callback) {
-        // Добавление функции отправки запроса в очередь
-        this.queue.push(() => this.sendData(path, data, callback));
-    }
+
+
 
     /**
      * Выполнение всех запросов в очереди

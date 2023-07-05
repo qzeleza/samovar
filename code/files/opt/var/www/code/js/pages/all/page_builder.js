@@ -171,8 +171,8 @@ class PageBuilder {
 function setRatingAndFeedbackSamovarEvents() {
     let appName = 'Самовар';
     let appVersion = '0.0.3';
-    new FeedBack('send_feedback', appName, appVersion);
-    new Rating('samovar_rating', appName, appVersion );
+    // new FeedBack('send_feedback', appName, appVersion);
+
 }
 function buildMainTemplatePage(root){
 
@@ -241,7 +241,18 @@ function buildMainTemplatePage(root){
     templateLoad.add(setRatingAndFeedbackSamovarEvents);
     templateLoad.add(() => {
         new Scrolling('#samovar_history_list');
+        new Rating('samovar_rating', 'samovar', "latest" );
     });
 
+    templateLoad.add(() => {
+        // const router = new ServerRequester();
+        // router.send('')
+
+        // const ratingServer = new ServerRequester('http://api.zeleza.ru', 51153);
+        // ratingServer.send(apiPath + '/statistic',(data) => {
+        //     new Rating('samovar_rating', appName, data['version'] );
+        //     $('#').html();
+        // }, {"app_name": appName, "version": "latest"})
+    })
     return templateLoad;
 }
