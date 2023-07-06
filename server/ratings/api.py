@@ -116,7 +116,7 @@ async def avg_rating():
     app_version = data.get('version')
     #await bot.send_message(chat_id=CHAT_ID, text=f'{app_name}\n{app_version}')
     # проверяем передан ли номер версии программы
-    if not app_version or app_version == 'latest':
+    if not app_version or app_version == 'latest' or not Rating.query.filter_by(app_name=app_name, version=app_version).first():
         # если не передан, то находим крайнюю из тех что есть
         app_version = db.session.query(db.func.max(Rating.version)).scalar()
 

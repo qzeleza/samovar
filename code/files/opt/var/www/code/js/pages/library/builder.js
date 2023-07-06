@@ -3,14 +3,6 @@
 // ------------------------------
 // Загрузка данные, используемые только для index.html
 const root = '';
-function addKvasEvents(){
-
-    let appName = 'Квас';
-    let appVersion = 'latest';
-    // new FeedBack('kvas_send_feedback', appName, appVersion)
-    // new Rating('kvas_rating', 'kvas', appVersion );
-
-}
 // Файл основной страницы HTML
 $(document).ready(function() {
 
@@ -27,9 +19,15 @@ $(document).ready(function() {
         libraryPageLoader.add(root + 'code/js/pages/all/select2.js');
 
         // Добавление дополнительных функций
-        libraryPageLoader.add(addKvasEvents);
+        // libraryPageLoader.add(addKvasEvents);
         libraryPageLoader.add(() => {
+
+            let appName = 'kvas';
+            let appVersion = 'latest';
             new Scrolling('#kvas_history_list');
+            new Rating('kvas_rating', appName, appVersion );
+            new FeedBack('kvas_send_feedback', appName, appVersion)
+
         });
 
         libraryPageLoader.load()
@@ -41,7 +39,6 @@ $(document).ready(function() {
                 $('#sidebar_menu .nav-group-sub').addClass('collapse show')
 
 
-                new Rating('kvas_rating', 'kvas', "latest" );
                 // const router = new ServerRequester();
                 // router.send('')
 
