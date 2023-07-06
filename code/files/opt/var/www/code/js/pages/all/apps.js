@@ -881,14 +881,11 @@ const Tooltips = function () {
             const state = localStorage.getItem(tooltipKey);
             if (state) {
                 $toolTips.tooltip(state);
-<<<<<<< HEAD:code/files/opt/var/www/extensions/js/pages/all/apps.js
-=======
                 if (state === 'enable'){
                     toggleSwitch.prop('checked', true);
                 } else {
                     toggleSwitch.prop('checked', false);
                 }
->>>>>>> e5bc7ae2637411d9e93037006fb3c216cd680e37:code/files/opt/var/www/code/js/pages/all/apps.js
             }
         }
 
@@ -921,28 +918,26 @@ App.initAfterLoad();
 Tooltips.init();
 Tooltips.initTooltips();
 
-<<<<<<< HEAD:code/files/opt/var/www/extensions/js/pages/all/apps.js
-const Settings = function () {
-
-    const tooltipToggle = function() {
-
-    }
-
-    //
-    // Return objects assigned to module
-    //
-
-    return {
-        init: function() {
-
-        },
-    }
-
-}();
+// const Settings = function () {
+//
+//     const tooltipToggle = function() {
+//
+//     }
+//
+//     //
+//     // Return objects assigned to module
+//     //
+//
+//     return {
+//         init: function() {
+//
+//         },
+//     }
+//
+// }();
 
 
 // Initialize module
-=======
 // шаблон для создания класса
 // const templete = function () {
 //
@@ -988,7 +983,6 @@ const Settings = function () {
 
 //
 // Устанавливаем в загрузку страницы
->>>>>>> e5bc7ae2637411d9e93037006fb3c216cd680e37:code/files/opt/var/www/code/js/pages/all/apps.js
 // ------------------------------
 
 // Загружаем данные только после загрузки loader.js
