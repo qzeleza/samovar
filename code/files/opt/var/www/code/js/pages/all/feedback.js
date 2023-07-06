@@ -6,27 +6,25 @@ class FeedBack {
         this.appName = appName;
         this.appVersion = appCurrentVersion;
         this.storageKey = elementId + '_rating';
-        this.ratingServer = new ServerRequester('http://api.zeleza.ru', 51153);
+        this.server = new ServerRequester('http://api.zeleza.ru', 51153);
         this.element = $(`#${this.elementId}`);
         this.element.on('click', this.sendFeedBack.bind(this));
     }
     sendFeedBack() {
 
-        const server = this.ratingServer;
-        const appName = this.appName;
-        const appVersion = this.appVersion;
+        const self = this;
         const rating = localStorage.getItem(this.storageKey);
 
         // const error_mess = 'Поле обязательно для заполнения';
         // Документация по Noty
         // https://ned.im/noty/v2/options.html
         //
-        let notyConfirm = new Noty({
+        new Noty({
             text: "" +
                 '<div class="ps-3 pb-1 form-validate">' +
                     "<div class='d-flex flex-row align-items-baseline pt-2 '>" +
-                        '<div class="fs-3 mb-3 text-primary me-2">Отзыв на ' + this.appName  +'</div>' +
-                        "<div class='badge bg-success bg-opacity-75 lift-up-3'>" + this.appVersion  + "</div>" +
+                        '<div class="fs-3 mb-3 text-primary me-2">Отзыв на ' + self.appName  +'</div>' +
+                        "<div class='badge bg-success bg-opacity-75 lift-up-3'>" + self.appVersion  + "</div>" +
                     "</div>" +
                     '<div class="mb-2">Пишите по существу и самое главное</div>' +
                     '<textarea id="user_review" class="form-control  h-200" placeholder="Суть Вашего предложения или замечений."></textarea>' +
@@ -49,9 +47,9 @@ class FeedBack {
                         // $noty = $noty element
 
                         // console.log($noty.$bar.find('input#example').val());
-                        server.send('/api/server/send/review', null, {
-                            'app_name': appName,
-                            'version': appVersion,
+                        self.server.send('/api/server/send/review', null, {
+                            'app_name': self.appName,
+                            'version': self.appVersion,
                             'name': $noty.$bar.find('input#user_name').val(),
                             'email': $noty.$bar.find('input#user_email').val(),
                             'review': $noty.$bar.find('input#user_review').val(),
@@ -60,7 +58,7 @@ class FeedBack {
 
                         // закрываем окно и сообщаем об отправке
                         $noty.close();
-                        notyConfirm({text: 'Данные успешно отправлены', type: 'success'});
+                        // notyConfirm({text: 'Данные успешно отправлены', type: 'success'});
                     }
                 },
                 {

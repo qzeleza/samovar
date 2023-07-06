@@ -168,12 +168,6 @@ class PageBuilder {
     }
 }
 
-function setRatingAndFeedbackSamovarEvents() {
-    let appName = 'Самовар';
-    let appVersion = '0.0.3';
-    // new FeedBack('send_feedback', appName, appVersion);
-
-}
 function buildMainTemplatePage(root){
 
     const templateLoad = new PageBuilder();
@@ -238,10 +232,16 @@ function buildMainTemplatePage(root){
 
     // Загрузка функции, которая подгружает классы
     // рейтинга и обратной связи  всех страниц шаблона
-    templateLoad.add(setRatingAndFeedbackSamovarEvents);
+    // templateLoad.add(setRatingAndFeedbackSamovarEvents);
     templateLoad.add(() => {
+
+        let appName = 'samovar';
+        let appVersion = 'latest';
+
         new Scrolling('#samovar_history_list');
-        new Rating('samovar_rating', 'samovar', "latest" );
+        new Rating('samovar_rating', appName, appVersion);
+        new FeedBack('send_feedback', appName, appVersion);
+
     });
 
     templateLoad.add(() => {
