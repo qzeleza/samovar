@@ -231,7 +231,7 @@ function buildMainTemplatePage(root){
     templateLoad.add(root + 'code/js/pages/all/feedback.js');
 
     // Загрузка функции, которая подгружает классы
-    // рейтинга и обратной связи  всех страниц шаблона
+    // рейтинга и обратной связи всех страниц шаблона
     // templateLoad.add(setRatingAndFeedbackSamovarEvents);
     templateLoad.add(() => {
 
@@ -244,7 +244,7 @@ function buildMainTemplatePage(root){
 
     });
 
-    templateLoad.add(() => {
+    // templateLoad.add(() => {
         // const router = new ServerRequester();
         // router.send('')
 
@@ -253,6 +253,6 @@ function buildMainTemplatePage(root){
         //     new Rating('samovar_rating', appName, data['version'] );
         //     $('#').html();
         // }, {"app_name": appName, "version": "latest"})
-    })
+    // })
     return templateLoad;
 }

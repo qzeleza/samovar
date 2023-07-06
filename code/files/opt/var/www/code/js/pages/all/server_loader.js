@@ -158,8 +158,8 @@ class ServerRequester {
                     if (self.queue.length === 0) self.spinIndicatorNoty.close();
                     // Отображение сообщения об ошибке с помощью Noty
                     const err_mess = "Ошибка при отправке запроса: " + error.statusText + ' (' + error.status + ')';
-                    self.errorNoty.setText().show(err_mess);
-                    console.error(err_mess);
+                    // self.errorNoty.setText().show(err_mess);
+                    console.error(err_mess + '\n' + data);
                 },
                 complete: function () {
                     // всегда выполняется после завершения запроса

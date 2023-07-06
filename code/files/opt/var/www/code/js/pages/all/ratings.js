@@ -94,7 +94,7 @@ class Rating {
             // Документация по Noty
             // https://ned.im/noty/v2/options.html
             //
-            let notyConfirm = new Noty({
+            const notyConfirm = new Noty({
                 text:   '<div class="pt-3 ps-3 pe-1 pb-1">' +
                     '<h4 class="mb-3">Спасибо за Вашу оценку ('+ this.rating + '/' + this.stars.length + ')</h4>' +
                     '<label class="form-label ms-1">Будем признательны за обратную связь</label> ' +
@@ -109,16 +109,20 @@ class Rating {
                 closeWith: ['button'], // ['click', 'button', 'hover', 'backdrop']
                 theme: 'bootstrap-v4',
                 type: 'confirm',
-                buttons: [
-                    {
-                        addClass: 'btn btn-outline-secondary ms-2 me-4 mb-2',
-                        text: 'Отправить <i class="ph-paper-plane-tilt ms-2"></i>',
-                        onClick: function($noty) {
-                            // this = button element
-                            // $noty = $noty element
+                buttons:
+                    [
+                        Noty.button('Отменить', 'btn btn-link mb-2', function () {
+                            notyConfirm.close();
+                        }),
 
-                            // console.log($noty.$bar.find('input#example').val());
-                            self.server.send('/api/server/send/review', null, {
+                        Noty.button('Отправить <i class="ph-paper-plane-tilt ms-2"></i>', 'btn btn-outline-secondary ms-2 me-4 mb-2', function ($noty) {
+                            alert('Отправлено!');
+                            // здесь размещаем код по отправке
+                            // обратной связи по расширению
+                            self.server.send('/api/server/send/review', ()=>{
+                                localStorage.setItem(self.storageKey, self.rating);
+                                notyConfirm.close();
+                            }, {
                                 'app_name': self.appName,
                                 'version': self.appVersion,
                                 'name': $noty.$bar.find('input#user_name').val(),
@@ -127,40 +131,10 @@ class Rating {
                                 'rating': self.rating,
                             });
 
-                            // сохранили данные об установленном рейтинге в локальное хранилище
-                            localStorage.setItem(self.storageKey, self.rating);
-                            // закрываем окно и сообщаем об отправке
-                            $noty.close();
-                            // self.notyConfirm({text: 'Данные успешно отправлены', type: 'success'});
-                        }
-                    },
-                    {
-                        addClass: 'btn btn-link mb-2', text: 'Отменить', onClick: function($noty) {
-                            // если нажали кнопку отмены
-                            $noty.close();
-                            // notyConfirm({text: 'You clicked "Cancel" button', type: 'error'});
-                        }
-                    }
-
-                    // Noty.button('Отменить', 'btn btn-link mb-2', function () {
-                    //     notyConfirm.close();
-                    // }),
-                    //
-                    // Noty.button('Отправить <i class="ph-paper-plane-tilt ms-2"></i>', 'btn btn-outline-secondary ms-2 me-4 mb-2', function () {
-                    //     alert('Отправлено!');
-                    //     // здесь размещаем код по отправке
-                    //     // обратной связи по расширению
-                    //     server.send('/apps/api/send/review', null, {
-                    //         'app_name': this.appName,
-                    //         'version': this.appVersion,
-                    //         'name':
-                    //     });
-                    //     localStorage.setItem(key, rating);
-                    //     notyConfirm.close();
-                    // },
-                    //     {id: 'send_to_server_button', 'data-status': 'ok'}
-                    // )
-                ]
+                        },
+                            {id: 'send_to_server_button', 'data-status': 'ok'}
+                        )
+                    ]
             }).show();
         }
 

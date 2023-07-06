@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 #
 # Cервер на Python с использованием фреймворка Flask и
 # базы данных SQLite, который позволяет отправлять оценку
@@ -13,6 +15,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from telegram import Bot
 import os, math
+
 
 BOT_TOKEN = "6214126365:AAEVpcdojvmA47fF8afczPSI_zgJ1ueZTJ0"
 CHAT_ID = "-878944874"
@@ -69,7 +72,7 @@ async def add_rating():
     version = data.get('version')
 
     # проверяем передан ли номер версии программы
-    if not version or version == 'latest':
+    if not version or version == 'latest' or not Rating.query.filter_by(app_name=app_name, version=version).first():
         # если не передан, то находим крайнюю из тех что есть
         version = db.session.query(db.func.max(Rating.version)).scalar()
 
@@ -102,7 +105,7 @@ def get_rating():
             }
 
         sorted_avg_ratings = sorted(avg_ratings.items(), key=lambda x: (x[0][0], x[0][1]), reverse=True)
-
+        # breakpoint()
         return render_template(rating_html_template, ratings=sorted_avg_ratings)
     else:
         return jsonify({'success': False})
@@ -134,6 +137,7 @@ async def avg_rating():
     else:
         return jsonify({'rating': None, 'voted': None, 'version': None})
 
+
 # Маршрут для получения списка всех отзывов для конкретного приложения
 @app.route(root_request + '/show/reviews', methods=['POST'])
 def get_reviews():
@@ -153,4 +157,4 @@ def get_reviews():
     return jsonify({'reviews': reviews})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=51153)
+    app.run(host='0.0.0.0', port=51153, debug=False)

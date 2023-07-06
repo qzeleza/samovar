@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
   <title>Рейтинги</title>
@@ -7,38 +6,40 @@
 <body>
 <div class="container pt-5">
   <h1>Общие данные по рейтигу</h1>
-  <table class="table mt-5">
-    <thead>
+  <table class="table mt-3">
+  <thead>
     <tr>
-      <th scope="col">Программа</th>
+      <th scope="col" class="align-middle">Название</th>
       <th scope="col">Версия ▼</th>
       <th scope="col">Рейтинг</th>
       <th scope="col">Голоса</th>
     </tr>
-    </thead>
-    <tbody class="align-content-center">
-    {% set prev_app_name = '' %}
+  </thead>
+  <tbody>
+    {% set ns = namespace(prev_app_name='') %}
     {% set app_rowspan = {} %}
     {% for app_key, app_data in ratings %}
-    {% if app_key[0] not in app_rowspan %}
-    {% set app_rowspan = app_rowspan.update({app_key[0]: 1}) or app_rowspan %}
-    {% else %}
-    {% set app_rowspan = app_rowspan.update({app_key[0]: app_rowspan[app_key[0]] + 1}) or app_rowspan %}
-    {% endif %}
+        {% if app_key[0] not in app_rowspan %}
+            {% set app_rowspan = app_rowspan.update({app_key[0]: 1}) or app_rowspan %}
+        {% else %}
+            {% set app_rowspan = app_rowspan.update({app_key[0]: app_rowspan[app_key[0]] + 1}) or app_rowspan %}
+        {% endif %}
     {% endfor %}
     {% for app_key, app_data in ratings %}
     <tr>
-      {% if prev_app_name != app_key[0] %}
-      <td rowspan="{{app_rowspan[app_key[0]]}}">{{ app_key[0] }}</td>
+      {% if ns.prev_app_name != app_key[0] %}
+      <td rowspan="{{app_rowspan[app_key[0]]}}" class="align-middle">{{ app_key[0] }}</td>
       {% endif %}
       <td>{{ app_key[1] }}</td>
       <td>{{ app_data.avg_rating }}</td>
       <td>{{ app_data.num_votes }}</td>
     </tr>
-    {% set prev_app_name = app_key[0] %}
+    {% set ns.prev_app_name = app_key[0] %}
     {% endfor %}
-    </tbody>
-  </table>
+  </tbody>
+</table>
+
+
 
 </div>
 
@@ -46,5 +47,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>
