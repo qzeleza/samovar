@@ -1,0 +1,512 @@
+
+/* позволяет закрашивать часть звездочки для рейтинга */
+.card-body.scroll-content .border-bottom {
+  margin-top: 30px;
+  padding-bottom: 30px;
+  margin-left: 20px;
+}
+
+.h-200 {
+  height: 200px;
+}
+.noty_layout {
+  --noty-width: 30rem !important;
+  --noty-bg: var(--body-bg) !important;
+  --noty-color: black;
+}
+.modal-header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.modal-body {
+  padding: 30px 55px;
+}
+
+.modal-footer {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.collapsed .collapsible-indicator {
+  position: relative;
+  top: -2px !important;
+}
+/*.card-header .app-version {*/
+  /*margin-left: 4vw;*/
+  /*margin-top: 8vw;*/
+/*}*/
+.dropdown .dropdown-item i {
+  padding-right: 15px;
+  font-size: small;
+}
+
+/*.scroll-content > div {*/
+/*  padding-right: 15px;
+/*  padding-top: 30px;*/
+/*  padding-bottom: 40px;*/
+/*}*/
+
+/* настройка отступов в заголовке страницы */
+.page-title {
+  padding-top: 1vh;
+  margin-top: 1vh;
+  padding-bottom: 1vh;
+  margin-bottom: 0;
+  padding-left: 1.4vw;
+}
+
+.page-title .text-muted {
+  padding-top: 0.9vh;
+}
+
+/* выделяем кнопку настроек при наведении на нее */
+.nav a.btn {
+  background-color: transparent;
+  color: inherit;
+}
+.nav a.btn:hover {
+  background-color: #f8f9fa;
+  color: #0d6efd;
+}
+
+/* позиционирование и размер иконки в боковом меню */
+.sidebar-section .nav-sidebar .nav-item .nav-link i {
+  transform: scale(1.5);
+}
+/*.sidebar-section .nav-sidebar .nav-item .nav-link.active {*/
+  /*padding-top: 15px;*/
+  /*padding-bottom: 12px;*/
+/*}*/
+
+/* регулировка высоты каждого изх пунктов левого меню навигации */
+.nav-sidebar .nav-item a span span  {
+  /*padding-top: 1.2vh !important;*/
+  /*padding-bottom: 1.2vh !important;*/
+}
+
+.btn-menu-hide  {
+  padding-top: 10px;
+}
+
+/* регулировка высоты основания каждой из карточек card */
+.card .card-footer {
+  height: 3.2vw;
+}
+.card .card-header .position-relative {
+  top: 18px;
+}
+
+.sidebar {
+  --sidebar-width: 23rem;
+}
+
+/* задаем высоту и цвет строки с логотипом*/
+.sidebar-logo {
+  /*background-color: #004c69 !important;*/
+  height: calc(var(--spacer) * 4.9 + var(--icon-font-size));
+  padding-bottom: 5px;
+}
+.bg-sidebar-logo {
+  --bg-opacity: 1;
+  background-color: #006386 !important;
+  /*background-color: #004c69 !important;*/
+}
+
+/* отступы для логотипа с изображением */
+.sidebar-logo-full {
+  /*padding-right: calc(var(--spacer) );*/
+  padding-left: calc(var(--spacer) );
+  height: calc(var(--spacer) * 1.8 + var(--icon-font-size));
+}
+
+.sidebar-logo-small {
+  height: calc(var(--spacer) * 0.6 + var(--icon-font-size));
+}
+
+/* отступы для логотипа с текстом */
+.sidebar-logo-text {
+  height: calc(var(--spacer) * 2.6 + var(--icon-font-size));
+  /*margin-left: auto !important;*/
+  padding-right: 0.9vw !important;
+  padding-top: calc(var(--spacer) * 0.5);
+  padding-left: calc(var(--spacer) * 1.5);
+}
+
+
+
+
+
+/* Новый более мелкий размер текста для заголовков */
+.display-7 {
+  font-size: calc(1.275rem + 1.2vw);
+  font-weight: 350;
+  line-height: 1.2715;
+}
+@media (min-width: 1200px) {
+  .display-7 {
+    font-weight: 250;
+    font-size: 2rem;
+  }
+}
+
+.display-8 {
+  font-size: calc(0.975rem + 1.1vw);
+  font-weight: 300;
+  line-height: 1.9715;
+}
+@media (min-width: 1200px) {
+  .display-8 {
+    font-weight: 250;
+    font-size: 1.5rem;
+  }
+}
+
+/* Устанавливаем ширину основной карточки для дисплеев ноутбуков с высоким разрешением */
+.content .row .main-card {
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: 90%;
+  padding-left: 30px;;
+}
+.reports-card {
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: 100%;
+}
+@media screen and (max-width: 4030px) {
+  .content .row .main-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 60%;
+  }
+  .reports-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 2030px) {
+  .content .row .main-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 55%;
+  }
+  .reports-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 1830px) {
+  .content .row .main-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 65%;
+  }
+  .reports-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1530px) {
+  .content .row .main-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 80%;
+  }
+  .reports-card {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}
+
+/* Цвет фона в сплывающих подсказок */
+.tooltip-inner, .tooltip-info + .tooltip > .tooltip-inner {
+    background-color: #9f811a;
+}
+
+/* отступ сверху для быстрого перехода по версиям */
+/*#ver_nav {*/
+/*  padding-top: 100px !important;*/
+/*}*/
+
+/* изменение позиционирования панели навигации при малых разрешениях */
+@media screen and (max-width: 1200px) {
+  .navbar-brand, .content {
+    position: absolute !important;
+  }
+}
+
+.navbar-brand {
+  position: relative;
+}
+
+/* Заголовок с отступом в 5px */
+.elem-header {
+  margin-right: 5px;
+}
+
+
+.dataTable tr td.child>ul {
+  display: table-row !important;
+}
+
+.text-blue {
+  color: #48b2fa;
+}
+
+.text-green {
+  color: lightseagreen;
+}
+
+.text-gray {
+  color: gray;
+}
+
+.text-lightgray {
+  color: lightgray;
+}
+
+/* Цвет светло-голубой */
+.border-light-blue {
+  border-color: rgba(121, 183, 255, 0.53) !important;
+}
+
+
+/* Цвет лазурный */
+.bg-azure {
+    background-color: azure !important;
+}
+
+/* Прячем границы строк в таблице */
+.rows-no-borders tbody tr {
+  border-style: hidden !important;
+}
+
+/* Ширина элемента в 15% */
+.w-15 {
+  width: 15% !important;
+}
+
+.dt-buttons {
+  margin-left: auto !important;
+}
+
+/* Контекстное меню для таблицы со списком доменных имен */
+#contextMenuVPN {
+  display: none;
+  position: fixed;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* отрабатываем нажатие на элемент с классом toggle-all
+   и открывает все элементы аккордеон, работает в связке с
+   писанием класса в custom.js
+*/
+a.toggle-all {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  color: #4B5563;
+}
+
+a.toggle-all i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  scale: 1.5;
+  transition: transform 0.2s ease-in-out;
+}
+
+a.toggle-all i.ph-arrow-fat-lines-up {
+  transform: translateY(-100%);
+}
+
+a.toggle-all.clicked i.ph-arrow-fat-lines-up {
+  transform: translateY(0);
+}
+
+a.toggle-all.clicked i.ph-arrow-fat-lines-down {
+  transform: translateY(100%);
+}
+
+/* конец toggle-all */
+
+/* Цвет золотой кнопки */
+.btn-gold {
+  --btn-color: #fff;
+  --btn-bg: #dfc77e;
+  --btn-border-color: #dfc77e;
+  --btn-hover-color: #fff;
+  --btn-hover-bg: #C7A94C;
+  --btn-hover-border-color: #C7A94C;
+  --btn-focus-shadow-rgb: 48,150,255;
+  --btn-active-color: #fff;
+  --btn-active-bg: #A68521;
+  --btn-active-border-color: #A68521;
+  --btn-active-shadow: inset 0 0 0 0 transparent;
+  --btn-disabled-color: #fff;
+  --btn-disabled-bg: #dfc77e;
+  --btn-disabled-border-color: #dfc77e;
+}
+
+/* Цвет золотого фона */
+.bg-gold {
+    /*--bg-opacity: 1;*/
+    background-color: rgba(#dfc77e, var(--bg-opacity)) !important;
+}
+.bg-nav {
+  --bg-opacity: 1;
+  background-color: rgba(#006386, var(--bg-opacity)) !important;
+}
+/* Цвет золотой текст */
+.text-gold {
+    --bg-opacity: 1;
+    color: rgba(#dfc77e, var(--bg-opacity)) !important;
+}
+
+/* Преобразование блока закрытия бокового меню */
+.sidebar-hide-icon {
+  position: absolute;
+  bottom: 0 !important;
+  left: 0;
+  width: -webkit-fill-available;
+}
+
+/* Размеры кнопки бокового меню - спрятать меню */
+.sidebar-section-body {
+  padding-bottom: 10px !important;
+  padding-top: 10px !important;
+}
+
+/* Цвет фона горизонтального меню сверху страницы */
+/*.navbar {*/
+/*  background-color: #004c69 !important;*/
+/*  height: 106px !important;*/
+/*}*/
+
+/* Цвет фона вертикального меню слева страницы */
+/*.sidebar-dark {*/
+/*  background-color: #3d4957ff !important;*/
+/*}*/
+
+/* Левое выравнивание текста в заголовке закладки */
+.nav-item .a .div {
+  text-align: left !important;
+}
+
+/* Прозрачный текст под текстом в timeline элементах (там, где текст) */
+.card .timeline-time {
+  background-color: transparent;
+}
+
+/* Убираем границу на кружке с иконками timeline */
+.card .timeline-icon {
+  /*border: 2px !important;*/
+  border-color: #ecebfbff;
+  opacity: 0.9;
+}
+
+/* Увеличиваем в 1.5 раза иконку в заголовке аккордеона */
+.accordion-header button div div i {
+    transform: scale(1.5);
+}
+
+/* Увеличиваем в 1.5 раза иконку в заголовке карточки */
+.card-header div div i {
+  transform: scale(1.5);
+}
+
+.ph-1_3x {
+  transform: scale(1.3) !important;
+}
+.ph-1_5x {
+  transform: scale(1.5);
+}
+
+/* Классы для подъема текста выше и ниже его текущего состояния */
+.lift-up-5 {
+  position: relative;
+  top: -5px;
+}
+.lift-up-3 {
+  position: relative;
+  top: -3px;
+}
+.lift-up-base {
+  position: relative;
+  top: -2px;
+}
+.lift-up-10 {
+  position: relative;
+  top: -10px;
+}
+
+.lift-up-15 {
+  position: relative;
+  top: -15px;
+}
+
+.lift-up-20 {
+  position: relative;
+  top: -20px;
+}
+
+.lift-up-25 {
+  position: relative;
+  top: -25px;
+}
+
+.lift-up-50 {
+  position: relative;
+  top: -50px;
+}
+
+.lift-down-5 {
+  position: relative;
+  top: 5px;
+}
+
+.lift-down-3 {
+  position: relative;
+  top: 3px;
+}
+
+.lift-down-10 {
+  position: relative;
+  top: 10px;
+}
+
+.lift-down-15 {
+  position: relative;
+  top: 15px;
+}
+
+.lift-down-20 {
+  position: relative;
+  top: 20px;
+}
+
+.lift-down-25 {
+  position: relative;
+  top: 25px;
+}
+
+.lift-down-30 {
+  position: relative;
+  top: 30px;
+}
+
+.lift-down-40 {
+  position: relative;
+  top: 40px;
+}
+/* \Классы для подъема текста выше и ниже его текущего состояния */

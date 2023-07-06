@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="ru" dir="ltr" data-color-theme="light" >
+
+	<!-- Заголовок проекта  -->
+	<head>
+
+		<!-- Мета заголовки проекта  -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Самовар - переварим все!</title>
+		<!-- /Мета заголовки проекта  -->
+
+		<!-- Глобальные стили -->
+		<link rel="shortcut icon" type="image/png" href="../../../favicon.png">
+		<link href="../../../assets/fonts/inter/inter.css" rel="stylesheet" type="text/css">
+		<link href="../../../assets/icons/phosphor/styles.min.css" rel="stylesheet" type="text/css">
+		<link href="../../../code/css/all.min.css" id="stylesheet" rel="stylesheet" type="text/css">
+		<link href="../../../code/css/custom.css" rel="stylesheet" type="text/css">
+		<!-- /Глобальные стили -->
+
+		<!-- Файлы JS библиотек -->
+		<script src="../../../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+		<script src="../../../assets/js/jquery/jquery.min.js"></script>
+		<script src="../../../assets/js/vendor/notifications/noty.min.js"></script>
+		<script src="../../../assets/js/vendor/validation/validate.min.js"></script>
+		<script src="../../../assets/js/vendor/selects/select2.min.js"></script>
+		<!--		<script src="../../../../assets/js/vendor/ui/dragula.min.js"></script>-->
+		<!-- /Файлы JS скриптов -->
+
+		<!-- Модульный загрузчик и сборщик конкретной страницы  -->
+		<script src="../../../code/js/pages/all/page_builder.js"></script>
+		<script src="../../../code/js/pages/all/scrolling.js"></script>
+		<script src="../../../code/js/pages/all/server_loader.js"></script>
+		<script src="../../../code/js/pages/services/builder.js"></script>
+		<!-- /Модульный загрузчик и сборщик конкретной страницы  -->
+
+		<!-- Файлы поддержки иконок  -->
+		<link rel="shortcut icon" type="image/x-icon" href="">
+		<!-- /Файлы поддержки иконок  -->
+
+	</head>
+	<!-- /Заголовок проекта  -->
+
+	<!-- Тело проекта  -->
+	<body class="no-transitions">
+
+		<!-- Блок загружаемый js: Правая панель настроек Самовара -->
+		<div id="right_panel" class="offcanvas offcanvas-end offcanvas-resizable offcanvas-size-lg" data-min-width="250" data-max-width="660" tabindex="-1"></div>
+		<!-- /Блок загружаемый js: Правая панель настроек Самовара -->
+
+		<!-- Содержание страницы -->
+		<div class="page-content">
+
+			<!-- Блок загружаемый js: Боковое меню Самовара -->
+			<div id="sidebar_panel" class="sidebar sidebar-dark sidebar-main sidebar-expand-lg"></div>
+			<!-- /Блок загружаемый js: Боковое меню Самовара -->
+
+			<!-- Основной контейнер страницы -->
+			<div class="content-wrapper ">
+
+				<!-- Заголовок страницы -->
+				<div class="page-header page-header-light border ">
+
+					<!-- Блок заголовка страницы -->
+					<div class=" d-lg-flex d-none d-lg-block ps-3 pt-1 pb-1">
+
+						<!--  Основной заголовок страницы и кнопка вызова правого меню -->
+						<div class="d-flex justify-content-between align-items-center w-100">
+
+							<!--  Основной заголовок страницы -->
+							<div id="page_header" class="page-title"></div>
+							<!--  /Основной заголовок страницы -->
+
+							<!-- Кнопка вызова правого меню -->
+							<div id="right_call_button" class="position-absolute top-0 end-0 pe-5 pt-4 "></div>
+							<!-- /Кнопка вызова правого меню -->
+
+						</div>
+						<!--  /Основной заголовок страницы и кнопка вызова правого меню -->
+
+					</div>
+					<!-- Блок заголовка страницы -->
+
+					<!-- Путь к текущей странице -->
+					<div id="page_breadcrumb" class="page-header-content border-top border-top-primary border-top-width-1"></div>
+					<!-- /Путь к текущей странице -->
+
+					<!-- /Блок заголовка страницы -->
+
+				</div>
+				<!-- /Заголовок страницы -->
+
+				<!-- Внутреннее содержимое страницы -->
+				<div class="content-inner pt-2 bg-white bg-opacity-10">
+
+					<!-- Содержимое страницы -->
+					<div class="content">
+
+						<!-- Основной ряд -->
+						<div class="row">
+
+							<!-- Окно основное -->
+							<div id="app_kvas_card" class="main-card"></div>
+							<!-- /Окно основное -->
+
+						</div>
+						<!-- /Ряд для хроники -->
+
+					</div>
+					<!-- /Содержимое страницы -->
+
+				</div>
+				<!-- /Внутреннее содержимое страницы -->
+
+				<!-- Кнопка возврата к верху страницы -->
+				<div class="btn-to-top">
+					<button class="btn btn-secondary btn-icon rounded-pill" type="button">
+						<i class="ph-arrow-up"></i>
+					</button>
+				</div>
+				<!-- /Кнопка возврата к верху страницы -->
+
+			</div>
+			<!-- /Основной контейнер страницы -->
+
+		</div>
+		<!-- Содержание страницы -->
+
+		<!-- МОДАЛЬНЫЕ ФОРМЫ ДЛЯ КОНКРЕТНОЙ СТРАНИЦЫ -->
+
+		<!-- Форма ввода SSR данных -->
+		<div id="modal_form_ssr_data" class="modal fade" tabindex="-1"></div>
+		<!-- /Форма ввода SSR данных -->
+
+		<!-- /МОДАЛЬНЫЕ ФОРМЫ ДЛЯ КОНКРЕТНОЙ СТРАНИЦЫ -->
+
+
+		<!-- ВНИМАНИЕ! НЕ УДАЛЯТЬ, ТАК КАК ЭТО ОКНА ОБЩИЕ ДЛЯ ВСЕХ СТРАНИЦ -->
+
+		<!-- Блок загружаемый js: модальные окна для показа истории по Квасу -->
+		<div id="samovar_history" class="modal fade" tabindex="-1"></div>
+		<!-- /Блок загружаемый js: модальные окна для показа истории по Квасу -->
+
+		<!-- Блок загружаемый js: модальные окна для запросов на удаление Самовара -->
+		<div id="delete_simple" class="modal fade " tabindex="-1" aria-labelledby="delete_simple_label" aria-hidden="true"></div>
+		<div id="delete_full" class="modal fade " tabindex="-1" aria-labelledby="delete_full_label" aria-hidden="true"></div>
+		<!-- /Блок загружаемый js: модальные окна для запросов на удаление Самовара -->
+
+		<!-- /ВНИМАНИЕ! НЕ УДАЛЯТЬ, ТАК КАК ЭТО ОКНА ОБЩИЕ ДЛЯ ВСЕХ СТРАНИЦ -->
+
+	</body>
+	<!-- /Тело проекта  -->
+
+</html>
