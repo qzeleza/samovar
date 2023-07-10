@@ -8,7 +8,7 @@
 int samovar() {
 
     const std::string domain = "samovar";
-    const std::uint16_t port = 8186;
+    const std::uint16_t port = 6621;
 
     ServerAPI api(port);
     initLocale(domain, ENGLISH);

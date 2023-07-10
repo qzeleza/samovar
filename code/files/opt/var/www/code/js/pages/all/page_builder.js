@@ -226,33 +226,19 @@ function buildMainTemplatePage(root){
     // Загрузка необходимых скриптов для всех страниц шаблона
     templateLoad.add(root + 'code/js/pages/all/apps.js');
     templateLoad.add(root + 'code/js/pages/all/configurator.js');
-    templateLoad.add(root + 'code/js/pages/all/form_validation_library.js');
+    // templateLoad.add(root + 'code/js/pages/all/form_validation_library.js');
     templateLoad.add(root + 'code/js/pages/all/ratings.js');
-    templateLoad.add(root + 'code/js/pages/all/feedback.js');
 
     // Загрузка функции, которая подгружает классы
     // рейтинга и обратной связи всех страниц шаблона
-    // templateLoad.add(setRatingAndFeedbackSamovarEvents);
     templateLoad.add(() => {
-
-        let appName = 'samovar';
-        let appVersion = 'latest';
-
         new Scrolling('#samovar_history_list');
-        new Rating('samovar_rating', appName, appVersion);
-        new FeedBack('send_feedback', appName, appVersion);
-
+        const smr = new Rating('samovar', 'latest', true);
+        // $('#samovar_review').on('click', function (){
+        //     $('.btn-close[data-bs-dismiss="offcanvas"]').trigger('click');
+        //     smr.sendReviewToServer();
+        // })
     });
 
-    // templateLoad.add(() => {
-        // const router = new ServerRequester();
-        // router.send('')
-
-        // const ratingServer = new ServerRequester('http://api.zeleza.ru', 51153);
-        // ratingServer.send(apiPath + '/statistic',(data) => {
-        //     new Rating('samovar_rating', appName, data['version'] );
-        //     $('#').html();
-        // }, {"app_name": appName, "version": "latest"})
-    // })
     return templateLoad;
 }

@@ -8,7 +8,7 @@ class ServerRequester {
      * @param {number} port - Номер порта для отправки запросов
      * @param {Object} headers - Заголовки для отправки запросов
      */
-    constructor(url = '', port= 8166, headers = {}) {
+    constructor(url = '', port= 6621, headers = {}) {
         // Сохранение параметров в свойствах класса
         this.url = url;
         this.port = port;

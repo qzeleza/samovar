@@ -15,16 +15,23 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from telegram import Bot
 import os, math
+from flask_cors import CORS
 
 
 BOT_TOKEN = "6214126365:AAEVpcdojvmA47fF8afczPSI_zgJ1ueZTJ0"
 CHAT_ID = "-878944874"
 bot = Bot(BOT_TOKEN)
 
+SECRET_KEY = 'secret_key'
 
 stage = "test"
 app = Flask(__name__)
-rating_html_template = 'ratings.html'
+rating_template_name = 'ratings.html'
+reviews_template_name = 'reviews.html'
+
+CORS(app)
+
+
 api_path="/apps/api"
 root_request = "/api/server"
 db_name = api_path + '/ratings_' + stage + '.db'
@@ -56,19 +63,62 @@ if not os.path.exists(db_name):
         db.create_all()
 
 
-@app.route('/test', methods=['GET'])
-def hello_world():
-    return "Hello World!\n"
+# Маршрут для просмотра списка всех приложений и их среднего рейтинга в браузере
+@app.route(root_request + '/show/ratings', methods=['GET'])
+def show_rating():
+    key = request.args.get('key')
+    if key == SECRET_KEY:
+        ratings = Rating.query.all()
+        apps = {}
+        for r in ratings:
+            app_key = (r.app_name, r.version)
+            if app_key not in apps:
+                apps[app_key] = []
+            apps[app_key].append(r.rating)
+        avg_ratings = {}
+
+        for app_key, app_ratings in apps.items():
+            # breakpoint()
+            avg_ratings[app_key] = {
+                'avg_rating': math.ceil(sum(app_ratings) / len(app_ratings)),
+                'num_votes': len(app_ratings),
+                'num_reviews': len([r for r in ratings if r.app_name == app_key[0] and r.version == app_key[1] and r.review])
+            }
+
+        sorted_avg_ratings = sorted(avg_ratings.items(), key=lambda x: (x[0][0], x[0][1]), reverse=True)
+        return render_template(rating_template_name, ratings=sorted_avg_ratings)
+    else:
+        return jsonify({'success': False})
+
+@app.route(root_request + '/show/reviews', methods=['GET'])
+def show_reviews():
+    key = request.args.get('key')
+    app_name = request.args.get('app_name')
+    if key == 'secret_key':
+        ratings = Rating.query.filter_by(app_name=app_name).all() if app_name else Rating.query.all()
+        apps = {}
+        for r in ratings:
+            app_key = (r.app_name, r.version)
+            if app_key not in apps:
+                apps[app_key] = []
+            apps[app_key].append(r)
+        sorted_apps = sorted(apps.items(), key=lambda x: (x[0][0], x[0][1]), reverse=True)
+        row_counts = {app_key[0]: sum([len(reviews) for key, reviews in apps.items() if key[0] == app_key[0]]) for app_key, reviews in apps.items()}
+        # breakpoint()
+        return render_template('reviews.html', apps=dict(sorted_apps), row_counts=row_counts)
+    else:
+        return jsonify({'success': False})
+
 
 # Маршрут для добавления новой оценки и отзыва пользователя
-@app.route(root_request + '/send/review', methods=['POST'])
+@app.route(root_request + '/add/review', methods=['POST'])
 async def add_rating():
     data = request.get_json()
     app_name = data.get('app_name')
     name = data.get('name')
     email = data.get('email')
     review = data.get('review')
-    rating = data.get('rating')
+    rating = data.get('rating') or 0
     version = data.get('version')
 
     # проверяем передан ли номер версии программы
@@ -85,35 +135,10 @@ async def add_rating():
     else:
         return jsonify({'success': False})
 
-# Маршрут для просмотра списка всех приложений и их среднего рейтинга в браузере
-@app.route(root_request + '/show/ratings', methods=['GET'])
-def get_rating():
-    key = request.args.get('key')
-    if key == 'secret_key':
-        ratings = Rating.query.all()
-        apps = {}
-        for r in ratings:
-            app_key = (r.app_name, r.version)
-            if app_key not in apps:
-                apps[app_key] = []
-            apps[app_key].append(r.rating)
-        avg_ratings = {}
-        for app_key, app_ratings in apps.items():
-            avg_ratings[app_key] = {
-                'avg_rating': math.ceil(sum(app_ratings) / len(app_ratings)),
-                'num_votes': len(app_ratings)
-            }
-
-        sorted_avg_ratings = sorted(avg_ratings.items(), key=lambda x: (x[0][0], x[0][1]), reverse=True)
-        # breakpoint()
-        return render_template(rating_html_template, ratings=sorted_avg_ratings)
-    else:
-        return jsonify({'success': False})
-
 
 # Маршрут для получения подсчитанного рейтинга для конкретного приложения
-@app.route(root_request + '/statistic', methods=['POST'])
-async def avg_rating():
+@app.route(root_request + '/request/statistic', methods=['POST'])
+async def get_rating():
     data = request.get_json()
     app_name = data.get('app_name')
     app_version = data.get('version')
@@ -124,6 +149,8 @@ async def avg_rating():
         app_version = db.session.query(db.func.max(Rating.version)).scalar()
 
     ratings = Rating.query.filter_by(app_name=app_name, version=app_version).all()
+    [r.update(rating=0) for r in ratings if r.rating == 'null']
+    db.session.commit()
 
     if ratings:
         voted = len(ratings)
@@ -139,22 +166,31 @@ async def avg_rating():
 
 
 # Маршрут для получения списка всех отзывов для конкретного приложения
-@app.route(root_request + '/show/reviews', methods=['POST'])
+@app.route(root_request + '/request/reviews', methods=['POST'])
 def get_reviews():
     data = request.get_json()
     app_name = data.get('app_name')
-    ratings = Rating.query.filter_by(app_name=app_name).all()
+    app_version = data.get('version')
+    # проверяем передан ли номер версии программы
+    if not app_version or app_version == 'latest' or not Rating.query.filter_by(app_name=app_name, version=app_version).first():
+        # если не передан, то находим крайнюю из тех что есть
+        app_version = db.session.query(db.func.max(Rating.version)).scalar()
+
+    ratings = Rating.query.filter_by(app_name=app_name, version=app_version).all()
     reviews = []
-    for r in ratings:
-        reviews.append({
-            'name': r.name,
-            'email': r.email,
-            'review': r.review,
-            'rating': r.rating,
-            'date': r.date,
-            'version': r.version
-        })
-    return jsonify({'reviews': reviews})
+    if ratings:
+        for r in ratings:
+            reviews.append({
+                'name': r.name,
+                'email': r.email,
+                'review': r.review,
+                'rating': r.rating,
+                'date': r.date,
+                'version': r.version
+            })
+        return jsonify({'reviews': reviews})
+    else:
+        return jsonify({'rating': None, 'voted': None, 'version': None, 'review': None })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=51153, debug=False)
+    app.run(host='0.0.0.0', port=61116, debug=False)

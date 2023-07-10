@@ -906,88 +906,13 @@ const Tooltips = function () {
         },
         initTooltips: function (){
             tooltipToggle();
-            // $('.sidebar-logo-hidden').hide();
-            // $('.sidebar-control.sidebar-main-resize').on('click', showLogoImageWhenHideMenu);
-
         }
     }
 }();
+
+
 
 App.initCore();
 App.initAfterLoad();
 Tooltips.init();
 Tooltips.initTooltips();
-
-// const Settings = function () {
-//
-//     const tooltipToggle = function() {
-//
-//     }
-//
-//     //
-//     // Return objects assigned to module
-//     //
-//
-//     return {
-//         init: function() {
-//
-//         },
-//     }
-//
-// }();
-
-
-// Initialize module
-// шаблон для создания класса
-// const templete = function () {
-//
-//     let templateVal;
-//
-//     const isTemplateVal = function() {
-//         return true;
-//     }
-//
-//     const makeSomethingWhenTrue = function() {
-//         return true;
-//     }
-//     const makeSomethingWhenFalse = function() {
-//         return true;
-//     }
-//
-//     const functionTemplate = function() {
-//         if (isTemplateVal()) {
-//             makeSomethingWhenTrue();
-//         } else {
-//             makeSomethingWhenFalse();
-//         }
-//     }
-//
-//
-//     //
-//     // Return objects assigned to module
-//     //
-//
-//     return {
-//         init: function() {
-//             templateVal = $('.class_of-some-element');
-//             // что-то делаем, когда нажали на элемент
-//             templateVal.on('click', functionTemplate);
-//             // что-то делаем, когда навели мышь на элемент
-//             templateVal.on('mouseenter',functionTemplate);
-//             // что-то делаем, когда убрали мышь с элемента
-//             templateVal.on('mouseleave',functionTemplate);
-//         },
-//     };
-//
-// }();
-
-//
-// Устанавливаем в загрузку страницы
-// ------------------------------
-
-// Загружаем данные только после загрузки loader.js
-// который отвечает за загрузку данных из других файлов в один
-// $(document).on("appReady", function() {
-
-// });
-

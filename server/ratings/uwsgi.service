@@ -3,11 +3,12 @@ Description=uWSGI service for API
 After=network.target
 
 [Service]
-User=uwsgi-user
-Group=uwsgi-group
-WorkingDirectory=/opt/apps/samovar
+User=nginx
+Group=nginx
+WorkingDirectory=/apps/api/
 ExecStart=/apps/api/venv/bin/uwsgi --ini /apps/api/uwsgi.ini
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
+
