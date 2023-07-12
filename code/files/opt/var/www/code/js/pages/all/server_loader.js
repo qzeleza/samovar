@@ -122,13 +122,13 @@ class ServerRequester {
      * @returns {Object} - Результат запроса
      */
     sendData(path, data= {}, callback = null) {
-        let result;
+        let result = null;
         let self = this;
         // Проверка входных данных
         if (this.validateDataRequest(data)) {
             // Если sendData была вызвана напрямую
             // без использования очереди вызовов
-            this.progressBarIndicatorNoty.close();
+            Noty.closeAll();
             if (this.queue.length === 0) this.spinIndicatorNoty.show();
             // Отправка POST-запроса с помощью jQuery.ajax
             $.ajax({
@@ -169,35 +169,6 @@ class ServerRequester {
                 }
             });
 
-            // $.ajax({
-            //     type: 'POST',
-            //     url: `${this.url}:${this.port}${path}`,
-            //     data: data,
-            //     headers: this.headers,
-            //     dataType: 'json',
-            //     async: true,
-            //     success: (data) => {
-            //         // Сохранение результата запроса в кеше по ключу path
-            //         this.cache[path] = data;
-            //         this.data[path] = data;
-            //         result = data;
-            //
-            //         // Вызов функции обратного вызова, если она передана
-            //         if (callback && typeof callback === 'function') {
-            //             callback(data);
-            //         }
-            //         // Закрываем индикатор ожидания
-            //         if (this.queue.length === 0) this.spinIndicatorNoty.close();
-            //     },
-            //     error: (jqXHR, textStatus, errorThrown) => {
-            //         // Закрываем индикатор ожидания
-            //         if (this.queue.length === 0) this.spinIndicatorNoty.close();
-            //         // Отображение сообщения об ошибке с помощью Noty
-            //         this.errorNoty.setText(`Ошибка: ${textStatus} ${errorThrown}`).show();
-            //     },
-            //     always: () => {
-            //     }
-            // });
         } else {
             // если не прошли проверку на ошибки
             // Отображение сообщения об ошибке с помощью Noty

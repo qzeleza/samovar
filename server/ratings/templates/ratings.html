@@ -6,13 +6,14 @@
 <body>
 <div class="container pt-5">
   <h1>Общие данные по рейтигу</h1>
-  <table class="table mt-3">
+  <table class="table mt-5">
   <thead>
     <tr>
       <th scope="col" class="align-middle">Название</th>
       <th scope="col">Версия ▼</th>
       <th scope="col">Рейтинг</th>
       <th scope="col">Голоса</th>
+      <th scope="col">Отзывы</th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +34,7 @@
       <td>{{ app_key[1] }}</td>
       <td>{{ app_data.avg_rating }}</td>
       <td>{{ app_data.num_votes }}</td>
+      <td>{{ app_data.num_reviews }}</td>
     </tr>
     {% set ns.prev_app_name = app_key[0] %}
     {% endfor %}

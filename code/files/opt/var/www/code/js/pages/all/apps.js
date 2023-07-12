@@ -916,3 +916,23 @@ App.initCore();
 App.initAfterLoad();
 Tooltips.init();
 Tooltips.initTooltips();
+
+function rightPanelAct(act='hide'){
+    const rightPanel = $('#right_panel');
+    if (act === 'hide') {
+        if (rightPanel || rightPanel._isShown) {
+            $('.btn-close[data-bs-dismiss="offcanvas"]').trigger('click');
+        }
+    } else if (act === 'show') {
+        const myOffcanvas = new bootstrap.Offcanvas(rightPanel);
+        if (self.rightPannelShown){
+            myOffcanvas.show();
+        }
+    }
+
+}
+
+
+let socket = io();
+socket.on('connect', function () {
+socket.emit('my event', {data: 'I\'m connected!'});})

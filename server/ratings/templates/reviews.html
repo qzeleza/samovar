@@ -29,15 +29,15 @@
 
                     <td rowspan="{{ reviews|length }}" class="fw-bold  text-center border-end  border-start">{{ app_key[1] }}</td>
                     {% for r in reviews %}
-                    {% if not loop.first %}
+                        {% if not loop.first %}
                 <tr class="border-end">
-                    {% endif %}
-                    <td>
-                        <div class="text-end">
-                            <span class="fw-bold">{{ r.name }}</span> | {{ r.email }} | {{ r.date.strftime('%Y-%m-%d') }}
-                        </div>
-                        <div class="text-start pb-3 pt-3">{{ r.review }}</div>
-                    </td>
+                        {% endif %}
+                        <td>
+                            <div class="text-end">
+                                <span class="fw-bold">{{ r.name }}</span> | {{ r.email }} | {{ r.date.strftime('%Y-%m-%d') }}
+                            </div>
+                            <div class="text-start pb-3 pt-3">{{ r.review }}</div>
+                        </td>
                 </tr>
 
                 {% endfor %}

@@ -53,6 +53,7 @@ class Rating {
         this.voted = $('#' + this.votedId);
         this.stars = this.createStarsRating();
         this.review = $('#' + this.reviewId);
+        this.validator = new FormDataValidator(this.reviewFormId);
 
         const themeNoty = 'bootstrap-v4';
         this.rightPannelShown = callRightPanel;
@@ -67,24 +68,18 @@ class Rating {
             theme: themeNoty,
             type: 'confirm',
             buttons: [
-                Noty.button('Отменить', 'btn btn-link mb-2', () => {self._pressOnCancelButton();},{type:'reset'}),
-                Noty.button('Отправить <i class="ph-paper-plane-tilt ms-2"></i>',
-                    'btn btn-outline-secondary ms-2 me-4 mb-2', () => {
-                        self._pressOnSendButton();
-                    }, {type: 'submit'}),
+                Noty.button('Отменить', 'btn btn-link mb-2', () => {this.notyReview.close();}),
+                Noty.button('Отправить <i class="ph-paper-plane-tilt ms-2"></i>','btn btn-outline-secondary ms-2 me-4 mb-2', () => { self._pressOnSendButton();}),
             ],
             callbacks:{
-                beforeShow:function() {
-                    const myOffcanvas = $('#right_panel');
-                    if (myOffcanvas || myOffcanvas._isShown ){
-                        $('.btn-close[data-bs-dismiss="offcanvas"]').trigger('click');
-                    }
+                beforeShow: function() {
+                    rightPanelAct('hide');
+                },
+                afterShow: function () {
+                    $('#' + self.userReviewId).focus();
                 },
                 afterClose: function() {
-                    const myOffcanvas = new bootstrap.Offcanvas($('#right_panel'));
-                    if (self.rightPannelShown){
-                        myOffcanvas.show();
-                    }
+                    rightPanelAct('show');
                 },
                 onClose: function() {
                     // костыль, который позволяет показывать окно при повторных вызовах
@@ -112,8 +107,8 @@ class Rating {
 
         this.stars.on('mouseover', this.setStarRating.bind(this));
         this.stars.on('mouseout', this._setRating.bind(this));
-        this.stars.on('click', this.sendRatingToServer.bind(this));
-        this.review.on('click', this.sendReviewToServer.bind(this));
+        this.stars.on('click', this.showRatingForm.bind(this));
+        this.review.on('click', this.showReviewForm.bind(this));
 
     }
 
@@ -146,7 +141,7 @@ class Rating {
 
             if (response['voted'] === null) {
                 self.voted.html('(0)');
-                self.appVersion = 'крайняя';
+                self.appVersion = 'latest';
             } else {
                 self.rating = response['rating'];
                 self.voted.html('(' + response['voted'] + ')');
@@ -186,19 +181,18 @@ class Rating {
         this.index = index + 1;
     }
 
-    _pressOnCancelButton(){
-        this.notyReview.close();
-    }
+
     //
     // Отправляем отзыв на сервер
     //
-    _pressOnSendButton(e){
-        let self = this;
-        let result = null;
+    _pressOnSendButton(event){
 
-        // if ($('#' + this.reviewFormId).valid()) {
-        // if ($('#' + this.reviewFormId).validetta('validate')) {
-            result = this.server.send('/api/server/add/review', () => {
+        const self = this;
+        // event.preventDefault(); // Предотвращает отправку формы
+        if (this.validator.validate()) {
+            // Если все поля прошли проверку, можно отправить форму
+            // Вы можете добавить свой код здесь для отправки данных формы
+            this.server.send('/api/server/add/review', () => {
                 localStorage.setItem(self.storageKey, self.rating);
                 self.notyReview.close();
                 self._getRatingFromServer();
@@ -208,17 +202,22 @@ class Rating {
                 'name': $('#' + this.userNameId).val(),
                 'email': $('#' + this.userEmailId).val(),
                 'review': $('#' + this.userReviewId).val(),
-                'rating': this.rating,
+                'rating': this.rating || 0,
             });
-        // }
-        return result;
+        }
     }
 
+    _showForm(notyWindows, htmlForm) {
+
+        notyWindows.setText(htmlForm, true);
+        notyWindows.show();
+
+    }
     //
     // Отправляем ТОЛЬКО отзыв
     //
-    sendReviewToServer() {
-        const self = this;
+    showReviewForm() {
+
         console.log('Обработчик события click для #' + this.reviewId +' вызван');
         const reviewForm =
             '<form id="' + this.reviewFormId + '" novalidate>' +
@@ -228,49 +227,23 @@ class Rating {
             "<div class='badge bg-success bg-opacity-75 lift-up-3'>" + this.appVersion + "</div>" +
             "</div>" +
             '<div class="mb-2">Пишите по существу и самое главное</div>' +
-            '<textarea id="' + this.userReviewId + '" class="form-control  h-200" placeholder="Суть Вашего предложения или замечений." data-validetta="required,minLength[6]"></textarea>' +
+            '<textarea id="' + this.userReviewId + '" class="form-control  h-200" placeholder="Суть Вашего предложения или замечений." data-min-length="6" data-bs-popup="tooltip" data-bs-placement="right" ></textarea>' +
             '<div style="display: flex;" class="pt-1 input-group" >' +
-            '</span><input id="' + this.userNameId + '" type="text" class="form-control" placeholder="Ваше имя" data-validetta="required,minLength[3]">' +
-            '</span><input id="' + this.userEmailId + '" type="email" class="form-control" placeholder="Ваш Email" data-validetta="required,email">' +
+            '</span><input id="' + this.userNameId + '" type="text" class="form-control" placeholder="Ваше имя" data-min-length="3" data-bs-popup="tooltip" data-bs-placement="left" >' +
+            '</span><input id="' + this.userEmailId + '" type="email" class="form-control" placeholder="Ваш Email" data-validate-email="email" data-bs-popup="tooltip" data-bs-placement="right" >' +
             '</div>' +
             '</div>' +
             "</form>";
 
-
-        this.notyReview.on('onShow', function () {
-            // Инициализируем валидацию формы
-            $('#' + self.reviewFormId).validetta({
-                realTime: true,
-                display: 'bubble',
-                bubblePosition: 'right',
-                errorClass: 'validetta-bubble-danger'
-            });
-            $('#' + self.userReviewId).focus();
-            console.log('Фокус ввода был установлен на #' + self.userReviewId);
-        });
-
-        $('#' + this.reviewFormId).on('validetta:submit', function (event, validetta) {
-            if (!validetta.isValid) {
-                event.preventDefault();
-            } else {
-                self._pressOnSendButton();
-            }
-        });
-
-        this.notyReview.setText(reviewForm, true);
-        this.notyReview.show();
-
+        this._showForm(this.notyReview, reviewForm);
 
     }
-
-
-
 
 
     //
     // Отправляем отзыв вместе с рейтингом
     //
-    sendRatingToServer(){
+    showRatingForm(){
         const sRating = localStorage.getItem(this.storageKey)
         if (sRating) {
             // если оценка уже была, то просто уведомляем об этом
@@ -283,25 +256,22 @@ class Rating {
                     "<div class='fs-4 text-primary fw-semibold pt-2 pb-1'> Ваша оценка - " +  sRating + "/" + this.stars.length + "</div>" +
                     "<span class='pb-2'>Поставить оценку повторно можно, лишь для следующей версии приложения.</span>" +
                 "</div>";
-            this.notyError.setText(reviewForm, true);
-            this.notyError.show();
+            this._showForm(this.notyError, reviewForm);
 
         } else {
-            let self = this;
             const thanksFor =
                 "<form>" +
                     '<div class="pt-3 ps-3 pe-1 pb-1">' +
                         '<h4 class="mb-3">Спасибо за Вашу оценку ('+ this.rating + '/' + this.stars.length + ')</h4>' +
                         '<label class="form-label ms-1">Будем признательны за обратную связь</label> ' +
-                        '<textarea id="' + self.appName + '_user_review" class="form-control" placeholder="Что необходимо добавить или изменить?" style="height: 200px;"></textarea>' +
+                        '<textarea id="' + this.appName + '_user_review" class="form-control" placeholder="Что необходимо добавить или изменить?" style="height: 200px;"></textarea>' +
                         '<div style="display: flex;" class="pt-1" >' +
-                            '<input id="' + self.appName + '_user_name" class="form-control" placeholder="Как к Вам обращаться?" >' +
-                            '<input id="' + self.appName + '_user_email" type="email" class="form-control" placeholder="Ваш Email" >' +
+                            '<input id="' + this.appName + '_user_name" class="form-control" placeholder="Как к Вам обращаться?" >' +
+                            '<input id="' + this.appName + '_user_email" type="email" class="form-control" placeholder="Ваш Email" >' +
                         '</div>' +
                     '</div>' +
                 "</form>";
-            this.notyReview.setText(thanksFor, true);
-            this.notyReview.show();
+            this._showForm(this.notyReview, thanksFor);
         }
 
     }

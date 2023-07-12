@@ -226,7 +226,7 @@ function buildMainTemplatePage(root){
     // Загрузка необходимых скриптов для всех страниц шаблона
     templateLoad.add(root + 'code/js/pages/all/apps.js');
     templateLoad.add(root + 'code/js/pages/all/configurator.js');
-    // templateLoad.add(root + 'code/js/pages/all/form_validation_library.js');
+    // templateLoad.add(root + 'code/js/pages/all/validator.js');
     templateLoad.add(root + 'code/js/pages/all/ratings.js');
 
     // Загрузка функции, которая подгружает классы
@@ -236,7 +236,7 @@ function buildMainTemplatePage(root){
         const smr = new Rating('samovar', 'latest', true);
         // $('#samovar_review').on('click', function (){
         //     $('.btn-close[data-bs-dismiss="offcanvas"]').trigger('click');
-        //     smr.sendReviewToServer();
+        //     smr.showReviewForm();
         // })
     });
 

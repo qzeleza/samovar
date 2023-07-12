@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocketIO Client</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.js"></script>
+  <script>
+    var socket = io('http://api.zeleza.ru:61116'); // Замените 'remote-server-ip' на фактический IP-адрес удаленного сервера
+
+    // Connect event
+    socket.on('connect', function() {
+      console.log('Подключено к серверу');
+    });
+
+    // Disconnect event
+    socket.on('disconnect', function() {
+      console.log('Отключено от сервера');
+    });
+
+
+    // Get Rating event
+    socket.on('get_rating_response', function(data) {
+      console.log('Received get_rating_response:', data);
+    });
+
+    // New Record event
+    socket.on('new_record_response', function(data) {
+      console.log('Received new_record_response:', data);
+    });
+
+    // Reviews List event
+    socket.on('reviews_list_response', function(data) {
+      console.log('Received reviews_list_response:', data);
+    });
+
+    // Send the get_rating event
+    function sendGetRatingEvent() {
+      let json = {   "event": "get_rating",
+        "data": {"app_name": "samovar"}
+      };
+      console.log('Данные отправлены на сервер');
+      socket.emit('get_rating', json);
+    }
+
+    // Send the new_record event
+    function sendNewRecordEvent() {
+      let data ={
+        "event": "new_record",
+        "data": {
+          "app_name": "kvas",
+          "version":"latest",
+          "name": "WebSocket",
+          "email":"ws@email.ws",
+          "review":"Тестовый отзыв: программа отличная так держать!",
+          "rating":"9"
+        }
+      };
+      socket.emit('new_record', data);
+    }
+
+    // Send the reviews_list event
+    function sendReviewsListEvent() {
+      var data = {   "event": "reviews_list",
+        "data": {"app_name": "samovar"}
+      };
+      socket.emit('reviews_list', data);
+    }
+  </script>
+</head>
+<body>
+<button onclick="sendGetRatingEvent()">Send Get Rating Event</button>
+<button onclick="sendNewRecordEvent()">Send New Record Event</button>
+<button onclick="sendReviewsListEvent()">Send Reviews List Event</button>
+</body>
+</html>

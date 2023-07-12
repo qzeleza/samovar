@@ -1,0 +1,101 @@
+### Send GET request get_rating
+POST http://api.zeleza.ru:61116/api/v1/get_rating
+Content-Type: application/json
+
+{
+  "app_name": "samovar"
+}
+
+### Send GET request new_record
+POST http://api.zeleza.ru:61116/api/v1/new_record
+Content-Type: application/json
+
+{
+  "app_name": "samovar",
+  "version": "1.0.1",
+  "name": "Bob",
+  "email": "test@email.cc",
+  "review": "Тестовый отзыв: программа отличная так держать!",
+  "rating": "10"
+}
+
+### Send POST request reviews_list
+POST http://api.zeleza.ru:61116/api/v1/reviews_list
+Content-Type: application/json
+
+{
+  "app_name": "samovar"
+}
+
+### Send GET request reviews_table_page
+GET http://api.zeleza.ru:61116/api/v1/reviews_table_page?key=secret_key&app_name=samovar
+
+### Send GET request summary_table_page
+GET http://api.zeleza.ru:61116/api/v1/summary_table_page?key=secret_key
+
+
+
+### Requests with WEBSOCKET
+WEBSOCKET ws://api.zeleza.ru:61116/socket.io/?EIO=4&transport=websocket
+Content-Type: application/json
+
+{
+  "event": "get_rating",
+  "data": {"app_name": "samovar"}
+}
+
+=== wait-for-server
+=== wait-for-server
+{
+  "event": "new_record",
+  "data": {
+    "app_name": "kvas",
+    "version":"latest",
+    "name": "WebSocket",
+    "email":"ws@email.ws",
+    "review":"Тестовый отзыв: программа отличная так держать!",
+    "rating":"9"
+  }
+}
+===
+{
+  "event": "reviews_list",
+  "data": {"app_name": "samovar"}
+}
+
+
+### Requests with scripts
+// Also, we can use scripts for sending messages to server and verifying messages from the server.
+WEBSOCKET ws://api.zeleza.ru:61116/
+Content-Type: application/json
+
+{
+  "message": "get_rating"
+}
+
+> {%
+  let i = 0
+  response.body.onEachMessage((message, unsubscribe, output) => {
+    i++
+    const jsonMessage = JSON.parse(message); // We know that our sample server returns JSON
+    client.test("Server sent a JSON with 'message' property: " + i , () => {
+      client.assert(jsonMessage.message !== undefined)
+    });
+    if (jsonMessage.message.includes("disconnect")) {
+      unsubscribe() // remove current listener
+      return
+    }
+
+    if (i === 5) {
+      output(JSON.stringify({
+        message: "disconnect"
+      }));
+    } else {
+      output(JSON.stringify({
+        message: "Message from the script: " + i
+      }));
+    }
+  }, () => {
+    client.log("We stopped listening for WebSocket from the current 'onEachMessage' call!")
+  });
+ %}
