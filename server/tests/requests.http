@@ -3,40 +3,40 @@ POST http://api.zeleza.ru:61116/api/v1/get_rating
 Content-Type: application/json
 
 {
-  "app_name": "samovar"
+  "app_name": "kvas"
 }
 
 ### Send GET request new_record
-POST http://api.zeleza.ru:61116/api/v1/new_record
+POST https://api.zeleza.ru:61116/api/v1/new_record
 Content-Type: application/json
 
 {
   "app_name": "samovar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "name": "Bob",
   "email": "test@email.cc",
   "review": "Тестовый отзыв: программа отличная так держать!",
-  "rating": "10"
+  "rating": "5"
 }
 
 ### Send POST request reviews_list
-POST http://api.zeleza.ru:61116/api/v1/reviews_list
+POST https://api.zeleza.ru:61116/api/v1/reviews_list
 Content-Type: application/json
 
 {
-  "app_name": "samovar"
+  "app_name": "kvas"
 }
 
 ### Send GET request reviews_table_page
-GET http://api.zeleza.ru:61116/api/v1/reviews_table_page?key=secret_key&app_name=samovar
+GET https://api.zeleza.ru:61116/api/v1/reviews_table_page?key=secret_key&app_name=samovar
 
 ### Send GET request summary_table_page
-GET http://api.zeleza.ru:61116/api/v1/summary_table_page?key=secret_key
+GET https://api.zeleza.ru:61116/api/v1/summary_table_page?key=secret_key
 
 
 
 ### Requests with WEBSOCKET
-WEBSOCKET ws://api.zeleza.ru:61116/socket.io/?EIO=4&transport=websocket
+WEBSOCKET wss://api.zeleza.ru:61116/socket.io/?EIO=4&transport=websocket
 Content-Type: application/json
 
 {
