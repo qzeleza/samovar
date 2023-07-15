@@ -20,7 +20,7 @@ def get_function_name():
 
 
 # Создание форматера с префиксами и дополнительной информацией
-def format_time(record, datefmt='%d-%m-%Y %H:%M:%S'):
+def format_time(record, datefmt=DebugConfig.DATE_FORMAT):
     timestamp = time.strftime(datefmt, time.localtime(record.created))
     return timestamp
 

@@ -11,26 +11,33 @@
 #
 #
 import os
-
 from sys import exit
 from apps.logger import root_logger
 
+# import eventlet
+# eventlet.monkey_patch()
+
+from gevent import monkey
+monkey.patch_all()
+
 from apps import create_app
-from apps.events import socketio
+from apps.websockets import socketio
 from config import config_dict
 
 # WARNING: Don't run with debug turned on in production!
 DEBUG = (os.getenv('DEBUG', 'False') == 'True')
 
+
+
 # The configuration
 get_config_mode = 'Debug' if DEBUG else 'Production'
 try:
-
     # Load the configuration using the default values
     app_config = config_dict[get_config_mode.capitalize()]
-
 except KeyError:
-    exit('Ошибка: Недопустимый <config_mode>. Ожидалось одно из значений [Debug, Production] ')
+    error = "Недопустимый <config_mode>. Ожидалось одно из значений [Debug, Production]"
+    root_logger.error(error)
+    exit(error)
 
 app = create_app(app_config)
 
@@ -41,5 +48,18 @@ if DEBUG:
     root_logger.info('Файл базы данных ' + app_config.DATABASE_PATH)
 
 
-if __name__ == '__main__':
-    socketio.run(app, host=app_config.HOST, port=app_config.PORT, debug=DEBUG)
+# if __name__ == '__main__':
+#     if app:
+#         socketio.run(
+#             app,
+#             host=app_config.HOST,
+#             port=app_config.PORT,
+#             keyfile=app_config.CERT_KEY,
+#             certfile=app_config.CERT_PEM,
+#             debug=DEBUG
+#         )
+#     #
+#     else:
+#         error = "Возникла ошибка при запуске приложения.\nПроверьте лог файл"
+#         root_logger.error(error)
+#         exit(error)

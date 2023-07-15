@@ -1,6 +1,6 @@
 // Создание WebSocket-соединения
 // const socket = io("http://api.zeleza.ru:61116/socket.io/?EIO=4&transport=websocket");
-const socket = io("ws://api.zeleza.ru:61116/");
+const socket = io("wss://api.zeleza.ru:63331/");
 
 // Обработчик события при установке соединения
 socket.on('connect', () => {

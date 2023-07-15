@@ -16,7 +16,7 @@ bot = Bot(Config.BOT_TOKEN)
 # проверяем есть ли в БД записи
 def check_db_for_empty(app_name, version):
     # проверяем передан ли номер версии программы
-    first_rec_of_version = Rating.query.filter_by(app_name=app_name, version=version).first()
+    first_rec_of_version = Rating.query.filter_by(app_name=app_name).first()
     if not first_rec_of_version and (not version or version == 'latest'):
         error = "ОШИБКА: Не задан номер версии и нет записей в БД."
         logger.error(error)
@@ -38,7 +38,7 @@ def get_version(app_name, version):
 
 
 # Получаем рейтинг по имени и номеру версии
-async def get_app_rating(data):
+def get_app_rating(data):
     logger.debug(f"Вызвана функция '{get_function_name()}'")
     app_name = data.get('app_name')
     version = data.get('version')
@@ -58,24 +58,25 @@ async def get_app_rating(data):
         # await bot.send_message(chat_id=CHAT_ID, text=f'Статистика по {app_name}:\nСредняя оценка: {
         # avg_rating}\nЧисло голосов: {voted}')
         logger.debug(f'Успешная обработка данных завершена.')
-        return jsonify({
+        return {
             'app_name': app_name,
             'rating': avg_rating,
             'voted': voted,
-            'version': version,
-        })
+            'version': version
+        }
     else:
         logger.debug('Обработка данных завершена с нулевым результатом.')
-        return jsonify({
+        return {
             'app_name': app_name,
             'rating': None,
             'voted': None,
             'version': None
-        })
+        }
 
 
 # Добавляем новый отзыв или новый рейтинг в БД
-async def add_new_record(data):
+def add_new_record(data):
+
     logger.debug(f"Вызвана функция '{get_function_name()}'")
 
     app_name = data.get('app_name')
@@ -96,9 +97,9 @@ async def add_new_record(data):
         except Exception as e:
             error = f'Данные в БД добавлены не были: {str(e)}'
             logger.debug(error)
-            return jsonify({'success': False, 'description': error})
+            return {'success': False, 'description': error}
         try:
-            await bot.send_message(chat_id=Config.CHAT_ID, text=f'Новый отзыв на {app_name}:\n'
+            bot.send_message(chat_id=Config.CHAT_ID, text=f'Новый отзыв на {app_name}:\n'
                                                                 f'Имя: {name}\n'
                                                                 f'Email: {email}\n'
                                                                 f'Отзыв: {review}\n'
@@ -107,11 +108,13 @@ async def add_new_record(data):
         except Exception as e:
             logger.debug(f"Сообщение в Telegram не было отправлено: {str(e)}")
 
-        return jsonify({'success': True, 'description': "Запись добавлена."})
+        mess = "Запись успешно добавлена."
+        logger.debug(mess)
+        return {'success': True, 'description': mess}
     else:
         error = "Один из параметров не задан: app_name или rating или version"
         logger.debug(error)
-        return jsonify({'success': False, 'description': error})
+        return {'success': False, 'description': error}
 
 
 # Получаем полный список отзывав по имени и версии приложения в JSON формате
@@ -122,25 +125,26 @@ def get_review_list(data):
     version = data.get('version')
 
     # проверяем передан ли номер версии программы
-    check_db_for_empty(app_name, version)
+    version = get_version(app_name, version)
 
     ratings = Rating.query.filter_by(app_name=app_name, version=version).all()
     reviews = []
     if ratings:
+        # breakpoint()
         for r in ratings:
             reviews.append({
                 'name': r.name,
                 'email': r.email,
                 'review': r.review,
                 'rating': r.rating,
-                'date': r.date,
-                'version': r.version
+                'date': r.date.strftime(Config.DATE_FORMAT),
             })
+
         logger.debug("Формирование списка отзывов успешно завершено.")
-        return jsonify({'reviews': reviews})
     else:
         logger.debug("Формирование списка отзывов завершено с нулевым результатом.")
-        return jsonify({'rating': None, 'voted': None, 'version': None, 'review': None})
+
+    return {'app_name': app_name, 'version': version, 'review_list': reviews}
 
 
 def show_apps_summary():
