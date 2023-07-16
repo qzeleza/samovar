@@ -1,0 +1,8 @@
+
+POST https://api.zeleza.ru:33661/kvas/v1/update
+Content-Type: application/json
+
+{
+  "app_name": "kvas"
+}
+
