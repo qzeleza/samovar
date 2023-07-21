@@ -1,0 +1,20 @@
+### Планы по Самовару
+
+1. Устранить причину отсутствия фокуса ввода при отправке обратной связи к Самовару
+2. Разработать механизм или использовать имеющийся, чтобы реализовать появление сообщений из очереди, а не параллельно, как сейчас.
+3. Проанализировать плюсы и минусы перехода на WebSocket и если да, то переписать сервер и клиента для этого
+    - Flask-SocketIO для реализации сервера
+        + https://tutorials.technology/tutorials/61-Create-an-application-with-websockets-and-flask.html
+        + https://blog.miguelgrinberg.com/post/easy-websockets-with-flask-and-gevent
+    - WebSocket++ на C++
+        + https://github.com/zaphoyd/websocketpp или
+        + https://gitlab.com/eidheim/Simple-WebSocket-Server
+    - Ably-js для клиентов на js
+        + https://github.com/ably/ably-js
+
+    Вывод:
+        Лучшее решения для Самовара, но есть трудности
+            - переписать сервер на c++ для роутера
+            - переписать клиентскую часть
+            - переписать сервер на Flask для сбора рейтинга
+        Потому, можно переписать на WebSocket, уже после выпуска рабочей версии.

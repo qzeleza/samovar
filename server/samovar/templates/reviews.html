@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Отзывы</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1 class="my-4 text-center">Отзывы</h1>
+    <div class="row">
+        <div class="offset-2 col-8">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="text-center">Приложение</th>
+                    <th class="text-center">Версия</th>
+                    <th class="text-start ps-3">Отзывы</th>
+                </tr>
+                </thead>
+                <tbody  class="border">
+                <tr class="border-end" >
+                    {% set ns = namespace(row_count=0) %}
+                    {% set np = namespace(prev_app_name='') %}
+                    {% for app_key, reviews in apps.items() %}
+                    {% if np.prev_app_name != app_key[0] %}
+                    <td rowspan="{{ row_counts[app_key[0]] }}" class="fs-4 fw-bold  text-center border-end border-start">{{ app_key[0] }}</td>
+                    {% endif %}
+
+                    <td rowspan="{{ reviews|length }}" class="fw-bold  text-center border-end  border-start">{{ app_key[1] }}</td>
+                    {% for r in reviews %}
+                        {% if not loop.first %}
+                <tr class="border-end">
+                        {% endif %}
+                        <td>
+                            <div class="text-end">
+                                <span class="fw-bold">{{ r.name }}</span> | {{ r.email }} | {{ r.date.strftime('%Y-%m-%d') }}
+                            </div>
+                            <div class="text-start pb-3 pt-3">{{ r.review }}</div>
+                        </td>
+                </tr>
+
+                {% endfor %}
+                {% set ns.row_count = ns.row_count + 1 %}
+                {% set np.prev_app_name = app_key[0] %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

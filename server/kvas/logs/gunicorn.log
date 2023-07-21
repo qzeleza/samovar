@@ -1,0 +1,1857 @@
+[2023-07-16 11:12:39 +0300] [66579] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fd2bbaf9280>
+  on_reload: <function OnReload.on_reload at 0x7fd2bbaf93a0>
+  when_ready: <function WhenReady.when_ready at 0x7fd2bbaf94c0>
+  pre_fork: <function Prefork.pre_fork at 0x7fd2bbaf95e0>
+  post_fork: <function Postfork.post_fork at 0x7fd2bbaf9700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fd2bbaf9820>
+  worker_int: <function WorkerInt.worker_int at 0x7fd2bbaf9940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fd2bbaf9a60>
+  pre_exec: <function PreExec.pre_exec at 0x7fd2bbaf9b80>
+  pre_request: <function PreRequest.pre_request at 0x7fd2bbaf9ca0>
+  post_request: <function PostRequest.post_request at 0x7fd2bbaf9d30>
+  child_exit: <function ChildExit.child_exit at 0x7fd2bbaf9e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fd2bbaf9f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fd2bba8f0d0>
+  on_exit: <function OnExit.on_exit at 0x7fd2bba8f1f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:12:39 +0300] [66579] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:12:39 +0300] [66579] [DEBUG] Arbiter booted
+[2023-07-16 11:12:39 +0300] [66579] [INFO] Listening at: http://0.0.0.0:33666 (66579)
+[2023-07-16 11:12:39 +0300] [66579] [INFO] Using worker: gevent
+[2023-07-16 11:12:39 +0300] [66587] [INFO] Booting worker with pid: 66587
+[2023-07-16 11:12:39 +0300] [66579] [DEBUG] 1 workers
+[2023-07-16 11:12:39 +0300] [66587] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/apps/kvas/venv/lib/python3.9/site-packages/gunicorn/arbiter.py", line 589, in spawn_worker
+    worker.init_process()
+  File "/apps/kvas/venv/lib/python3.9/site-packages/gunicorn/workers/ggevent.py", line 146, in init_process
+    super().init_process()
+  File "/apps/kvas/venv/lib/python3.9/site-packages/gunicorn/workers/base.py", line 134, in init_process
+    self.load_wsgi()
+  File "/apps/kvas/venv/lib/python3.9/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/apps/kvas/venv/lib/python3.9/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/apps/kvas/venv/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+    return self.load_wsgiapp()
+  File "/apps/kvas/venv/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/apps/kvas/venv/lib/python3.9/site-packages/gunicorn/util.py", line 359, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 790, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/apps/kvas/api.py", line 15, in <module>
+    from apps.logger import root_logger
+  File "/apps/kvas/apps/__init__.py", line 7, in <module>
+    from apps.feedbacks import register_routes
+  File "/apps/kvas/apps/feedbacks.py", line 4, in <module>
+    from apps.logger import get_function_name
+  File "/apps/kvas/apps/logger.py", line 48, in <module>
+    file_handler = RotatingFileHandler(
+  File "/usr/lib/python3.9/logging/handlers.py", line 153, in __init__
+    BaseRotatingHandler.__init__(self, filename, mode, encoding=encoding,
+  File "/usr/lib/python3.9/logging/handlers.py", line 58, in __init__
+    logging.FileHandler.__init__(self, filename, mode=mode,
+  File "/usr/lib/python3.9/logging/__init__.py", line 1142, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/usr/lib/python3.9/logging/__init__.py", line 1171, in _open
+    return open(self.baseFilename, self.mode, encoding=self.encoding,
+PermissionError: [Errno 13] Permission denied: '/apps/kvas/logs/ws.log'
+[2023-07-16 11:12:39 +0300] [66587] [INFO] Worker exiting (pid: 66587)
+[2023-07-16 11:12:40 +0300] [66579] [INFO] Shutting down: Master
+[2023-07-16 11:12:40 +0300] [66579] [INFO] Reason: Worker failed to boot.
+[2023-07-16 11:14:51 +0300] [66604] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fd3db9cd280>
+  on_reload: <function OnReload.on_reload at 0x7fd3db9cd3a0>
+  when_ready: <function WhenReady.when_ready at 0x7fd3db9cd4c0>
+  pre_fork: <function Prefork.pre_fork at 0x7fd3db9cd5e0>
+  post_fork: <function Postfork.post_fork at 0x7fd3db9cd700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fd3db9cd820>
+  worker_int: <function WorkerInt.worker_int at 0x7fd3db9cd940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fd3db9cda60>
+  pre_exec: <function PreExec.pre_exec at 0x7fd3db9cdb80>
+  pre_request: <function PreRequest.pre_request at 0x7fd3db9cdca0>
+  post_request: <function PostRequest.post_request at 0x7fd3db9cdd30>
+  child_exit: <function ChildExit.child_exit at 0x7fd3db9cde50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fd3db9cdf70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fd3db9630d0>
+  on_exit: <function OnExit.on_exit at 0x7fd3db9631f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:14:51 +0300] [66604] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:14:51 +0300] [66604] [DEBUG] Arbiter booted
+[2023-07-16 11:14:51 +0300] [66604] [INFO] Listening at: http://0.0.0.0:33666 (66604)
+[2023-07-16 11:14:51 +0300] [66604] [INFO] Using worker: gevent
+[2023-07-16 11:14:51 +0300] [66605] [INFO] Booting worker with pid: 66605
+[2023-07-16 11:14:51 +0300] [66604] [DEBUG] 1 workers
+[2023-07-16 11:15:53 +0300] [66604] [INFO] Handling signal: int
+[2023-07-16 11:15:53 +0300] [66605] [INFO] Worker exiting (pid: 66605)
+[2023-07-16 11:15:53 +0300] [66604] [INFO] Shutting down: Master
+[2023-07-16 11:15:56 +0300] [66608] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f502b129280>
+  on_reload: <function OnReload.on_reload at 0x7f502b1293a0>
+  when_ready: <function WhenReady.when_ready at 0x7f502b1294c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f502b1295e0>
+  post_fork: <function Postfork.post_fork at 0x7f502b129700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f502b129820>
+  worker_int: <function WorkerInt.worker_int at 0x7f502b129940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f502b129a60>
+  pre_exec: <function PreExec.pre_exec at 0x7f502b129b80>
+  pre_request: <function PreRequest.pre_request at 0x7f502b129ca0>
+  post_request: <function PostRequest.post_request at 0x7f502b129d30>
+  child_exit: <function ChildExit.child_exit at 0x7f502b129e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f502b129f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f502b0bf0d0>
+  on_exit: <function OnExit.on_exit at 0x7f502b0bf1f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:15:56 +0300] [66608] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:15:56 +0300] [66608] [DEBUG] Arbiter booted
+[2023-07-16 11:15:56 +0300] [66608] [INFO] Listening at: http://0.0.0.0:33666 (66608)
+[2023-07-16 11:15:56 +0300] [66608] [INFO] Using worker: gevent
+[2023-07-16 11:15:56 +0300] [66609] [INFO] Booting worker with pid: 66609
+[2023-07-16 11:15:56 +0300] [66608] [DEBUG] 1 workers
+[2023-07-16 11:17:04 +0300] [66608] [INFO] Handling signal: int
+[2023-07-16 11:17:04 +0300] [66609] [INFO] Worker exiting (pid: 66609)
+[2023-07-16 11:17:04 +0300] [66608] [INFO] Shutting down: Master
+[2023-07-16 11:17:06 +0300] [66618] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f1a2e050280>
+  on_reload: <function OnReload.on_reload at 0x7f1a2e0503a0>
+  when_ready: <function WhenReady.when_ready at 0x7f1a2e0504c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f1a2e0505e0>
+  post_fork: <function Postfork.post_fork at 0x7f1a2e050700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f1a2e050820>
+  worker_int: <function WorkerInt.worker_int at 0x7f1a2e050940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f1a2e050a60>
+  pre_exec: <function PreExec.pre_exec at 0x7f1a2e050b80>
+  pre_request: <function PreRequest.pre_request at 0x7f1a2e050ca0>
+  post_request: <function PostRequest.post_request at 0x7f1a2e050d30>
+  child_exit: <function ChildExit.child_exit at 0x7f1a2e050e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f1a2e050f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f1a2dfe60d0>
+  on_exit: <function OnExit.on_exit at 0x7f1a2dfe61f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:17:06 +0300] [66618] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:17:06 +0300] [66618] [DEBUG] Arbiter booted
+[2023-07-16 11:17:06 +0300] [66618] [INFO] Listening at: http://0.0.0.0:33666 (66618)
+[2023-07-16 11:17:06 +0300] [66618] [INFO] Using worker: gevent
+[2023-07-16 11:17:06 +0300] [66619] [INFO] Booting worker with pid: 66619
+[2023-07-16 11:17:06 +0300] [66618] [DEBUG] 1 workers
+[2023-07-16 11:17:49 +0300] [66618] [INFO] Handling signal: int
+[2023-07-16 11:17:50 +0300] [66619] [INFO] Worker exiting (pid: 66619)
+[2023-07-16 11:17:50 +0300] [66618] [INFO] Shutting down: Master
+[2023-07-16 11:18:22 +0300] [66631] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f5ee24c1280>
+  on_reload: <function OnReload.on_reload at 0x7f5ee24c13a0>
+  when_ready: <function WhenReady.when_ready at 0x7f5ee24c14c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f5ee24c15e0>
+  post_fork: <function Postfork.post_fork at 0x7f5ee24c1700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f5ee24c1820>
+  worker_int: <function WorkerInt.worker_int at 0x7f5ee24c1940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f5ee24c1a60>
+  pre_exec: <function PreExec.pre_exec at 0x7f5ee24c1b80>
+  pre_request: <function PreRequest.pre_request at 0x7f5ee24c1ca0>
+  post_request: <function PostRequest.post_request at 0x7f5ee24c1d30>
+  child_exit: <function ChildExit.child_exit at 0x7f5ee24c1e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f5ee24c1f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f5ee24570d0>
+  on_exit: <function OnExit.on_exit at 0x7f5ee24571f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:18:22 +0300] [66631] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:18:22 +0300] [66631] [DEBUG] Arbiter booted
+[2023-07-16 11:18:22 +0300] [66631] [INFO] Listening at: http://0.0.0.0:33666 (66631)
+[2023-07-16 11:18:22 +0300] [66631] [INFO] Using worker: gevent
+[2023-07-16 11:18:22 +0300] [66632] [INFO] Booting worker with pid: 66632
+[2023-07-16 11:18:22 +0300] [66631] [DEBUG] 1 workers
+[2023-07-16 11:18:35 +0300] [66631] [INFO] Handling signal: int
+[2023-07-16 11:18:35 +0300] [66632] [INFO] Worker exiting (pid: 66632)
+[2023-07-16 11:18:36 +0300] [66631] [INFO] Shutting down: Master
+[2023-07-16 11:22:49 +0300] [66654] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f124c801280>
+  on_reload: <function OnReload.on_reload at 0x7f124c8013a0>
+  when_ready: <function WhenReady.when_ready at 0x7f124c8014c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f124c8015e0>
+  post_fork: <function Postfork.post_fork at 0x7f124c801700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f124c801820>
+  worker_int: <function WorkerInt.worker_int at 0x7f124c801940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f124c801a60>
+  pre_exec: <function PreExec.pre_exec at 0x7f124c801b80>
+  pre_request: <function PreRequest.pre_request at 0x7f124c801ca0>
+  post_request: <function PostRequest.post_request at 0x7f124c801d30>
+  child_exit: <function ChildExit.child_exit at 0x7f124c801e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f124c801f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f124c7970d0>
+  on_exit: <function OnExit.on_exit at 0x7f124c7971f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:22:49 +0300] [66654] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:22:49 +0300] [66654] [DEBUG] Arbiter booted
+[2023-07-16 11:22:49 +0300] [66654] [INFO] Listening at: http://0.0.0.0:33666 (66654)
+[2023-07-16 11:22:49 +0300] [66654] [INFO] Using worker: gevent
+[2023-07-16 11:22:49 +0300] [66655] [INFO] Booting worker with pid: 66655
+[2023-07-16 11:22:49 +0300] [66654] [DEBUG] 1 workers
+[2023-07-16 11:23:05 +0300] [66654] [INFO] Handling signal: int
+[2023-07-16 11:23:05 +0300] [66655] [INFO] Worker exiting (pid: 66655)
+[2023-07-16 11:23:05 +0300] [66654] [INFO] Shutting down: Master
+[2023-07-16 11:23:58 +0300] [66659] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7ff37d3a9280>
+  on_reload: <function OnReload.on_reload at 0x7ff37d3a93a0>
+  when_ready: <function WhenReady.when_ready at 0x7ff37d3a94c0>
+  pre_fork: <function Prefork.pre_fork at 0x7ff37d3a95e0>
+  post_fork: <function Postfork.post_fork at 0x7ff37d3a9700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7ff37d3a9820>
+  worker_int: <function WorkerInt.worker_int at 0x7ff37d3a9940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7ff37d3a9a60>
+  pre_exec: <function PreExec.pre_exec at 0x7ff37d3a9b80>
+  pre_request: <function PreRequest.pre_request at 0x7ff37d3a9ca0>
+  post_request: <function PostRequest.post_request at 0x7ff37d3a9d30>
+  child_exit: <function ChildExit.child_exit at 0x7ff37d3a9e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7ff37d3a9f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7ff37d33f0d0>
+  on_exit: <function OnExit.on_exit at 0x7ff37d33f1f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:23:58 +0300] [66659] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:23:58 +0300] [66659] [DEBUG] Arbiter booted
+[2023-07-16 11:23:58 +0300] [66659] [INFO] Listening at: http://0.0.0.0:33666 (66659)
+[2023-07-16 11:23:58 +0300] [66659] [INFO] Using worker: gevent
+[2023-07-16 11:23:58 +0300] [66660] [INFO] Booting worker with pid: 66660
+[2023-07-16 11:23:58 +0300] [66659] [DEBUG] 1 workers
+[2023-07-16 11:24:12 +0300] [66659] [INFO] Handling signal: int
+[2023-07-16 11:24:12 +0300] [66660] [INFO] Worker exiting (pid: 66660)
+[2023-07-16 11:24:12 +0300] [66659] [INFO] Shutting down: Master
+[2023-07-16 11:24:52 +0300] [66663] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fd6bfe87280>
+  on_reload: <function OnReload.on_reload at 0x7fd6bfe873a0>
+  when_ready: <function WhenReady.when_ready at 0x7fd6bfe874c0>
+  pre_fork: <function Prefork.pre_fork at 0x7fd6bfe875e0>
+  post_fork: <function Postfork.post_fork at 0x7fd6bfe87700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fd6bfe87820>
+  worker_int: <function WorkerInt.worker_int at 0x7fd6bfe87940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fd6bfe87a60>
+  pre_exec: <function PreExec.pre_exec at 0x7fd6bfe87b80>
+  pre_request: <function PreRequest.pre_request at 0x7fd6bfe87ca0>
+  post_request: <function PostRequest.post_request at 0x7fd6bfe87d30>
+  child_exit: <function ChildExit.child_exit at 0x7fd6bfe87e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fd6bfe87f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fd6bfe1d0d0>
+  on_exit: <function OnExit.on_exit at 0x7fd6bfe1d1f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:24:52 +0300] [66663] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:24:52 +0300] [66663] [DEBUG] Arbiter booted
+[2023-07-16 11:24:52 +0300] [66663] [INFO] Listening at: http://0.0.0.0:33666 (66663)
+[2023-07-16 11:24:52 +0300] [66663] [INFO] Using worker: gevent
+[2023-07-16 11:24:52 +0300] [66664] [INFO] Booting worker with pid: 66664
+[2023-07-16 11:24:52 +0300] [66663] [DEBUG] 1 workers
+[2023-07-16 11:24:55 +0300] [66664] [DEBUG] POST /kvas/v1/update
+[2023-07-16 11:24:55 +0300] [66664] [DEBUG] Closing connection. 
+[2023-07-16 11:25:01 +0300] [66663] [INFO] Handling signal: int
+[2023-07-16 11:25:01 +0300] [66664] [INFO] Worker exiting (pid: 66664)
+[2023-07-16 11:25:02 +0300] [66663] [INFO] Shutting down: Master
+[2023-07-16 11:27:05 +0300] [66691] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f174f92e280>
+  on_reload: <function OnReload.on_reload at 0x7f174f92e3a0>
+  when_ready: <function WhenReady.when_ready at 0x7f174f92e4c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f174f92e5e0>
+  post_fork: <function Postfork.post_fork at 0x7f174f92e700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f174f92e820>
+  worker_int: <function WorkerInt.worker_int at 0x7f174f92e940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f174f92ea60>
+  pre_exec: <function PreExec.pre_exec at 0x7f174f92eb80>
+  pre_request: <function PreRequest.pre_request at 0x7f174f92eca0>
+  post_request: <function PostRequest.post_request at 0x7f174f92ed30>
+  child_exit: <function ChildExit.child_exit at 0x7f174f92ee50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f174f92ef70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f174f8c40d0>
+  on_exit: <function OnExit.on_exit at 0x7f174f8c41f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:27:05 +0300] [66691] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:27:05 +0300] [66691] [DEBUG] Arbiter booted
+[2023-07-16 11:27:05 +0300] [66691] [INFO] Listening at: http://0.0.0.0:33666 (66691)
+[2023-07-16 11:27:05 +0300] [66691] [INFO] Using worker: gevent
+[2023-07-16 11:27:05 +0300] [66692] [INFO] Booting worker with pid: 66692
+[2023-07-16 11:27:05 +0300] [66691] [DEBUG] 1 workers
+[2023-07-16 11:27:21 +0300] [66692] [DEBUG] POST /kvas/v1/update
+[2023-07-16 11:27:22 +0300] [66692] [DEBUG] Closing connection. 
+[2023-07-16 11:28:39 +0300] [66691] [INFO] Handling signal: term
+[2023-07-16 11:28:39 +0300] [66692] [INFO] Worker exiting (pid: 66692)
+[2023-07-16 11:28:39 +0300] [66691] [INFO] Shutting down: Master
+[2023-07-16 11:28:40 +0300] [66703] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f8e79d8a280>
+  on_reload: <function OnReload.on_reload at 0x7f8e79d8a3a0>
+  when_ready: <function WhenReady.when_ready at 0x7f8e79d8a4c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f8e79d8a5e0>
+  post_fork: <function Postfork.post_fork at 0x7f8e79d8a700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f8e79d8a820>
+  worker_int: <function WorkerInt.worker_int at 0x7f8e79d8a940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f8e79d8aa60>
+  pre_exec: <function PreExec.pre_exec at 0x7f8e79d8ab80>
+  pre_request: <function PreRequest.pre_request at 0x7f8e79d8aca0>
+  post_request: <function PostRequest.post_request at 0x7f8e79d8ad30>
+  child_exit: <function ChildExit.child_exit at 0x7f8e79d8ae50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f8e79d8af70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f8e79d200d0>
+  on_exit: <function OnExit.on_exit at 0x7f8e79d201f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:28:40 +0300] [66703] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:28:40 +0300] [66703] [DEBUG] Arbiter booted
+[2023-07-16 11:28:40 +0300] [66703] [INFO] Listening at: http://0.0.0.0:33666 (66703)
+[2023-07-16 11:28:40 +0300] [66703] [INFO] Using worker: gevent
+[2023-07-16 11:28:40 +0300] [66704] [INFO] Booting worker with pid: 66704
+[2023-07-16 11:28:40 +0300] [66703] [DEBUG] 1 workers
+[2023-07-16 11:32:31 +0300] [66703] [INFO] Handling signal: term
+[2023-07-16 11:32:31 +0300] [66704] [INFO] Worker exiting (pid: 66704)
+[2023-07-16 11:32:31 +0300] [66703] [INFO] Shutting down: Master
+[2023-07-16 11:32:31 +0300] [66728] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f78a87c7280>
+  on_reload: <function OnReload.on_reload at 0x7f78a87c73a0>
+  when_ready: <function WhenReady.when_ready at 0x7f78a87c74c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f78a87c75e0>
+  post_fork: <function Postfork.post_fork at 0x7f78a87c7700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f78a87c7820>
+  worker_int: <function WorkerInt.worker_int at 0x7f78a87c7940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f78a87c7a60>
+  pre_exec: <function PreExec.pre_exec at 0x7f78a87c7b80>
+  pre_request: <function PreRequest.pre_request at 0x7f78a87c7ca0>
+  post_request: <function PostRequest.post_request at 0x7f78a87c7d30>
+  child_exit: <function ChildExit.child_exit at 0x7f78a87c7e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f78a87c7f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f78a875d0d0>
+  on_exit: <function OnExit.on_exit at 0x7f78a875d1f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:32:31 +0300] [66728] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:32:31 +0300] [66728] [DEBUG] Arbiter booted
+[2023-07-16 11:32:31 +0300] [66728] [INFO] Listening at: http://0.0.0.0:33666 (66728)
+[2023-07-16 11:32:31 +0300] [66728] [INFO] Using worker: gevent
+[2023-07-16 11:32:31 +0300] [66729] [INFO] Booting worker with pid: 66729
+[2023-07-16 11:32:31 +0300] [66728] [DEBUG] 1 workers
+[2023-07-16 11:32:45 +0300] [66728] [INFO] Handling signal: term
+[2023-07-16 11:32:46 +0300] [66729] [INFO] Worker exiting (pid: 66729)
+[2023-07-16 11:32:46 +0300] [66728] [INFO] Shutting down: Master
+[2023-07-16 11:33:35 +0300] [66746] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f3e4a636280>
+  on_reload: <function OnReload.on_reload at 0x7f3e4a6363a0>
+  when_ready: <function WhenReady.when_ready at 0x7f3e4a6364c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f3e4a6365e0>
+  post_fork: <function Postfork.post_fork at 0x7f3e4a636700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f3e4a636820>
+  worker_int: <function WorkerInt.worker_int at 0x7f3e4a636940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f3e4a636a60>
+  pre_exec: <function PreExec.pre_exec at 0x7f3e4a636b80>
+  pre_request: <function PreRequest.pre_request at 0x7f3e4a636ca0>
+  post_request: <function PostRequest.post_request at 0x7f3e4a636d30>
+  child_exit: <function ChildExit.child_exit at 0x7f3e4a636e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f3e4a636f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f3e4a5cc0d0>
+  on_exit: <function OnExit.on_exit at 0x7f3e4a5cc1f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:33:35 +0300] [66746] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:33:35 +0300] [66746] [DEBUG] Arbiter booted
+[2023-07-16 11:33:35 +0300] [66746] [INFO] Listening at: http://0.0.0.0:33666 (66746)
+[2023-07-16 11:33:35 +0300] [66746] [INFO] Using worker: gevent
+[2023-07-16 11:33:35 +0300] [66747] [INFO] Booting worker with pid: 66747
+[2023-07-16 11:33:35 +0300] [66746] [DEBUG] 1 workers
+[2023-07-16 11:34:25 +0300] [66746] [INFO] Handling signal: term
+[2023-07-16 11:34:25 +0300] [66747] [INFO] Worker exiting (pid: 66747)
+[2023-07-16 11:34:25 +0300] [66746] [INFO] Shutting down: Master
+[2023-07-16 11:41:45 +0300] [66853] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f8ed9415280>
+  on_reload: <function OnReload.on_reload at 0x7f8ed94153a0>
+  when_ready: <function WhenReady.when_ready at 0x7f8ed94154c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f8ed94155e0>
+  post_fork: <function Postfork.post_fork at 0x7f8ed9415700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f8ed9415820>
+  worker_int: <function WorkerInt.worker_int at 0x7f8ed9415940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f8ed9415a60>
+  pre_exec: <function PreExec.pre_exec at 0x7f8ed9415b80>
+  pre_request: <function PreRequest.pre_request at 0x7f8ed9415ca0>
+  post_request: <function PostRequest.post_request at 0x7f8ed9415d30>
+  child_exit: <function ChildExit.child_exit at 0x7f8ed9415e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f8ed9415f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f8ed93ab0d0>
+  on_exit: <function OnExit.on_exit at 0x7f8ed93ab1f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:41:45 +0300] [66853] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:41:45 +0300] [66853] [DEBUG] Arbiter booted
+[2023-07-16 11:41:45 +0300] [66853] [INFO] Listening at: http://0.0.0.0:33666 (66853)
+[2023-07-16 11:41:45 +0300] [66853] [INFO] Using worker: gevent
+[2023-07-16 11:41:45 +0300] [66854] [INFO] Booting worker with pid: 66854
+[2023-07-16 11:41:45 +0300] [66853] [DEBUG] 1 workers
+[2023-07-16 11:50:44 +0300] [66853] [INFO] Handling signal: term
+[2023-07-16 11:50:44 +0300] [66854] [INFO] Worker exiting (pid: 66854)
+[2023-07-16 11:50:44 +0300] [66853] [INFO] Shutting down: Master
+[2023-07-16 11:51:02 +0300] [66920] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fb4a7777280>
+  on_reload: <function OnReload.on_reload at 0x7fb4a77773a0>
+  when_ready: <function WhenReady.when_ready at 0x7fb4a77774c0>
+  pre_fork: <function Prefork.pre_fork at 0x7fb4a77775e0>
+  post_fork: <function Postfork.post_fork at 0x7fb4a7777700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fb4a7777820>
+  worker_int: <function WorkerInt.worker_int at 0x7fb4a7777940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fb4a7777a60>
+  pre_exec: <function PreExec.pre_exec at 0x7fb4a7777b80>
+  pre_request: <function PreRequest.pre_request at 0x7fb4a7777ca0>
+  post_request: <function PostRequest.post_request at 0x7fb4a7777d30>
+  child_exit: <function ChildExit.child_exit at 0x7fb4a7777e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fb4a7777f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fb4a770d0d0>
+  on_exit: <function OnExit.on_exit at 0x7fb4a770d1f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:51:02 +0300] [66920] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:51:02 +0300] [66920] [DEBUG] Arbiter booted
+[2023-07-16 11:51:02 +0300] [66920] [INFO] Listening at: http://0.0.0.0:33666 (66920)
+[2023-07-16 11:51:02 +0300] [66920] [INFO] Using worker: gevent
+[2023-07-16 11:51:02 +0300] [66922] [INFO] Booting worker with pid: 66922
+[2023-07-16 11:51:02 +0300] [66920] [DEBUG] 1 workers
+[2023-07-16 11:59:54 +0300] [66920] [INFO] Handling signal: term
+[2023-07-16 11:59:54 +0300] [66922] [INFO] Worker exiting (pid: 66922)
+[2023-07-16 11:59:55 +0300] [66920] [INFO] Shutting down: Master
+[2023-07-16 11:59:55 +0300] [66965] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f8377c2f280>
+  on_reload: <function OnReload.on_reload at 0x7f8377c2f3a0>
+  when_ready: <function WhenReady.when_ready at 0x7f8377c2f4c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f8377c2f5e0>
+  post_fork: <function Postfork.post_fork at 0x7f8377c2f700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f8377c2f820>
+  worker_int: <function WorkerInt.worker_int at 0x7f8377c2f940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f8377c2fa60>
+  pre_exec: <function PreExec.pre_exec at 0x7f8377c2fb80>
+  pre_request: <function PreRequest.pre_request at 0x7f8377c2fca0>
+  post_request: <function PostRequest.post_request at 0x7f8377c2fd30>
+  child_exit: <function ChildExit.child_exit at 0x7f8377c2fe50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f8377c2ff70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f8377bc50d0>
+  on_exit: <function OnExit.on_exit at 0x7f8377bc51f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 11:59:55 +0300] [66965] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 11:59:55 +0300] [66965] [DEBUG] Arbiter booted
+[2023-07-16 11:59:55 +0300] [66965] [INFO] Listening at: http://0.0.0.0:33666 (66965)
+[2023-07-16 11:59:55 +0300] [66965] [INFO] Using worker: gevent
+[2023-07-16 11:59:55 +0300] [66966] [INFO] Booting worker with pid: 66966
+[2023-07-16 11:59:55 +0300] [66965] [DEBUG] 1 workers
+[2023-07-16 12:00:56 +0300] [66966] [DEBUG] POST /kvas/v1/update
+[2023-07-16 12:00:56 +0300] [66966] [DEBUG] Closing connection. 
+[2023-07-16 12:01:31 +0300] [66965] [INFO] Handling signal: term
+[2023-07-16 12:01:31 +0300] [66966] [INFO] Worker exiting (pid: 66966)
+[2023-07-16 12:01:31 +0300] [66965] [INFO] Shutting down: Master
+[2023-07-16 12:01:31 +0300] [66978] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f0f50473280>
+  on_reload: <function OnReload.on_reload at 0x7f0f504733a0>
+  when_ready: <function WhenReady.when_ready at 0x7f0f504734c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f0f504735e0>
+  post_fork: <function Postfork.post_fork at 0x7f0f50473700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f0f50473820>
+  worker_int: <function WorkerInt.worker_int at 0x7f0f50473940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f0f50473a60>
+  pre_exec: <function PreExec.pre_exec at 0x7f0f50473b80>
+  pre_request: <function PreRequest.pre_request at 0x7f0f50473ca0>
+  post_request: <function PostRequest.post_request at 0x7f0f50473d30>
+  child_exit: <function ChildExit.child_exit at 0x7f0f50473e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f0f50473f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f0f504090d0>
+  on_exit: <function OnExit.on_exit at 0x7f0f504091f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 12:01:31 +0300] [66978] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 12:01:31 +0300] [66978] [DEBUG] Arbiter booted
+[2023-07-16 12:01:31 +0300] [66978] [INFO] Listening at: http://0.0.0.0:33666 (66978)
+[2023-07-16 12:01:31 +0300] [66978] [INFO] Using worker: gevent
+[2023-07-16 12:01:31 +0300] [66979] [INFO] Booting worker with pid: 66979
+[2023-07-16 12:01:32 +0300] [66978] [DEBUG] 1 workers
+[2023-07-16 12:01:54 +0300] [66979] [DEBUG] POST /kvas/v1/update
+[2023-07-16 12:01:54 +0300] [66979] [DEBUG] Closing connection. 
+[2023-07-16 13:28:37 +0300] [66978] [INFO] Handling signal: term
+[2023-07-16 13:28:38 +0300] [66979] [INFO] Worker exiting (pid: 66979)
+[2023-07-16 13:28:38 +0300] [66978] [INFO] Shutting down: Master
+[2023-07-16 13:28:39 +0300] [67889] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f59770df280>
+  on_reload: <function OnReload.on_reload at 0x7f59770df3a0>
+  when_ready: <function WhenReady.when_ready at 0x7f59770df4c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f59770df5e0>
+  post_fork: <function Postfork.post_fork at 0x7f59770df700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f59770df820>
+  worker_int: <function WorkerInt.worker_int at 0x7f59770df940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f59770dfa60>
+  pre_exec: <function PreExec.pre_exec at 0x7f59770dfb80>
+  pre_request: <function PreRequest.pre_request at 0x7f59770dfca0>
+  post_request: <function PostRequest.post_request at 0x7f59770dfd30>
+  child_exit: <function ChildExit.child_exit at 0x7f59770dfe50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f59770dff70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f59770750d0>
+  on_exit: <function OnExit.on_exit at 0x7f59770751f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 13:28:39 +0300] [67889] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 13:28:39 +0300] [67889] [DEBUG] Arbiter booted
+[2023-07-16 13:28:39 +0300] [67889] [INFO] Listening at: http://0.0.0.0:33666 (67889)
+[2023-07-16 13:28:39 +0300] [67889] [INFO] Using worker: gevent
+[2023-07-16 13:28:39 +0300] [67896] [INFO] Booting worker with pid: 67896
+[2023-07-16 13:28:39 +0300] [67889] [DEBUG] 1 workers
+[2023-07-16 13:30:38 +0300] [67889] [INFO] Handling signal: term
+[2023-07-16 13:30:39 +0300] [67896] [INFO] Worker exiting (pid: 67896)
+[2023-07-16 13:30:39 +0300] [67889] [INFO] Shutting down: Master
+[2023-07-16 13:30:39 +0300] [67911] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f2963a0c280>
+  on_reload: <function OnReload.on_reload at 0x7f2963a0c3a0>
+  when_ready: <function WhenReady.when_ready at 0x7f2963a0c4c0>
+  pre_fork: <function Prefork.pre_fork at 0x7f2963a0c5e0>
+  post_fork: <function Postfork.post_fork at 0x7f2963a0c700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f2963a0c820>
+  worker_int: <function WorkerInt.worker_int at 0x7f2963a0c940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f2963a0ca60>
+  pre_exec: <function PreExec.pre_exec at 0x7f2963a0cb80>
+  pre_request: <function PreRequest.pre_request at 0x7f2963a0cca0>
+  post_request: <function PostRequest.post_request at 0x7f2963a0cd30>
+  child_exit: <function ChildExit.child_exit at 0x7f2963a0ce50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f2963a0cf70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f29639a20d0>
+  on_exit: <function OnExit.on_exit at 0x7f29639a21f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 13:30:39 +0300] [67911] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 13:30:39 +0300] [67911] [DEBUG] Arbiter booted
+[2023-07-16 13:30:39 +0300] [67911] [INFO] Listening at: http://0.0.0.0:33666 (67911)
+[2023-07-16 13:30:39 +0300] [67911] [INFO] Using worker: gevent
+[2023-07-16 13:30:39 +0300] [67914] [INFO] Booting worker with pid: 67914
+[2023-07-16 13:30:39 +0300] [67911] [DEBUG] 1 workers
+[2023-07-16 13:31:31 +0300] [67914] [DEBUG] POST /kvas/v1/update
+[2023-07-16 13:31:31 +0300] [67914] [DEBUG] Closing connection. 
+[2023-07-16 14:00:04 +0300] [67911] [INFO] Handling signal: term
+[2023-07-16 14:00:04 +0300] [67914] [INFO] Worker exiting (pid: 67914)
+[2023-07-16 14:00:04 +0300] [67911] [INFO] Shutting down: Master
+[2023-07-16 14:00:05 +0300] [68054] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['0.0.0.0:33666']
+  backlog: 2048
+  workers: 1
+  worker_class: gevent
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /apps/kvas
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 33
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: None
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /apps/kvas/logs/gunicorn.log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: api:app
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7feaf89c4280>
+  on_reload: <function OnReload.on_reload at 0x7feaf89c43a0>
+  when_ready: <function WhenReady.when_ready at 0x7feaf89c44c0>
+  pre_fork: <function Prefork.pre_fork at 0x7feaf89c45e0>
+  post_fork: <function Postfork.post_fork at 0x7feaf89c4700>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7feaf89c4820>
+  worker_int: <function WorkerInt.worker_int at 0x7feaf89c4940>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7feaf89c4a60>
+  pre_exec: <function PreExec.pre_exec at 0x7feaf89c4b80>
+  pre_request: <function PreRequest.pre_request at 0x7feaf89c4ca0>
+  post_request: <function PostRequest.post_request at 0x7feaf89c4d30>
+  child_exit: <function ChildExit.child_exit at 0x7feaf89c4e50>
+  worker_exit: <function WorkerExit.worker_exit at 0x7feaf89c4f70>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7feaf895a0d0>
+  on_exit: <function OnExit.on_exit at 0x7feaf895a1f0>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-07-16 14:00:05 +0300] [68054] [INFO] Starting gunicorn 20.1.0
+[2023-07-16 14:00:05 +0300] [68054] [DEBUG] Arbiter booted
+[2023-07-16 14:00:05 +0300] [68054] [INFO] Listening at: http://0.0.0.0:33666 (68054)
+[2023-07-16 14:00:05 +0300] [68054] [INFO] Using worker: gevent
+[2023-07-16 14:00:05 +0300] [68061] [INFO] Booting worker with pid: 68061
+[2023-07-16 14:00:05 +0300] [68054] [DEBUG] 1 workers
+[2023-07-16 14:00:23 +0300] [68061] [DEBUG] POST /kvas/v1/update
+[2023-07-16 14:00:23 +0300] [68061] [DEBUG] Closing connection. 

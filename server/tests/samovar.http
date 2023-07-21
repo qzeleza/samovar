@@ -1,0 +1,46 @@
+
+POST https://api.zeleza.ru:63331/api/v1/get_rating
+Content-Type: application/json
+
+{
+  "app_name": "kvas"
+}
+
+
+
+### Send GET request get_rating
+POST https://api.zeleza.ru:63331/api/v1/get_rating
+Content-Type: application/json
+
+{
+  "app_name": "kvas"
+}
+
+### Send GET request new_record
+POST https://api.zeleza.ru:63331/api/v1/new_record
+Content-Type: application/json
+
+{
+  "app_name": "samovar",
+  "version": "1.0.2",
+  "name": "Bob",
+  "email": "test@email.cc",
+  "review": "Тестовый отзыв: программа отличная так держать!",
+  "rating": "5"
+}
+
+### Send POST request reviews_list
+POST https://api.zeleza.ru:63331/api/v1/reviews_list
+Content-Type: application/json
+
+{
+  "app_name": "kvas"
+}
+
+### Send GET request reviews_table_page
+GET https://api.zeleza.ru:63331/api/v1/reviews_table_page?key=secret_key&app_name=samovar
+
+### Send GET request summary_table_page
+GET https://api.zeleza.ru:63331/api/v1/summary_table_page?key=secret_key
+
+

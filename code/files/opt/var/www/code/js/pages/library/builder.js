@@ -25,8 +25,8 @@ $(document).ready(function() {
             let appName = 'kvas';
             let appVersion = 'latest';
             new Scrolling('#kvas_history_list');
-            new Rating('kvas_rating', appName, appVersion );
-            new FeedBack('kvas_send_feedback', appName, appVersion)
+            new Rating(appName, appVersion );
+            // new FeedBack('kvas_send_feedback', appName, appVersion)
 
         });
 
@@ -43,7 +43,7 @@ $(document).ready(function() {
                 // router.send('')
 
                 // const apiPath = "/apps/api";
-                // const server = new ServerRequester('http://api.zeleza.ru', 51153);
+                // const server = new ServerRequester('https://api.zeleza.ru', 61116);
                 // server.send(apiPath + '')
 
                 // Установка триггера для других js файлов

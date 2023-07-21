@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn сервис для запуска Самовара
+After=network.target
+# PartOf=gunicorn.target
+# ReloadPropagatedFrom=gunicorn.target
+
+[Service]
+User=www-data
+Group=root
+WorkingDirectory=/apps/api
+ExecStart=/apps/api/venv/bin/gunicorn -k gevent -w 2 --bind 0.0.0.0:61116 api:app --error-logfile /apps/api/logs/gunicorn.log --log-level debug
+
+[Install]
+WantedBy=multi-user.target
+# WantedBy=gunicorn.target
