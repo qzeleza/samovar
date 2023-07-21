@@ -10,6 +10,7 @@
 // Setup module
 // ------------------------------
 
+
 const App = function () {
 
 
@@ -932,7 +933,7 @@ function rightPanelAct(act='hide'){
 
 }
 
-
-let socket = io();
-socket.on('connect', function () {
-socket.emit('my event', {data: 'I\'m connected!'});})
+// import TransportAPI from "../classes/transport";
+const API_ROOT = '/api/v1'
+const RATING_SERVER = new TransportAPI("api.zeleza.ru", 63331)
+const ROUTER_SERVER = new TransportAPI("api.zeleza.ru", 33661)

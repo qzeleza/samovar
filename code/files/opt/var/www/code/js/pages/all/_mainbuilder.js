@@ -168,6 +168,7 @@ class PageBuilder {
     }
 }
 
+
 function buildMainTemplatePage(root){
 
     const templateLoad = new PageBuilder();
@@ -224,20 +225,20 @@ function buildMainTemplatePage(root){
     templateLoad.add({id:'#samovar_history', file: root + 'pages/library/modules/samovar/history.html'});
 
     // Загрузка необходимых скриптов для всех страниц шаблона
+    // templateLoad.add(root + 'code/js/pages/classes/transport.js');
     templateLoad.add(root + 'code/js/pages/all/apps.js');
     templateLoad.add(root + 'code/js/pages/all/configurator.js');
-    // templateLoad.add(root + 'code/js/pages/all/validator.js');
-    templateLoad.add(root + 'code/js/pages/all/ratings.js');
+    templateLoad.add(root + 'code/js/pages/classes/validator.js');
+    templateLoad.add(root + 'code/js/pages/classes/ratings.js');
+    templateLoad.add(root + 'code/js/pages/classes/scrolling.js');
+
+
 
     // Загрузка функции, которая подгружает классы
     // рейтинга и обратной связи всех страниц шаблона
     templateLoad.add(() => {
         new Scrolling('#samovar_history_list');
-        const smr = new Rating('samovar', 'latest', true);
-        // $('#samovar_review').on('click', function (){
-        //     $('.btn-close[data-bs-dismiss="offcanvas"]').trigger('click');
-        //     smr.showReviewForm();
-        // })
+        new Rating('samovar', 'latest', RATING_SERVER, true);
     });
 
     return templateLoad;

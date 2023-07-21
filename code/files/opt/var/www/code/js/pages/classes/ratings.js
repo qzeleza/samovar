@@ -28,14 +28,12 @@ class Rating {
     /**
      * @param {string} appName - базовое имя программы на английском
      * @param {string} appCurrentVersion - версия программы
+     * @param {object} server - текущее число проголосовавших за программу
      * @param {boolean} callRightPanel - необходимость вызывать правую панель после отправки отзыва
      */
-    constructor(appName, appCurrentVersion = 'latest', callRightPanel = false) {
+    constructor(appName, appCurrentVersion, server,  callRightPanel = false) {
 
-        // после отладки - закомментировать
-        this.clearRating();
-
-        this.server = new ServerRequester('https://api.zeleza.ru', 61116);
+        this.server = server;
 
         this.starsId = appName + '_rating';
         this.votedId = appName + '_voted'
@@ -45,19 +43,23 @@ class Rating {
         this.userEmailId = appName + '_user_email';
         this.reviewFormId = appName + '_form_review';
 
-
+        this.stars = null
         this.appName = appName;
         this.appVersion = appCurrentVersion;
         this.storageKey = this.starsId;
 
         this.voted = $('#' + this.votedId);
-        this.stars = this.createStarsRating();
+        this.stars = null
         this.review = $('#' + this.reviewId);
         this.validator = new FormDataValidator(this.reviewFormId);
 
         const themeNoty = 'bootstrap-v4';
         this.rightPannelShown = callRightPanel;
         let self = this;
+
+        // после отладки - закомментировать
+        this.clearRating();
+
         this.notyReview = new Noty({
             timeout: false,
             modal: true,
@@ -69,7 +71,7 @@ class Rating {
             type: 'confirm',
             buttons: [
                 Noty.button('Отменить', 'btn btn-link mb-2', () => {this.notyReview.close();}),
-                Noty.button('Отправить <i class="ph-paper-plane-tilt ms-2"></i>','btn btn-outline-secondary ms-2 me-4 mb-2', () => { self._pressOnSendButton();}),
+                Noty.button('Отправить <i class="ph-paper-plane-tilt ms-2"></i>','btn btn-outline-secondary me-4 ms-2 me-2 mb-2', () => { self._pressOnSendButton();}),
             ],
             callbacks:{
                 beforeShow: function() {
@@ -85,7 +87,7 @@ class Rating {
                     // костыль, который позволяет показывать окно при повторных вызовах
                     this.showing = false;
                     this.shown = false;
-
+                    $('.tooltip').remove();
                 },
             }
         });
@@ -105,53 +107,66 @@ class Rating {
             }
         })
 
-        this.stars.on('mouseover', this.setStarRating.bind(this));
-        this.stars.on('mouseout', this._setRating.bind(this));
-        this.stars.on('click', this.showRatingForm.bind(this));
-        this.review.on('click', this.showReviewForm.bind(this));
+        this._getRatingFromServer();
 
     }
 
     //
     // Создаем элемент <li> из звезд иконок
     //
-    createStarsRating() {
-
-        this._getRatingFromServer();
+    _createStarsRating() {
 
         let $li = $('li#' + this.starsId);
-        $li.removeClass('placeholder-glow').removeClass('w-80px');
-        // Создание и добавление элементов <i> (звезд) внутрь <li>
-        for (let i = 0; i < 10; i++) {
-            $('<i>', {
-                class: 'ph-star fs-base lh-base align-top'
-            }).prependTo($li);
+        if (!this.stars) {
+            $li.removeClass('placeholder-wave bg-black bg-opacity-20 wmin-300');
+            this.voted.removeClass('d-inline-block ')
+            // Создание и добавление элементов <i> (звезд) внутрь <li>
+            for (let i = 0; i < 10; i++) {
+                $('<i>', {
+                    class: 'ph-star fs-base lh-base align-top'
+                }).prependTo($li);
+            }
+            this.stars = $(`#${this.starsId} .ph-star`)
+            this.stars.on('mouseover', this.setStarRating.bind(this));
+            this.stars.on('mouseout', this._setRating.bind(this));
+            this.stars.on('click', this.showRatingForm.bind(this));
+            this.review.on('click', this.showReviewForm.bind(this));
         }
-
-        return $(`#${this.starsId} .ph-star`);
     }
     //
     // Получение рейтинга с сервера
     //
-    _getRatingFromServer() {
-
+    _getRatingFromServer(attempt = 1) {
         let self = this;
-        // для тестирования возвращаем случайный рейтинг
-        this.server.send('/api/server/request/statistic', (response)=>{
-
-            if (response['voted'] === null) {
-                self.voted.html('(0)');
-                self.appVersion = 'latest';
+        this.server.send(API_ROOT + "/get_rating", {
+            app_name: this.appName,
+            version: this.appVersion
+        }, (response) => {
+            if (response === undefined && attempt < 5) {
+                // Повторить запрос с задержкой в 2 секунды
+                setTimeout(() => {
+                    self._getRatingFromServer(attempt + 1);
+                    console.log('Попытка запроса номер ' + (attempt + 1))
+                }, 2000);
+            } else if (response === undefined && attempt >= 5) {
+                // Превышено максимальное количество попыток
+                console.log('Превышено максимальное количество попыток запроса /get_rating')
             } else {
-                self.rating = response['rating'];
-                self.voted.html('(' + response['voted'] + ')');
-                self.appVersion = response['version'];
-                self._setRating();
+                if (response.voted === null || response.voted === undefined) {
+                    self.voted.html('(0)');
+                    self.appVersion = 'latest';
+                } else {
+                    self.rating = response.rating;
+                    self.voted.html('(' + response.voted + ')');
+                    self.appVersion = response.version;
+                    self._createStarsRating();
+                    self._setRating();
+
+                }
             }
-
-        }, {'app_name': this.appName, 'version': this.appVersion})
-
+        });
     }
+
 
     //
     // Установка звездочек при наведении на элемент мышью
@@ -192,17 +207,31 @@ class Rating {
         if (this.validator.validate()) {
             // Если все поля прошли проверку, можно отправить форму
             // Вы можете добавить свой код здесь для отправки данных формы
-            this.server.send('/api/server/add/review', () => {
-                localStorage.setItem(self.storageKey, self.rating);
-                self.notyReview.close();
-                self._getRatingFromServer();
-            }, {
-                'app_name': this.appName,
-                'version': this.appVersion,
-                'name': $('#' + this.userNameId).val(),
-                'email': $('#' + this.userEmailId).val(),
-                'review': $('#' + this.userReviewId).val(),
-                'rating': this.rating || 0,
+            this.server.send(API_ROOT + '/new_record', {
+                app_name : this.appName,
+                version  : this.appVersion,
+                name     : $('#' + this.userNameId).val(),
+                email    : $('#' + this.userEmailId).val(),
+                review   : $('#' + this.userReviewId).val(),
+                rating   : this.rating || 0,
+            }, (response) => {
+                if (response.success) {
+                    localStorage.setItem(self.storageKey, self.rating);
+                    self.notyReview.close();
+                    self._getRatingFromServer();
+                } else {
+                    const reviewForm =
+                        "<div class='ps-3 pe-3 pb-3'>" +
+                        "<div class='d-flex flex-row align-items-baseline pt-2 pb-2 border-bottom '>" +
+                        "<div class='me-1 fs-4 fw-semibold'>" + this.appName + "</div>" +
+                        "<div class='badge bg-success bg-opacity-75 lift-up-3'>" + this.appVersion  + "</div>" +
+                        "</div>" +
+                        "<div class='fs-4 text-primary fw-semibold pt-2 pb-1'>Ошибка при отправке отзыва </div>" +
+                        "<span class='pb-2'>" + response.description +  "</span>" +
+                        "</div>";
+                    this._showForm(this.notyError, reviewForm);
+                }
+
             });
         }
     }
@@ -221,18 +250,18 @@ class Rating {
         console.log('Обработчик события click для #' + this.reviewId +' вызван');
         const reviewForm =
             '<form id="' + this.reviewFormId + '" novalidate>' +
-            '<div class="ps-3 pb-1">' +
-            "<div class='d-flex flex-row align-items-baseline pt-2 '>" +
-            '<div class="fs-3 mb-3 text-primary me-2">Отзыв на ' + this.appName + '</div>' +
-            "<div class='badge bg-success bg-opacity-75 lift-up-3'>" + this.appVersion + "</div>" +
-            "</div>" +
-            '<div class="mb-2">Пишите по существу и самое главное</div>' +
-            '<textarea id="' + this.userReviewId + '" class="form-control  h-200" placeholder="Суть Вашего предложения или замечений." data-min-length="6" data-bs-popup="tooltip" data-bs-placement="right" ></textarea>' +
-            '<div style="display: flex;" class="pt-1 input-group" >' +
-            '</span><input id="' + this.userNameId + '" type="text" class="form-control" placeholder="Ваше имя" data-min-length="3" data-bs-popup="tooltip" data-bs-placement="left" >' +
-            '</span><input id="' + this.userEmailId + '" type="email" class="form-control" placeholder="Ваш Email" data-validate-email="email" data-bs-popup="tooltip" data-bs-placement="right" >' +
-            '</div>' +
-            '</div>' +
+                '<div class="ps-3 pb-1">' +
+                    "<div class='d-flex flex-row align-items-baseline pt-2 '>" +
+                        '<div class="fs-3 mb-3 text-primary me-2">Отзыв на ' + this.appName + '</div>' +
+                        "<div class='badge bg-success bg-opacity-75 lift-up-3'>" + this.appVersion + "</div>" +
+                    "</div>" +
+                    '<div class="mb-2">Пишите по существу и самое главное</div>' +
+            		'<textarea id="' + this.userReviewId + '" class="form-control  h-200" placeholder="Суть Вашего предложения или замечений." data-min-length="6" data-bs-popup="tooltip" data-bs-placement="right" ></textarea>' +
+            		'<div style="display: flex;" class="pt-1 input-group" >' +
+            			'</span><input id="' + this.userNameId + '" type="text" class="form-control" placeholder="Ваше имя" data-min-length="3" data-bs-popup="tooltip" data-bs-placement="left" >' +
+            			'</span><input id="' + this.userEmailId + '" type="email" class="form-control" placeholder="Ваш Email" data-validate-email="email" data-bs-popup="tooltip" data-bs-placement="right" >' +
+            		'</div>' +
+            	'</div>' +
             "</form>";
 
         this._showForm(this.notyReview, reviewForm);
@@ -259,20 +288,23 @@ class Rating {
             this._showForm(this.notyError, reviewForm);
 
         } else {
-            const thanksFor =
-                "<form>" +
-                    '<div class="pt-3 ps-3 pe-1 pb-1">' +
-                        '<h4 class="mb-3">Спасибо за Вашу оценку ('+ this.rating + '/' + this.stars.length + ')</h4>' +
+            const reviewForm =
+                '<form id="' + this.reviewFormId + '" novalidate>' +
+                	'<div class="pt-3 ps-3 pe-1 pb-1">' +
+                		'<h4 class="mb-3">Спасибо за Вашу оценку ('+ this.rating + '/' + this.stars.length + ')</h4>' +
                         '<label class="form-label ms-1">Будем признательны за обратную связь</label> ' +
-                        '<textarea id="' + this.appName + '_user_review" class="form-control" placeholder="Что необходимо добавить или изменить?" style="height: 200px;"></textarea>' +
-                        '<div style="display: flex;" class="pt-1" >' +
-                            '<input id="' + this.appName + '_user_name" class="form-control" placeholder="Как к Вам обращаться?" >' +
-                            '<input id="' + this.appName + '_user_email" type="email" class="form-control" placeholder="Ваш Email" >' +
-                        '</div>' +
-                    '</div>' +
+                        '<textarea id="' + this.userReviewId + '" class="form-control  h-200" placeholder="Суть Вашего предложения или замечений." data-min-length="6" data-bs-popup="tooltip" data-bs-placement="right" ></textarea>' +
+                        '<div style="display: flex;" class="pt-1 input-group" >' +
+                            '</span><input id="' + this.userNameId + '" type="text" class="form-control" placeholder="Ваше имя" data-min-length="3" data-bs-popup="tooltip" data-bs-placement="left" >' +
+                            '</span><input id="' + this.userEmailId + '" type="email" class="form-control" placeholder="Ваш Email" data-validate-email="email" data-bs-popup="tooltip" data-bs-placement="right" >' +
+                		'</div>' +
+                	'</div>' +
                 "</form>";
-            this._showForm(this.notyReview, thanksFor);
+
+            this._showForm(this.notyReview, reviewForm);
         }
 
     }
 }
+
+// export default Rating;

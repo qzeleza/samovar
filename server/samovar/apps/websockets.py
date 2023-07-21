@@ -44,29 +44,30 @@ def default_error_handler(e):
 
 
 @socketio.on('get_rating')
-def handle_ws_get_rating(json):
+def handle_ws_get_rating(json, callback):
     # breakpoint()
     logger.debug(f"Вызвана функция '{get_function_name()}'")
     logger.debug(f'Получены данные: {json}')
     result = get_app_rating(json)
 
     logger.debug(f'Отправляемые данные: {result}')
-    socketio.emit('get_rating_response', result)
+    # socketio.emit('get_rating_response', result)
+    callback(result)
 
 
 @socketio.on('new_record')
-def handle_ws_new_record(data):
+def handle_ws_new_record(data, callback):
     logger.debug(f"Вызвана функция '{get_function_name()}'")
     logger.debug(f'Получены данные: {data}')
     # breakpoint()
     result = add_new_record(data)
 
     logger.debug(f'Отправляемые данные: {result}')
-    socketio.emit('new_record_response', result)
+    callback(result)
 
 
 @socketio.on('reviews_list')
-def handle_ws_reviews_list(data):
+def handle_ws_reviews_list(data, callback):
     logger.debug(f"Вызвана функция '{get_function_name()}'")
     logger.debug(f'Получены данные: {data}')
 
@@ -74,4 +75,5 @@ def handle_ws_reviews_list(data):
     # breakpoint()
     logger.debug(f'Отправляемые данные: {result}')
 
-    socketio.emit('reviews_list_response', result)
+    # socketio.emit('reviews_list_response', result)
+    callback(result)

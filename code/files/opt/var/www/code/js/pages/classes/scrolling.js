@@ -52,3 +52,4 @@ class Scrolling {
         });
     }
 }
+// export default Scrolling;
