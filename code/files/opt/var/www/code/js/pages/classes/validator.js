@@ -72,3 +72,4 @@ class FormDataValidator {
         return isValid;
     }
 }
+// export default FormDataValidator;

@@ -12,7 +12,7 @@ $(document).ready(function() {
 
         libraryPageLoader.add({id:'#page_header', file: root + 'pages/library/modules/header.html'});
         libraryPageLoader.add({id:'#page_breadcrumb', file: root + 'pages/library/modules/breadcrumb.html'});
-        libraryPageLoader.add({id:'#app_kvas_card', file: root + 'pages/library/modules/card.html'});
+        libraryPageLoader.add({id:'#app_kvas_card', file: root + 'pages/library/modules/kvas/card.html'});
         libraryPageLoader.add({id:'#kvas_preview', file: root + 'pages/library/modules/kvas/preview.html'});
         libraryPageLoader.add({id:'#kvas_history', file: root + 'pages/library/modules/kvas/history.html'});
 
@@ -25,9 +25,7 @@ $(document).ready(function() {
             let appName = 'kvas';
             let appVersion = 'latest';
             new Scrolling('#kvas_history_list');
-            new Rating(appName, appVersion );
-            // new FeedBack('kvas_send_feedback', appName, appVersion)
-
+            new Rating(appName, appVersion, RATING_SERVER);
         });
 
         libraryPageLoader.load()

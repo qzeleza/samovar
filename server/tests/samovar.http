@@ -13,7 +13,7 @@ POST https://api.zeleza.ru:63331/api/v1/get_rating
 Content-Type: application/json
 
 {
-  "app_name": "kvas"
+  "app_name": "samovar"
 }
 
 ### Send GET request new_record
