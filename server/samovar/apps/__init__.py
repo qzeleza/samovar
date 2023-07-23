@@ -34,9 +34,7 @@ def create_app(config):
         return False
     # Обеспечиваем безопасность при передаче заголовком
     try:
-        # CORS(app)
-        # CORS(app, origins=['*'])
-        CORS(app, resources={r"/*": {"origins": "*"}}, headers=['Content-Type'], expose_headers=['Access-Control-Allow-Origin'], supports_credentials=True)
+        CORS(app)
         logger.debug("Заголовки CORS установлены успешно")
     except Exception as e:
         error = f'При установке CORS заголовков возникли ошибки: {str(e)}'

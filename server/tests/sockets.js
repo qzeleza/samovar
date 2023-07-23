@@ -1,7 +1,6 @@
 // Создание WebSocket-соединения
-// const socket = io("http://api.zeleza.ru:61116/socket.io/?EIO=4&transport=websocket");
-const socket = io("wss://api.zeleza.ru:63331/");
-
+// const socket = io("wss://api.zeleza.ru:11211"); // samovar
+const socket = io("wss://api.zeleza.ru:11133"); // kvas-test
 // Обработчик события при установке соединения
 socket.on('connect', () => {
     console.log('Подключились к серверу');
@@ -17,17 +16,15 @@ socket.on('error', (error) => {
 
 });
 
-$(window).on('error', function(e) {
-    console.log('Произошла ошибка:', e);
-    const errorElement = $("<div>").addClass("alert alert-danger").text("Ошибка: \n" + e);
-
-    // Добавление элемента в контейнер с ответами
-    $("#responseContainer").append(errorElement);
-
-});
 // Обработчик события при разрыве соединения
-socket.on('disconnect', () => {
+socket.on('disconnect', (data) => {
     console.log('Отключились от сервера');
+    displayResponse(data.description);
+});
+
+socket.on('goodbye', (data) => {
+    console.log(data.description);
+    displayResponse(data.description);
 });
 
 // Обработчик события 'welcome' - приветственное сообщение от сервера
@@ -51,6 +48,11 @@ socket.on('reviews_list_response', (response) => {
     displayResponse(response);
 });
 
+// Обработчик события 'new_record_response'
+socket.on('update_response', (response) => {
+    displayResponse(response);
+});
+
 $(document).ready(function() {
     // Задаем значения по умолчанию для каждого типа сообщения
     let defaultData = {
@@ -63,13 +65,14 @@ $(document).ready(function() {
             '"review":"Тестовый отзыв: программа отличная так держать!",' +
             '"rating":"9"' +
             '}',
-        reviews_list: '{ "app_name": "samovar"}'
+        reviews_list: '{ "app_name": "samovar"}',
+        update: '{ "app_name": "samovar"}',
     };
 
         let msgType = $("#messageType");
 
         function setDef() {
-            msgType.val("reviews_list").trigger('change');
+            msgType.val("get_rating").trigger('change');
         }
 
         // Установка значения по умолчанию при выборе типа сообщения

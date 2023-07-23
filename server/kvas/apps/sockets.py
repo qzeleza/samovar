@@ -1,9 +1,10 @@
 from flask import request
-from flask_socketio import SocketIO, emit, send, join_room, leave_room
-import logging
+from flask_socketio import emit, send
+from flask_socketio import SocketIO
 
 from apps.logger import get_function_name
-from apps.functions import add_new_record, get_app_rating, get_review_list
+from apps.functions import apps_update
+import logging
 
 logger = logging.getLogger(__name__)
 
@@ -34,10 +35,13 @@ def send_back(request, result):
 
     emit(response_message_type, result, room=request.sid)
 
+@socketio.on('update')
+def handle_ws_get_rating(json):
+    logger.debug(f"Вызвана функция '{get_function_name()}'")
+    # breakpoint()
+    result = apps_update(json)
+    send_back(request, result)
 
-# ----------------------------------------------------------------
-#  Обработка запросов через WebSocket
-# ----------------------------------------------------------------
 
 @socketio.on('connect')
 def handle_ws_connect():
@@ -57,48 +61,13 @@ def handle_ws_disconnect():
     logger.debug(desc)
     emit('goodbye', {'success': True, 'description': desc})
 
-# breakpoint()
-
-@socketio.on('get_rating')
-def handle_ws_get_rating(json):
-
-    logger.debug(f"Вызвана функция '{get_function_name()}'")
-    logger.info(f'Получены данные: {json}')
-
-    result = get_app_rating(json)
-
-    logger.info(f'Отправляемые данные: {result}')
-    send_back(request, result)
-
-
-@socketio.on('new_record')
-def handle_ws_new_record(data):
-
-    logger.debug(f"Вызвана функция '{get_function_name()}'")
-    logger.info(f'Получены данные: {data}')
-
-    result = add_new_record(data)
-
-    logger.info(f'Отправляемые данные: {result}')
-    send_back(request, result)
-
-
-@socketio.on('reviews_list')
-def handle_ws_reviews_list(data):
-
-    logger.debug(f"Вызвана функция '{get_function_name()}'")
-    logger.info(f'Получены данные: {data}')
-
-    result = get_review_list(data)
-
-    logger.info(f'Отправляемые данные: {result}')
-    send_back(request, result)
-
 
 # Стандартный обработчик ошибок для WebSocket
 @socketio.on_error_default
 def default_error_handler(e):
-    logger.error(f'ОШИБКА: {e}')
+    logger.debug(f"Вызвана функция '{get_function_name()}'")
+    logger.debug(f"ОШИБКА {e}")
     logger.error(f'ОШИБКА: {request.event["message"]}')
     logger.error(f'Аргументы: {request.event["args"]}')
+
 

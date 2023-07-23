@@ -14,27 +14,28 @@ import os
 from sys import exit
 from apps.logger import root_logger
 
-# import eventlet
-# eventlet.monkey_patch()
+# from gevent import pywsgi
+# from geventwebsocket.handler import WebSocketHandler
 
 from gevent import monkey
 monkey.patch_all()
 
 from apps import create_app
-from apps.websockets import socketio
 from config import config_dict
+from apps.websockets import socketio
 
 # WARNING: Don't run with debug turned on in production!
 DEBUG = (os.getenv('DEBUG', 'False') == 'True')
 
-
-
 # The configuration
 get_config_mode = 'Debug' if DEBUG else 'Production'
+
 try:
     # Load the configuration using the default values
     app_config = config_dict[get_config_mode.capitalize()]
+
 except KeyError:
+
     error = "Недопустимый <config_mode>. Ожидалось одно из значений [Debug, Production]"
     root_logger.error(error)
     exit(error)
@@ -47,19 +48,20 @@ if DEBUG:
     root_logger.info('Логирование ведется в файл ' + app_config.LOG_DEBUG_FILE)
     root_logger.info('Файл базы данных ' + app_config.DATABASE_PATH)
 
+if __name__ == '__main__':
 
-# if __name__ == '__main__':
-#     if app:
-#         socketio.run(
-#             app,
-#             host=app_config.HOST,
-#             port=app_config.PORT,
-#             keyfile=app_config.CERT_KEY,
-#             certfile=app_config.CERT_PEM,
-#             debug=DEBUG
-#         )
-#     #
-#     else:
-#         error = "Возникла ошибка при запуске приложения.\nПроверьте лог файл"
-#         root_logger.error(error)
-#         exit(error)
+    if app:
+
+        socketio.run(
+            app,
+            host=app_config.HOST,
+            port=app_config.PORT,
+            keyfile=app_config.CERT_KEY,
+            certfile=app_config.CERT_PEM,
+            debug=DEBUG
+        )
+    #
+    else:
+        error = "Возникла ошибка при запуске приложения.\nПроверьте лог файл"
+        root_logger.error(error)
+        exit(error)

@@ -1,137 +1,16 @@
-DEBUG 16-07-2023 11:18:22 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 11:18:22 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:18:22 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 11:18:22 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 11:18:22 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 11:18:22 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 11:18:22 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 11:22:50 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:22:50 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 11:22:50 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:22:50 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 11:22:50 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 11:22:50 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 11:22:50 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 11:22:50 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 11:23:58 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:23:58 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 11:23:58 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:23:58 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 11:23:58 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 11:23:58 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 11:23:58 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 11:23:58 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 11:24:52 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:24:52 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 11:24:52 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:24:52 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 11:24:52 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 11:24:52 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 11:24:52 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 11:24:52 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 11:24:55 [apps.feedbacks] >>> Вызвана функция 'get_rating_route'
-DEBUG 16-07-2023 11:24:55 [apps.functions] >>> Вызвана функция 'apps_update'
-DEBUG 16-07-2023 11:24:55 [apps.functions] >>> Успешная обработка данных завершена.
-DEBUG 16-07-2023 11:27:05 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:27:05 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 11:27:05 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:27:05 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 11:27:05 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 11:27:05 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 11:27:05 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 11:27:05 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 11:27:22 [apps.feedbacks] >>> Вызвана функция 'get_rating_route'
-DEBUG 16-07-2023 11:27:22 [apps.functions] >>> Вызвана функция 'apps_update'
-DEBUG 16-07-2023 11:27:22 [apps.functions] >>> Успешная обработка данных завершена.
-DEBUG 16-07-2023 11:28:40 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:28:40 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 11:28:40 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:28:40 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 11:28:40 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 11:28:40 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 11:28:40 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 11:28:40 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 11:32:32 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:32:32 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 11:32:32 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:32:32 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 11:32:32 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 11:32:32 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 11:32:32 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 11:32:32 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 11:33:36 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:33:36 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 11:33:36 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:33:36 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 11:33:36 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 11:33:36 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 11:33:36 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 11:33:36 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 11:41:45 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:41:45 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 11:41:45 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:41:45 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 11:41:46 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 11:41:46 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 11:41:46 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 11:41:46 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 11:51:02 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:51:02 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 11:51:02 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:51:02 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 11:51:02 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 11:51:02 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 11:51:02 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 11:51:02 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 11:59:55 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:59:55 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 11:59:55 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 11:59:55 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 11:59:55 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 11:59:55 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 11:59:55 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 11:59:55 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 12:00:56 [apps.feedbacks] >>> Вызвана функция 'get_rating_route'
-DEBUG 16-07-2023 12:00:56 [apps.functions] >>> Вызвана функция 'apps_update'
-DEBUG 16-07-2023 12:00:56 [apps.functions] >>> Успешная обработка данных завершена.
-DEBUG 16-07-2023 12:01:32 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 12:01:32 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 12:01:32 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 12:01:32 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 12:01:32 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 12:01:32 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 12:01:32 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 12:01:32 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 12:01:54 [apps.feedbacks] >>> Вызвана функция 'get_rating_route'
-DEBUG 16-07-2023 12:01:54 [apps.functions] >>> Вызвана функция 'apps_update'
-DEBUG 16-07-2023 12:01:54 [apps.functions] >>> Успешная обработка данных завершена.
-DEBUG 16-07-2023 13:28:39 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 13:28:39 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 13:28:39 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 13:28:39 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 13:28:39 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 13:28:39 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 13:28:39 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 13:28:39 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 13:30:40 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 13:30:40 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 13:30:40 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 13:30:40 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 13:30:40 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 13:30:40 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 13:30:40 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 13:30:40 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 13:31:31 [apps.feedbacks] >>> Вызвана функция 'get_rating_route'
-DEBUG 16-07-2023 13:31:31 [apps.functions] >>> Вызвана функция 'apps_update'
-DEBUG 16-07-2023 13:31:31 [apps.functions] >>> Успешная обработка данных завершена.
-DEBUG 16-07-2023 14:00:05 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 14:00:05 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-DEBUG 16-07-2023 14:00:05 [httpx] >>> load_ssl_context verify=True cert=None trust_env=True http2=False
-DEBUG 16-07-2023 14:00:05 [httpx] >>> load_verify_locations cafile='/apps/kvas/venv/lib/python3.9/site-packages/certifi/cacert.pem'
-INFO 16-07-2023 14:00:05 [engineio.server] >>> Server initialized for gevent.
-DEBUG 16-07-2023 14:00:05 [apps] >>> Конфигурация создана успешно
-DEBUG 16-07-2023 14:00:05 [apps] >>> Заголовки CORS установлены успешно
-DEBUG 16-07-2023 14:00:05 [apps] >>> Регистрация RestAPI запросов прошла успешно
-DEBUG 16-07-2023 14:00:23 [apps.feedbacks] >>> Вызвана функция 'get_rating_route'
-DEBUG 16-07-2023 14:00:23 [apps.functions] >>> Вызвана функция 'apps_update'
-DEBUG 16-07-2023 14:00:23 [apps.functions] >>> Успешная обработка данных завершена.
+INFO 22-07-2023 15:22:10 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
+INFO 22-07-2023 15:22:11 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
+INFO 22-07-2023 15:22:36 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
+INFO 22-07-2023 15:22:36 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
+INFO 22-07-2023 15:23:01 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
+INFO 22-07-2023 15:23:01 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
+INFO 22-07-2023 15:23:26 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
+INFO 22-07-2023 15:23:26 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
+INFO 22-07-2023 15:23:51 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
+INFO 22-07-2023 15:23:51 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
+INFO 22-07-2023 15:24:16 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
+INFO 22-07-2023 15:24:16 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
+INFO 22-07-2023 15:24:41 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
+INFO 22-07-2023 15:24:41 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
+INFO 22-07-2023 15:25:06 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
+INFO 22-07-2023 15:25:06 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 

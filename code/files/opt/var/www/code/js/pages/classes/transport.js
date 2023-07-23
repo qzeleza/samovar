@@ -1,231 +1,144 @@
-/**
- * Класс для создания и управления анимацией вращения изображения.
- */
-class ModalAnimation {
+// Определяем приоритет обработки запросов к серверу
+const RequestPriority = {
+    RESTAPI: 0,
+    WEBSOCKET: 1,
+};
+
+class NetworkRequestManager {
     /**
-     * Создает новый экземпляр класса ModalAnimation.
-     * @param {string} imgSrc - Источник изображения.
-     * @param {number} imgSize - Размер изображения.
-     * @param {number} overlayOpacity - Непрозрачность затемнения.
-     * @param {number} cycleDuration - Продолжительность цикла анимации.
-     * @param {number} rotationSpeed - Скорость вращения.
-     * @param {number} acceleration - ускорение вращения.
+     * Класс для отправки запросов по HTTPS и Socket.IO протоколам с обработкой ошибок
+     * @param {string} serverName - Имя сервера.
+     * @param {number} port - Порт сервера.
+     * @param {number} priorityRequest - Приоритет отправки запросов (RequestPriority.RESTAPI или RequestPriority.WEBSOCKET).
      */
-    constructor(imgSrc, imgSize, overlayOpacity, cycleDuration, rotationSpeed, acceleration) {
-        this.imgSize = imgSize;
-        this.cycleDuration = cycleDuration / 1000;
-        this.overlayOpacity = overlayOpacity;
-        this.imgSrc = imgSrc;
-        this.rotationSpeed = rotationSpeed;
-        this.interval = null;
-        this.$imgContainer = null;
-        this.$overlay = null;
-        this.acceleration = acceleration;
-    }
-
-    /**
-     * Запускает анимацию вращения изображения.
-     */
-    start() {
-        try {
-            // Создание элементов
-            this.$overlay = $('<div>').css({
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                backgroundColor: 'black',
-                opacity: this.overlayOpacity / 100,
-                zIndex: 9998
-            });
-            this.$imgContainer = $('<div>').css({
-                borderRadius: '50%',
-                border: `${this.imgSize * 0.03}vh solid white`,
-                overflow: 'hidden',
-                position: 'fixed',
-                top: '40%',		// ориентация по высоте отображения анимации
-                left: '50%',  	// ориентация по ширине отображения анимации
-                transform: 'translate(-50%, -50%)',
-                width: `${this.imgSize}vh`,
-                height: `${this.imgSize}vh`,
-                zIndex: 9999,
-            });
-            const $img = $('<img>')
-                .attr('src', this.imgSrc)
-                .css({
-                    position: 'absolute',
-                    top: '-2%',
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    padding: '5%'
-                }).on('error', () => {
-                    // Обработка ошибки загрузки изображения
-                    console.error(`Ошибка загрузки изображения ${this.imgSrc}`);
-                    this.stop();
-                });
-            this.$imgContainer.append($img);
-            $('body').append(this.$overlay).append(this.$imgContainer);
-
-            // Анимация
-            let angle = 0;
-            let speed = 0;
-
-            // Функция для обновления анимации
-            const updateAnimation = (rotationType) => {
-                if (rotationType === 'clockwise') {
-                    angle += speed;
-                    if (angle >= 1) angle -= 1;
-                } else if (rotationType === 'counterclockwise') {
-                    angle -= speed;
-                    if (angle <= -1) angle += 1;
-                }
-                if (speed < this.rotationSpeed) speed += this.acceleration;
-                this.$imgContainer.css('transform', `translate(-50%, -50%)
-          		rotateY(${angle}deg)
-          		rotateX(${angle}deg)
-          		rotateY(${angle}deg)
-          		rotateX(${angle}deg)
-          		`);
-            };
-
-            // Запуск первого цикла анимации
-            this.interval = setInterval(() => updateAnimation('clockwise'), this.cycleDuration);
-
-        }
-        catch(error) {
-            console.error(`Ошибка при запуске анимации: ${error.message}`);
-            this.stop();
-        }
-    }
-    /**
-     * Останавливает анимацию вращения изображения.
-     */
-    stop() {
-        clearInterval(this.interval);
-        this.$imgContainer.remove();
-        this.$overlay.remove();
-    }
-
-}
-
-
-
-/**
- * Класс для отправки запросов на сервер через REST API или WebSocket
- */
-class TransportAPI {
-    /**
-     * Создает экземпляр класса ApiClient
-     * @param {string} server - Адрес сервера
-     * @param {number} port - Порт сервера
-     */
-    constructor(server, port) {
-        this.server = server;
+    constructor(serverName, port, priorityRequest = RequestPriority.WEBSOCKET) {
+        this.serverName = serverName;
         this.port = port;
-        this.queue = [];
-        this.socket = null;
-        this.checkWebSocket();
-        const imgSrc = "assets/images/logo/loading.svg"
-        this.spinAnimated = new ModalAnimation(imgSrc, 15, 70, 1, 1, 3);
+        this.httpsPriority = priorityRequest;
+        this.stack = [];
+        this.messageContainer = $('#message-container');
+        this.socket = null; // Переменная для хранения объекта Socket.IO
+        this.initSocket(); // Инициализируем Socket.IO при создании экземпляра класса
     }
 
     /**
-     * Проверка наличия WebSocket и установка соединения
-     * @private
+     * Инициализация Socket.IO
      */
-    checkWebSocket() {
-        if (typeof io !== 'undefined') {
-            let url = `https://${this.server}:${this.port}`;
-            try {
-                this.socket = io(url);
-                this.socket.on('connect', () => {
-                    console.log("WebSocket соединение установлено");
-                    this.processQueue();
-                });
-                this.socket.on('connect_error', (error) => {
-                    console.error(`Ошибка WebSocket: ${error}`);
-                    this.socket = null;
-                });
-                this.socket.on('disconnect', (reason) => {
-                    console.log(`WebSocket соединение закрыто: ${reason}`);
-                    this.socket = null;
-                });
-            } catch (error) {
-                console.error(`Ошибка WebSocket: ${error}`);
-                this.socket = null;
-            }
+    initSocket() {
+        try {
+            this.socket = io(`wss://${this.serverName}:${this.port}`);
+            this.socket.on('connect', () => {
+                this.showMessage('WebSocket подключен.', 'success');
+            });
+            this.socket.on('error', (error) => {
+                this.showMessage(`Ошибка в WebSocket: ${error.message}`, 'danger');
+            });
+            this.socket.on('disconnect', () => {
+                this.showMessage('WebSocket отключен.', 'warning');
+            });
+        } catch (error) {
+            this.showMessage(`Ошибка при инициализации WebSocket: ${error.message}`, 'danger');
+        }
+    }
+
+    /**
+     * Отправка HTTPS-запроса
+     * @param {string} path - Путь для запроса.
+     * @param {Object} data - Данные для отправки.
+     * @param {Function} callback - Функция обработки пришедшего ответа.
+     */
+    async _sendHttpsRequest(path, data, callback) {
+        try {
+            const url = `https://${this.serverName}:${this.port}/${path}`;
+            const response = await $.ajax({
+                url,
+                type: 'POST',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                dataType: 'json'
+            });
+            callback(response);
+        } catch (error) {
+            this.showMessage(`Ошибка при отправке HTTPS запроса: ${error.message}`, 'danger');
+        }
+    }
+
+    /**
+     * Отправка Socket.IO-запроса
+     * @param {string} path - Путь для запроса.
+     * @param {Object} data - Данные для отправки.
+     * @param {Function} callback - Функция обработки пришедшего ответа.
+     */
+    _sendSocketRequest(path, data, callback) {
+        try {
+            this.socket.emit(path, data);
+            this.socket.on(`${path}_response`, (responseData) => {
+                callback(responseData);
+            });
+        } catch (error) {
+            this.showMessage(`Ошибка при отправке WebSocket запроса: ${error.message}`, 'danger');
+        }
+    }
+
+    /**
+     * Отправка запроса с выбором протокола
+     * @param {string} path - Путь для запроса.
+     * @param {Object} data - Данные для отправки.
+     * @param {Function} callback - Функция обработки пришедшего ответа.
+     * @param {boolean} allowDuplicate - Разрешить дублирование запроса в стеке.
+     */
+    async send(path, data, callback, allowDuplicate = false) {
+        if (!allowDuplicate && this.stack.some(req => req.path === path)) {
+            this.showMessage(`Ошибка при отправке HTTPS запроса: Запрос ${path} уже находится в стеке, дублирование запрещено.`, 'warning');
+            return;
+        }
+
+        this.stack.push({ path });
+
+        if (this.httpsPriority === RequestPriority.RESTAPI) {
+            await this._sendHttpsRequest(path, data, (responseData) => {
+                callback(responseData);
+                this._removeFromRequestStack(path);
+            });
+            this._sendSocketRequest(path, data, (responseData) => {
+                callback(responseData);
+                this._removeFromRequestStack(path);
+            });
+        } else if (this.httpsPriority === RequestPriority.WEBSOCKET) {
+            this._sendSocketRequest(path, data, (responseData) => {
+                callback(responseData);
+                this._removeFromRequestStack(path);
+            });
+            await this._sendHttpsRequest(path, data, (responseData) => {
+                callback(responseData);
+                this._removeFromRequestStack(path);
+            });
         } else {
-            console.log("Библиотека socket.io не найдена");
-            this.socket = null;
+            this.showMessage(`Неизвестный приоритет запроса: ${this.httpsPriority}`, 'danger');
         }
     }
 
     /**
-     * Обработка запросов из очереди
-     * @private
+     * Удаление запроса из стека
+     * @param {string} path - Путь для запроса.
      */
-    processQueue() {
-        while (this.queue.length > 0) {
-            let request = this.queue.shift();
-            if (this.socket) {
-                const action = request.route.split("/").pop();
-                // const message = {type: action, data: request.data};
-                // const message = {data: request.data};
-                this.socket.emit(action, request.data);
-                this.socket.on(action + '_response', (data) => {
-                    request.callback(data);
-                });
-            } else {
-                this.sendAjax(request.route, request.data, request.callback);
-            }
-        }
+    _removeFromRequestStack(path) {
+        this.stack = this.stack.filter(req => req.path !== path);
     }
 
     /**
-     * Отправка запроса через REST API
-     * @param {string} route - Маршрут запроса
-     * @param {Object} data - Данные запроса
-     * @param {function} callback - Функция обратного вызова для обработки ответа
-     * @private
+     * Отображение сообщения
+     * @param {string} message - Текст сообщения.
+     * @param {string} type - Тип сообщения (success, danger, warning и т.д.).
      */
-    sendAjax(route, data, callback) {
-        $.ajax({
-            type: "POST",
-            url: `https://${this.server}:${this.port}/${route}`,
-            data: JSON.stringify(data),
-            contentType: "application/json",
-            success: (data) => {callback(data);},
-            error: (error) => {console.error(`Ошибка REST API: ${error}`);}
+    showMessage(message, type) {
+        const alertElement = $(`<div class="alert alert-${type} fade show mb-2" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            ${message}
+        </div>`);
+        this.messageContainer.append(alertElement);
+        alertElement.fadeTo(3000, 500).slideUp(500, () => {
+            alertElement.alert('close');
         });
     }
-
-    /**
-     * Отправка запроса на сервер
-     * @param {string} route - Маршрут запроса
-     * @param {Object} data - Данные запроса
-     * @param {function} callback - Функция обратного вызова для обработки ответа
-     */
-    send(route, data, callback) {
-        const action = route.split("/").pop();
-        let request = {route: route, data: data, callback: callback};
-        this.spinAnimated.start();		// запускаем анимацию до окончания загрузки
-        if (this.socket && this.socket.connected) {
-            // let message = {type: action, data: request.data};
-            // const message = {data: request.data};
-            this.socket.emit(action, request.data);
-            this.socket.on(action + '_response', (data) => {
-                callback(data);
-            });
-        } else {
-            this.queue.push(request);
-            if (!this.socket) {
-                this.sendAjax(request.route, request.data, request.callback);
-            }
-        }
-        this.spinAnimated.stop();		// останавливаем анимацию до окончания загрузки
-    }
 }
-
-// export default TransportAPI;

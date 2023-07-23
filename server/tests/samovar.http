@@ -1,5 +1,5 @@
 
-POST https://api.zeleza.ru:63331/api/v1/get_rating
+POST https://api.zeleza.ru:11211/api/v1/get_rating
 Content-Type: application/json
 
 {
@@ -9,7 +9,7 @@ Content-Type: application/json
 
 
 ### Send GET request get_rating
-POST https://api.zeleza.ru:63331/api/v1/get_rating
+POST https://api.zeleza.ru:11211/api/v1/get_rating
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### Send GET request new_record
-POST https://api.zeleza.ru:63331/api/v1/new_record
+POST https://api.zeleza.ru:11211/api/v1/new_record
 Content-Type: application/json
 
 {
@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 
 ### Send POST request reviews_list
-POST https://api.zeleza.ru:63331/api/v1/reviews_list
+POST https://api.zeleza.ru:11211/api/v1/reviews_list
 Content-Type: application/json
 
 {
@@ -38,9 +38,9 @@ Content-Type: application/json
 }
 
 ### Send GET request reviews_table_page
-GET https://api.zeleza.ru:63331/api/v1/reviews_table_page?key=secret_key&app_name=samovar
+GET https://api.zeleza.ru:11211/api/v1/reviews_table_page?key=secret_key&app_name=samovar
 
 ### Send GET request summary_table_page
-GET https://api.zeleza.ru:63331/api/v1/summary_table_page?key=secret_key
+GET https://api.zeleza.ru:11211/api/v1/summary_table_page?key=secret_key
 
 

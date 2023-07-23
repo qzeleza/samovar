@@ -16,13 +16,14 @@ class Config(object):
     HOST = '0.0.0.0'
     PORT = 61116
 
+
     RESTAPI_ROOT_PATH = "/api/v1/"
 
     RATING_TEMPLATE_NAME = 'ratings.html'
     REVIEWS_TEMPLATE_NAME = 'reviews.html'
 
-    CERT_PEM = 'certs/api.crt'
-    CERT_KEY = 'certs/api.key'
+    CERT_PEM = basedir + '/certs/api.zeleza.ru.crt'
+    CERT_KEY = basedir + '/certs/api.zeleza.ru.key'
 
     # if not SECRET_KEY:
     #     SECRET_KEY = ''.join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))

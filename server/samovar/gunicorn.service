@@ -8,7 +8,7 @@ After=network.target
 User=www-data
 Group=root
 WorkingDirectory=/apps/api
-ExecStart=/apps/api/venv/bin/gunicorn -k gevent -w 2 --bind 0.0.0.0:61116 api:app --error-logfile /apps/api/logs/gunicorn.log --log-level debug
+ExecStart=/apps/api/venv/bin/gunicorn -k "geventwebsocket.gunicorn.workers.GeventWebSocketWorker" -w 1 --threads 100 --bind 0.0.0.0:61116 api:app --error-logfile /apps/api/logs/gunicorn.log --log-level error
 
 [Install]
 WantedBy=multi-user.target

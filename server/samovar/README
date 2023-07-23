@@ -10,8 +10,10 @@ apt-get install -y build-essential python3-venv libpcre3-dev python3-dev curl na
 mkdir -p "${API_PATH}/templates"
 python3 -m venv venv
 . "${API_PATH}/venv/bin/active"
-pip install wheel flask[async] Flask-SQLAlchemy python-telegram-bot gunicorn cryptography certifi flask-socketio gevent Flask-Caching
+pip install wheel flask[async] Flask-SQLAlchemy python-telegram-bot gunicorn cryptography certifi flask-socketio gevent Flask-Caching gevent-websocket
 pip install -U flask-cors
+mkdir /etc/systemd/system/nginx.service.d
+printf "[Service]\nExecStartPost=/bin/sleep 1\n" /etc/systemd/system/nginx.service.d/override.conf
 ufw allow "${API_PORT_OUTSIDE}/tcp"
 ufw enable
 ln -s ${API_PATH}/gunicorn.service /etc/systemd/system/samovar.service
@@ -30,8 +32,11 @@ systemctl start samovar.service
 systemctl status samovar.service
 systemctl enable samovar.service
 
+# Проверка портов
 netstat -tuln | grep ":${API_PORT}"
+netstat -tuln | grep LISTEN
 lsof -i :${API_PORT}"
+lsof -i @api.zeleza.ru:${API_PORT}
 
 Команды для отладки
 --------------------------
