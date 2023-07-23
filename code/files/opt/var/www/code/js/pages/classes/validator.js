@@ -1,3 +1,6 @@
+//
+// Класс FormDataValidator предназначен для проверки данных в формах
+//
 class FormDataValidator {
     constructor(formId) {
 

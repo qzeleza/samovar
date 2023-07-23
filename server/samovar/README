@@ -1,25 +1,28 @@
 Необходимо на чистой системе (Debian 10) выполнить следующий код
 ---------------------
-API_PATH=/apps/api
-API_PORT_OUTSIDE=63331
+APP_NAME=samovar
+API_PATH=/apps/${APP_NAME}
+API_PORT_OUTSIDE=11211
 API_PORT_INSIDE=61116
 
 apt update && apt upgrade
-apt-get install -y build-essential python3-venv libpcre3-dev python3-dev curl nano nginx net-tools certbot apt-get install logrotate
+apt-get install -y build-essential python3-venv libpcre3-dev python3-dev curl ufw nano nginx net-tools certbot logrotate rsync
 
 mkdir -p "${API_PATH}/templates"
 python3 -m venv venv
 . "${API_PATH}/venv/bin/active"
 
+pip install --upgrade pip setuptools
 pip install wheel flask[async] Flask-SQLAlchemy python-telegram-bot gunicorn cryptography certifi flask-socketio gevent Flask-Caching gevent-websocket
 pip install -U flask-cors
 
 mkdir /etc/systemd/system/nginx.service.d
-printf "[Service]\nExecStartPost=/bin/sleep 1\n" /etc/systemd/system/nginx.service.d/override.conf
+printf "[Service]\nExecStartPost=/bin/sleep 1\n" > /etc/systemd/system/nginx.service.d/override.conf
 
 ufw allow "${API_PORT_OUTSIDE}/tcp"
 ufw enable
 
+rm /etc/nginx/sites-enabled/default
 ln -s ${API_PATH}/gunicorn.service /etc/systemd/system/samovar.service
 ln -s ${API_PATH}/uwsgi.ini /etc/uwsgi/apps-enabled/samovar.ini
 ln -s ${API_PATH}/nginx.conf /etc/nginx/apps-enabled/samovar.conf
@@ -33,10 +36,13 @@ chown -R www-data:root "${API_PATH}/logs" "${API_PATH}/databases"
 touch "${API_PATH}/__init__.py"
 chown -R www-data:root ./logs/
 
+mkdir -p "${API_PATH}/logs" && chown -R www-data:root "${API_PATH}/logs"
+mkdir -p "${API_PATH}/databases" && chown -R www-data:root "${API_PATH}/databases"
+
 systemctl daemon-reload
-systemctl start samovar.service
-systemctl status samovar.service
-systemctl enable samovar.service
+systemctl start ${APP_NAME}.service
+systemctl status ${APP_NAME}.service
+systemctl enable ${APP_NAME}.service
 systemctl restart logrotate.service
 
 # Проверка портов
@@ -55,3 +61,5 @@ systemctl restart gevent.service
 ps aux | grep api.py
 ufw status numbered
 ufw delete <num>
+systemctl daemon-reload && systemctl restart samovar && systemctl restart kvas && systemctl restart nginx
+/apps/api/venv/bin/gunicorn -k gevent --bind 0.0.0.0:11211 api:app --error-logfile /apps/api/logs/gunicorn.log --log-level debug --certfile /apps/api/certs/api.zeleza.ru.crt --keyfile /apps/api/certs/api.zeleza.ru.key

@@ -19,14 +19,18 @@
     </div>
     <div class="card-body">
       <div class="mb-3">
-        <label for="messageType">Тип сообщения:</label>
-        <select id="messageType" class="form-select">
-          <option value="get_rating">Get Rating</option>
-          <option value="new_record">New Record</option>
-          <option value="reviews_list">Reviews List</option>
-          <option value="update">Kvas update</option>
+        <label for="serverType">Тип сервера:</label>
+        <select id="serverType" class="form-select">
+          <option value="samovar">Самовар</option>
+          <option value="kvas">Квас</option>
         </select>
       </div>
+      <div class="mb-3">
+          <label for="messageType">Тип сообщения:</label>
+          <select id="messageType" class="form-select">
+            <!-- Здесь не будет никаких элементов, так как они будут добавлены динамически -->
+          </select>
+        </div>
       <div class="mb-3">
         <label for="messageData">Сообщение для отправки:</label>
         <textarea type="text" id="messageData" class="form-control" style="height: 200px"></textarea>

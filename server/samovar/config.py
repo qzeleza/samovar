@@ -15,6 +15,7 @@ class Config(object):
 
     HOST = '0.0.0.0'
     PORT = 61116
+    #
 
 
     RESTAPI_ROOT_PATH = "/api/v1/"
@@ -24,9 +25,6 @@ class Config(object):
 
     CERT_PEM = basedir + '/certs/api.zeleza.ru.crt'
     CERT_KEY = basedir + '/certs/api.zeleza.ru.key'
-
-    # if not SECRET_KEY:
-    #     SECRET_KEY = ''.join(random.choice( string.ascii_lowercase  ) for i in range( 32 ))
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     USE_SQLITE = True
@@ -51,6 +49,7 @@ class ProductionConfig(Config):
 class DebugConfig(Config):
     DEBUG = True
     STAGE = 'test'
+    PORT = 11211
     NUM_LOG_BACKUPS = 3
     MAX_LOG_SIZE = 15000
     LOG_DEBUG_FILE = Config.basedir + '/logs/ws.log'

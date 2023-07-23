@@ -25,10 +25,20 @@ def remove_connection(sid):
     if sid in active_connections:
         del active_connections[sid]
 
+# @socketio.on_event(namespace='/socket.io')
+# def send_unknown_message_error(request, error_message):
+#     breakpoint()
+#     response_message_type = f"wrong_message_response"
+#     emit(response_message_type, {'success': False, 'description': error_message}, room=request.sid)
+
 
 def send_back(request, result):
     # Получаем тип пришедшего сообщения
     message_type = request.event["message"].split(' ')[0]
+
+    # if message_type not in socketio.server.handlers['/']:
+    #     send_unknown_message_error(request, message_type)
+    #     return
 
     # Формируем новый тип сообщения, добавив "_response" к текущему типу
     response_message_type = f"{message_type}_response"
@@ -66,8 +76,10 @@ def handle_ws_disconnect():
 @socketio.on_error_default
 def default_error_handler(e):
     logger.debug(f"Вызвана функция '{get_function_name()}'")
-    logger.debug(f"ОШИБКА {e}")
-    logger.error(f'ОШИБКА: {request.event["message"]}')
+    error_message = f"Ошибка: {e}"
+    logger.error(error_message)
+    logger.error(f'Сообщение: {request.event["message"]}')
     logger.error(f'Аргументы: {request.event["args"]}')
+    send_unknown_message_error(request, error_message)
 
 

@@ -933,9 +933,3 @@ function rightPanelAct(act='hide'){
 
 }
 
-// import TransportAPI from "../classes/transport";
-const API_ROOT = '/api/v1'
-// const RATING_SERVER = new TransportAPI("api.zeleza.ru", 63331)
-// const ROUTER_SERVER = new TransportAPI("api.zeleza.ru", 33661)
-const RATING_SERVER = new NetworkRequestManager("api.zeleza.ru", 63331)
-const ROUTER_SERVER = new NetworkRequestManager("api.zeleza.ru", 33661)

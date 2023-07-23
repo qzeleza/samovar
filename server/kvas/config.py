@@ -16,8 +16,8 @@ class Config(object):
 
     RESTAPI_ROOT_PATH = "/kvas/v1/"
 
-    CERT_PEM = basedir + '/certs/api.zeleza.ru.crt'
-    CERT_KEY = basedir + '/certs/api.zeleza.ru.key'
+    CERT_PEM = basedir + '/certs/kvas.zeleza.ru.crt'
+    CERT_KEY = basedir + '/certs/kvas.zeleza.ru.key'
 
 
 class ProductionConfig(Config):
@@ -28,6 +28,7 @@ class ProductionConfig(Config):
 class DebugConfig(Config):
     DEBUG = True
     STAGE = 'test'
+    PORT = 11133
     NUM_LOG_BACKUPS = 3
     MAX_LOG_SIZE = 15000
     LOG_DEBUG_FILE = Config.basedir + '/logs/ws.log'
