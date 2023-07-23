@@ -5,23 +5,29 @@ API_PORT_OUTSIDE=63331
 API_PORT_INSIDE=61116
 
 apt update && apt upgrade
-apt-get install -y build-essential python3-venv libpcre3-dev python3-dev curl nano nginx net-tools certbot
+apt-get install -y build-essential python3-venv libpcre3-dev python3-dev curl nano nginx net-tools certbot apt-get install logrotate
 
 mkdir -p "${API_PATH}/templates"
 python3 -m venv venv
 . "${API_PATH}/venv/bin/active"
+
 pip install wheel flask[async] Flask-SQLAlchemy python-telegram-bot gunicorn cryptography certifi flask-socketio gevent Flask-Caching gevent-websocket
 pip install -U flask-cors
+
 mkdir /etc/systemd/system/nginx.service.d
 printf "[Service]\nExecStartPost=/bin/sleep 1\n" /etc/systemd/system/nginx.service.d/override.conf
+
 ufw allow "${API_PORT_OUTSIDE}/tcp"
 ufw enable
+
 ln -s ${API_PATH}/gunicorn.service /etc/systemd/system/samovar.service
 ln -s ${API_PATH}/uwsgi.ini /etc/uwsgi/apps-enabled/samovar.ini
 ln -s ${API_PATH}/nginx.conf /etc/nginx/apps-enabled/samovar.conf
+ln -s ${API_PATH}/logs/samovar.logrotate /etc/logrotate.d/samovar
 
 groupadd root
 useradd -m -g www-data root
+
 API_PATH=/apps/api
 chown -R www-data:root "${API_PATH}/logs" "${API_PATH}/databases"
 touch "${API_PATH}/__init__.py"
@@ -31,6 +37,7 @@ systemctl daemon-reload
 systemctl start samovar.service
 systemctl status samovar.service
 systemctl enable samovar.service
+systemctl restart logrotate.service
 
 # Проверка портов
 netstat -tuln | grep ":${API_PORT}"
@@ -40,6 +47,7 @@ lsof -i @api.zeleza.ru:${API_PORT}
 
 Команды для отладки
 --------------------------
+logrotate -d  /apps/kvas/logs/kvas.logrotate
 pkill -f gunicorn
 gunicorn -k gevent -w 1 --bind 0.0.0.0:61116 api:app
 killall gevent

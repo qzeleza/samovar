@@ -1,16 +1,75 @@
-INFO 22-07-2023 15:22:10 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
-INFO 22-07-2023 15:22:11 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
-INFO 22-07-2023 15:22:36 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
-INFO 22-07-2023 15:22:36 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
-INFO 22-07-2023 15:23:01 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
-INFO 22-07-2023 15:23:01 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
-INFO 22-07-2023 15:23:26 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
-INFO 22-07-2023 15:23:26 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
-INFO 22-07-2023 15:23:51 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
-INFO 22-07-2023 15:23:51 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
-INFO 22-07-2023 15:24:16 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
-INFO 22-07-2023 15:24:16 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
-INFO 22-07-2023 15:24:41 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
-INFO 22-07-2023 15:24:41 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
-INFO 22-07-2023 15:25:06 [engineio.server] >>> YKotx681AybZn4u9AAAC: Sending packet PING data None
-INFO 22-07-2023 15:25:06 [engineio.server] >>> YKotx681AybZn4u9AAAC: Received packet PONG data 
+DEBUG 23-07-2023 11:08:16 [geventwebsocket.handler] >>> Initializing WebSocket
+DEBUG 23-07-2023 11:08:16 [geventwebsocket.handler] >>> Validating WebSocket request
+DEBUG 23-07-2023 11:08:16 [geventwebsocket.handler] >>> Attempting to upgrade connection
+DEBUG 23-07-2023 11:08:16 [geventwebsocket.handler] >>> WebSocket request accepted, switching protocols
+INFO 23-07-2023 11:08:16 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received request to upgrade to websocket
+INFO 23-07-2023 11:08:16 [geventwebsocket.handler] >>> 127.0.0.1 - - [2023-07-23 11:08:16] "GET /socket.io/?EIO=4&transport=polling&t=Oc1oiET&sid=_OgYUTYDhs4ZHkB_AAAA HTTP/1.1" 200 210 0.035232
+INFO 23-07-2023 11:08:16 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Upgrade to websocket successful
+INFO 23-07-2023 11:08:41 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:08:41 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:09:06 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:09:06 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:09:31 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:09:31 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:09:56 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:09:56 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:10:21 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:10:21 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:10:46 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:10:47 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:11:12 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:11:12 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:11:37 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:11:37 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:12:02 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:12:02 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:12:27 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:12:27 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:12:52 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:12:52 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:13:17 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:13:17 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:13:42 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:13:42 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:14:07 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:14:07 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:14:32 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:14:32 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:14:57 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:14:57 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:15:22 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:15:22 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:15:47 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:15:47 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:16:12 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:16:12 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:16:37 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:16:37 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:17:02 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:17:02 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:17:27 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:17:27 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:17:52 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:17:52 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:18:17 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:18:17 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:18:42 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:18:43 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:19:08 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:19:08 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:19:33 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:19:33 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:19:58 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:19:58 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:20:23 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:20:23 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:20:48 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:20:48 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:21:13 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:21:13 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:21:38 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:21:38 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:22:03 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:22:03 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
+INFO 23-07-2023 11:22:28 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Sending packet PING data None
+INFO 23-07-2023 11:22:28 [engineio.server] >>> _OgYUTYDhs4ZHkB_AAAA: Received packet PONG data 
