@@ -43,12 +43,45 @@ $(document).ready(function() {
                 default: '{ "app_name": "kvas"}'
             },
             {
-                value: "current_dns",
-                text: "Получить текущий DNS",
-                default: '{ "app_name": "kvas"}'
+                value: "get_router_data",
+                text: "Получить данные роутера",
+                default: '{}'
             }
         ]
     };
+
+    function call_kvas_socket_handlers(){
+
+        // Обработчик события 'new_record_response'
+        socket.on('update_response', (response) => {
+            displayResponse(response);
+        });
+
+        // Обработчик события 'new_record_response'
+        socket.on('get_router_data_response', (response) => {
+            displayResponse(response);
+        });
+    }
+    function call_samovar_socket_handlers(){
+
+                // Обработчик события 'get_rating_response'
+        socket.on('get_rating_response', (response) => {
+            displayResponse(response);
+        });
+
+        // Обработчик события 'new_record_response'
+        socket.on('new_record_response', (response) => {
+            displayResponse(response);
+        });
+
+        // Обработчик события 'reviews_list_response'
+        socket.on('reviews_list_response', (response) => {
+            displayResponse(response);
+        });
+
+
+
+    }
 
     function displayResponse(response) {
         // Очистка контейнера с предыдущими ответами
@@ -137,26 +170,8 @@ $(document).ready(function() {
             displayResponse(data.description);
         });
 
-        // Обработчик события 'get_rating_response'
-        socket.on('get_rating_response', (response) => {
-            displayResponse(response);
-        });
-
-        // Обработчик события 'new_record_response'
-        socket.on('new_record_response', (response) => {
-            displayResponse(response);
-        });
-
-        // Обработчик события 'reviews_list_response'
-        socket.on('reviews_list_response', (response) => {
-            displayResponse(response);
-        });
-
-        // Обработчик события 'new_record_response'
-        socket.on('update_response', (response) => {
-            displayResponse(response);
-        });
-
+        call_samovar_socket_handlers();
+        call_kvas_socket_handlers();
 
         // Обработчик отправки формы
         sendButton.on("click", function() {

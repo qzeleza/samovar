@@ -5,7 +5,6 @@ class Config(object):
     basedir = os.path.abspath(os.path.dirname(__file__))
 
     # Assets Management
-    # ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
     DATE_FORMAT = "%d-%m-%Y %H:%M:%S"
 
     # Set up the App SECRET_KEY
@@ -39,11 +38,6 @@ class ProductionConfig(Config):
     DEBUG = False
     STAGE = 'dev'
     SQLALCHEMY_DATABASE_URI, DATABASE_PATH = db_init(STAGE, Config.basedir)
-
-    # Security
-    SESSION_COOKIE_HTTPONLY = True
-    REMEMBER_COOKIE_HTTPONLY = True
-    REMEMBER_COOKIE_DURATION = 3600
 
 
 class DebugConfig(Config):

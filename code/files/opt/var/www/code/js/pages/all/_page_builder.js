@@ -1,7 +1,7 @@
 
 
 const RATING_SERVER = new NetworkRequestManager("api.zeleza.ru", 11211, '/api/v1')
-const ROUTER_SERVER = new NetworkRequestManager("kvas.zeleza.ru", 11133, '/kvas/v1')
+
 
 function buildMainTemplatePage(root){
 
@@ -61,6 +61,7 @@ function buildMainTemplatePage(root){
     // Загрузка необходимых скриптов для всех страниц шаблона
     templateLoad.add(root + 'code/js/pages/all/apps.js');
     templateLoad.add(root + 'code/js/pages/all/configurator.js');
+    templateLoad.add(root + 'code/js/pages/classes/router.js');
 
 
     // Загрузка функции, которая подгружает классы

@@ -1,8 +1,18 @@
-
-POST https://api.zeleza.ru:11133/kvas/v1/update
+### Send GET request new_record
+POST https://kvas.zeleza.ru:11133/kvas/v1/update
 Content-Type: application/json
 
 {
   "app_name": "kvas"
 }
 
+
+
+
+### Send GET request new_record
+POST https://kvas.zeleza.ru:11133/kvas/v1/get_router_data
+Content-Type: application/json
+
+{
+  "": ""
+}

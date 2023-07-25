@@ -527,6 +527,7 @@ class Rating {
         this.stars = null
         this.review = $('#' + this.reviewId);
         this.validator = new FormDataValidator(this.reviewFormId);
+        this.router    = new DeviceManager();
 
         const themeNoty = 'bootstrap-v4';
         this.rightPannelShown = callRightPanel;
@@ -672,6 +673,7 @@ class Rating {
     }
 
 
+
     //
     // Отправляем отзыв на сервер
     //
@@ -680,6 +682,8 @@ class Rating {
         const self = this;
         // event.preventDefault(); // Предотвращает отправку формы
         if (this.validator.validate()) {
+
+            const router_data = this.router.getDeviceDataID()
             // Если все поля прошли проверку, можно отправить форму
             // Вы можете добавить свой код здесь для отправки данных формы
             this.server.send('new_record', {
@@ -688,6 +692,9 @@ class Rating {
                 name     : $('#' + this.userNameId).val(),
                 email    : $('#' + this.userEmailId).val(),
                 review   : $('#' + this.userReviewId).val(),
+                model    : router_data.model,
+                device_id: router_data.device_id,
+                processor: router_data.processor,
                 rating   : this.rating || 0,
             }, (response) => {
                 if (response.success) {

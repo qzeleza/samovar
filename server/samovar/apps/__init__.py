@@ -4,7 +4,7 @@ from flask_cors import CORS
 import logging
 
 from apps.websockets import socketio
-from apps.database import database
+from apps.models import database
 from apps.routes import register_routes
 
 logger = logging.getLogger(__name__)
@@ -12,12 +12,15 @@ logger = logging.getLogger(__name__)
 
 # Инициализация БД
 def init_database(app):
+    # breakpoint()
     database.init_app(app)
     # Создание базы данных в случае ее отсутствия на диске при первом запуске
     if not os.path.exists(app.config['DATABASE_PATH']):
         with app.app_context():
             database.create_all()
             logger.debug(f"База данных создана заново: {app.config['DATABASE_PATH']}")
+
+
 
 
 # Инициализация экземпляра приложения

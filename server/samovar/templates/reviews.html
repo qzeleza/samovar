@@ -33,9 +33,11 @@
                 <tr class="border-end">
                         {% endif %}
                         <td>
+                            <div >{{ r.type }}</div>
                             <div class="text-end">
                                 <span class="fw-bold">{{ r.name }}</span> | {{ r.email }} | {{ r.date.strftime('%Y-%m-%d') }}
                             </div>
+                            <div class="text-end">{{ r.model }} | {{ r.processor }} | {{ r.device_id }}</div>
                             <div class="text-start pb-3 pt-3">{{ r.review }}</div>
                         </td>
                 </tr>
