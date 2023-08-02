@@ -3,17 +3,24 @@ POST https://api.zeleza.ru:11211/api/v1/get_rating
 Content-Type: application/json
 
 {
-  "app_name": "kvas"
+  "app_name": "samovar"
 }
 
+### Send GET request get_rating
+POST https://api.zeleza.ru:11211/api/v1/get_last_version
+Content-Type: application/json
 
+{
+  "app_name": "kvas"
+}
 
 ### Send GET request get_rating
 POST https://api.zeleza.ru:11211/api/v1/get_rating
 Content-Type: application/json
 
 {
-  "app_name": "samovar"
+  "app_name": "samovar",
+  "version": "latest"
 }
 
 ### Send GET request new_record
@@ -21,11 +28,10 @@ POST https://api.zeleza.ru:11211/api/v1/new_record
 Content-Type: application/json
 
 {
-  "app_name": "kvas",
-  "version": "1.3",
+  "app_name": "samovar",
   "name": "Bob",
   "email": "test@email.cc",
-  "review": "Тестовый отзыв: программа отличная так держать! Супер",
+  "review": "Тестовый отзыв: программа отличная так держать! Супер11",
   "rating": "9",
   "type": "Отзыв с рейтингом",
   "device_id": "42csr4rc435v34v2c5tc2",

@@ -1,4 +1,21 @@
 
+.noty-container {
+  --alert-padding-x: var(--spacer);
+  --alert-padding-y: calc(var(--spacer) * 0.8);
+  --alert-dismissible-padding-r: calc(var(--spacer) * 3);
+  --alert-margin-bottom: var(--spacer);
+  --alert-border-width: var(--border-width);
+  --alert-border-radius: var(--border-radius);
+  position: relative;
+  padding: var(--alert-padding-y) var(--alert-padding-x);
+  margin-bottom: var(--alert-margin-bottom);
+  color: var(--alert-color);
+  background-color: var(--alert-bg);
+  border:var(--alert-border-width) solid var(--alert-border-color);
+  border-radius: var(--alert-border-radius);
+  transition: opacity var(--transition-base-timer) linear;
+  padding-right: var(--alert-dismissible-padding-r);
+}
 /* позволяет закрашивать часть звездочки для рейтинга */
 .card-body.scroll-content .border-bottom {
   margin-top: 30px;

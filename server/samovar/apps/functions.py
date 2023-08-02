@@ -35,6 +35,7 @@ def get_user_record(user_email, user_name):
         db.session.commit()
     return user
 
+
 # получаем экземпляр ТипаРоутера по модели и процессоре
 def get_router_record(model, processor):
     router_model = RouterModels.query.filter_by(model=model, processor=processor).first()
@@ -43,6 +44,7 @@ def get_router_record(model, processor):
         db.session.add(router_model)
         db.session.commit()
     return router_model
+
 
 def get_device_record(device_id, router, user):
     device = Devices.query.filter_by(device_id=device_id).first()
@@ -61,6 +63,7 @@ def get_type_review_record(type):
         db.session.commit()
     return type_review
 
+
 def add_review_record(review, rating, type_review, app, device):
     # breakpoint()
     review = Reviews(datetime.utcnow(), review, rating, type_review.id, app.id, device.id)
@@ -69,20 +72,23 @@ def add_review_record(review, rating, type_review, app, device):
 
     return review
 
+
 def add_new_record(data):
     # breakpoint()
     logger.debug(f"Вызвана функция '{get_function_name()}'")
-
+    # breakpoint()
     app_name = data.get('app_name')
     user_name = data.get('name')
     user_email = data.get('email')
     app_review = data.get('review')
     review_type = data.get('type')
-    app_rating = data.get('rating') or 0
+    app_rating = data.get('rating')
     app_version = data.get('version')
     device_id = data.get('device_id')
     device_processor = data.get('processor')
     device_model = data.get('model')
+
+    app_version = get_last_version(app_name) if not app_version or app_version == 'latest' else app_version
 
     # Проверяем наличие данных в связанных таблицах и добавляем их при необходимости
     app = get_app_record(app_name, app_version)
@@ -123,7 +129,6 @@ def add_new_record(data):
         return {'success': False, 'description': error}
 
 
-
 # проверяем есть ли в БД записи
 def check_db_for_empty(app_name, version):
     # breakpoint()
@@ -136,35 +141,33 @@ def check_db_for_empty(app_name, version):
 
 
 # Функция для получения версии приложения
-def get_version(app_name, version):
+def get_last_version(app_name):
+    # breakpoint()
+    version = 'latest'
     check_db_for_empty(app_name, version)
-    if not version or version == 'latest':
-        logger.debug('Версия приложения не установлена или установлена в latest')
-        # Если не передан или запись с такой версией не найдена, то находим крайнюю из тех, что есть
-        last_version = db.session.query(db.func.max(Applications.version)).filter(Applications.name == app_name).scalar()
-        if last_version:
-            logger.debug(f'В БД была найдена {last_version} версия приложения {app_name}')
-            version = last_version
-        else:
-            version = -1
+    # logger.debug('Версия приложения не установлена или установлена в latest')
+    # Если не передан или запись с такой версией не найдена, то находим крайнюю из тех, что есть
+    last_version = db.session.query(db.func.max(Applications.version)).filter(Applications.name == app_name).scalar()
+    if last_version:
+        logger.debug(f'В БД была найдена {last_version} версия приложения {app_name}')
+        version = last_version
+    else:
+        version = 'н/д'
     return version
 
 
 # Получаем рейтинг по имени и номеру версии
 def get_app_rating(data):
-
     logger.debug(f"Вызвана функция '{get_function_name()}'")
     app_name = data.get('app_name')
     app_version = data.get('version')
-
+    version = get_last_version(app_name) if not app_version or app_version == 'latest' else app_version
     result = {
         'app_name': app_name,
-        'rating': -1,
-        'voted': -1,
-        'version': -1
+        'rating': 0,
+        'voted': 0,
+        'version': version
     }
-
-    version = get_version(app_name, app_version)
 
     if version:
 
@@ -190,26 +193,26 @@ def get_app_rating(data):
                     'version': version
                 }
 
-                return  result
+                return result
             else:
-                logger.debug('Обработка данных завершена с нулевым результатом.')
+                logger.debug(f'Отзывы для {app_name}:{version} в БД отсутствуют.')
                 return result
         else:
-            logger.debug('Обработка данных завершена с нулевым результатом.')
+            logger.debug(f'Данные {app_name}:{version} в БД отсутствуют.')
             return result
     else:
-        logger.debug('Обработка данных завершена с нулевым результатом.')
+        logger.debug(f'Для приложения {app_name} нет данных с версией {version} в БД.')
         return result
+
 
 # Получаем полный список отзывав по имени и версии приложения в JSON формате
 def get_review_list(data):
-
     logger.debug(f"Вызвана функция '{get_function_name()}'")
     app_name = data.get('app_name')
     app_version = data.get('version')
 
     voted = 0
-    version = get_version(app_name, app_version)
+    version = get_last_version(app_name)
     result = {
         'app_name': app_name,
         'version': version,
@@ -257,9 +260,7 @@ def get_review_list(data):
         return result
 
 
-
 def show_apps_summary():
-
     logger.debug(f"Вызвана функция '{get_function_name()}'")
     try:
         reviews = Reviews.query.filter(Reviews.rating > 0).all()
@@ -327,4 +328,3 @@ def show_reviews_table(request):
 
     except Exception as e:
         logger.error(f"Ошибка при генерации страницы: {str(e)}")
-

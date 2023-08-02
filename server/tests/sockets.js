@@ -27,26 +27,35 @@ $(document).ready(function() {
                     '"name": "WebSocket",' +
                     '"email":"ws@email.ws",' +
                     '"review":"Тестовый отзыв: программа отличная так держать!",' +
-                    '"rating":"9"' +
+                    '"rating":"9",' +
+                    '"type": "Отзыв с рейтингом",' +
+                    '"device_id":"42csr4rc435v34v2c5tc2",' +
+                    '"processor": "mipsel",' +
+                    '"model": "Ultra KN-3118"' +
                     '}',
             },
             {
                 value: "reviews_list",
                 text: "Получить список всех отзывов",
-                default: '{ "app_name": "samovar"}'
+                default: '{"app_name": "samovar"}'
             },
+            {
+                value: "get_last_version",
+                text: "Получить крайнюю версию приложения",
+                default: '{"app_name": "samovar"}'
+            }
         ],
         kvas: [
             {
                 value: "update",
                 text: "Обновление",
-                default: '{ "app_name": "kvas"}'
+                default: '{"app_name": "kvas"}'
             },
             {
                 value: "get_router_data",
                 text: "Получить данные роутера",
                 default: '{}'
-            }
+            },
         ]
     };
 
@@ -71,6 +80,11 @@ $(document).ready(function() {
 
         // Обработчик события 'new_record_response'
         socket.on('new_record_response', (response) => {
+            displayResponse(response);
+        });
+
+        // Обработчик события 'new_record_response'
+        socket.on('get_last_version_response', (response) => {
             displayResponse(response);
         });
 
@@ -208,6 +222,7 @@ $(document).ready(function() {
     messageType.on("change", function() {
         const defaultValue = getDefaultData(serverType.val(), $(this).val());
         messageData.val(defaultValue);
+        sendButton.trigger("click");
     });
 
     // Установка значений по умолчанию

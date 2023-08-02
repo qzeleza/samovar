@@ -1,7 +1,8 @@
 
 
-const RATING_SERVER = new NetworkRequestManager("api.zeleza.ru", 11211, '/api/v1')
+let REVIEWS, ROUTER;
 
+let ROUTER_INFO;
 
 function buildMainTemplatePage(root){
 
@@ -62,13 +63,39 @@ function buildMainTemplatePage(root){
     templateLoad.add(root + 'code/js/pages/all/apps.js');
     templateLoad.add(root + 'code/js/pages/all/configurator.js');
     templateLoad.add(root + 'code/js/pages/classes/router.js');
-
+    templateLoad.add(root + 'code/js/pages/classes/reviews.js');
 
     // Загрузка функции, которая подгружает классы
     // рейтинга и обратной связи всех страниц шаблона
     templateLoad.add(() => {
-        new Scrolling('#samovar_history_list');
-        new Rating('samovar', 'latest', RATING_SERVER, true);
+        let app_name = 'samovar'
+        let version;
+
+        ROUTER = new DeviceManager();
+        REVIEWS = new ReviewsManager();
+        // Устанавливаем текущую версию Самовара
+        REVIEWS.getLastVersion(app_name, (response) => {
+            if (response) {
+                version =  response.version
+                $('#' + app_name + '_version').html('Текущая версия ' + version);
+            }
+        })
+        ROUTER.getAppUpdateInfo(app_name, (response) => {
+            if (response.update) {
+                $('#' + app_name + '_new_version').html(response.version);
+                $('#' + app_name + '_update_box').removeClass('d-none');
+                const info = "Вышло обновление для <b>Самовар</b>.<br>Новая версия <b>" + response.version + ".</b>";
+                showMessage(info, MessageType.INFO);
+            }
+        })
+
+        // router_data.getAppUpdateInfo("kvas");
+        new Scrolling('#' + app_name + '_history_list');
+        // app_name = 'samovar';
+        ROUTER.getDeviceDataID((response) => {
+            ROUTER_INFO = response;
+            new Rating(app_name, version,true);
+        })
     });
 
     return templateLoad;

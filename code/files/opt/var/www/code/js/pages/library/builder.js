@@ -6,6 +6,7 @@ const root = '';
 // Файл основной страницы HTML
 $(document).ready(function() {
 
+
     try {
         // Добавление дополнительных модулей
         const libraryPageLoader = buildMainTemplatePage(root);
@@ -17,16 +18,10 @@ $(document).ready(function() {
         libraryPageLoader.add({id:'#kvas_history', file: root + 'pages/library/modules/kvas/history.html'});
 
         libraryPageLoader.add(root + 'code/js/pages/all/select2.js');
-
-        // Добавление дополнительных функций
-        // libraryPageLoader.add(addKvasEvents);
         libraryPageLoader.add(() => {
-
-            let appName = 'kvas';
-            let appVersion = 'latest';
-            new Scrolling('#kvas_history_list');
-            new Rating(appName, appVersion, RATING_SERVER);
+            samovarAppsInit('kvas');
         });
+
 
         libraryPageLoader.load()
             .then(() => {
@@ -35,14 +30,6 @@ $(document).ready(function() {
                 // Выбираем пункт Библиотека
                 $('#lib_link').addClass('active');
                 $('#sidebar_menu .nav-group-sub').addClass('collapse show')
-
-
-                // const router = new ServerRequester();
-                // router.send('')
-
-                // const apiPath = "/apps/api";
-                // const server = new ServerRequester('https://api.zeleza.ru', 61116);
-                // server.send(apiPath + '')
 
                 // Установка триггера для других js файлов
                 $(document).trigger("appReady");

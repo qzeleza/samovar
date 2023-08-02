@@ -3,12 +3,16 @@ from flask_socketio import SocketIO, emit, send, join_room, leave_room
 import logging
 
 from apps.logger import get_function_name
-from apps.functions import add_new_record, get_app_rating, get_review_list
+from apps.functions import (
+    add_new_record,
+    get_app_rating,
+    get_review_list,
+    get_last_version
+    )
 
 logger = logging.getLogger(__name__)
 
 socketio = SocketIO(logger=True, cors_allowed_origins='*', engineio_logger=True, async_mode='gevent')
-
 
 # Словарь для отслеживания активных WebSocket соединений
 active_connections = {}
@@ -35,6 +39,11 @@ def send_back(request, result):
     emit(response_message_type, result, room=request.sid)
 
 
+def send_to_log(name_func, data):
+    logger.debug(f"Вызвана функция '{name_func}'")
+    logger.debug(f'Получены данные: {data}')
+
+
 # ----------------------------------------------------------------
 #  Обработка запросов через WebSocket
 # ----------------------------------------------------------------
@@ -44,7 +53,7 @@ def handle_ws_connect():
     sid = request.sid
     add_connection(sid)
     desc = "Соединение установлено"
-    logger.debug(f'Заголовки {request.headers}')
+    logger.debug(f'Заголовки:\n{request.headers}')
     logger.debug(desc)
     emit('welcome', {'success': True, 'description': desc})
 
@@ -57,41 +66,47 @@ def handle_ws_disconnect():
     logger.debug(desc)
     emit('goodbye', {'success': True, 'description': desc})
 
+
 # breakpoint()
 
 @socketio.on('get_rating')
 def handle_ws_get_rating(json):
-
-    logger.debug(f"Вызвана функция '{get_function_name()}'")
-    logger.info(f'Получены данные: {json}')
+    send_to_log(get_function_name(), json)
 
     result = get_app_rating(json)
 
-    logger.info(f'Отправляемые данные: {result}')
+    logger.debug(f'Отправляемые данные: {result}')
+    send_back(request, result)
+
+
+@socketio.on('get_last_version')
+def handle_ws_get_rating(json):
+    send_to_log(get_function_name(), json)
+    # breakpoint()
+    last_version = get_last_version(json.get('app_name'))
+    result = {'version': last_version}
+
+    logger.debug(f'Отправляемые данные: {result}')
     send_back(request, result)
 
 
 @socketio.on('new_record')
 def handle_ws_new_record(data):
-
-    logger.debug(f"Вызвана функция '{get_function_name()}'")
-    logger.info(f'Получены данные: {data}')
+    send_to_log(get_function_name(), data)
 
     result = add_new_record(data)
 
-    logger.info(f'Отправляемые данные: {result}')
+    logger.debug(f'Отправляемые данные: {result}')
     send_back(request, result)
 
 
 @socketio.on('reviews_list')
 def handle_ws_reviews_list(data):
-
-    logger.debug(f"Вызвана функция '{get_function_name()}'")
-    logger.info(f'Получены данные: {data}')
+    send_to_log(get_function_name(), data)
 
     result = get_review_list(data)
 
-    logger.info(f'Отправляемые данные: {result}')
+    logger.debug(f'Отправляемые данные: {result}')
     send_back(request, result)
 
 
@@ -101,4 +116,3 @@ def default_error_handler(e):
     logger.error(f'ОШИБКА: {e}')
     logger.error(f'ОШИБКА: {request.event["message"]}')
     logger.error(f'Аргументы: {request.event["args"]}')
-

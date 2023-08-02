@@ -11,6 +11,67 @@
 // ------------------------------
 
 
+//
+// Позволяет показывать и прятать правую панель
+//
+function rightPanelAct(act='hide'){
+    const rightPanel = $('#right_panel');
+    if (act === 'hide') {
+        if (rightPanel || rightPanel._isShown) {
+            $('.btn-close[data-bs-dismiss="offcanvas"]').trigger('click');
+        }
+    } else if (act === 'show') {
+        const myOffcanvas = new bootstrap.Offcanvas(rightPanel);
+        if (self.rightPannelShown){
+            myOffcanvas.show();
+        }
+    }
+
+}
+
+// Проверяем подключен ли Noty
+if (typeof Noty == 'undefined') {
+    console.warn('Warning - noty.min.js is not loaded.');
+}
+
+
+//
+// Типы сообщений для функции showMessage
+//
+const MessageType = {
+    ERROR: 'danger',
+    INFO: 'info',
+    SUCCESS: 'success',
+    WARNING: 'warning',
+    ALERT: 'primary',
+}
+
+//
+// Выводим сообщение на экран (правый верхний угол)
+//
+function showMessage(text,                              // текст сообщения
+                     type = MessageType.ALERT,   // тип сообщения (цвет фона)
+                     layout = 'topRight',        // позиционирование сообщения: top, topLeft, topCenter, topRight, center, centerLeft, centerRight, bottom, bottomLeft, bottomCenter, bottomRight
+                     timeout = 3000,            // Время показа сообщения
+                     modal = false              // модальное ли окно
+) {
+    new Noty({
+        text: text,
+        theme: ' alert-' + type + ' noty-container',
+        modal: modal,
+        layout: 'topRight',
+        closeWith: ['click', 'button'],
+        timeout: timeout,
+    }).show();
+}
+//
+// Показываем сообщение об ошибке
+//
+function showError(error){
+    console.log(error);
+    showMessage(error, MessageType.ERROR, 'topRight', 5000, true )
+}
+
 const App = function () {
 
 
@@ -912,24 +973,43 @@ const Tooltips = function () {
 }();
 
 
+function samovarAppsInit(appName){
+    let appVersion;
+    REVIEWS.getLastVersion(appName, (response) => {
+        if (response) {
+            appVersion = response.version;
+            $('#' + appName + '_version').html('v.' + appVersion);
+        }
+    });
+    new Scrolling('#' + appName + '_history_list');
+    new Rating(appName, appVersion);
+
+    // Загружаем видео о каждом приложении
+    const src = './assets/media/'+ appName + '_preview.mov';
+    const modalWindow = $('#' + appName + '_preview');
+    const modalPreview = $('#' + appName + '_modal_preview');
+
+    fetch(src)
+        .then(function(response) {
+            if (response.status === 404) {
+                console.log(`Файл ${src} не найден!`);
+            } else {
+                modalWindow.on('shown.bs.modal', function (event) {
+                    let iframe = $('<div class="ratio ratio-16x9"><iframe class="rounded" src="' + src + '" allowfullscreen></iframe></div>');
+                    const modalBody = modalPreview.find('.modal-body').empty();
+                    modalBody.append(iframe);
+                });
+                modalWindow.on('hide.bs.modal', function (event) {
+                    modalPreview.find('iframe').remove();
+                });
+
+            }
+        }
+    );
+}
+
 
 App.initCore();
 App.initAfterLoad();
 Tooltips.init();
 Tooltips.initTooltips();
-
-function rightPanelAct(act='hide'){
-    const rightPanel = $('#right_panel');
-    if (act === 'hide') {
-        if (rightPanel || rightPanel._isShown) {
-            $('.btn-close[data-bs-dismiss="offcanvas"]').trigger('click');
-        }
-    } else if (act === 'show') {
-        const myOffcanvas = new bootstrap.Offcanvas(rightPanel);
-        if (self.rightPannelShown){
-            myOffcanvas.show();
-        }
-    }
-
-}
-
