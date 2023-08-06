@@ -143,17 +143,18 @@ def check_db_for_empty(app_name, version):
 # Функция для получения версии приложения
 def get_last_version(app_name):
     # breakpoint()
+    answer = {app_name: 'н/д'}
     version = 'latest'
+
     check_db_for_empty(app_name, version)
     # logger.debug('Версия приложения не установлена или установлена в latest')
     # Если не передан или запись с такой версией не найдена, то находим крайнюю из тех, что есть
     last_version = db.session.query(db.func.max(Applications.version)).filter(Applications.name == app_name).scalar()
     if last_version:
         logger.debug(f'В БД была найдена {last_version} версия приложения {app_name}')
-        version = last_version
-    else:
-        version = 'н/д'
-    return version
+        answer = {app_name: last_version}
+
+    return answer
 
 
 # Получаем рейтинг по имени и номеру версии

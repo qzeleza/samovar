@@ -1,44 +1,27 @@
-class ReviewsManager {
+
+class ExtensionsManager {
     constructor() {
         this.server = new NetworkRequestManager("api.zeleza.ru", 11211, '/api/v1')
+        this.lastVersion = {};
     }
-    getLastVersion(app_name, callback) {
-        let last_version;
-        this.server.send('get_last_version', {
-            app_name: app_name
+    getLastVersion(app_name, force = false, callback = function() {}) {
 
-        }, (response) => {
-            last_version = response;
-            callback(response);
-        });
-        return last_version;
-    }
-    getRating(app_name, version, callback){
+        // если ранее версия не была получена
+        // и не надо получать рейтинг с сервера
+        let result = this.lastVersion[app_name];
 
-        this.server.send('get_rating', {
-            app_name: app_name,
-            version: version
+        // если настаиваем на получении рейтинга с сервера
+        // или крайняя версия приложения не была получена с сервера
+        if (force || ! (result)) {
+            tryGetDataFromServer(this.server, 'get_last_version', {app_name: app_name}, (response)=> {
+                // добавили в словарь новую версию приложения или обновили его
+                result = this.lastVersion[app_name] = response[app_name];
+                callback(response);
 
-        }, (response) => {
-            callback(response);
-        });
-    }
-    addNewReview(app_name, version, name, email, review, type, rating, callback){
-        this.server.send('new_record', {
-            app_name: app_name,
-            version     : version,
-            name        : name,
-            email       : email,
-            review      : review,
-            model       : ROUTER_INFO.model,
-            device_id   : ROUTER_INFO.device_id,
-            processor   : ROUTER_INFO.processor,
-            type        : type,
-            rating      : rating || 0,
+            }, `при получении крайней версии ${app_name}`);
+        }
 
-        }, (response) => {
-            callback(response);
-        });
+        return result;
     }
 }
 

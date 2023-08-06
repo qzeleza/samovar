@@ -973,33 +973,39 @@ const Tooltips = function () {
 }();
 
 
-function samovarAppsInit(appName){
-    let appVersion;
-    REVIEWS.getLastVersion(appName, (response) => {
-        if (response) {
-            appVersion = response.version;
-            $('#' + appName + '_version').html('v.' + appVersion);
-        }
-    });
+function samovarInitExtension(appName, routerInfo){
+
+    if (!routerInfo) {
+        console.error('Переданные данные routerInfo в функцию samovarInitExtension пусты.')
+    }
+    // устанавливаем версию приложения на странице библиотеки
+    // $('#' + appName + '_version').html('v.' + LastVersion);
+
+    // подгружаем возможность делать скролл
+    // и устанавливаем рейтинг приложения
     new Scrolling('#' + appName + '_history_list');
-    new Rating(appName, appVersion);
+    new Rating(appName, routerInfo);
 
     // Загружаем видео о каждом приложении
     const src = './assets/media/'+ appName + '_preview.mov';
     const modalWindow = $('#' + appName + '_preview');
     const modalPreview = $('#' + appName + '_modal_preview');
 
+    // Проверяем есть ли файл по указанному пути
     fetch(src)
         .then(function(response) {
             if (response.status === 404) {
                 console.log(`Файл ${src} не найден!`);
             } else {
+                // Если файл найден, то активируем события при показе и закрытии окна
                 modalWindow.on('shown.bs.modal', function (event) {
+                    // загружаем файл во фрейм
                     let iframe = $('<div class="ratio ratio-16x9"><iframe class="rounded" src="' + src + '" allowfullscreen></iframe></div>');
                     const modalBody = modalPreview.find('.modal-body').empty();
                     modalBody.append(iframe);
                 });
                 modalWindow.on('hide.bs.modal', function (event) {
+                    // удаляем фрейм
                     modalPreview.find('iframe').remove();
                 });
 
@@ -1007,7 +1013,6 @@ function samovarAppsInit(appName){
         }
     );
 }
-
 
 App.initCore();
 App.initAfterLoad();

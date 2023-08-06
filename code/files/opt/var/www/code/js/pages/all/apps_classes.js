@@ -315,6 +315,30 @@ const RequestPriority = {
     WEBSOCKET: 1,
 };
 
+/**
+ * Функция шаблон для отправки запросов
+ * с целью осуществления всех возможных проверок при запросе
+ *
+ * @param {Object} server           - экземпляр класса NetworkRequestManager
+ * @param {string} request          - Путь для запроса.
+ * @param {Object} data             - Данные для отправки.
+ * @param {Function} callback       - Функция обработки пришедшего ответа.
+ * @param {string} requestDescribe  - Описание запроса в предложном падеже, отвечает на вопрос "при чем?"
+ */
+function tryGetDataFromServer(server, request, data, callback, requestDescribe){
+    try {
+        server.send(request, data, (response) => {
+            if (response) {
+                callback(response);
+            } else {
+                showError(`Пришел пустой ответ с сервера ${requestDescribe}.`)
+            }
+        });
+    } catch (error) {
+        showError(`Ошибка при запросе ${requestDescribe}: ${error.message}`)
+    }
+}
+
 class NetworkRequestManager {
     /**
      * Класс для отправки запросов по HTTPS и Socket.IO протоколам с обработкой ошибок
@@ -361,21 +385,32 @@ class NetworkRequestManager {
      * @param {string} path - Путь для запроса.
      * @param {Object} data - Данные для отправки.
      * @param {Function} callback - Функция обработки пришедшего ответа.
-     * @param errorCallback - Функция обработки ошибки
+     * @param {Function} errorCallback - Функция обработки ошибки
      */
     _sendHttpsRequest(path, data, callback, errorCallback) {
         try {
+
             const url = `https://${this.serverName}:${this.port}${this.rootPath}/${path}`;
             const response = $.ajax({
                 url,
                 type: 'POST',
                 data: JSON.stringify(data),
                 contentType: 'application/json',
-                dataType: 'json'
+                dataType: 'json',
+                success: function(response) {
+                    // Обработка успешного ответа
+                    console.log('Данные успешно получены:', response);
+                    callback(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Обработка ошибки
+                    showError(`Ошибка при отправке HTTPS запроса: ${textStatus} - ${errorThrown}`);
+                    // Дополнительные действия при ошибке...
+                }
             });
-            callback(response);
+
         } catch (error) {
-            showError(`Ошибка при отправке HTTPS запроса: ${error.message}`)
+            showError(`Ошибка в самом HTTPS запросе: ${error.message}`)
             errorCallback();
         }
     }
@@ -419,13 +454,13 @@ class NetworkRequestManager {
             this._sendHttpsRequest(path, data, (responseData) => {
                 if (!restapiError) {
                     callback(responseData);
-                    this._removeFromRequestStack(path);
+                    this._removeFromRequestStack(path, data);
                 }
             }, () => {
                 restapiError = true;
                 this._sendSocketRequest(path, data, (responseData) => {
                     callback(responseData);
-                    this._removeFromRequestStack(path);
+                    this._removeFromRequestStack(path, data);
                 }, () => {});
             });
 
@@ -434,13 +469,13 @@ class NetworkRequestManager {
             this._sendSocketRequest(path, data, (responseData) => {
                 if (!socketError) {
                     callback(responseData);
-                    this._removeFromRequestStack(path);
+                    this._removeFromRequestStack(path, data);
                 }
             }, () => {
                 socketError = true;
                 this._sendHttpsRequest(path, data, (responseData) => {
                     callback(responseData);
-                    this._removeFromRequestStack(path);
+                    this._removeFromRequestStack(path, data);
                 },  () => {});
             });
 
@@ -452,9 +487,10 @@ class NetworkRequestManager {
     /**
      * Удаление запроса из стека
      * @param {string} path - Путь для запроса.
+     * @param data - данные запроса
      */
-    _removeFromRequestStack(path) {
-        this.stack = this.stack.filter(req => req.path !== path);
+    _removeFromRequestStack(path, data) {
+        this.stack = this.stack.filter(req => req.path !== path && req.data !== data);
     }
 
 }
@@ -495,36 +531,39 @@ class Rating {
     // Конструктор
     /**
      * @param {string} appName - базовое имя программы на английском
-     * @param {string} appCurrentVersion - версия программы
+     * @param routerInfo - информация о текущем устройстве (роутере) с целью обезличенного закрепление данных
      * @param {boolean} callRightPanel - необходимость вызывать правую панель после отправки отзыва
      */
-    constructor(appName, appCurrentVersion, callRightPanel = false) {
+    constructor(appName, routerInfo, callRightPanel = false) {
 
         this.starsId = appName + '_rating';
         this.votedId = appName + '_voted'
         this.reviewId = appName + '_review'
+        this.versionId = appName + '_version'
         this.userNameId = appName + '_user_name';
         this.userReviewId = appName + '_user_review';
         this.userEmailId = appName + '_user_email';
         this.reviewFormId = appName + '_form_review';
 
         this.reviewContext = null;
-        // this.routerData = ROUTER_INFO;
 
-        this.stars = null
+        this.stars = null;
         this.appName = appName;
-        this.appVersion = appCurrentVersion;
+        this.appVersion = null;
         this.storageKey = this.starsId;
 
-        this.voted = $('#' + this.votedId);
-        this.review = $('#' + this.reviewId);
+        this.votedElem = $('#' + this.votedId);
+        this.reviewElem = $('#' + this.reviewId);
         this.validator = new FormDataValidator(this.reviewFormId);
         // this.router    = new DeviceManager();
 
         this.rightPannelShown = callRightPanel;
 
+        this.routerInfo = routerInfo;
+        this.ratingServer = new NetworkRequestManager("api.zeleza.ru", 11211, '/api/v1');
+
         // после отладки - закомментировать
-        this.clearRating();
+        this.clearRatingOnLocalStorage();
         this._initNotyDialogs();
         this._getRatingFromServer();
 
@@ -593,9 +632,10 @@ class Rating {
     _createStarsRating() {
 
         let $li = $('li#' + this.starsId);
-        if (!this.stars) {
+        const starCount = $li.find('i').length
+        if (starCount === 0) {
             $li.removeClass('placeholder-wave bg-black bg-opacity-20 wmin-300');
-            this.voted.removeClass('d-inline-block ')
+            this.votedElem.removeClass('d-inline-block ')
             // Создание и добавление элементов <i> (звезд) внутрь <li>
             for (let i = 0; i < 10; i++) {
                 $('<i>', {
@@ -603,66 +643,39 @@ class Rating {
                 }).prependTo($li);
             }
             this.stars = $(`#${this.starsId} .ph-star`)
-            this.stars.on('mouseover', this.setStarRating.bind(this));
-            this.stars.on('mouseout', this._setRating.bind(this));
+            this.stars.on('mouseover', this.setStarRatingWhenClickOn.bind(this));
+            this.stars.on('mouseout', this._setRatingWhenHover.bind(this));
             this.stars.on('click', this.showRatingForm.bind(this));
-            this.review.on('click', this.showReviewForm.bind(this));
+            this.reviewElem.on('click', this.showReviewForm.bind(this));
         }
-    }
-    //
-    // Получение рейтинга с сервера
-    //
-    _getRatingFromServer(attempt = 1) {
-        const self = this;
-        REVIEWS.getRating(this.appName, this.appVersion,(response) => {
-            if (response === undefined && attempt < 5) {
-                // Если предыдущий запрос был неудачным и прошло менее 5 попыток
-                // Повторить запрос с задержкой в 2 секунды
-                setTimeout(() => {
-                    self._getRatingFromServer(attempt + 1);
-                    console.log('Попытка запроса номер ' + (attempt + 1))
-                }, 2000);
-            } else if (response === undefined && attempt >= 5) {
-                // Превышено максимальное количество попыток
-                showError(`Превышено максимальное (${attempt}) количество попыток запроса '/get_rating'`)
-            } else {
-                    // Обрабатываем запрос в случае удачи
-                if (self.appName === response.app_name) {
-                    self.rating = response.rating;
-                    self.voted.html('(' + response.voted + ')');
-                    self.appVersion = response.version;
-                    self._createStarsRating();
-                    if (response.voted !== 0) {
-                        self._setRating();
-                    }
-                }
-            }
-        });
     }
 
 
     //
     // Установка звездочек при наведении на элемент мышью
     //
-    _setRating() {
+    _setRatingWhenHover() {
         // Установка рейтинга
-        this.stars.slice(0, this.rating).addClass('text-warning')
-        this.stars.slice(this.rating, this.stars.length).removeClass('text-warning');
+        if(this.stars){
+            this.stars.slice(0, this.rating).addClass('text-warning')
+            this.stars.slice(this.rating, this.stars.length).removeClass('text-warning');
+        }
     }
 
 
     //
     // Удаляем хранимый рейтинг на локальном хранилище
     //
-    clearRating(){
-         localStorage.removeItem(this.storageKey)
+    clearRatingOnLocalStorage(){
+        localStorage.removeItem(this.storageKey)
     }
+
 
     //
     // Устанавливаем цвет звездочек иконок в зависимости
     // от того сколько звездочек выбрал мышью пользователь
     //
-    setStarRating(e){
+    setStarRatingWhenClickOn(e){
         let index = this.stars.index(e.target);
         this.stars.slice(0, index + 1).addClass('text-warning');
         this.stars.slice(index + 1, this.stars.length).removeClass('text-warning');
@@ -670,50 +683,107 @@ class Rating {
     }
 
 
+    //
+    // Получение рейтинга с сервера
+    //
+    _getRatingFromServer() {
+        this._getLastVersionFromServer( () => {
+            tryGetDataFromServer(this.ratingServer, 'get_rating', {
+                app_name: this.appName, version: this.appVersion },
+                (response)=> {
+                    // Обработка результата ответа от сервера после получения рейтинга приложения
+                    if (response.app_name === this.appName ) {
+                        this.rating = response.rating;
+                        this.votedElem.html('(' + response.voted + ')');
+                        this.appVersion = response.version;
+                        this._createStarsRating();
+                        if (response.voted !== 0) {
+                            this._setRatingWhenHover();
+                        }
+                    }
+                }, `при запросе рейтинга ${this.appName}`);
+        });
+    }
+
+    //
+    // Получение рейтинга с сервера
+    //
+    _getLastVersionFromServer(callback) {
+        tryGetDataFromServer(this.ratingServer, 'get_last_version', {
+                app_name: this.appName
+            },
+            (response)=> {
+                // Обработка результата ответа от сервера после получения рейтинга приложения
+                // if (response.app_name === this.appName ) {
+                this.appVersion = response[this.appName];
+                $('#' + this.versionId).html('v.' + this.appVersion);
+                callback(response);
+                // }
+            }, `при запросе крайней версии ${this.appName}`);
+    }
+
 
     //
     // Отправляем отзыв на сервер
     //
     _pressOnSendButton(event){
 
-        const self = this;
-        // event.preventDefault(); // Предотвращает отправку формы
         if (this.validator.validate()) {
 
-            // const router_data = this.router.getDeviceDataID()
+            // const router_data = this.router.getDeviceInfo()
             // Если все поля прошли проверку, можно отправить форму
             // Вы можете добавить свой код здесь для отправки данных формы
-            REVIEWS.addNewReview(this.appName, this.appVersion,
-                $('#' + this.userNameId).val(),
-                $('#' + this.userEmailId).val(),
-                $('#' + this.userReviewId).val(),
-                this.reviewContext,
-                this.rating, (response) => {
-                    // закрываем окно текущее
-                    self.notyReview.close();
-                    // обработка в случае успеха
-                    if (response.success) {
-                        localStorage.setItem(self.storageKey, self.rating);
-                        self._getRatingFromServer();
-                        showMessage('Ваш отзыв <b>отправлен</b>.<br>Спасибо.', MessageType.SUCCESS)
-                    } else {
-                        // Ошибка при отправке отзыва
-                        showMessage(response.description)
-                    }
+            tryGetDataFromServer(this.ratingServer, 'new_record', {
+                app_name    : this.appName,
+                version     : this.appVersion,
+                name        : $('#' + this.userNameId).val(),
+                email       : $('#' + this.userEmailId).val(),
+                review      : $('#' + this.userReviewId).val(),
+                model       : this.routerInfo.model,
+                device_id   : this.routerInfo.device_id,
+                processor   : this.routerInfo.processor,
+                type        : this.reviewContext,
+                rating      : this.rating || 0,
 
-                }
-            );
+            }, (response) => {
+                this._whenSentReviewToServer(response);
+            }, `при добавлении нового отзыва для ${this.appName}`);
+
         }
     }
 
+
+    //
+    // Обработка результата ответа от сервера после отправки отзыва пользоватлея
+    //
+    _whenSentReviewToServer(response) {
+        // закрываем окно текущее
+        this.notyReview.close();
+        // обработка в случае успеха
+        if (response.success) {
+            localStorage.setItem(this.storageKey, this.rating);
+            this._getRatingFromServer();
+            showMessage(`Ваш отзыв на <b>${this.appName.toUpperCase()}</b> успешно <b>отправлен</b>.<br>Спасибо.`, MessageType.SUCCESS)
+        } else {
+            // Ошибка при отправке отзыва
+            showMessage(response.description)
+        }
+
+    }
+
+    //
+    // Переписываем текст диалога и отображаем его на экране
+    //
     _showForm(notyWindows, htmlForm) {
 
         notyWindows.setText(htmlForm, true);
         notyWindows.show();
 
     }
+
+
     //
-    // Отправляем ТОЛЬКО отзыв
+    // Отображаем форму ТОЛЬКО для отзыва (без рейтинга)
     //
     showReviewForm() {
 
@@ -740,7 +810,7 @@ class Rating {
 
 
     //
-    // Отправляем отзыв вместе с рейтингом
+    // Отображаем форму для заполнения отзыва вместе с рейтингом
     //
     showRatingForm(){
         const sRating = localStorage.getItem(this.storageKey)

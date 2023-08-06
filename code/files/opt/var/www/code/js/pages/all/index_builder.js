@@ -1,8 +1,6 @@
 
 
-let REVIEWS, ROUTER;
-
-let ROUTER_INFO;
+let Extensions, UserRouter, DeviceInfo;
 
 function buildMainTemplatePage(root){
 
@@ -68,34 +66,28 @@ function buildMainTemplatePage(root){
     // Загрузка функции, которая подгружает классы
     // рейтинга и обратной связи всех страниц шаблона
     templateLoad.add(() => {
-        let app_name = 'samovar'
-        let version;
 
-        ROUTER = new DeviceManager();
-        REVIEWS = new ReviewsManager();
-        // Устанавливаем текущую версию Самовара
-        REVIEWS.getLastVersion(app_name, (response) => {
-            if (response) {
-                version =  response.version
-                $('#' + app_name + '_version').html('Текущая версия ' + version);
-            }
-        })
-        ROUTER.getAppUpdateInfo(app_name, (response) => {
+        const appName = 'samovar';
+
+        UserRouter   = new DeviceManager();
+        Extensions   = new ExtensionsManager();
+
+        UserRouter.getAppUpdateInfo(appName, (response) => {
             if (response.update) {
-                $('#' + app_name + '_new_version').html(response.version);
-                $('#' + app_name + '_update_box').removeClass('d-none');
-                const info = "Вышло обновление для <b>Самовар</b>.<br>Новая версия <b>" + response.version + ".</b>";
+                $('#' + appName + '_new_version').html(response.version);
+                $('#' + appName + '_update_box').removeClass('d-none');
+                const info = "Вышло обновление для <b>Самовара</b>.<br>Новая версия<b> " + response.version + ".</b>";
                 showMessage(info, MessageType.INFO);
             }
         })
 
-        // router_data.getAppUpdateInfo("kvas");
-        new Scrolling('#' + app_name + '_history_list');
-        // app_name = 'samovar';
-        ROUTER.getDeviceDataID((response) => {
-            ROUTER_INFO = response;
-            new Rating(app_name, version,true);
-        })
+        new Scrolling('#' + appName + '_history_list');
+
+        UserRouter.getDeviceInfo((deviceInfo) => {
+            new Rating(appName, deviceInfo,true);
+        });
+
+
     });
 
     return templateLoad;

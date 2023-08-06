@@ -11,7 +11,7 @@ POST https://api.zeleza.ru:11211/api/v1/get_last_version
 Content-Type: application/json
 
 {
-  "app_name": "kvas"
+  "app_name": "samovar"
 }
 
 ### Send GET request get_rating
@@ -31,7 +31,7 @@ Content-Type: application/json
   "app_name": "samovar",
   "name": "Bob",
   "email": "test@email.cc",
-  "review": "Тестовый отзыв: программа отличная так держать! Супер11",
+  "reviewElem": "Тестовый отзыв: программа отличная так держать! Супер11",
   "rating": "9",
   "type": "Отзыв с рейтингом",
   "device_id": "42csr4rc435v34v2c5tc2",

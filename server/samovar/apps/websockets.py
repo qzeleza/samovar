@@ -83,8 +83,7 @@ def handle_ws_get_rating(json):
 def handle_ws_get_rating(json):
     send_to_log(get_function_name(), json)
     # breakpoint()
-    last_version = get_last_version(json.get('app_name'))
-    result = {'version': last_version}
+    result = get_last_version(json.get('app_name'))
 
     logger.debug(f'Отправляемые данные: {result}')
     send_back(request, result)

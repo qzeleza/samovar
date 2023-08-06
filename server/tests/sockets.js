@@ -26,7 +26,7 @@ $(document).ready(function() {
                     '"version":"latest",' +
                     '"name": "WebSocket",' +
                     '"email":"ws@email.ws",' +
-                    '"review":"Тестовый отзыв: программа отличная так держать!",' +
+                    '"reviewElem":"Тестовый отзыв: программа отличная так держать!",' +
                     '"rating":"9",' +
                     '"type": "Отзыв с рейтингом",' +
                     '"device_id":"42csr4rc435v34v2c5tc2",' +

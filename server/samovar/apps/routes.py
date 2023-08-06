@@ -31,9 +31,8 @@ def register_routes(app, root_path):
         send_to_log(get_function_name())
         # breakpoint()
         app_name = request.json.get('app_name')
-        result = {'version': get_last_version(app_name)}
 
-        return jsonify(result)
+        return jsonify(get_last_version(app_name))
 
     # Маршрут для добавления новой оценки и отзыва пользователя
     @app.route(root_path + '/new_record', methods=['POST'])

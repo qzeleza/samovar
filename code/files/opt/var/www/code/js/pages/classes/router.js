@@ -9,28 +9,28 @@ let ROUTER_URL = TEST_STAGE ? TEST_ROUTER_URL : PROD_ROUTER_URL
 class DeviceManager {
     constructor() {
         this.server = new NetworkRequestManager(ROUTER_URL, 11133, '/kvas/v1');
-        this.router_info = null;
+        this.info = null;
     }
 
     // Получаем данные об обновлении (если есть) для запрошенного приложения
     getAppUpdateInfo(app_name, callback) {
-        this.server.send('update', {"app_name": app_name}, (response) => {
+        tryGetDataFromServer(this.server, 'update', {"app_name": app_name}, (response) => {
+            this.info = response;
             callback(response);
-        });
+        }, `при запросе обновления ${app_name}`);
     }
 
 
     // Получаем данные, которые позволяют определить модель устройства
-    getDeviceDataID(callback) {
+    getDeviceInfo(callback) {
 
-        if (this.router_info) {
-            return this.router_info;
+        if (this.info) {
+            return this.info;
         } else {
-            const self = this;
-            this.server.send('get_router_data', {}, (response) => {
-                self.router_info = response;
+            tryGetDataFromServer(this.server, 'get_router_data', {}, (response) => {
+                this.info = response;
                 callback(response);
-            });
+            }, "при запросе информации о роутере пользователя");
         }
 
     }
