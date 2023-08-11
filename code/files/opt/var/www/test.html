@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="ru" dir="ltr" data-color-theme="light" >
+
+<!-- Заголовок проекта  -->
+<head>
+
+    <!-- Мета заголовки проекта  -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Пример генерации истории</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+
+        <div class="modal-body">
+
+            <div id="historyContainer">
+
+                <div class="row">
+                    <!-- Здесь будет сгенерирована история -->
+                </div>
+
+            </div>
+        </div>
+
+
+<script>
+    // Пример JSON-данных
+    let jsonHistory = {
+        "1.0": [
+            { "item1": "Значение 1.0 - Элемент 1"},
+            { "item2": "Значение 1.0 - Элемент 2" }
+        ],
+        "2.0": [
+            { "item1": "Значение 2.0 - Элемент 1" },
+            { "item2": "Значение 2.0 - Элемент 2" },
+            { "item2": "Значение 2.0 - Элемент 2" },
+            { "item2": "Значение 2.0 - Элемент 2" },
+            { "item2": "Значение 2.0 - Элемент 2" },
+        ]
+    };
+
+    function generateHistoryHTMLFormat(jsonHistory) {
+        let html = '<div class="row">';
+
+        html += '<div class="col-9">';
+        html += '<div class="scroll-content overflow-auto position-relative ps-4 pe-3" style="height: 40vh;" tabindex="0">';
+
+        $.each(jsonHistory, function(version, items) {
+            html += '<div class="pb-1">';
+            html += '<h6>Версия ' + version + '</h6>';
+            html += '<ol class="flex-column">';
+
+            $.each(items, function(index, item) {
+                $.each(item, function(key, value) {
+                    html += '<li>' + value + '</li>';
+                });
+
+            });
+
+            html += '</ol>';
+            html += '</div>';
+        });
+        html += '</div>';
+        html += '</div>';
+
+        html += '<div class="col">';
+        html += '<div class="lift-down-10 sticky-lg-top order-1 order-lg-2 mb-3 d-xl-block d-none" id="ver_nav">';
+
+        html += '<ul class="nav nav-scrollspy flex-column ">';
+        let firstIteration = true;
+        $.each(jsonHistory, function(version, items) {
+            if (firstIteration) {
+                html += '<li class="nav-item"><a href="#" class="nav-link index active">' + version + '</a></li>';
+                firstIteration = false;
+            } else {
+                html += '<li class="nav-item"><a href="#" class="nav-link index">' + version + '</a></li>';
+            }
+        });
+        html += '</ul>';
+
+        html += '</div>';
+        html += '</div>';
+
+        html += '</div>';   // Закрытие верхнего div-контейнера
+
+        return html;
+    }
+
+
+    $(document).ready(function() {
+        var generatedHTML = generateHistoryHTMLFormat(jsonHistory);
+        $('#historyContainer').html(generatedHTML);
+    });
+</script>
+</body>
+</html>

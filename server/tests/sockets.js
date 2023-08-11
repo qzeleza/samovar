@@ -56,6 +56,11 @@ $(document).ready(function() {
                 text: "Получить данные роутера",
                 default: '{}'
             },
+            {
+                value: "get_apps_data",
+                text: "Получить данные приложений",
+                default: '{}'
+            },
         ]
     };
 
@@ -68,6 +73,11 @@ $(document).ready(function() {
 
         // Обработчик события 'new_record_response'
         socket.on('get_router_data_response', (response) => {
+            displayResponse(response);
+        });
+
+        // Обработчик события 'new_record_response'
+        socket.on('get_apps_data_response', (response) => {
             displayResponse(response);
         });
     }

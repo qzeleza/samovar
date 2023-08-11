@@ -7,8 +7,8 @@ let ROUTER_URL = TEST_STAGE ? TEST_ROUTER_URL : PROD_ROUTER_URL
 
 
 class DeviceManager {
-    constructor() {
-        this.server = new NetworkRequestManager(ROUTER_URL, 11133, '/kvas/v1');
+    constructor(server) {
+        this.server = server
         this.info = null;
     }
 
