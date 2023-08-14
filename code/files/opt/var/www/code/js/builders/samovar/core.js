@@ -55,6 +55,9 @@ function buildMainTemplatePage(root){
             },
         }
     });
+    templateLoad.add(() => {
+
+    });
 
     // Загрузка необходимых страниц и аттрибутов элементов в них для всех страниц шаблона
     // templateLoad.add({id:'#samovar_delete_simple_modal', file: root + 'pages/all/modals/simple_del.html'});

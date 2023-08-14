@@ -108,7 +108,7 @@
 
 /* регулировка высоты основания каждой из карточек card */
 .card .card-footer {
-  height: 3.2vw;
+  height: 3vw;
 }
 .card .card-header .position-relative {
   top: 18px;

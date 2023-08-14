@@ -181,31 +181,53 @@ class AppsManager {
             }
         });
 
-        // $element.find("[id^='" + templ + "'], [href^='#" + templ + "']").each(function () {
-        //     // заменяем в id на название элемента
-        //     const newId = $(this).attr('id').replace(templ, self.appName);
-        //     $(this).attr('id', newId);
-        // });
+        function getNumAuthorsInData(obj, prefix){
+            let count = 0;
 
-        // Ключи в словаре с данными с сервера должны соответствовать id элементов в карточке
+            $.each(obj, function(key) {
+                if (key.startsWith(prefix)) {
+                    count++;
+                }
+            });
+
+            return count;
+        }
+        // Получаем число авторов в массиве данных
+        const numAuthorsInData = getNumAuthorsInData(applicationData, 'author');
+        let countAuthor = 1;
+
+            // Ключи в словаре с данными с сервера должны соответствовать id элементов в карточке
         $.each(applicationData, function(key, value) {
             // Состав data  = {
-            //      self.appName + "_author_1" : { name: 'имя1', email: 'email1'}, - имя #1 автора приложения
-            //      self.appName + "_author_N" : { name: 'имяN', email: 'emailN'}, - имя #N автора приложения
-            //      self.appName + "_app_rus_name" : value,                         - название приложения по русски
-            //      self.appName + "_full_description" : value,                     - полное описание приложения
-            //      self.appName + "_description" : value,                          - сокращенное описание приложения
-            //      self.appName + "_version_date : value,                          - дата выпуска обозначенной версии приложения
+            //      "author_1" : { name: 'имя1', email: 'email1'}, - имя #1 автора приложения
+            //      "author_N" : { name: 'имяN', email: 'emailN'}, - имя #N автора приложения
+            //      "app_rus_name" : value,                         - название приложения по русски
+            //      "full_description" : value,                     - полное описание приложения
+            //      "description" : value,                          - сокращенное описание приложения
+            //      "last_version : value,                          - крайняя версия приложения
+            //      "last_version_date : value,                     - дата выпуска обозначенной версии приложения
+            //      "links : [                                      - ссылки для приложения
+            //                 {
+            //                     "title": 'Название',             - название
+            //                     "link": 'path_to_file.html',     - ссылка
+            //                     "icon": 'ph-ххххх',              - иконка из серии ph-
+            //                 },
+            //               ]
             // }
             // заменяем данные найденных элементов с данными пришедшими из сервера
 
+
             if (key.startsWith("author")){
                 //  если ключ это автор
-                if ($element.find(`#${self.appName}_${key}`).length > 0) {
-                    $element.find(`#${self.appName}_${key}`).attr('href', `mailto:${value.email}`)
-                    $element.find(`#${self.appName}_${key}`).html(value.name);
-                    $element.find(`#${self.appName}_${key}`).removeClass('placeholder placeholder-wave ');
-                }
+                const authorText = countAuthor < numAuthorsInData ? value.name + ', ' : value.name;
+                const author = $('<a class="text-black fw-semibold"></a>')
+                    .attr('href', `mailto:${value.email}`)
+                    .attr('id', `${self.appName}_${key}`)
+                    .text(authorText);
+
+                $element.find(`#${self.appName}_authors`).append(author);
+                countAuthor++;
+
             } else if(key.startsWith("links")){
                 // добавляем в меню ссылки
                 $element.replaceWith(function (){
@@ -213,11 +235,12 @@ class AppsManager {
                 });
                 $element.find(`#${self.appName}_dropdown`).append(self._generateDropdownMenu(applicationData.links));
             } else {
-                    // обработка всех остальных тегов
-                    if ($element.find(`#${self.appName}_${key}`).length > 0) {
-                        $element.find(`#${self.appName}_${key}`).html(value);
-                    }
+                // обработка всех остальных тегов
+                if ($element.find(`#${self.appName}_${key}`).length > 0) {
+                    $element.find(`#${self.appName}_${key}`).html(value);
                 }
+            }
+            $element.find(`#${self.appName}_${key}`).removeClass('placeholder placeholder-wave ');
         })
 
         return $element;
@@ -261,5 +284,6 @@ class AppsManager {
                 }
             );
     }
+
 }
 

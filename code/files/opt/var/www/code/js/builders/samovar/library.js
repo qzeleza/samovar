@@ -28,10 +28,12 @@ $(document).ready( function () {
             tryGetDataFromServer(RouterServer, 'get_apps_data', {}, (data) => {
                 $.each(data, function(app_name, app_data) {
                     appsData[app_name] = new AppsManager(app_name, RouterServer);
+                    // Получаем данные с сервера
                     const htmlAppCardCode = appsData[app_name].generateAppBigCardHTML('pages/core/templates/card.html', app_data);
-
-                    $(`#apps_card_list`).append('<div id="app_' + app_name + '_card" class="main-card"></div>');
+                    // Генерируем карточки приложений
+                    $(`#apps_card_list`).append('<div class="col-12"><div id="app_' + app_name + '_card" class="main-card"></div></div><div class="col-0"></div>');
                     $(`#app_${app_name}_card`).append(htmlAppCardCode);
+                    // Получаем
                     appsData[app_name].getAppVersionHistory();
                 });
             }, `при запросе данных о приложениях!`);
@@ -53,6 +55,12 @@ $(document).ready( function () {
                 // Выбираем пункт Библиотека
                 $('#lib_link').addClass('active');
                 $('#sidebar_menu .nav-group-sub').addClass('collapse show')
+
+                // Устанавливаем размер сетки главного окна с карточками приложения
+                const cont = $('#apps_card_list')
+                const selCol = $('#numColumnsSelect');
+                // Инициализация с начальным числом столбцов
+                initRightPanelColumnsButtons(cont, selCol);
 
                 // Установка триггера для других js файлов
                 $(document).trigger("appReady");

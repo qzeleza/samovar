@@ -159,3 +159,95 @@ function getVideoDuration(idVideoSource){
     // возвращаем результат
     return formattedDuration;
 }
+
+
+/**
+ * Обновляет распределение элементов в столбцах и рядах в соответствии с заданными числами колонок и рядов.
+ *
+ * @param {jQuery} container  - элемент, в который нужно добавить колонки и ряды
+ * @param {number} numColumns - Количество колонок для распределения.
+ */
+function updateColumns(container, numColumns) {
+    // Рассчитываем ширину колонок и высоту рядов
+    const columnWidth = Math.floor(12 / numColumns);
+
+    // Сохраняем старые элементы с классами 'col-' и их содержимое
+    const oldColumnContents = [];
+    container.find('[class*="col-"]').each(function () {
+        oldColumnContents.push($(this).contents().detach());
+    });
+
+    // Создаем новые элементы div с классами 'col-N' и добавляем содержимое
+    // Удаляем старые элементы с классами 'col-'
+    container.find('[class*="col-"]').remove();
+
+    for (let j = 0; j < numColumns; j++) {
+        const columnDiv = $('<div>').addClass(`col-${columnWidth} card-container`);
+        container.append(columnDiv);
+
+        if (oldColumnContents.length > 0) {
+            const content = oldColumnContents.shift();
+            if (content) {
+                columnDiv.append(content);
+            }
+        }
+    }
+
+// Добавляем оставшиеся элементы в первый столбец
+    const firstColumnDiv = container.find(`.col-${columnWidth}:first`);
+    for (const remainingContent of oldColumnContents) {
+        firstColumnDiv.append(remainingContent);
+    }
+
+    dragInit(container);
+}
+
+
+/**
+ *  Функция предназначена для установки при загрузке
+ *  страницы кнопок с количеством видимых столбцов в правом меню
+ *  @param {jQuery} viewContainer     - элемент в который нужно добавить колонки
+ *  @param {jQuery} $numColumnsSelect - элемент выбора числа колонок
+ **/
+function initRightPanelColumnsButtons(viewContainer, $numColumnsSelect) {
+
+    // Определение числа возможных столбцов в зависимости от ширины экрана
+    let maxColumns = 0;
+    if (window.innerWidth < 576) {
+        maxColumns = 2;
+    } else if (window.innerWidth < 768) {
+        maxColumns = 3;
+    } else if (window.innerWidth < 1200) {
+        maxColumns = 4;
+    } else {
+        maxColumns = 6;
+    }
+
+
+    for (let i = 1; i <= maxColumns; i++) {
+        const selectInput = $('<div>').addClass('dropdown-menu');
+        const activItemClass = (i === 1) ? 'dropdown-item active' : 'dropdown-item';
+        const item = $('<a>').addClass(activItemClass).attr({href:'#'}).text(`${i}`);
+        $numColumnsSelect.append(selectInput, item);
+
+        item.on('click',  function () {
+            const activeText = 'active';
+            updateColumns(viewContainer, i);
+            $('#cellSizeSelect').text(`${i} шт.`)
+            $numColumnsSelect.find(`[class*="${activeText}"]`).removeClass(activeText)
+            $(this).addClass(activeText)
+            const elements = viewContainer.find('[id^="app_"]');
+            if(i > 1) {elements.removeClass('main-card')}
+            else {elements.addClass('main-card')}
+        });
+    }
+
+    // Инициализация с начальным числом столбцов
+    updateColumns(viewContainer, 1);
+
+}
+
+function dragInit(container){
+    const containers = Array.from($('.card-container'));
+    const drake = dragula(containers);
+}

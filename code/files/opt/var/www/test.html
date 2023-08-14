@@ -1,101 +1,187 @@
 <!DOCTYPE html>
-
-<html lang="ru" dir="ltr" data-color-theme="light" >
-
-<!-- Заголовок проекта  -->
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Мета заголовки проекта  -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="assets/fonts/inter/inter.css" rel="stylesheet" type="text/css">
+    <link href="assets/icons/phosphor/styles.min.css" rel="stylesheet" type="text/css">
+    <link href="code/css/all.min.css" id="stylesheet" rel="stylesheet" type="text/css">
+    <link href="assets/js/vendor/validation/validetta/validetta.min.css" rel="stylesheet" type="text/css">
+    <script src="assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery/jquery.min.js"></script>
+    <script src="assets/js/vendor/ui/dragula.min.js"></script>
+<!--    <script src="assets/js/vendor/ui/drag.init.js"></script>-->
 
-    <title>Пример генерации истории</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Dynamic Columns Example</title>
 </head>
 <body>
+<div class="container">
 
 
-        <div class="modal-body">
+    <div class="mb-3 border-top">
+        <div class="fw-semibold mb-2 mt-3 mb-3">Размер сетки окна</div>
 
-            <div id="historyContainer">
+        <div id="update-column-select" class="btn-group align-items-baseline">
 
-                <div class="row">
-                    <!-- Здесь будет сгенерирована история -->
-                </div>
+            <a href="#" class="btn border dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
+                <i class="ph-columns"></i>
+            </a>
+            <div id="numColumnsSelect" class="dropdown-menu" style="position: absolute; inset: auto auto 0 0; margin: 0; transform: translate3d(0px, -42px, 0px);" data-popper-placement="top-start"></div>
 
-            </div>
         </div>
+        <span id="cellSizeSelect" class="fw-semibold ms-2">1 кол.</span>
+
+    </div>
+
+
+    <div id="my-view" class="row">
+        <!-- Содержимое будет добавлено с помощью JavaScript -->
+
+    </div>
+</div>
 
 
 <script>
-    // Пример JSON-данных
-    let jsonHistory = {
-        "1.0": [
-            { "item1": "Значение 1.0 - Элемент 1"},
-            { "item2": "Значение 1.0 - Элемент 2" }
-        ],
-        "2.0": [
-            { "item1": "Значение 2.0 - Элемент 1" },
-            { "item2": "Значение 2.0 - Элемент 2" },
-            { "item2": "Значение 2.0 - Элемент 2" },
-            { "item2": "Значение 2.0 - Элемент 2" },
-            { "item2": "Значение 2.0 - Элемент 2" },
-        ]
-    };
+    /**
+     * Обновляет распределение элементов в столбцах и рядах в соответствии с заданными числами колонок и рядов.
+     *
+     * @param {jQuery} container  - элемент, в который нужно добавить колонки и ряды
+     * @param {number} numColumns - Количество колонок для распределения.
+     */
+    function updateColumns(container, numColumns) {
+        // Рассчитываем ширину колонок и высоту рядов
+        const columnWidth = Math.floor(12 / numColumns);
 
-    function generateHistoryHTMLFormat(jsonHistory) {
-        let html = '<div class="row">';
-
-        html += '<div class="col-9">';
-        html += '<div class="scroll-content overflow-auto position-relative ps-4 pe-3" style="height: 40vh;" tabindex="0">';
-
-        $.each(jsonHistory, function(version, items) {
-            html += '<div class="pb-1">';
-            html += '<h6>Версия ' + version + '</h6>';
-            html += '<ol class="flex-column">';
-
-            $.each(items, function(index, item) {
-                $.each(item, function(key, value) {
-                    html += '<li>' + value + '</li>';
-                });
-
-            });
-
-            html += '</ol>';
-            html += '</div>';
+        // Сохраняем старые элементы с классами 'col-' и их содержимое
+        const oldColumnContents = [];
+        container.find('[class*="col-"]').each(function () {
+            oldColumnContents.push($(this).contents().detach());
         });
-        html += '</div>';
-        html += '</div>';
 
-        html += '<div class="col">';
-        html += '<div class="lift-down-10 sticky-lg-top order-1 order-lg-2 mb-3 d-xl-block d-none" id="ver_nav">';
+        // Создаем новые элементы div с классами 'col-N' и добавляем содержимое
+        // Удаляем старые элементы с классами 'col-'
+        container.find('[class*="col-"]').remove();
 
-        html += '<ul class="nav nav-scrollspy flex-column ">';
-        let firstIteration = true;
-        $.each(jsonHistory, function(version, items) {
-            if (firstIteration) {
-                html += '<li class="nav-item"><a href="#" class="nav-link index active">' + version + '</a></li>';
-                firstIteration = false;
-            } else {
-                html += '<li class="nav-item"><a href="#" class="nav-link index">' + version + '</a></li>';
+        for (let j = 0; j < numColumns; j++) {
+            const columnDiv = $('<div>').addClass(`col-${columnWidth} card-container`);
+            container.append(columnDiv);
+
+            if (oldColumnContents.length > 0) {
+                const content = oldColumnContents.shift();
+                if (content) {
+                    columnDiv.append(content);
+                }
             }
-        });
-        html += '</ul>';
+        }
 
-        html += '</div>';
-        html += '</div>';
+// Добавляем оставшиеся элементы в первый столбец
+        const firstColumnDiv = container.find(`.col-${columnWidth}:first`);
+        for (const remainingContent of oldColumnContents) {
+            firstColumnDiv.append(remainingContent);
+        }
 
-        html += '</div>';   // Закрытие верхнего div-контейнера
-
-        return html;
+        dragInit(container);
     }
 
+    /**
+     *  Функция предназначена для установки при загрузке
+     *  страницы кнопок с количеством видимых столбцов в правом меню
+     *  @param {jQuery} viewContainer     - элемент в который нужно добавить колонки
+     *  @param {jQuery} $numColumnsSelect - элемент выбора числа колонок
+     **/
+    function initRightPanelColumnsButtons(viewContainer, $numColumnsSelect) {
 
-    $(document).ready(function() {
-        var generatedHTML = generateHistoryHTMLFormat(jsonHistory);
-        $('#historyContainer').html(generatedHTML);
+        // Определение числа возможных столбцов в зависимости от ширины экрана
+        let maxColumns = 0;
+        if (window.innerWidth < 576) {
+            maxColumns = 2;
+        } else if (window.innerWidth < 768) {
+            maxColumns = 3;
+        } else if (window.innerWidth < 1200) {
+            maxColumns = 4;
+        } else {
+            maxColumns = 6;
+        }
+
+
+        for (let i = 1; i <= maxColumns; i++) {
+            const selectInput = $('<div>').addClass('dropdown-menu');
+            const activItemClass = (i === 1) ? 'dropdown-item active' : 'dropdown-item';
+            const item = $('<a>').addClass(activItemClass).attr({href:'#'}).text(`${i}`);
+            $numColumnsSelect.append(selectInput, item);
+
+            item.on('click',  function () {
+                const activeTest = 'active';
+                updateColumns(viewContainer, i);
+                $('#cellSizeSelect').text(`${i} кол.`)
+                $numColumnsSelect.find(`[class*="${activeTest}"]`).removeClass(activeTest)
+                $(this).addClass(activeTest)
+            });
+        }
+
+        // Инициализация с начальным числом столбцов
+        updateColumns(viewContainer, 1);
+
+        const numTestCards = 6;
+        for (let i = 1; i <= numTestCards; i++) {
+            const card = $('<div>').addClass('card');
+            const cardHeader = $('<div>').addClass('card-header').text(`Карточка №${i}`);
+            const cardBody = $('<div>').addClass('card-body').text(`Пример тела карточки №${i}`);
+            const cardFooter = $('<div>').addClass('card-footer').text(`Нижняя часть карточки №${i}`);
+            card.append(cardHeader);
+            card.append(cardBody);
+            card.append(cardFooter);
+
+            viewContainer.append(card);
+        }
+        const totalElements = numTestCards;
+        const totalContainers = viewContainer.find('[class*=col-]').length;
+
+        const $cards = viewContainer.find('.card')
+        // Вычисление общего количества элементов и контейнеров
+
+        const elementsPerContainer = Math.floor(totalElements / totalContainers);
+        // Вычисление примерного количества элементов на каждый контейнер
+        const remainder = totalElements % totalContainers;
+        // Остаток элементов, которые нужно распределить
+
+        let elementIndex = 0;
+        // Индекс элемента, который мы будем перемещать
+
+        viewContainer.find('[class*=col-]').each(function(index) {
+            // Проход по каждому контейнеру
+            const container = $(this);
+            // Получение текущего контейнера
+            const containerElements = elementsPerContainer + (index < remainder ? 1 : 0);
+            // Вычисление числа элементов для текущего контейнера
+
+            container.empty();
+            // Очистка контейнера от старых элементов
+
+            for (let i = 0; i < containerElements; i++) {
+                // Проход по числу элементов для текущего контейнера
+                container.append($cards.eq(elementIndex));
+                // Добавление элемента в контейнер
+                elementIndex++;
+                // Увеличение индекса для следующего элемента
+            }
+        });
+
+    }
+
+    function dragInit(container){
+        const containers = Array.from($('.card-container'));
+        const drake = dragula(containers);
+    }
+    $(document).ready(function () {
+        const cont = $('#my-view')
+        const selCol = $('#numColumnsSelect');
+        // Инициализация с начальным числом столбцов
+        initRightPanelColumnsButtons(cont, selCol);
+        dragInit(cont);
     });
 </script>
+
 </body>
 </html>

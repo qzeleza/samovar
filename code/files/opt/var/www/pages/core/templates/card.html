@@ -20,69 +20,42 @@
     <div class="mb-1 ">
 
       <!-- Заголовок расширения в карточке -->
-      <div class="d-flex align-items-end mb-0">
+      <div class="d-flex justify-content-between align-items-end mb-0">
         <!-- Меню расширенное самого расширения в карточке -->
-        <div class=" mt-sm-0 ">
-          <h1 id="_@_app_rus_name" class="placeholder placeholder-wave me-2 text-uppercase fw-semibold text-primary mb-0"></h1>
+        <div class="mt-sm-0 d-flex align-items-center">
+
+          <h1 id="_@_app_rus_name" class="placeholder placeholder-wave me-2 text-uppercase fw-semibold text-primary mb-1 lift-up-3"></h1>
+
 
         </div>
         <!-- /Меню расширенное самого расширения в карточке -->
-
-
       </div>
 
       <!-- Автор и дата выпуска расширения в карточке -->
-      <ul class="list-inline list-inline-bullet text-muted mb-0">
-        <li class="list-inline-item">Авторы:
-          <a id="_@_author_1" href="" class="placeholder placeholder-wave text-black fw-semibold"></a>,
-          <a id="_@_author_2" href="" class="placeholder placeholder-wave text-black fw-semibold"></a>
-        </li>
-      </ul>
-      <!-- Автор и дата выпуска расширения вкарточке -->
-      <!-- Заголовок расширения в карточке -->
-
-      <!-- Блок загружаемый js: меню расширенное самого расширения в карточке -->
-      <div id="_@_actions" class="position-absolute top-0 end-0 translate-middle-y ps-2 pe-3 pt-4 mt-3 zindex-1">
-        <!-- Меню расширенное самого расширения в карточке -->
-        <div class="dropdown ">
-          <a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="ph-list ph-1_5x"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-end " style="">
-
-            <a id="_@_review_call" href="#" class="dropdown-item">
-              <i class="ph-chat-text"></i>
-              Оставить отзыв
-            </a>
-            
-            <a href="#" class="dropdown-item " data-bs-toggle="modal" data-bs-target="#_@_history_modal">
-              <i class="ph-clock"></i>
-              Показать историю версий
-            </a>
-            
-            <div class="dropdown-divider"></div>
-            
-            <a id="_@_update_install" href="#" class="dropdown-item">
-              <i class="ph-arrows-clockwise"> </i>
-              Обновить пакет
-            </a>
-
-            <div class="dropdown-divider"></div>
-
-            <a id="_@_simple_delete_call" href="#" class="dropdown-item">
-              <i class="ph-x"></i>
-              Удалить пакет
-            </a>
-            <a id="_@_full_delete_call" href="#" class="dropdown-item">
-              <i class="ph-x"></i>
-              Удалить пакет и данные
-            </a>
-          </div>
-        </div>
-        <!-- /Меню расширенное самого расширения в карточке -->
+      <div class="list-inline list-inline-bullet text-muted mb-2">
+        <span id="_@_authors" class="list-inline-item">Авторы: </span>
       </div>
-      <!-- /Блок загружаемый js: меню расширенное самого расширения в карточке -->
+      <!-- Автор и дата выпуска расширения вкарточке -->
 
+
+      <!--  Иконка для случая, когда пункт без меню -->
+      <div id="_@_dropdown_icon" class="dropdown">
+        <i class="ph-check text-success ph-1_3x rounded-pill p-1 bg-success bg-opacity-75 text-white"></i>
+      </div>
+      <!-- /Иконка для случая, когда пункт без меню -->
+
+      <!-- Общая информация о расширении в карточке -->
+      <div  id="_@_dropdown" class="dropdown position-absolute top-0 end-0 translate-middle-y pe-3 mt-4 pt-2">
+        <span class="me-2 fw-medium text-success">пакет установлен</span>
+        <a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="pt-0">
+            <i class="ph-check text-success ph-1x rounded-pill p-1 bg-success bg-opacity-75 text-white"></i>
+          </div>
+        </a>
+      </div>
+
+
+      <!-- Заголовок расширения в карточке -->
 
 
     </div>
@@ -90,34 +63,36 @@
 
     <!-- Описание расширения в карточке -->
     <p id="_@_full_description" class="pe-4 pb-0 mb-0 placeholder placeholder-wave ">
-
     </p>
     <!-- /Описание расширения в карточке -->
 
   </div>
   <!-- /Тело карточки -->
 
-
-
   <!-- Основание карточки -->
   <div class="card-footer d-sm-flex justify-content-sm-start align-items-sm-center">
 
-    <!-- Общая информация о расширении в карточке -->
-    <ul class="list-inline mt-3">
+    <!-- Автор и дата выпуска расширения в карточке -->
 
-      <!-- Версия расширения в карточке -->
-      <li class="list-inline-item me-2 mb-2">
-        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#_@_history_modal">
-          <span id="_@_last_version" class="badge bg-success mt-0 "></span>
+    <ul class="list-inline text-muted mb-0">
+      <li class="list-inline-item me-1">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#_@_history_modal" class="">
+          <span id="_@_last_version" class="placeholder placeholder-wave badge bg-success"></span>
         </a>
       </li>
-      <li id="_@_last_version_date" class="placeholder placeholder-wave list-inline-item me-1"></li>
-      <!-- /Версия расширения в карточке -->
+      <li class="list-inline-item text-muted">дата выпуска:
+        <span id="_@_last_version_date" class="fw-semibold text-black placeholder placeholder-wave "></span>
+      </li>
+    </ul>
+    <!-- Автор и дата выпуска расширения вкарточке -->
+
+    <!-- Общая информация о расширении в карточке -->
+    <ul class="list-inline ms-auto mt-2 pt-1 pe-3">
 
       <!-- Блок загружаемый js: Рейтинг расширения в карточке -->
-      <li id="_@_rating" class="list-inline-item ps-0 mt-1 placeholder placeholder-wave bg-black bg-opacity-20 wmin-350" >
+      <li id="_@_rating" class="list-inline-item placeholder placeholder-wave bg-black bg-opacity-20 wmin-170" >
         <!-- Рейтинг расширения в карточке -->
-<!--        <span id="_@_voted" class="placeholder-glow text-muted "></span>-->
+        <!--        <span id="_@_voted" class="placeholder-glow text-muted "></span>-->
         <span id="_@_voted" class="d-inline-block text-muted  wmin-10"></span>
         <!-- /Рейтинг расширения в карточке -->
       </li>
@@ -125,23 +100,48 @@
 
 
     </ul>
+     <!-- /Блок загружаемый js: меню расширенное самого расширения в карточке -->
+    <!-- Блок загружаемый js: меню расширенное самого расширения в карточке -->
+    <div id="_@_actions" class="pt-2 pb-1">
+      <!-- Меню расширенное самого расширения в карточке -->
+      <div class="dropdown">
+        <a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="ph-list ph-1_5x"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end " >
 
-    <!--  Иконка для случая, когда пункт без меню -->
-    <div id="_@_dropdown_icon" class="pb-1 dropdown ms-auto">
-      <i class="ph-check text-success ph-1_3x rounded-pill p-1 bg-success bg-opacity-75 text-white"></i>
-    </div>
-    <!-- /Иконка для случая, когда пункт без меню -->
+          <a id="_@_review_call" href="#" class="dropdown-item">
+            <i class="ph-chat-text"></i>
+            Оставить отзыв
+          </a>
 
-    <!-- Общая информация о расширении в карточке -->
-    <div  id="_@_dropdown" class="dropdown ms-auto">
-      <a href="#" class="text-body d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-        <!--              <i class="ph-faders ps-1 pe-1 ph-1_3x"></i>-->
-        <div class="pb-1">
-          <i class="ph-check text-success ph-1_3x rounded-pill p-1 bg-success bg-opacity-75 text-white"></i>
+          <a href="#" class="dropdown-item " data-bs-toggle="modal" data-bs-target="#_@_history_modal">
+            <i class="ph-clock"></i>
+            Показать историю версий
+          </a>
+
+          <div class="dropdown-divider"></div>
+
+          <a id="_@_update_install" href="#" class="dropdown-item">
+            <i class="ph-arrows-clockwise"> </i>
+            Обновить пакет
+          </a>
+
+          <div class="dropdown-divider"></div>
+
+          <a id="_@_simple_delete_call" href="#" class="dropdown-item">
+            <i class="ph-x"></i>
+            Удалить пакет
+          </a>
+          <a id="_@_full_delete_call" href="#" class="dropdown-item">
+            <i class="ph-x"></i>
+            Удалить пакет и данные
+          </a>
         </div>
-        <!--        <i class="ph-arrow-right ms-1 "></i>-->
-      </a>
+      </div>
+      <!-- /Меню расширенное самого расширения в карточке -->
     </div>
+
 
   </div>
   <!-- Основание карточки -->

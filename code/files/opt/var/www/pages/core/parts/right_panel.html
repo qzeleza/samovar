@@ -39,7 +39,7 @@
     <ul class="nav nav-tabs nav-tabs-underline nav-justified mb-0">
 
       <li class="nav-item">
-        <a href="#bottom-justified-tab1" class="nav-link active" data-bs-toggle="tab">Настройки</a>
+        <a href="#bottom-justified-tab1" class="nav-link active" data-bs-toggle="tab">Внешний вид</a>
       </li>
       <li class="nav-item">
         <a href="#bottom-justified-tab2" class="nav-link " data-bs-toggle="tab">Действия</a>
@@ -54,9 +54,22 @@
       <!-- Содержание вкладки Настроек Самовара -->
       <div class="tab-pane offcanvas-body fade show active" id="bottom-justified-tab1">
         <div class="form-check form-switch pb-3 pt-2">
+          <label class="form-check-label ms-3" for="samovar_tooltip">Всплывающие подсказки</label>
           <input type="checkbox" class="form-check-input" id="samovar_tooltip" checked="">
-          <label class="form-check-label" for="samovar_tooltip">Всплывающие подсказки</label>
         </div>
+        <div class="mb-3 border-top">
+          <div class="fw-semibold mb-2 mt-3">Число колонок главного окна</div>
+
+          <div id="update-column-select" class="btn-group align-items-baseline">
+
+            <a href="#" class="btn border dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true"><i  class="ph-columns"></i></a>
+            <div id="numColumnsSelect" class="dropdown-menu" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(0px, -42px, 0px);" data-popper-placement="top-start"></div>
+
+          </div>
+          <span id="cellSizeSelect" class=" ms-2 mt-1">1 шт.</span>
+
+        </div>
+
         <div class="pt-3 border-top">
           <div class="fw-semibold mb-2">Цвет темы</div>
           <div class="list-group mb-3">
