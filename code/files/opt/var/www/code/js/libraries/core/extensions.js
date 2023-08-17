@@ -224,7 +224,7 @@ class AppsManager {
 
                 //  если ключ это автор
                 const authorText = countAuthor < numAuthorsInData ? value.name + ', ' : value.name;
-                const author = $('<a class="text-black fw-semibold"></a>')
+                const author = $('<a class="fw-semibold"></a>')
                     .attr('href', `mailto:${value.email}`)
                     .attr('id', `${self.appName}_${key}`)
                     .text(authorText);
