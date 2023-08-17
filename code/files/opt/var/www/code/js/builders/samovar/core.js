@@ -10,7 +10,7 @@ function buildMainTemplatePage(root){
     const app_name = 'samovar';
 
     // Загрузка необходимых страниц и аттрибутов элементов в них для всех страниц шаблона
-    templateLoad.add({id:'#right_call_button', file: root + 'pages/core/parts/right_call_button.html'});
+    templateLoad.add({id:'#right_call_button', file: root + 'pages/core/parts/right_toolbar.html'});
     templateLoad.add({ id: '#sidebar_panel', file: root + "pages/core/parts/sidebar.html",
         attributes: {
             '#logo_images_link': {
@@ -56,7 +56,8 @@ function buildMainTemplatePage(root){
         }
     });
     templateLoad.add(() => {
-
+        // установка кнопки вида
+        initSideBarResizeState();
     });
 
     // Загрузка необходимых страниц и аттрибутов элементов в них для всех страниц шаблона
@@ -81,7 +82,7 @@ function buildMainTemplatePage(root){
     // Получаем данные об истории версий (если есть) для запрошенного приложения
     templateLoad.add(() => {
         samovarApp.getAppVersionHistory();
-    } );
+    });
 
 
     // Проверяем самовар на наличие обновлений

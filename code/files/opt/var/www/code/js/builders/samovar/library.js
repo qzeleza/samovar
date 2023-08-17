@@ -27,15 +27,30 @@ $(document).ready( function () {
             // Получаем данные о приложении с роутера
             tryGetDataFromServer(RouterServer, 'get_apps_data', {}, (data) => {
                 $.each(data, function(app_name, app_data) {
+                    // if (app_name !== 'rodina'){
                     appsData[app_name] = new AppsManager(app_name, RouterServer);
                     // Получаем данные с сервера
                     const htmlAppCardCode = appsData[app_name].generateAppBigCardHTML('pages/core/templates/card.html', app_data);
                     // Генерируем карточки приложений
-                    $(`#apps_card_list`).append('<div class="col-12"><div id="app_' + app_name + '_card" class="main-card"></div></div><div class="col-0"></div>');
-                    $(`#app_${app_name}_card`).append(htmlAppCardCode);
+                    const $cardList = $(`#apps_card_list`);
+                    // const $cardMain = $('<div>').addClass('main-card').attr('id', `app_${app_name}_card`);
+                    const $cardMain = $('<div>').attr('id', `app_${app_name}_card`);
+                    $cardMain.append(htmlAppCardCode);
+                    const $cardContainer = $('<div>').addClass('col-12 card-container').append($cardMain);
+                    $cardList.append($cardContainer);
                     // Получаем
                     appsData[app_name].getAppVersionHistory();
+                    // }
+
                 });
+                // Устанавливаем размер сетки главного окна с карточками приложения
+                const cont = $('#apps_card_list')
+                const selCol = $('#numColumnsSelect');
+                // Инициализация с начальным числом столбцов
+                initRightPanelColumnsButtons(cont, selCol);
+                // Инициализация вида карточек в окне
+                initViewState();
+
             }, `при запросе данных о приложениях!`);
 
         });
@@ -55,12 +70,6 @@ $(document).ready( function () {
                 // Выбираем пункт Библиотека
                 $('#lib_link').addClass('active');
                 $('#sidebar_menu .nav-group-sub').addClass('collapse show')
-
-                // Устанавливаем размер сетки главного окна с карточками приложения
-                const cont = $('#apps_card_list')
-                const selCol = $('#numColumnsSelect');
-                // Инициализация с начальным числом столбцов
-                initRightPanelColumnsButtons(cont, selCol);
 
                 // Установка триггера для других js файлов
                 $(document).trigger("appReady");

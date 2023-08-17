@@ -1,0 +1,60 @@
+<div class="btn-toolbar pt-2 align-items-center" >
+
+  <!--  Кнопки переключения компактного и полного вида карточек -->
+  <div id="toggle_view" class="btn-group p-2 ">
+
+    <!--  Полный вид  -->
+    <input type="radio" class="btn-check" name="options" id="card-view-full" autocomplete="off">
+    <label class="btn btn-flat-info border-light-blue"
+           data-bs-popup="tooltip"
+           data-bs-placement="left"
+           data-bs-original-title="Вид полный окон"
+           for="card-view-full">
+      <i class="ph-square text-black fw-lighter"></i>
+    </label>
+    <!--  /Полный вид  -->
+
+    <!--  Компактный вид  -->
+    <input type="radio" class="btn-check" name="options" id="card-view-compact" autocomplete="off">
+    <label class="btn btn-flat-info "
+           data-bs-popup="tooltip"
+           data-bs-placement="bottom"
+           data-bs-original-title="Компактный вид окон"
+           for="card-view-compact">
+      <i class="ph-squares-four text-black fw-lighter"></i>
+    </label>
+    <!--  /Компактный вид  -->
+
+  </div>
+
+  <div class="btn-group p-2">
+    <div id="columns-setup" class="border-end-secondary">
+      <!--      <div class="fw-semibold mb-2 mt-3">Число колонок главного окна</div>-->
+
+      <div id="update-column-select" class="btn-group align-items-baseline "
+           data-bs-popup="tooltip"
+           data-bs-placement="bottom"
+           data-bs-original-title="Число колонок в окне">
+        <a href="#" class="btn border dropdown-toggle btn-flat-info border-light-blue" data-bs-toggle="dropdown" aria-expanded="true">
+          <i class="ph-columns"></i>
+        </a>
+        <div id="numColumnsSelect" class="dropdown-menu wmin-200" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(0px, -42px, 0px);" data-popper-placement="top-start"></div>
+      </div>
+
+    </div>
+  </div>
+  <!-- / Кнопки переключения компактного и полного вида карточек -->
+
+  <div class="btn-group p-2">
+    <!-- Кнопка вызова правого меню -->
+    <button type="button" class="btn bg-teal bg-opacity-20 border-light border-light-blue d-lg-inline-flex tooltip-info"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#right_panel"
+            data-bs-popup="tooltip"
+            data-bs-placement="bottom"
+            data-bs-original-title="Меню настроек Самовара">
+      <i class="ph-bookmarks"></i>
+    </button>
+    <!-- /Кнопка вызова правого меню -->
+  </div>
+</div>

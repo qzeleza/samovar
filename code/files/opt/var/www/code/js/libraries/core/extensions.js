@@ -118,26 +118,28 @@ class AppsManager {
     //     title: 'Службы',
     //     link: 'pages/kvas/services/services.html',
     //     icon: 'ph-stack'
+    //     show_when_not_installed: "true",
     //   },...
     //   ]
     //
-    _generateDropdownMenu(menuItems) {
+    _generateDropdownMenu(menuItems, installed) {
         const dropdownMenu = $('<div class="dropdown-menu dropdown-menu-end"></div>');
         let item;
         for (let i = 0; i < menuItems.length; i++) {
             const menuItem = menuItems[i];
             if (menuItem.title === 'divider') {
-                item = $('<div class="dropdown-divider"></div>');
+                item = installed === 'true' ? $('<div class="dropdown-divider"></div>') : null;
             } else {
-                item = $('<a href="' + menuItem.link + '" class="dropdown-item"></a>');
-                const icon = $('<i class="' + menuItem.icon + '"></i>');
-                const title = $('<span>' + menuItem.title + '</span>');
+                if (installed === 'true' || menuItem.show_when_not_installed === 'true'){
+                    item = $('<a href="' + menuItem.link + '" class="dropdown-item"></a>');
+                    const icon = $('<i class="' + menuItem.icon + '"></i>');
+                    const title = $('<span>' + menuItem.title + '</span>');
 
-                item.append(icon);
-                item.append(title);
+                    item.append(icon);
+                    item.append(title);
+                }
             }
-
-            dropdownMenu.append(item);
+            if (item) dropdownMenu.append(item);
         }
 
         return dropdownMenu;
@@ -181,6 +183,7 @@ class AppsManager {
             }
         });
 
+        // Определяем число авторов в присланных данных
         function getNumAuthorsInData(obj, prefix){
             let count = 0;
 
@@ -218,6 +221,7 @@ class AppsManager {
 
 
             if (key.startsWith("author")){
+
                 //  если ключ это автор
                 const authorText = countAuthor < numAuthorsInData ? value.name + ', ' : value.name;
                 const author = $('<a class="text-black fw-semibold"></a>')
@@ -229,12 +233,49 @@ class AppsManager {
                 countAuthor++;
 
             } else if(key.startsWith("links")){
+
                 // добавляем в меню ссылки
                 $element.replaceWith(function (){
                     return $(this).find(`#${self.appName}_dropdown_icon`).remove()
                 });
-                $element.find(`#${self.appName}_dropdown`).append(self._generateDropdownMenu(applicationData.links));
-            } else {
+                $element.find(`#${self.appName}_dropdown`).append(self._generateDropdownMenu(applicationData.links, applicationData.installed));
+
+            } else if(key.startsWith("installed")){
+
+                // Обрабатываем статус установки пакета
+                const $icon = $element.find(`#${self.appName}_status_icon`);
+                const $text = $element.find(`#${self.appName}_status_installed`);
+                const $itemMenuDel = $element.find(`#${self.appName}_simple_delete_call`);
+                const $itemMenuFullDel = $element.find(`#${self.appName}_full_delete_call`);
+                const $itemMenuInstall = $element.find(`#${self.appName}_install_call`);
+                const $itemMenuUpdate = $element.find(`#${self.appName}_update_install`);
+                const $itemMenuDivUpdate = $element.find(`#${self.appName}_update_install_div`);
+                const $itemMenuReview = $element.find(`#${self.appName}_review_call`);
+
+                if (value === "true"){
+                    $text.text('установлен').addClass('text-success').removeClass('text-warning');
+                    $icon.addClass('ph-check').removeClass('ph-x');
+                    $icon.addClass('bg-success').removeClass('bg-warning');
+                    $itemMenuDel.removeClass('d-none');
+                    $itemMenuFullDel.removeClass('d-none');
+                    $itemMenuUpdate.removeClass('d-none');
+                    $itemMenuDivUpdate.removeClass('d-none');
+                    $itemMenuInstall.addClass('d-none');
+                    $itemMenuReview.removeClass('d-none');
+                } else {
+                    $text.text('не установлен').addClass('text-warning').removeClass('text-success');
+                    $icon.addClass('ph-x').removeClass('ph-check');
+                    $icon.addClass('bg-warning').removeClass('bg-success');
+                    $itemMenuDel.addClass('d-none');
+                    $itemMenuFullDel.addClass('d-none');
+                    $itemMenuUpdate.addClass('d-none');
+                    $itemMenuDivUpdate.addClass('d-none');
+                    $itemMenuInstall.removeClass('d-none');
+                    $itemMenuReview.addClass('d-none');
+                }
+
+            }
+            else {
                 // обработка всех остальных тегов
                 if ($element.find(`#${self.appName}_${key}`).length > 0) {
                     $element.find(`#${self.appName}_${key}`).html(value);

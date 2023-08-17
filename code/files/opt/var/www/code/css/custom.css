@@ -1,3 +1,17 @@
+#numColumnsSelect{
+  min-width: 6.6rem !important;
+}
+.card-compact {
+  max-height: 28% !important;
+}
+
+.card {
+  max-height: 48% !important;
+}
+
+.card-preview-window {
+  width: 33% !important;
+}
 
 .noty-container {
   --alert-padding-x: var(--spacer);
@@ -23,7 +37,7 @@
   margin-left: 20px;
 }
 
-.h-200 {
+.h-200px {
   height: 200px;
 }
 .noty_layout {
