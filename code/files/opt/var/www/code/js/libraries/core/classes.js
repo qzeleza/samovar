@@ -340,6 +340,32 @@ class PageBuilder {
             reject(error);
         }
     }
+
+
+    /**
+     * Выгружает указанный ранее загруженный скрипт.
+     * @param {string} scriptName - Имя скрипта, который нужно выгрузить.
+     */
+    unloadScript(scriptName= undefined) {
+        const scripts = document.querySelectorAll('script');
+        if (scriptName) {
+            scripts
+                .filter(script => script.src.includes(scriptName))
+                .forEach(script => script.parentNode.removeChild(script));
+        } else {
+            scripts.forEach(script => script.parentNode.removeChild(script));
+        }
+    }
+
+
+    /**
+     * Очищает стек вызовов и сбрасывает все изменения.
+     */
+    reset() {
+        this.callStack = [];
+        this.unloadScript(); // Выгружаем все ранее загруженные скрипты
+    }
+
 }
 
 

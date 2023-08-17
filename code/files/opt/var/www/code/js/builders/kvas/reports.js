@@ -14,7 +14,6 @@ $(document).ready(function() {
 
         reportPageLoader.add({id:'#page_header', file: root + 'pages/kvas/reports/modules/header.html'});
         reportPageLoader.add({id:'#page_breadcrumb', file: root + 'pages/kvas/reports/modules/breadcrumb.html'});
-        reportPageLoader.add({id:'#app_kvas_card', file: root + 'pages/kvas/reports/modules/card.html'});
 
         reportPageLoader.add(root + 'code/js/pages/all/select2.js');
         reportPageLoader.add(() => {
