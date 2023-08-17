@@ -56,7 +56,9 @@ $(document).ready( function () {
 
         libraryPageLoader.add(() => {
             UserRouter.getDeviceInfo((deviceInfo) => {
-                samovarInitExtension(appName, deviceInfo);
+                $.each(appsData, function(app_name, app_data) {
+                    new Rating(app_name, deviceInfo);
+                });
             });
 
         });

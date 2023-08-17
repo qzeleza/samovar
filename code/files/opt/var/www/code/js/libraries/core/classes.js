@@ -653,7 +653,10 @@ class Rating {
             theme: themeNoty,
             type: 'confirm',
             buttons: [
-                Noty.button('Отменить', 'btn btn-link mb-2', () => {this.notyReview.close();}),
+                Noty.button('Отменить', 'btn btn-link mb-2', () => {
+                    this.notyReview.close();
+                    this._setRatingStars(this.rating);
+                }),
                 Noty.button('Отправить <i class="ph-paper-plane-tilt ms-2"></i>','btn btn-outline-secondary me-4 ms-2 me-2 mb-2', () => { self._pressOnSendButton();}),
             ],
             callbacks:{
@@ -723,12 +726,15 @@ class Rating {
     //
     _setRatingWhenHover() {
         // Установка рейтинга
-        if(this.stars){
-            this.stars.slice(0, this.rating).addClass('text-warning')
-            this.stars.slice(this.rating, this.stars.length).removeClass('text-warning');
-        }
+        this._setRatingStars(this.rating)
     }
 
+    _setRatingStars(rating){
+        if(this.stars){
+            this.stars.slice(0, rating).addClass('text-warning')
+            this.stars.slice(rating, this.stars.length).removeClass('text-warning');
+        }
+    }
 
     //
     // Удаляем хранимый рейтинг на локальном хранилище
@@ -746,7 +752,6 @@ class Rating {
         let index = this.stars.index(e.target);
         this.stars.slice(0, index + 1).addClass('text-warning');
         this.stars.slice(index + 1, this.stars.length).removeClass('text-warning');
-        this.index = index + 1;
     }
 
 
@@ -764,9 +769,9 @@ class Rating {
                         this.votedElem.html('(' + response.voted + ')');
                         this.appVersion = response.version;
                         this._createStarsRating();
-                        // if (response.voted !== 0) {
+                        if (response.voted !== 0) {
                             this._setRatingWhenHover();
-                        // }
+                        }
                     }
                 }, `при запросе рейтинга ${this.appName}`);
         });
@@ -823,7 +828,7 @@ class Rating {
 
 
     //
-    // Обработка результата ответа от сервера после отправки отзыва пользоватлея
+    // Обработка результата ответа от сервера после отправки отзыва пользователя
     //
     _whenSentReviewToServer(response) {
         // закрываем окно текущее
@@ -835,7 +840,7 @@ class Rating {
             showMessage(`Ваш отзыв на <b>${this.appName.toUpperCase()}</b> успешно <b>отправлен</b>.<br>Спасибо.`, MessageType.SUCCESS)
         } else {
             // Ошибка при отправке отзыва
-            console.log(showMessage(response.description));
+            console.log(showError(response.description));
         }
 
     }
@@ -898,11 +903,11 @@ class Rating {
             this._showForm(this.notyCantToSet, reviewForm);
 
         } else {
-            this.rating = $('#' + this.starsId + ' .text-warning').length;
+            const rating = $('#' + this.starsId + ' .text-warning').length;
             const reviewForm =
                 '<form id="' + this.reviewFormId + '" novalidate>' +
                 	'<div class="pt-3 ps-3 pe-1 pb-1">' +
-                		'<h4 class="mb-3">Спасибо за Вашу оценку ('+ this.rating + '/' + this.stars.length + ')</h4>' +
+                		'<h4 class="mb-3">Спасибо за Вашу оценку ('+ rating + '/' + this.stars.length + ')</h4>' +
                         '<label class="form-label ms-1">Будем признательны за обратную связь</label> ' +
                         '<textarea id="' + this.userReviewId + '" class="form-control  h-200px" placeholder="Суть Вашего предложения или замечений." data-min-length="6" data-bs-popup="tooltip" data-bs-placement="right" ></textarea>' +
                         '<div style="display: flex;" class="pt-1 input-group" >' +
