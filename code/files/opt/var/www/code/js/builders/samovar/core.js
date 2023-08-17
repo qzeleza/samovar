@@ -68,7 +68,7 @@ function buildMainTemplatePage(root){
     // Загрузка необходимых скриптов для всех страниц шаблона
     templateLoad.add(root + 'code/js/libraries/core/init.js');
     templateLoad.add(root + 'code/js/libraries/core/router.js');
-    templateLoad.add(root + 'code/js/libraries/core/extensions.js');
+    templateLoad.add(root + 'code/js/libraries/core/apps.manager.js');
 
     // Устанавливаем экземпляры серверов для работы
     templateLoad.add(() => {

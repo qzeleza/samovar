@@ -251,11 +251,14 @@ class AppsManager {
                 const $itemMenuUpdate = $element.find(`#${self.appName}_update_install`);
                 const $itemMenuDivUpdate = $element.find(`#${self.appName}_update_install_div`);
                 const $itemMenuReview = $element.find(`#${self.appName}_review_call`);
+                const colorUninstalledApp = 'warning'
+                const colorInstalledApp = 'success'
+
 
                 if (value === "true"){
-                    $text.text('установлен').addClass('text-success').removeClass('text-warning');
+                    $text.text('установлен').addClass(`text-${colorInstalledApp}`).removeClass(`text-${colorUninstalledApp}`);
                     $icon.addClass('ph-check').removeClass('ph-x');
-                    $icon.addClass('bg-success').removeClass('bg-warning');
+                    $icon.addClass(`bg-${colorInstalledApp}`).removeClass(`bg-${colorUninstalledApp}`);
                     $itemMenuDel.removeClass('d-none');
                     $itemMenuFullDel.removeClass('d-none');
                     $itemMenuUpdate.removeClass('d-none');
@@ -263,9 +266,9 @@ class AppsManager {
                     $itemMenuInstall.addClass('d-none');
                     $itemMenuReview.removeClass('d-none');
                 } else {
-                    $text.text('не установлен').addClass('text-warning').removeClass('text-success');
+                    $text.text('не установлен').addClass(`text-${colorUninstalledApp}`).removeClass(`text-${colorInstalledApp}`);
                     $icon.addClass('ph-x').removeClass('ph-check');
-                    $icon.addClass('bg-warning').removeClass('bg-success');
+                    $icon.addClass(`bg-${colorUninstalledApp}`).removeClass(`bg-${colorInstalledApp}`);
                     $itemMenuDel.addClass('d-none');
                     $itemMenuFullDel.addClass('d-none');
                     $itemMenuUpdate.addClass('d-none');

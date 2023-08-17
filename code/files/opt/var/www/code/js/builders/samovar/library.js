@@ -16,7 +16,6 @@ $(document).ready( function () {
 
         libraryPageLoader.add({id: '#page_header', file: root + 'pages/library/modules/header.html'});
         libraryPageLoader.add({id: '#page_breadcrumb', file: root + 'pages/library/modules/breadcrumb.html'});
-        // libraryPageLoader.add({id: '#app_kvas_card', file: root + 'pages/library/modules/kvas/card.html'});
         libraryPageLoader.add({id: '#kvas_preview_modal', file: root + 'pages/library/modules/kvas/preview.html'});
         libraryPageLoader.add({id: '#kvas_history_modal', file: root + 'pages/library/modules/samovar/history.html'});
 

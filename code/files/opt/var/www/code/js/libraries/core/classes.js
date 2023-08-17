@@ -1,5 +1,44 @@
 
 //
+// Типы сообщений для функции showMessage
+//
+const MessageType = {
+    ERROR: 'danger',
+    INFO: 'info',
+    SUCCESS: 'success',
+    WARNING: 'warning',
+    ALERT: 'primary',
+}
+
+//
+// Выводим сообщение на экран (правый верхний угол)
+//
+function showMessage(text,                              // текст сообщения
+                     type = MessageType.ALERT,   // тип сообщения (цвет фона)
+                     layout = 'topRight',        // позиционирование сообщения: top, topLeft, topCenter, topRight, center, centerLeft, centerRight, bottom, bottomLeft, bottomCenter, bottomRight
+                     timeout = 3000,            // Время показа сообщения
+                     modal = false              // модальное ли окно
+) {
+    new Noty({
+        text: text,
+        theme: ' alert-' + type + ' noty-container',
+        modal: modal,
+        layout: 'topRight',
+        closeWith: ['click', 'button'],
+        timeout: timeout,
+    }).show();
+}
+//
+// Показываем сообщение об ошибке
+//
+function showError(error){
+    console.log(error);
+    showMessage(error, MessageType.ERROR, 'topRight', 5000, true )
+    return error;
+}
+
+
+//
 // Класс FormDataValidator предназначен для проверки данных в формах
 //
 class FormDataValidator {
@@ -156,7 +195,7 @@ class PageBuilder {
      */
     add(data) {
         if (!data) {
-            throw new Error('Некорректные данные');
+            throw new Error(showError('Некорректные данные'));
         }
 
         // Определение типа данных
@@ -177,7 +216,7 @@ class PageBuilder {
         }
 
         if (!type) {
-            throw new Error('Некорректные данные');
+            throw new Error(showError('Некорректные данные'));
         }
 
         this.callStack.push({type: type, id: data.id, data: data});
@@ -189,7 +228,7 @@ class PageBuilder {
      */
     load() {
         if (this.callStack.length === 0) {
-            throw new Error('Стек вызовов пуст');
+            throw new Error(showError('Стек вызовов пуст'));
         }
         this._removeDuplicateScripts(); // Удаление повторяющихся скриптов из стека вызовов
 
@@ -207,20 +246,20 @@ class PageBuilder {
                                     loadNext();
                                 })
                                 .fail((jqxhr, settings, exception) => {
-                                    reject(new Error(`Ошибка при загрузке скрипта ${item.data}: ${exception}`));
+                                    reject(new Error(showError(`Ошибка при загрузке скрипта ${item.data}: ${exception}`)));
                                 });
                             break;
                         case 'module':
                             const elemChecked = $(`${item.id}`);
                             // Загрузка модуля
                             if (!elemChecked.length) {
-                                reject(`Ошибка при загрузке модуля ${item.data.file}: элемент с идентификатором ${item.id} не найден`);
+                                reject(showError(`Ошибка при загрузке модуля ${item.data.file}: элемент с идентификатором ${item.id} не найден`));
                             } else {
                                 elemChecked.load(item.data.file, (response, status, xhr) => {
                                     if (status === 'error') {
-                                        reject(`Ошибка при загрузке модуля ${item.data.file}: ${xhr.statusText}`);
+                                        reject(showError(`Ошибка при загрузке модуля ${item.data.file}: ${xhr.statusText}`));
                                     } else if (!response || response.trim().length === 0) {
-                                        reject(`Ошибка при загрузке модуля ${item.data.file}: пустой ответ`);
+                                        reject(showError(`Ошибка при загрузке модуля ${item.data.file}: пустой ответ`));
                                     } else {
                                         // Применение атрибутов к загруженному модулю
                                         this._applyAttributes(item.data.attributes, reject);
@@ -290,7 +329,7 @@ class PageBuilder {
                             }
                         } else {
                             if ($(selector).attr(attributeName) === undefined) {
-                                throw new Error(`Атрибут ${attributeName} отсутствует в элементе ${selector}`);
+                                throw new Error(showError(`Атрибут ${attributeName} отсутствует в элементе ${selector}`));
                             }
                             $(selector).attr(attributeName, values);
                         }
@@ -331,11 +370,11 @@ function tryGetDataFromServer(server, request, data, callback, requestDescribe){
             if (response) {
                 callback(response);
             } else {
-                showError(`Пришел пустой ответ с сервера ${requestDescribe}.`)
+                console.log(showError(`Пришел пустой ответ с сервера ${requestDescribe}.`));
             }
         });
     } catch (error) {
-        showError(`Ошибка при запросе ${requestDescribe}: ${error.message}`)
+        console.log(showError(`Ошибка при запросе ${requestDescribe}: ${error.message}`));
     }
 }
 
@@ -376,7 +415,7 @@ class NetworkRequestManager {
                 // showMessage('WebSocket отключен.', MessageType.WARNING);
             });
         } catch (error) {
-            showError(`Ошибка при инициализации WebSocket: ${error.message}`);
+            console.log(showError(`Ошибка при инициализации WebSocket: ${error.message}`));
         }
     }
 
@@ -404,13 +443,13 @@ class NetworkRequestManager {
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     // Обработка ошибки
-                    showError(`Ошибка при отправке HTTPS запроса: ${textStatus} - ${errorThrown}`);
+                    console.log(showError(`Ошибка при отправке HTTPS запроса: ${textStatus} - ${errorThrown}`));
                     // Дополнительные действия при ошибке...
                 }
             });
 
         } catch (error) {
-            showError(`Ошибка в самом HTTPS запросе: ${error.message}`)
+            console.log(showError(`Ошибка в самом HTTPS запросе: ${error.message}`));
             errorCallback();
         }
     }
@@ -429,7 +468,7 @@ class NetworkRequestManager {
                 callback(responseData);
             });
         } catch (error) {
-            showError(`Ошибка при отправке WebSocket запроса: ${error.message}`);
+            console.log(showError(`Ошибка при отправке WebSocket запроса: ${error.message}`));
             errorCallback();
         }
     }
@@ -443,7 +482,7 @@ class NetworkRequestManager {
      */
     send(path, data, callback, allowDuplicate = false) {
         if (!allowDuplicate && this.stack.some(req => req.path === path && req.data === data)) {
-            console.log(`Ошибка при отправке HTTPS запроса: Запрос ${path}, с данными ${data} уже находится в стеке, дублирование запрещено.`);
+            console.log(showError(`Ошибка при отправке HTTPS запроса: Запрос ${path}, с данными ${data} уже находится в стеке, дублирование запрещено.`));
             return;
         }
 
@@ -480,7 +519,7 @@ class NetworkRequestManager {
             });
 
         } else {
-            showError(`Неизвестный приоритет запроса: ${this.httpsPriority}`);
+            console.log(showError(`Неизвестный приоритет запроса: ${this.httpsPriority}`));
         }
     }
 
@@ -699,9 +738,9 @@ class Rating {
                         this.votedElem.html('(' + response.voted + ')');
                         this.appVersion = response.version;
                         this._createStarsRating();
-                        if (response.voted !== 0) {
+                        // if (response.voted !== 0) {
                             this._setRatingWhenHover();
-                        }
+                        // }
                     }
                 }, `при запросе рейтинга ${this.appName}`);
         });
@@ -770,7 +809,7 @@ class Rating {
             showMessage(`Ваш отзыв на <b>${this.appName.toUpperCase()}</b> успешно <b>отправлен</b>.<br>Спасибо.`, MessageType.SUCCESS)
         } else {
             // Ошибка при отправке отзыва
-            showMessage(response.description)
+            console.log(showMessage(response.description));
         }
 
     }

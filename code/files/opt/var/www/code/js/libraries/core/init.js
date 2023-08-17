@@ -16,44 +16,6 @@ if (typeof Noty == 'undefined') {
     console.warn('Warning - noty.min.js is not loaded.');
 }
 
-
-//
-// Типы сообщений для функции showMessage
-//
-const MessageType = {
-    ERROR: 'danger',
-    INFO: 'info',
-    SUCCESS: 'success',
-    WARNING: 'warning',
-    ALERT: 'primary',
-}
-
-//
-// Выводим сообщение на экран (правый верхний угол)
-//
-function showMessage(text,                              // текст сообщения
-                     type = MessageType.ALERT,   // тип сообщения (цвет фона)
-                     layout = 'topRight',        // позиционирование сообщения: top, topLeft, topCenter, topRight, center, centerLeft, centerRight, bottom, bottomLeft, bottomCenter, bottomRight
-                     timeout = 3000,            // Время показа сообщения
-                     modal = false              // модальное ли окно
-) {
-    new Noty({
-        text: text,
-        theme: ' alert-' + type + ' noty-container',
-        modal: modal,
-        layout: 'topRight',
-        closeWith: ['click', 'button'],
-        timeout: timeout,
-    }).show();
-}
-//
-// Показываем сообщение об ошибке
-//
-function showError(error){
-    console.log(error);
-    showMessage(error, MessageType.ERROR, 'topRight', 5000, true )
-}
-
 const App = function () {
 
 
@@ -1102,8 +1064,6 @@ const themeSwitcher = function() {
         }
     }
 }();
-
-
 
 App.initCore();
 App.initAfterLoad();
