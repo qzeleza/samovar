@@ -285,8 +285,12 @@ function initRightPanelColumnsButtons(viewContainer, $numColumnsSelect) {
         // Инициализация с начальным числом столбцов
         let  nCol = localStorage.getItem(numColumnCards);
         nCol = (nCol) ? +nCol : 1;
-        if(nCol > 1) {elements.removeClass('main-card')}
-        else {elements.addClass('main-card')}
+        if(nCol > 1) {elements.removeClass('main-card')} else {
+            // Если карточка всего одна, то устанавливаем только один столбец
+            elements.addClass('main-card')
+            nCol = 1;
+        }
+        // Активируем соответствующий выбор числа столбцов
         $numColumnsSelect.find(`*:contains(${nCol})`).trigger('click')
         // updateColumns(viewContainer, nCol);
 

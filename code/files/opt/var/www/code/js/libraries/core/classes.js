@@ -223,7 +223,7 @@ class PageBuilder {
                                         reject(`Ошибка при загрузке модуля ${item.data.file}: пустой ответ`);
                                     } else {
                                         // Применение атрибутов к загруженному модулю
-                                        this._applyAttributes(item.id, item.data.attributes, reject);
+                                        this._applyAttributes(item.data.attributes, reject);
                                         loadNext();
                                     }
                                 });
@@ -236,7 +236,7 @@ class PageBuilder {
                             break;
                         case 'attributes':
                             // Применение атрибутов к элементу
-                            this._applyAttributes(item.id, item.data.attributes, reject);
+                            this._applyAttributes(item.data.attributes, reject);
                             loadNext();
                             break;
                     }
@@ -269,11 +269,10 @@ class PageBuilder {
     /**
      * Применяет атрибуты к указанному элементу.
      * @private
-     * @param {string} id - Идентификатор элемента, к которому нужно применить атрибуты.
      * @param {Object} attributes - Атрибуты, которые нужно применить к элементу.
      * @param {function} reject - Функция, которая вызывается, если произошла ошибка.
      */
-    _applyAttributes(id, attributes, reject) {
+    _applyAttributes(attributes, reject) {
         try {
             // Применение атрибутов к элементу
             if (attributes) {
