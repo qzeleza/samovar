@@ -69,6 +69,7 @@ function buildMainTemplatePage(root){
     templateLoad.add(root + 'code/js/libraries/core/init.js');
     templateLoad.add(root + 'code/js/libraries/core/router.js');
     templateLoad.add(root + 'code/js/libraries/core/apps.manager.js');
+    templateLoad.add(root + 'assets/js/vendor/ui/dragula.min.js');
 
     // Устанавливаем экземпляры серверов для работы
     templateLoad.add(() => {

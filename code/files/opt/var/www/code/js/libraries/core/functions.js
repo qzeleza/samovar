@@ -103,7 +103,7 @@ function rightPanelAct(act = 'hide', needToCallRightPanel = false) {
     // Если действие равно 'hide' (скрыть)
     if (act === 'hide') {
         // Если правая панель существует или уже отображается
-        if (rightPanel || rightPanel._isShown) {
+        if (rightPanel || rightPanel._isShown()) {
             $('.btn-close[data-bs-dismiss="offcanvas"]').trigger('click');
         }
     }
@@ -118,35 +118,6 @@ function rightPanelAct(act = 'hide', needToCallRightPanel = false) {
     }
 }
 
-//
-// Получаем длительность видео посредством начала его воспроизведения
-//
-function getVideoDuration(idVideoSource){
-
-    // Функция для форматирования времени
-    function formatTime(timeInSeconds) {
-        const minutes = Math.floor(timeInSeconds / 60);
-        const seconds = Math.floor(timeInSeconds % 60);
-        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-    }
-
-    const videoElement = $(`#${idVideoSource}`)[0];
-    let formattedDuration;
-
-    // Загрузка метаданных видео
-    videoElement.addEventListener("loadedmetadata", function () {
-        const duration = videoElement.duration;
-        formattedDuration = formatTime(duration);
-        // Остановка воспроизведения после получения длительности
-        videoElement.pause();
-    });
-
-    // Начать загрузку видео для получения метаданных
-    videoElement.load();
-
-    // возвращаем результат
-    return formattedDuration;
-}
 
 
 /**
@@ -250,6 +221,18 @@ function initRightPanelColumnsButtons(viewContainer, $numColumnsSelect) {
 
         const elements = viewContainer.find('[id^="app_"]');
 
+        function setMainCard(element, numCards){
+            let res = numCards;
+            if(numCards > 1) {
+                element.removeClass('ps-0 main-card');
+            }
+            else {
+                element.addClass('ps-0 main-card');
+                res = 1;
+            }
+            return res;
+        }
+
         for (let i = 1; i <= maxColumns; i++) {
             const selectInput = $('<div>').addClass('dropdown-menu');
             const activItemClass = (i === 1) ? 'dropdown-item active' : 'dropdown-item';
@@ -262,19 +245,14 @@ function initRightPanelColumnsButtons(viewContainer, $numColumnsSelect) {
                 // $('#cellSizeSelect').text(`${i} шт.`)
                 $numColumnsSelect.find(`[class*="${activeText}"]`).removeClass(activeText)
                 $(this).addClass(activeText)
-                if(i > 1) {elements.removeClass('main-card')}
-                else {elements.addClass('main-card')}
+                setMainCard(elements, i)
             });
         }
 
         // Инициализация с начальным числом столбцов
         let  nCol = localStorage.getItem(numColumnCards);
         nCol = (nCol) ? +nCol : 1;
-        if(nCol > 1) {elements.removeClass('main-card')} else {
-            // Если карточка всего одна, то устанавливаем только один столбец
-            elements.addClass('main-card')
-            nCol = 1;
-        }
+        nCol = setMainCard(elements, nCol)
         // Активируем соответствующий выбор числа столбцов
         $numColumnsSelect.find(`*:contains(${nCol})`).trigger('click')
         // updateColumns(viewContainer, nCol);
@@ -352,3 +330,91 @@ function toggleCardViewingMode(fullView) {
     });
     localStorage.setItem(fullViewCards, String(fullView));
 }
+
+
+function setPreviewVideoCardOnClick(appName) {
+    const src = './assets/media/' + appName + '_preview.mov';
+    const modalPreviewId = appName + '_modal_preview_window';
+    const modalPreview = $('#' + modalPreviewId);
+
+    // Проверяем есть ли файл по указанному пути
+    fetch(src)
+        .then(response => {
+            if (response.status === 404) {
+                console.log(`Файл ${src} не найден!`);
+                const noFileFound = '<div class="fs-5 text-danger fw-light mb-1">Файл пред-просмотра не найден!</div>';
+                modalPreview.html(noFileFound);
+            } else {
+                // устанавливаем длительность ролика
+                getVideoDuration(src)
+                    .then(duration => {
+                        $('#' + appName + '_preview_time').html(duration);
+                        console.log("Длительность видео:", duration);
+                    })
+                    .catch(error => {
+                        console.error("Ошибка: ", error);
+                    });
+            }
+        });
+}
+
+// Функция для получения длительности видео
+function getVideoDuration(videoSrc) {
+    return new Promise((resolve, reject) => {
+        const video = document.createElement('video');
+        video.src = videoSrc;
+        video.onloadedmetadata = function () {
+            resolve(formatDuration(video.duration));
+        };
+        video.onerror = function (error) {
+            reject(error);
+        };
+    });
+}
+
+// Функция для форматирования длительности в часы, минуты и секунды
+function formatDuration(duration) {
+    const hours = Math.floor(duration / 3600);
+    const minutes = Math.floor((duration % 3600) / 60);
+    const seconds = Math.floor(duration % 60);
+
+    const hoursText = hours > 0 && hours < 10 ? '0' + hours + ':' : hours > 0 ? hours + ':' : '';
+    const minutesText = minutes > 0 && minutes < 10 ? '0' + minutes + ':' : minutes > 0 ? minutes + ':' : '';
+    return hoursText + minutesText + seconds;
+}
+
+
+//
+// Получаем длительность видео посредством начала его воспроизведения
+//
+// function getVideoDuration(idVideoSource) {
+//     return new Promise((resolve, reject) => {
+//         // Функция для форматирования времени
+//         function formatTime(timeInSeconds) {
+//             const minutes = Math.floor(timeInSeconds / 60);
+//             const seconds = Math.floor(timeInSeconds % 60);
+//             return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+//         }
+//
+//         // Создаем объект HTMLMediaElement
+//         const videoElement = document.getElementById(idVideoSource);
+//         let formattedDuration;
+//
+//         if (!videoElement) {
+//             reject("Видеоэлемент не найден");
+//             return;
+//         }
+//
+//         // Загрузка метаданных видео
+//         videoElement.addEventListener("loadedmetadata", function () {
+//             const duration = videoElement.duration;
+//             formattedDuration = formatTime(duration);
+//             // Остановка воспроизведения после получения длительности
+//             videoElement.pause();
+//             resolve(formattedDuration);
+//         });
+//
+//         // Начать загрузку видео для получения метаданных
+//         videoElement.load();
+//     });
+// }

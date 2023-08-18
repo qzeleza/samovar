@@ -168,7 +168,8 @@ class AppsManager {
         // Возвращаем измененный код шаблона
         // return $.map(items, function (item) {
         let $element = $(template).clone();
-        $element.find("[id^='" + templ + "'], [href^='#" + templ + "']").each(function () {
+        // $element.attr('id').replace(templ, self.appName);
+        $element.find("[id^='" + templ + "'], [href^='#" + templ + "']").addBack().each(function () {
             const isIdMatch = $(this).is("[id^='" + templ + "']");
             const isHrefMatch = $(this).is("[href^='#" + templ + "']");
 
@@ -245,38 +246,30 @@ class AppsManager {
                 // Обрабатываем статус установки пакета
                 const $icon = $element.find(`#${self.appName}_status_icon`);
                 const $text = $element.find(`#${self.appName}_status_installed`);
-                const $itemMenuDel = $element.find(`#${self.appName}_simple_delete_call`);
-                const $itemMenuFullDel = $element.find(`#${self.appName}_full_delete_call`);
-                const $itemMenuInstall = $element.find(`#${self.appName}_install_call`);
-                const $itemMenuUpdate = $element.find(`#${self.appName}_update_install`);
-                const $itemMenuDivUpdate = $element.find(`#${self.appName}_update_install_div`);
-                const $itemMenuReview = $element.find(`#${self.appName}_review_call`);
+
                 const colorUninstalledApp = 'warning'
                 const colorInstalledApp = 'success'
 
 
                 if (value === "true"){
                     $text.text('установлен').addClass(`text-${colorInstalledApp}`).removeClass(`text-${colorUninstalledApp}`);
-                    $icon.addClass('ph-check').removeClass('ph-x');
-                    $icon.addClass(`bg-${colorInstalledApp}`).removeClass(`bg-${colorUninstalledApp}`);
-                    $itemMenuDel.removeClass('d-none');
-                    $itemMenuFullDel.removeClass('d-none');
-                    $itemMenuUpdate.removeClass('d-none');
-                    $itemMenuDivUpdate.removeClass('d-none');
-                    $itemMenuInstall.addClass('d-none');
-                    $itemMenuReview.removeClass('d-none');
+                    $icon.addClass('ph-check').removeClass('ph-x').addClass(`bg-${colorInstalledApp}`).removeClass(`bg-${colorUninstalledApp}`);
+                    $element.find(`#${self.appName}_simple_delete_call`).removeClass('d-none');
+                    $element.find(`#${self.appName}_full_delete_call`).removeClass('d-none');
+                    $element.find(`#${self.appName}_update_install`).removeClass('d-none');
+                    $element.find(`#${self.appName}_update_install_div`).removeClass('d-none');
+                    $element.find(`#${self.appName}_install_call`).addClass('d-none');
+                    $element.find(`#${self.appName}_review_call`).removeClass('d-none');
                 } else {
                     $text.text('не установлен').addClass(`text-${colorUninstalledApp}`).removeClass(`text-${colorInstalledApp}`);
-                    $icon.addClass('ph-x').removeClass('ph-check');
-                    $icon.addClass(`bg-${colorUninstalledApp}`).removeClass(`bg-${colorInstalledApp}`);
-                    $itemMenuDel.addClass('d-none');
-                    $itemMenuFullDel.addClass('d-none');
-                    $itemMenuUpdate.addClass('d-none');
-                    $itemMenuDivUpdate.addClass('d-none');
-                    $itemMenuInstall.removeClass('d-none');
-                    $itemMenuReview.addClass('d-none');
+                    $icon.addClass('ph-x').removeClass('ph-check').addClass(`bg-${colorUninstalledApp}`).removeClass(`bg-${colorInstalledApp}`);
+                    $element.find(`#${self.appName}_simple_delete_call`).addClass('d-none');
+                    $element.find(`#${self.appName}_full_delete_call`).addClass('d-none');
+                    $element.find(`#${self.appName}_update_install`).addClass('d-none');
+                    $element.find(`#${self.appName}_update_install_div`).addClass('d-none');
+                    $element.find(`#${self.appName}_install_call`).removeClass('d-none');
+                    $element.find(`#${self.appName}_review_call`).addClass('d-none');
                 }
-
             }
             else {
                 // обработка всех остальных тегов
@@ -285,49 +278,12 @@ class AppsManager {
                 }
             }
             $element.find(`#${self.appName}_${key}`).removeClass('placeholder placeholder-wave ');
+
         })
 
         return $element;
     }
 
-
-    //
-    // Генерируем модальное окно просмотра видео для приложения, если оно имеется.
-    //
-    _generatePreviewFrame() {
-        // Загружаем видео о каждом приложении
-        const src = './assets/media/'+ this.appName + '_preview.mov';
-        // const modalWindow = $('#' + appName + '_preview_');
-        const modalPreview = $('#' + this.appName + '_modal_preview');
-
-        // Проверяем есть ли файл по указанному пути
-        fetch(src)
-            .then(function(response) {
-                    const modalBody = modalPreview.find('.modal-body').empty();
-                    if (response.status === 404) {
-                        console.log(`Файл ${src} не найден!`);
-                        const noFileFound = '<div class="fs-5 text-danger fw-light mb-1">Файл пред-просмотра не найден!</div>'
-                        modalBody.append(noFileFound);
-                    } else {
-                        // устанавливаем длительность ролика
-                        const duration = getVideoDuration(`${this.appName}_modal_preview`);
-                        $(`#${this.appName}_preview_time`).html(duration);
-
-                        // Если файл найден, то активируем события при показе и закрытии окна
-                        modalPreview.on('shown.bs.modal', function (event) {
-                            // загружаем файл во фрейм
-                            const iframe = $('<div class="ratio ratio-16x9"><iframe class="rounded" src="' + src + '" allowfullscreen></iframe></div>');
-                            modalBody.append(iframe);
-                        });
-                        modalPreview.on('hide.bs.modal', function (event) {
-                            // удаляем фрейм
-                            modalPreview.find('iframe').remove();
-                        });
-
-                    }
-                }
-            );
-    }
 
 }
 
