@@ -595,9 +595,9 @@ const App = function () {
         }
     }
 
-        //
-        // Функция для изменения ширины правого меню, вызываемого по кнопке
-        //
+    //
+    // Функция для изменения ширины правого меню, вызываемого по кнопке
+    //
     const offcanvasResize = function() {
         const element = document.querySelector('.offcanvas-resizable');
         const minimum_size = element.getAttribute('data-min-width');

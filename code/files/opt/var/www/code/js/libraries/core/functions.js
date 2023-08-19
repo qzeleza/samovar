@@ -2,92 +2,6 @@ const numColumnCards = 'numColumnCards';    // Ключ числа колоно�
 const fullViewCards  = 'fullViewCards';     // Ключ состояния полного вида карточек в окне для записи в localStorage
 const sideBarResize = 'sideBarResize'       // Ключ состояния открытия правой боковой панели в окне для записи в localStorage
 
-//--------------------------------------------------------------------------
-//
-// Генератор HTML кода для показа истории версий приложения из json словаря
-//
-//--------------------------------------------------------------------------
-// Пример JSON-данных
-//--------------------------------------------------------------------------
-//     let jsonHistory = {
-//             'app_name': app_name,
-//             'version': {
-//                  "1.0": [
-//                      { "item1": "Значение 1.0 - Элемент 1"},
-//                      { "item2": "Значение 1.0 - Элемент 2" }
-//                   ],
-//                  "2.0": [
-//                      { "item1": "Значение 2.0 - Элемент 1" },
-//                      { "item2": "Значение 2.0 - Элемент 2" },
-//                       { "item2": "Значение 2.0 - Элемент 2" },
-//                   ]
-//     };
-//
-function generateHistoryHTMLFormat(jsonHistory) {
-    const appName = jsonHistory.app_name
-    const appNameRus = jsonHistory.app_name_rus + 'а'
-
-    let html = '';
-
-    html += '<div class="modal-dialog ">';
-    html += '<div class="modal-content" id="' + appName + '_history_list">';
-    html += '<div class="modal-header bg-primary bg-opacity-20 ps-3 pe-3 pt-2 pb-2">';
-    html += '<h5 class="modal-title ps-2">История версий <span class="text-secondary ms-1 pt-1">' + appNameRus.toUpperCase() + '</span></h5>';
-    html += '<button type="button" class="btn-close " data-bs-dismiss="modal"></button>';
-    html += '</div>';
-    html += '<div class="modal-body">'
-
-
-    html += '<div class="row">'
-    html += '<div class="col-9">';
-    html += '<div class="scroll-content overflow-auto position-relative ps-4 pe-3" style="height: 40vh;" tabindex="0">';
-
-    $.each(jsonHistory.version, function(version, items) {
-        html += '<div class="pb-1">';
-        html += '<h6>Версия ' + version + '</h6>';
-        html += '<ol class="flex-column">';
-
-        $.each(items, function(index, item) {
-            $.each(item, function(key, value) {
-                html += '<li>' + value + '</li>';
-            });
-        });
-
-        html += '</ol>';
-        html += '</div>';
-    });
-    html += '</div>';
-    html += '</div>';
-
-    html += '<div class="col">';
-    html += '<div class="lift-down-10 sticky-lg-top order-1 order-lg-2 mb-3 d-xl-block d-none" id="ver_nav">';
-
-    html += '<ul class="nav nav-scrollspy flex-column ">';
-    let firstIteration = true;
-    $.each(jsonHistory.version, function(version, items) {
-        html += '<li class="nav-item"><a href="#" class="nav-link index'
-        if (firstIteration) {
-            html += ' active';
-            firstIteration = false;
-        }
-        html += '">' + version + '</a></li>';
-    });
-    html += '</ul>';
-
-    html += '</div>';
-    html += '</div>';
-
-    html += '</div>';   // Закрытие верхнего div-контейнера
-
-    html += '</div>';
-    html += '<div class="modal-footer p-0">';
-    html += '<button type="button" class="btn btn-link" data-bs-dismiss="modal">Закрыть</button>';
-    html += '</div>';
-    html += '</div>';
-    html += '</div>';
-
-    return html;
-}
 
 
 /**
@@ -207,6 +121,7 @@ function initRightPanelColumnsButtons(viewContainer, $numColumnsSelect) {
     // Запускаем настройку числа колонок окна только если карточек больше чем одна
     if (viewContainer.find('.card').length > 1 ){
         setup.removeClass('d-none');
+        setup.parent().addClass('p-2');
         // Определение числа возможных столбцов в зависимости от ширины экрана
         let maxColumns = 0;
         if (window.innerWidth < 576) {
@@ -236,7 +151,7 @@ function initRightPanelColumnsButtons(viewContainer, $numColumnsSelect) {
         for (let i = 1; i <= maxColumns; i++) {
             const selectInput = $('<div>').addClass('dropdown-menu');
             const activItemClass = (i === 1) ? 'dropdown-item active' : 'dropdown-item';
-            const item = $('<a>').addClass(activItemClass).attr({href:'#'}).text(`${i} столб.`);
+            const item = $('<a>').addClass(activItemClass).attr({href:'#'}).text(`${i} колон.`);
             $numColumnsSelect.append(selectInput, item);
 
             item.on('click',  function () {
@@ -260,6 +175,7 @@ function initRightPanelColumnsButtons(viewContainer, $numColumnsSelect) {
     } else {
         // Прячем настройку колонок окна если их меньше одного
         setup.addClass('d-none');
+        setup.parent().removeClass('p-2');
     }
 }
 
@@ -332,31 +248,6 @@ function toggleCardViewingMode(fullView) {
 }
 
 
-function setPreviewVideoCardOnClick(appName) {
-    const src = './assets/media/' + appName + '_preview.mov';
-    const modalPreviewId = appName + '_modal_preview_window';
-    const modalPreview = $('#' + modalPreviewId);
-
-    // Проверяем есть ли файл по указанному пути
-    fetch(src)
-        .then(response => {
-            if (response.status === 404) {
-                console.log(`Файл ${src} не найден!`);
-                const noFileFound = '<div class="fs-5 text-danger fw-light mb-1">Файл пред-просмотра не найден!</div>';
-                modalPreview.html(noFileFound);
-            } else {
-                // устанавливаем длительность ролика
-                getVideoDuration(src)
-                    .then(duration => {
-                        $('#' + appName + '_preview_time').html(duration);
-                        console.log("Длительность видео:", duration);
-                    })
-                    .catch(error => {
-                        console.error("Ошибка: ", error);
-                    });
-            }
-        });
-}
 
 // Функция для получения длительности видео
 function getVideoDuration(videoSrc) {
@@ -383,38 +274,142 @@ function formatDuration(duration) {
     return hoursText + minutesText + seconds;
 }
 
+//--------------------------------------------------------------------------
+//
+// Генератор HTML кода для показа истории версий приложения из json словаря
+//
+//--------------------------------------------------------------------------
+// Пример JSON-данных
+//--------------------------------------------------------------------------
+//     let jsonHistory = {
+//             'app_name': app_name,
+//             'version': {
+//                  "1.0": [
+//                      { "item1": "Значение 1.0 - Элемент 1"},
+//                      { "item2": "Значение 1.0 - Элемент 2" }
+//                   ],
+//                  "2.0": [
+//                      { "item1": "Значение 2.0 - Элемент 1" },
+//                      { "item2": "Значение 2.0 - Элемент 2" },
+//                       { "item2": "Значение 2.0 - Элемент 2" },
+//                   ]
+//     };
+//
 
-//
-// Получаем длительность видео посредством начала его воспроизведения
-//
-// function getVideoDuration(idVideoSource) {
-//     return new Promise((resolve, reject) => {
-//         // Функция для форматирования времени
-//         function formatTime(timeInSeconds) {
-//             const minutes = Math.floor(timeInSeconds / 60);
-//             const seconds = Math.floor(timeInSeconds % 60);
-//             return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-//         }
-//
-//         // Создаем объект HTMLMediaElement
-//         const videoElement = document.getElementById(idVideoSource);
-//         let formattedDuration;
-//
-//         if (!videoElement) {
-//             reject("Видеоэлемент не найден");
-//             return;
-//         }
-//
-//         // Загрузка метаданных видео
-//         videoElement.addEventListener("loadedmetadata", function () {
-//             const duration = videoElement.duration;
-//             formattedDuration = formatTime(duration);
-//             // Остановка воспроизведения после получения длительности
-//             videoElement.pause();
-//             resolve(formattedDuration);
-//         });
-//
-//         // Начать загрузку видео для получения метаданных
-//         videoElement.load();
-//     });
-// }
+/**
+ * Создает и отображает версионную историю приложения на веб-странице.
+ *
+ * @async
+ * @param {Object} jsonHistory      - Данные версионной истории в формате JSON.
+ * @param {string} root             - Путь к корневой директории
+ * @param {string} historyTemplate  - Путь к файлу с HTML-шаблоном версионной истории.
+ */
+function createVersionHistory(jsonHistory, root= '', historyTemplate = 'pages/core/templates/history.html') {
+    // Получаем элементы модального окна и контейнера для скроллинга.
+
+    const appName                            = jsonHistory.app_name;
+    const historyModalDialogId        = `${appName}_history_modal`;
+    const $historyModalDialog                = $('<div>').addClass("modal fade").attr({id: historyModalDialogId, tabindex: -1})
+    const scrollingHistoryListId      = `#${appName}_history_list`;
+    const $listModalWindows                  = $('#list_modal_windows');
+
+    try {
+        // Загружаем содержимое HTML-шаблона и заменяем плейсхолдер на название приложения.
+        // Загружаем шаблон карточки из файла
+        const data = $.ajax({
+            url: root + historyTemplate,
+            async: false
+        }).responseText;
+        // const data = await $.get(root + historyTemplate);
+        const htmlVersion = replaceAttrValueInside($(data), '_@', appName);
+
+        // Получаем контейнеры для контента и навигации из загруженного HTML.
+        const contentContainer = htmlVersion.find(`#${appName}_history_content`);
+        const navigationContainer = htmlVersion.find(`#${appName}_history_navigation`);
+        const headerModalWindow = htmlVersion.find(`#${appName}_history_header`);
+        // Установим заголовок окна
+        headerModalWindow.text(`История версий расширения "${jsonHistory.app_name_rus}"`)
+        // Итерируем по версиям из JSON-данных.
+        for (const [version, items] of Object.entries(jsonHistory.version)) {
+            // Создаем контейнер для версии и добавляем заголовок с номером версии.
+            const versionContainer = $('<div>').addClass("pb-1");
+            versionContainer.append($('<h6>').text(`Версия ${version}`));
+
+            // Создаем упорядоченный список для элементов версии.
+            const listItems = $('<ol>').addClass('flex-column');
+
+            // Итерируем по элементам текущей версии и их свойствам.
+            for (const item of items) {
+                for (const [, value] of Object.entries(item)) {
+                    // Добавляем элемент списка с текстом значения.
+                    listItems.append($('<li>').text(value));
+                }
+            }
+
+            // Добавляем список элементов к контейнеру версии.
+            versionContainer.append(listItems);
+            contentContainer.append(versionContainer);
+
+            // Создаем пункт навигации для версий и ссылку.
+            const navItem = $('<li>').addClass('nav-item');
+            const navLink = $('<a>').addClass('nav-link index').attr('href', '#').text(version);
+
+            // Устанавливаем активное состояние для первой версии.
+            if (version === Object.keys(jsonHistory.version)[0]) {
+                navLink.addClass('active');
+            }
+
+            // Добавляем текст версии в пункт навигации и вставляем в HTML.
+            navItem.append(navLink);
+            navigationContainer.append(navItem);
+        }
+
+        // Добавляем HTML-код версионной истории в модальное окно.
+        $historyModalDialog.append(htmlVersion);
+        if ($listModalWindows.has(`#${historyModalDialogId}`).length === 0 ) {
+            $listModalWindows.append($historyModalDialog);
+            new Scrolling(scrollingHistoryListId);
+        }
+
+
+    } catch (error) {
+        // Обрабатываем ошибки при загрузке и обработке данных.
+        console.error(showError(`Ошибка при создании версионной истории: ${error}`));
+        throw error;
+    }
+}
+
+
+/**
+ * Заменяет значение атрибута внутри элемента и его потомков.
+ *
+ * @param {jQuery} $element - jQuery-объект, представляющий элемент, внутри которого нужно произвести замену.
+ * @param {string} oldAttValue - Старое значение атрибута для замены.
+ * @param {string} newAttValue - Новое значение атрибута.
+ * @returns {jQuery} Измененный jQuery-объект, представляющий исходный элемент.
+ */
+function replaceAttrValueInside($element, oldAttValue, newAttValue) {
+    // Найти элемент и все его внутренние элементы
+    $element.find('*').addBack().each(function () {
+        // Получить все атрибуты элемента
+        const attributes = this.attributes;
+
+        // Проверить наличие атрибутов перед конвертацией
+        if (attributes) {
+            // Преобразовать attributes в массив, чтобы избежать "утечек памяти"
+            const attributesArray = Array.from(attributes);
+
+            // Для каждого атрибута элемента
+            attributesArray.forEach(attr => {
+                const { name, value } = attr;
+                // Заменить исходную подстроку на новую подстроку в значении атрибута
+                const newValue = value.replace(oldAttValue, newAttValue);
+                // Установить новое значение атрибута
+                $(this).attr(name, newValue);
+            });
+        }
+    });
+
+    // Вернуть измененный jQuery-объект, представляющий исходный элемент
+    return $element;
+}

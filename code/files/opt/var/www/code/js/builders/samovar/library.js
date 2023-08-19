@@ -19,59 +19,60 @@ $(document).ready( function () {
         // libraryPageLoader.add({id: '#kvas_history_modal', file: root + 'pages/library/modules/samovar/history.html'});
 
 
-        // Связываем кнопку вызова истории версий для Самовара
+        // Создаем карточки приложений для библиотеки Самовара
         libraryPageLoader.add(() => {
-
             // Получаем данные о приложении с роутера
             tryGetDataFromServer(RouterServer, 'get_apps_data', {}, (data) => {
+                // проходимся по каждой карточке в присланном списке данных
                 $.each(data, function(app_name, app_data) {
                     // if (app_name !== 'rodina'){
-                    appsData[app_name] = new AppsManager(app_name, RouterServer);
-                    // Получаем данные с сервера
-                    const htmlAppCardCode = appsData[app_name].generateAppBigCardHTML('pages/core/templates/card.html', app_data);
-                    // Генерируем карточки приложений
-                    const $cardList = $(`#apps_card_list`);
-                    // const $cardMain = $('<div>').addClass('main-card').attr('id', `app_${app_name}_card`);
-                    const $cardMain = $('<div>').attr('id', `app_${app_name}_card`);
-                    $cardMain.append(htmlAppCardCode);
-                    const $cardContainer = $('<div>').addClass('col-12 card-container').append($cardMain);
-                    $cardList.append($cardContainer);
-                    // Получаем историю приложения
-                    appsData[app_name].getAppVersionHistory();
+                    appsData[app_name] = new AppsManager(app_name, RouterServer, root);
+                    // Создаем карточки на каждое приложение и регистрируем их в библиотеке
+                    const $cardHTMLCode = appsData[app_name].createAppCard(app_data);
 
+                    // Генерируем список из карточек приложений
+                    const $appCard = $('<div>').attr('id', `app_${this.appName}_card`);
+                    $appCard.append($cardHTMLCode);
+                    const $cardContainer        = $('<div>').addClass('col-12 card-container').append($appCard);
+                    const $appsLibWindows       = $(`#apps_card_list`);     // Элемент главного окна который содержит карточки приложений
+                    const $numColumnsSelect     = $('#numColumnsSelect');   // Элемент
+
+                    // Помещаем код окна в список окно
+                    $appsLibWindows.append($cardContainer);
+                    // Получаем историю приложения
+                    appsData[app_name].createAppVersionHistory();
+                    // Создаем модальные окна для показа видео роликов о приложении
+                    appsData[app_name].createAppVideoPreview();
+                    // Инициализация с начальным числом столбцов
+                    initRightPanelColumnsButtons($appsLibWindows, $numColumnsSelect);
+                    // Инициализация вида карточек в окне
+                    initViewState();
                 });
-                // Устанавливаем размер сетки главного окна с карточками приложения
-                const cont = $('#apps_card_list')
-                const selCol = $('#numColumnsSelect');
-                // Инициализация с начальным числом столбцов
-                initRightPanelColumnsButtons(cont, selCol);
-                // Инициализация вида карточек в окне
-                initViewState();
 
             }, `при запросе данных о приложениях!`);
 
         });
 
+
+
+        //
         libraryPageLoader.add(() => {
             UserRouter.getDeviceInfo((deviceInfo) => {
                 $.each(appsData, function(app_name, app_data) {
-                    // Добавляем к код модальные окна для предостмотра видео по каждому приложению
-                    const modalContName = `${app_name}_modal_preview_container`;
-                    const modalCont = $('<div>').addClass('modal fade').attr('tabindex', -1).attr('id', `${app_name}_modal_preview_window`);
-                    const modalPrev = $('<div>').addClass('modal-dialog modal-lg').attr('id', modalContName);
-                    // Создаем модальное окно и записываем его в элемент списка модальных окон
-                    $('#list_modal_windows').append(modalCont.append(modalPrev));
-                    $.get( root + 'pages/core/templates/preview.html', function(data) {
-                        // По завершении загрузки, данные будут переданы в функцию обратного вызова
-                        const modalVideo = $(`#${modalContName}`);
-                        modalVideo.html(data);
-                        modalVideo.find('video source').attr('src', `./assets/media/${app_name}_preview.mov`);
-                    });
-                    setPreviewVideoCardOnClick(app_name);
-                    // Получаем рейтинг с сервера и устанавливаем его в каждом приложении
+                    // Получаем рейтинг с сервера и устанавливаем его в каждой карточке приложения
                     new Rating(app_name, deviceInfo);
+
                 });
             });
+
+
+        });
+
+        // Восстанавливаем запомненные значения
+        // размера сетки главного окна
+        // вид окна: компактный или полный
+        libraryPageLoader.add(() => {
+            // Устанавливаем размер сетки главного окна с карточками приложения
 
         });
 
@@ -83,6 +84,7 @@ $(document).ready( function () {
                 // Выбираем пункт Библиотека
                 $('#lib_link').addClass('active');
                 $('#sidebar_menu .nav-group-sub').addClass('collapse show')
+                $('#sidebar_kvas_menu').addClass('collapsed').addClass('nav-item-open');
 
                 // Установка триггера для других js файлов
                 $(document).trigger("appReady");

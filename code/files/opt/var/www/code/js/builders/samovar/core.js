@@ -63,7 +63,7 @@ function buildMainTemplatePage(root){
     // Загрузка необходимых страниц и аттрибутов элементов в них для всех страниц шаблона
     // templateLoad.add({id:'#samovar_delete_simple_modal', file: root + 'pages/all/modals/simple_del.html'});
     // templateLoad.add({id:'#samovar_delete_full_modal', file: root + 'pages/all/modals/full_del.html'});
-    templateLoad.add({id:'#samovar_history_modal', file: root + 'pages/library/modules/samovar/history.html'});
+    // templateLoad.add({id:'#samovar_history_modal', file: root + 'pages/library/modules/samovar/history.html'});
 
     // Загрузка необходимых скриптов для всех страниц шаблона
     templateLoad.add(root + 'code/js/libraries/core/init.js');
@@ -76,13 +76,6 @@ function buildMainTemplatePage(root){
         RouterServer        = new NetworkRequestManager(ROUTER_URL, 11133, '/kvas/v1');
         UserRouter          = new DeviceManager(RouterServer);
         ReviewsServer       = new NetworkRequestManager("api.zeleza.ru", 11211, '/api/v1');
-        samovarApp          = new AppsManager(app_name, RouterServer);
-    });
-
-    // Связываем кнопку вызова истории версий для Самовара
-    // Получаем данные об истории версий (если есть) для запрошенного приложения
-    templateLoad.add(() => {
-        samovarApp.getAppVersionHistory();
     });
 
 
@@ -96,6 +89,14 @@ function buildMainTemplatePage(root){
                 showMessage(info, MessageType.INFO);
             }
         })
+    });
+
+    // Связываем кнопку вызова истории версий для Самовара
+    // Получаем данные об истории версий (если есть) для запрошенного приложения
+    templateLoad.add(() => {
+        tryGetDataFromServer(RouterServer, 'get_app_history', {"app_name": app_name}, (jsonHistory) => {
+            createVersionHistory(jsonHistory);
+        }, `при запросе истории версий ${this.appName}`);
     });
 
     // Загрузка функции, которая подгружает классы
