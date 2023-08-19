@@ -37,12 +37,8 @@ $(document).ready( function () {
                     const $appsLibWindows       = $(`#apps_card_list`);     // Элемент главного окна который содержит карточки приложений
                     const $numColumnsSelect     = $('#numColumnsSelect');   // Элемент
 
-                    // Помещаем код окна в список окно
+                    // Помещаем код карточки приложения в список
                     $appsLibWindows.append($cardContainer);
-                    // Получаем историю приложения
-                    appsData[app_name].createAppVersionHistory();
-                    // Создаем модальные окна для показа видео роликов о приложении
-                    appsData[app_name].createAppVideoPreview();
                     // Инициализация с начальным числом столбцов
                     initRightPanelColumnsButtons($appsLibWindows, $numColumnsSelect);
                     // Инициализация вида карточек в окне

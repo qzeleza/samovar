@@ -12,20 +12,14 @@ class AppsManager {
         this.root                       = root;
         this.appName                    = app_name;
         this.callRightPanel             = callRightPanel;
+        this.templeAppName              = '_@';
 
         this.storageKey                 = `#${this.appName}_history_modal_key`;
-
-        this.historyModalElem           = $(`#${this.appName}_history_modal`);
-        this.callToFullDeleteElem       = $(`#${this.appName}_full_delete_call`);
-        this.callToSimpleDeleteElem     = $(`#${this.appName}_simple_delete_call`);
         this.modalDialogsList           = $('#list_modal_windows');
 
         this.htmlCardTemplFile          = root + 'pages/core/templates/card.html'
         this.htmlPreviewTemplFile       = root + 'pages/core/templates/preview.html'
-
-
-        this.callToFullDeleteElem       .on('click', this.askToFullDelete.bind(this));
-        this.callToSimpleDeleteElem     .on('click', this.askToSimpleDelete.bind(this));
+        this.htmlAppDeleteTemplFile     = root + 'pages/core/templates/app.delete.html'
 
 
     }
@@ -51,53 +45,62 @@ class AppsManager {
     }
 
 
-    //
-    // Функция запроса удаления программы
-    //
-    askToFullDelete() {
-        this._askToDeleteApp('full');
-    }
-
-    askToSimpleDelete() {
-        this._askToDeleteApp('simple');
-    }
-
-    _askToDeleteApp(method) {
+    initDeleteDialog(method, app_rus_name) {
 
         const self = this;
-        let textToAsk = 'пакета <b>' + RusNames[this.appName];
+        let textToAsk = 'пакета <b>' + app_rus_name;
         textToAsk += (method === 'simple') ? '</b>.' : '</b> и его данных.';
-        const askToDeleteNoty = new Noty({
-            text: '<div class="ps-3 pb-1 border-bottom pb-5 pt-4">' +
-                "<div class='d-flex flex-row align-items-baseline text-center pt-2 '>" +
-                '<div class="fs-4 mt-2 mb-1 text-danger me-2 ">Подтвердите удаление ' + textToAsk + '</div>' +
-                "</div>" +
-                '</div>',
-            closeWith: ['click', 'backdrop', 'button'], // ['click', 'button', 'hover', 'backdrop']
-            type: 'confirm',
-            modal: true,
-            layout: 'topCenter',
-            buttons: [
-                Noty.button('Отменить', 'btn btn-link mb-2 me-2', () => {
-                    askToDeleteNoty.close();
-                }),
-                Noty.button('Удалить <i class="ph-x ms-2 "></i>', 'btn btn-outline-danger ms-2 me-4 mb-2', () => {
-                    self._appDelete(method);
-                }),
-            ],
-            callbacks: {
-                beforeShow: function () {
-                    rightPanelAct('hide', this.callRightPanel);
-                },
-                afterClose: function () {
-                    rightPanelAct('show', this.callRightPanel);
-                    // костыль, который позволяет показывать окно при повторных вызовах
-                    this.showing = false;
-                    this.shown = false;
-                },
-            }
-        });
-        askToDeleteNoty.show();
+        const fullDeleteElemId       = `${this.appName}_${method}_delete_modal`;
+        const htmlDialog    = getModalDialogFromFile(fullDeleteElemId, this.htmlAppDeleteTemplFile);
+        const appDeleteDialog       = replaceAttrValueInside(htmlDialog, this.templeAppName, this.appName);
+
+        if (this.modalDialogsList.has(`#${fullDeleteElemId}`).length === 0 ) {
+
+            const $appDeleteElem = $(appDeleteDialog);
+
+            $appDeleteElem.find('.modal-title').text(`Удаление ${app_rus_name}`);
+            $appDeleteElem.find('.modal-body').html(`Подтвердите удаление ${textToAsk}`);
+
+            $appDeleteElem.find(`${this.appName}_delete_confirm`).on('click', function() {
+                self._appDelete(method);
+            });
+            $appDeleteElem.find(`#${fullDeleteElemId}`).on('show.bs.modal', function() {
+                rightPanelAct('hide', this.callRightPanel);
+            });
+            $appDeleteElem.find(`#${fullDeleteElemId}`).on('hidden.bs.modal', function() {
+                rightPanelAct('show', this.callRightPanel);
+            });
+            this.modalDialogsList.append($appDeleteElem);
+        }
+
+
+        // const askToDeleteNoty = new Noty({
+        //     text: htmlDialog,
+        //     closeWith: ['click', 'backdrop', 'button'], // ['click', 'button', 'hover', 'backdrop']
+        //     type: 'confirm',
+        //     modal: true,
+        //     layout: 'topCenter',
+        //     buttons: [
+        //         Noty.button('Отменить', 'btn btn-link mb-2 me-2', () => {
+        //             askToDeleteNoty.close();
+        //         }),
+        //         Noty.button('Удалить <i class="ph-x ms-2 "></i>', 'btn btn-outline-danger ms-2 me-4 mb-2', () => {
+        //             self._appDelete(method);
+        //         }),
+        //     ],
+        //     callbacks: {
+        //         beforeShow: function () {
+        //             rightPanelAct('hide', this.callRightPanel);
+        //         },
+        //         afterClose: function () {
+        //             rightPanelAct('show', this.callRightPanel);
+        //             // костыль, который позволяет показывать окно при повторных вызовах
+        //             this.showing = false;
+        //             this.shown = false;
+        //         },
+        //     }
+        // });
+        // askToDeleteNoty.show();
 
     }
 
@@ -110,14 +113,10 @@ class AppsManager {
         tryGetDataFromServer(this.server, deleteRoute, {"app_name": this.appName}, (answer) => {
 
             if (answer.result) {
-
                 showMessage(`Приложение <b>${self.appName}</b> было успешно удалено.`);
             }
-            createVersionHistory(answer);
-            new Scrolling('#' + self.appName + '_history_list');
-            localStorage.setItem(self.storageKey, 'stored');
 
-        }, `при запросе истории версий ${this.appName}`);
+        }, `при запросе удаления пакета ${this.appName}`);
     }
 
     //
@@ -168,10 +167,7 @@ class AppsManager {
         const templ = '_@';            // шаблон для поиска и замены имени приложения в карточке приложения
 
         // Загружаем шаблон карточки из файла
-        const template = $.ajax({
-            url: this.htmlCardTemplFile,
-            async: false
-        }).responseText;
+        const template = getHTMLCodeFromFile(this.htmlCardTemplFile);
 
         // Генерируем элементы из шаблона и добавляем данные
         // Возвращаем измененный код шаблона
@@ -252,8 +248,8 @@ class AppsManager {
                 if (value === "true") {
                     $text.text('установлен').addClass(`text-${colorInstalledApp}`).removeClass(`text-${colorUninstalledApp}`);
                     $icon.addClass('ph-check').removeClass('ph-x').addClass(`bg-${colorInstalledApp}`).removeClass(`bg-${colorUninstalledApp}`);
-                    $element.find(`#${self.appName}_simple_delete_call`).removeClass('d-none');
-                    $element.find(`#${self.appName}_full_delete_call`).removeClass('d-none');
+                    $element.find(`#${self.appName}_simple_delete_modal_call`).removeClass('d-none');
+                    $element.find(`#${self.appName}_full_delete_modal_call`).removeClass('d-none');
                     $element.find(`#${self.appName}_update_install`).removeClass('d-none');
                     $element.find(`#${self.appName}_update_install_div`).removeClass('d-none');
                     $element.find(`#${self.appName}_install_call`).addClass('d-none');
@@ -261,8 +257,8 @@ class AppsManager {
                 } else {
                     $text.text('не установлен').addClass(`text-${colorUninstalledApp}`).removeClass(`text-${colorInstalledApp}`);
                     $icon.addClass('ph-x').removeClass('ph-check').addClass(`bg-${colorUninstalledApp}`).removeClass(`bg-${colorInstalledApp}`);
-                    $element.find(`#${self.appName}_simple_delete_call`).addClass('d-none');
-                    $element.find(`#${self.appName}_full_delete_call`).addClass('d-none');
+                    $element.find(`#${self.appName}_simple_delete_modal_call`).addClass('d-none');
+                    $element.find(`#${self.appName}_full_delete_modal_call`).addClass('d-none');
                     $element.find(`#${self.appName}_update_install`).addClass('d-none');
                     $element.find(`#${self.appName}_update_install_div`).addClass('d-none');
                     $element.find(`#${self.appName}_install_call`).removeClass('d-none');
@@ -282,6 +278,10 @@ class AppsManager {
         // Создаем модальные окна для показа видео роликов о приложении
         this.createAppVideoPreview();
 
+        // Создаем и устанавливаем реакцию на кнопки для простого и полного удаления
+        this.initDeleteDialog('full', applicationData.app_rus_name);
+        this.initDeleteDialog('simple', applicationData.app_rus_name);
+
         return $element;
     }
 
@@ -299,11 +299,7 @@ class AppsManager {
         if (this.modalDialogsList.has(`#${modalContName}`).length === 0 ) this.modalDialogsList.append(modalCont.append(modalPrev));
 
         // Загружаем шаблон карточки из файла
-        const data = $.ajax({
-            url: this.htmlPreviewTemplFile,
-            async: false
-        }).responseText;
-
+        const data = getHTMLCodeFromFile(this.htmlPreviewTemplFile);
         const modalVideo = $(`#${modalContName}`);
         modalVideo.html(data);
         modalVideo.find('video source').attr('src', src);

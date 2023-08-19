@@ -314,12 +314,10 @@ function createVersionHistory(jsonHistory, root= '', historyTemplate = 'pages/co
     const $listModalWindows                  = $('#list_modal_windows');
 
     try {
+
         // Загружаем содержимое HTML-шаблона и заменяем плейсхолдер на название приложения.
-        // Загружаем шаблон карточки из файла
-        const data = $.ajax({
-            url: root + historyTemplate,
-            async: false
-        }).responseText;
+        const data = getHTMLCodeFromFile(root + historyTemplate);
+
         // const data = await $.get(root + historyTemplate);
         const htmlVersion = replaceAttrValueInside($(data), '_@', appName);
 
@@ -413,3 +411,38 @@ function replaceAttrValueInside($element, oldAttValue, newAttValue) {
     // Вернуть измененный jQuery-объект, представляющий исходный элемент
     return $element;
 }
+
+
+
+/**
+ * Функция для загрузки HTML-кода из файла с использованием асинхронного AJAX-запроса.
+ *
+ * @param {string} htmlCardTemplFile    - Путь к файлу с HTML-кодом.
+ * @returns {Promise<string>}           - HTML-код из файла.
+ */
+function getHTMLCodeFromFile(htmlCardTemplFile){
+    // Загружаем шаблон карточки из файла
+    return $.ajax({
+        url: htmlCardTemplFile,
+        async: false
+    }).responseText;
+}
+
+/**
+ * Функция для загрузки HTML-кода из файла с использованием асинхронного AJAX-запроса.
+ *
+ * @param modalID
+ * @param {string} htmlCardTemplFile    - Путь к файлу с HTML-кодом.
+ * @returns {Promise<string>}           - HTML-код из файла.
+ */
+function getModalDialogFromFile(modalID, htmlCardTemplFile){
+    const $historyModalDialog = $('<div>').addClass("modal fade").attr({id: modalID, tabindex: -1})
+    // Загружаем шаблон карточки из файла
+    const fileCont = $.ajax({
+        url: htmlCardTemplFile,
+        async: false
+    }).responseText;
+    return $historyModalDialog.append($(fileCont));
+}
+
+
