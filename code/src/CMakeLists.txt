@@ -1,8 +1,8 @@
-# Имя проекта - Samovar
+# Имя проекта - CAMOBAP
 project(Samovar VERSION 1.0)
 # Устанавливаем стандарт языка C++11
 set(CMAKE_CXX_STANDARD 11)
-# Добавляем исполняемый файл samovar
+# Добавляем исполняемый файл CAMOBAP
 add_executable(${PROJECT_NAME}
     samovar.cpp
     api.cpp
@@ -37,8 +37,8 @@ target_compile_features(samovar PUBLIC cxx_std_11)
 # Определяем библиотеку с именем 'samovar_lib'
 #add_library(samovar_lib STATIC ${SOURCES})
 
-# Определяем исполняемый файл 'samovar'
-#add_executable(${PROJECT_NAME} samovar.cpp ${SOURCES})
+# Определяем исполняемый файл 'CAMOBAP'
+#add_executable(${PROJECT_NAME} CAMOBAP.cpp ${SOURCES})
 # Указываем точку входа в программу
 #target_compile_definitions(${PROJECT_NAME} PUBLIC SAMOVAR_ENTRY=${PROJECT_NAME})
 # Линкуем библиотеку с исполняемым файлом
@@ -57,7 +57,7 @@ target_compile_features(samovar PUBLIC cxx_std_11)
 #target_include_directories(${PROJECT_NAME} PRIVATE ${GETTEXT_INCLUDE_DIR})
 
 # Устанавливаем флаги компиляции
-#target_compile_options(samovar PRIVATE -Wall -Wextra -pedantic -Werror)
+#target_compile_options(CAMOBAP PRIVATE -Wall -Wextra -pedantic -Werror)
 # Добавляем Google Test в качестве зависимости для бинарного файла 'TestSamovar'
 
 
@@ -69,7 +69,7 @@ target_compile_features(samovar PUBLIC cxx_std_11)
 #        api.cpp
 #        args.cpp
 #        locale.cpp
-#        samovar.cpp
+#        CAMOBAP.cpp
 #        server.cpp
 #        system.cpp)
 #
@@ -87,13 +87,13 @@ target_compile_features(samovar PUBLIC cxx_std_11)
 #file(GLOB SOURCES "*.cpp")
 #include_directories(includes)
 #
-#add_executable(Samovar ${SOURCES})
-#target_link_libraries(Samovar ${GETTEXT_LIBRARY})
+#add_executable(CAMOBAP ${SOURCES})
+#target_link_libraries(CAMOBAP ${GETTEXT_LIBRARY})
 
 
 #set(SAMOVAR_CORE_SRC api.cpp args.cpp locale.cpp server.cpp system.cpp includes/api.hpp includes/args.hpp includes/locale.hpp includes/codes.hpp includes/json.hpp includes/system.hpp)
 #add_library(core ${SAMOVAR_CORE_SRC})
-##add_executable(samovar samovar.cpp)
-#target_link_libraries(samovar core ${GETTEXT_LIBRARIES})
+##add_executable(CAMOBAP CAMOBAP.cpp)
+#target_link_libraries(CAMOBAP core ${GETTEXT_LIBRARIES})
 
-#add_executable(Samovar samovar.cpp)
+#add_executable(CAMOBAP CAMOBAP.cpp)

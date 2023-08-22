@@ -16,7 +16,7 @@ $(document).ready(function() {
             {
                 value: "get_rating",
                 text: "Получить рейтинг приложения",
-                default: '{"app_name": "samovar"}',
+                default: '{"app_name": "CAMOBAP"}',
             },
             {
                 value: "new_record",
@@ -37,12 +37,12 @@ $(document).ready(function() {
             {
                 value: "reviews_list",
                 text: "Получить список всех отзывов",
-                default: '{"app_name": "samovar"}'
+                default: '{"app_name": "CAMOBAP"}'
             },
             {
                 value: "get_last_version",
                 text: "Получить крайнюю версию приложения",
-                default: '{"app_name": "samovar"}'
+                default: '{"app_name": "CAMOBAP"}'
             }
         ],
         kvas: [
@@ -149,7 +149,7 @@ $(document).ready(function() {
                 socket.disconnect();
                 socket.removeAllListeners();
             }
-            // Изменение адреса и порта для сервера "samovar"
+            // Изменение адреса и порта для сервера "CAMOBAP"
             socket = io(serverSamovar);
         } else if (selectedServerType === "kvas") {
             messageType.val("update").trigger('change');

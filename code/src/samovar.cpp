@@ -7,7 +7,7 @@
 
 int samovar() {
 
-    const std::string domain = "samovar";
+    const std::string domain = "CAMOBAP";
     const std::uint16_t port = 6621;
 
     ServerAPI api(port);

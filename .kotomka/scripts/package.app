@@ -205,7 +205,7 @@ check_arch(){
 #-------------------------------------------------------------------------------
 #aclocal_patch(){
 #
-#	m4_path=/apps/entware/package/master/samovar/src/libhttpserver-0.18.2/m4
+#	m4_path=/apps/entware/package/master/CAMOBAP/src/libhttpserver-0.18.2/m4
 #	aclocal_path=/apps/entware/staging_dir/host/share/aclocal
 #	aclocal_files="libtool.m4,lt~obsolete.m4,ltoptions.m4,ltsugar.m4,ltversion.m4"
 #
@@ -312,8 +312,8 @@ do_package_make(){
 }
 
 # cd /apps/entware && make menuconfig
-# cd /apps/entware && ll /apps/entware/packages/utils/samovar/ &&  cat /apps/entware/packages/utils/kotomka/Makefile
-# &&  make clean && make package/samovar/{clean,compile} -j1 V=sc
+# cd /apps/entware && ll /apps/entware/packages/utils/CAMOBAP/ &&  cat /apps/entware/packages/utils/kotomka/Makefile
+# &&  make clean && make package/CAMOBAP/{clean,compile} -j1 V=sc
 
 
 #

@@ -29,6 +29,8 @@ Content-Type: application/json
 
 {
   "app_name": "samovar",
+  "rus_name": "Самовар",
+  "version": "1.0.1",
   "name": "Bob",
   "email": "test@email.cc",
   "reviewElem": "Тестовый отзыв: программа отличная так держать! Супер11",

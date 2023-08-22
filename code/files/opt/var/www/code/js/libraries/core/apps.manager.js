@@ -3,12 +3,12 @@ class AppsManager {
     /**
      * Конструктор класса AppsLibManager
      * @param {string} app_name         - базовое имя программы на английском
-     * @param {Object} server           - сервер для получения информации
+     * @param {Object} routerServer     - сервер для получения информации с роутера
      * @param {boolean} callRightPanel  - флаг, указывающий, нужно ли вызывать правую панель после отправки отзыва
      * @param {string} root             - путь до корневой директории, требуемый для открытия файлов
      */
-    constructor(app_name, server, callRightPanel = false, root = '') {
-        this.server                     = server;
+    constructor(app_name, routerServer, callRightPanel = false, root = '') {
+        this.routerServer               = routerServer;
         this.root                       = root;
         this.appName                    = app_name;
         this.callRightPanel             = callRightPanel;
@@ -21,14 +21,52 @@ class AppsManager {
         this.htmlPreviewTemplFile       = root + 'pages/core/templates/preview.html'
         this.htmlAppDeleteTemplFile     = root + 'pages/core/templates/app.delete.html'
 
+    }
 
+    /**
+     * Проверяет наличие обновления для приложения и обрабатывает результат.
+     *
+     * @param {boolean} [force=false] - Флаг, указывающий на принудительную проверку обновления.
+     */
+    checkAppUpdate(force = false) {
+        // Выполняем запрос к серверу для проверки обновления
+        tryGetDataFromServer(this.routerServer, 'check_update', {"app_name": this.appName}, (response) => {
+            if (response.update) {
+                if (force) {
+                    this._appRequestUpdate(); // Вызываем метод для запроса обновления при принудительной проверке
+                } else {
+                    // Выводим информацию о наличии обновления
+                    const info = `Найдено обновление для <b>${this.appName}</b>.<br>Новая версия<b> ${response.version}.</b>`;
+                    showMessage(info, MessageType.INFO);
+                }
+            } else {
+                console.log(`Обновления для ${this.appName} отсутствуют!`);
+            }
+        }, `при запросе обновления <b>${this.appName}</b>`);
     }
 
 
 
+    // Обработчик обновления приложения
+    _appRequestUpdate(){
+        tryGetDataFromServer(this.routerServer, 'let_install', {"app_name": this.appName}, (response) => {
+            if (response.success) {
+                createVersionHistory(response.history);
+                showMessage(`Обновление пакета "${this.appName}" прошло УСПЕШНО!<br>Пакет был обновлен до версии v${response.version}`,
+                    MessageType.SUCCESS, LayoutType.CENTER, 5000);
+            } else {
+                showError(`Обновление пакета завершилось неудачно!<br>Причина ошибки: ${response.error}`, LayoutType.CENTER)
+            }
+        }, `при проведении обновления ${this.appName}`);
+    }
 
+    // Обработчик установки приложения
+    appInstall(){
 
+    }
 
+    // Обновляем данные карточки приложения после его установки в Самовар
+    updateCardApp(){}
     //
     // Функция вызова и обработки данных при просмотре истории версий приложения
     //
@@ -37,12 +75,42 @@ class AppsManager {
         // или отсутствия сохраненного флага наличия привязки
         if (!localStorage.getItem(this.storageKey) || force) {
             // Привязываем функцию запроса данных с сервера к кнопке вызова
-            tryGetDataFromServer(this.server, 'get_app_history', {"app_name": this.appName}, (jsonHistory) => {
+            tryGetDataFromServer(this.routerServer, 'get_app_history', {"app_name": this.appName}, (jsonHistory) => {
                 createVersionHistory(jsonHistory);
+                localStorage.setItem(this.storageKey, 'stored');
             }, `при запросе истории версий ${this.appName}`);
-            localStorage.setItem(this.storageKey, 'stored');
         }
     }
+
+
+
+    /**
+     * Создает экземпляры класса Rating для каждого приложения с передачей информации о роутере.
+     *
+     * @param {Object} appsData - Объект с данными о приложениях.
+     */
+    createRatingsForApps() {
+
+        if (ROUTER_INFO) {
+            for (const app_name in appsData) {
+                if (appsData.hasOwnProperty(app_name)) {
+                    new Rating(app_name, ROUTER_INFO, true);
+                }
+            }
+        } else {
+            tryGetDataFromServer(
+                RouterServer,
+                'get_router_data',
+                {},
+                (deviceInfo) => {
+                    ROUTER_INFO = deviceInfo;
+                    this.createRatingsForApps(appsData);
+                },
+                "при запросе информации о роутере пользователя"
+            );
+        }
+    }
+
 
 
     initDeleteDialog(method, app_rus_name) {
@@ -73,35 +141,6 @@ class AppsManager {
             this.modalDialogsList.append($appDeleteElem);
         }
 
-
-        // const askToDeleteNoty = new Noty({
-        //     text: htmlDialog,
-        //     closeWith: ['click', 'backdrop', 'button'], // ['click', 'button', 'hover', 'backdrop']
-        //     type: 'confirm',
-        //     modal: true,
-        //     layout: 'topCenter',
-        //     buttons: [
-        //         Noty.button('Отменить', 'btn btn-link mb-2 me-2', () => {
-        //             askToDeleteNoty.close();
-        //         }),
-        //         Noty.button('Удалить <i class="ph-x ms-2 "></i>', 'btn btn-outline-danger ms-2 me-4 mb-2', () => {
-        //             self._appDelete(method);
-        //         }),
-        //     ],
-        //     callbacks: {
-        //         beforeShow: function () {
-        //             rightPanelAct('hide', this.callRightPanel);
-        //         },
-        //         afterClose: function () {
-        //             rightPanelAct('show', this.callRightPanel);
-        //             // костыль, который позволяет показывать окно при повторных вызовах
-        //             this.showing = false;
-        //             this.shown = false;
-        //         },
-        //     }
-        // });
-        // askToDeleteNoty.show();
-
     }
 
     // Удаление пакета
@@ -110,7 +149,7 @@ class AppsManager {
         const deleteRoute = (method === 'simple') ? 'delete_app_simple' : 'delete_app_full';
         const self = this;
 
-        tryGetDataFromServer(this.server, deleteRoute, {"app_name": this.appName}, (answer) => {
+        tryGetDataFromServer(this.routerServer, deleteRoute, {"app_name": this.appName}, (answer) => {
 
             if (answer.result) {
                 showMessage(`Приложение <b>${self.appName}</b> было успешно удалено.`);
@@ -139,7 +178,7 @@ class AppsManager {
             } else {
                 if (installed === 'true' || menuItem.show_when_not_installed === 'true') {
                     item = $('<a href="' + menuItem.link + '" class="dropdown-item"></a>');
-                    const icon = $('<i class="' + menuItem.icon + '"></i>');
+                    const icon = $('<i class="' + menuItem.icon + ' ph-1_5x"></i>');
                     const title = $('<span>' + menuItem.title + '</span>');
 
                     item.append(icon);
@@ -236,34 +275,7 @@ class AppsManager {
                 $element.find(`#${self.appName}_dropdown`).append(self._generateDropdownMenu(applicationData.links, applicationData.installed));
 
             } else if (key.startsWith("installed")) {
-
-                // Обрабатываем статус установки пакета
-                const $icon = $element.find(`#${self.appName}_status_icon`);
-                const $text = $element.find(`#${self.appName}_status_installed`);
-
-                const colorUninstalledApp = 'warning'
-                const colorInstalledApp = 'success'
-
-
-                if (value === "true") {
-                    $text.text('установлен').addClass(`text-${colorInstalledApp}`).removeClass(`text-${colorUninstalledApp}`);
-                    $icon.addClass('ph-check').removeClass('ph-x').addClass(`bg-${colorInstalledApp}`).removeClass(`bg-${colorUninstalledApp}`);
-                    $element.find(`#${self.appName}_simple_delete_modal_call`).removeClass('d-none');
-                    $element.find(`#${self.appName}_full_delete_modal_call`).removeClass('d-none');
-                    $element.find(`#${self.appName}_update_install`).removeClass('d-none');
-                    $element.find(`#${self.appName}_update_install_div`).removeClass('d-none');
-                    $element.find(`#${self.appName}_install_call`).addClass('d-none');
-                    $element.find(`#${self.appName}_review_call`).removeClass('d-none');
-                } else {
-                    $text.text('не установлен').addClass(`text-${colorUninstalledApp}`).removeClass(`text-${colorInstalledApp}`);
-                    $icon.addClass('ph-x').removeClass('ph-check').addClass(`bg-${colorUninstalledApp}`).removeClass(`bg-${colorInstalledApp}`);
-                    $element.find(`#${self.appName}_simple_delete_modal_call`).addClass('d-none');
-                    $element.find(`#${self.appName}_full_delete_modal_call`).addClass('d-none');
-                    $element.find(`#${self.appName}_update_install`).addClass('d-none');
-                    $element.find(`#${self.appName}_update_install_div`).addClass('d-none');
-                    $element.find(`#${self.appName}_install_call`).removeClass('d-none');
-                    $element.find(`#${self.appName}_review_call`).addClass('d-none');
-                }
+                self._updateModalElementsIfInstalled($element, value)
             } else {
                 // обработка всех остальных тегов
                 if ($element.find(`#${self.appName}_${key}`).length > 0) {
@@ -285,6 +297,53 @@ class AppsManager {
         return $element;
     }
 
+
+    // Устанавливаем доступность элементов в зависимости от флага установки приложения
+    _updateModalElementsIfInstalled($element, isInstalled){
+
+        // Обрабатываем статус установки пакета
+        const self = this;
+        const $icon = $element.find(`#${this.appName}_status_icon`);
+        const $text = $element.find(`#${this.appName}_status_installed`);
+
+        const colorUninstalledApp = 'warning'
+        const colorInstalledApp = 'success'
+
+
+        if (isInstalled === "true") {
+            $text.text('установлен').addClass(`text-${colorInstalledApp}`).removeClass(`text-${colorUninstalledApp}`);
+            $icon.addClass('ph-check').removeClass('ph-x').addClass(`bg-${colorInstalledApp}`).removeClass(`bg-${colorUninstalledApp}`);
+            $element.find(`#${this.appName}_simple_delete_modal_call`).removeClass('d-none');
+            $element.find(`#${this.appName}_full_delete_modal_call`).removeClass('d-none');
+            $element.find(`#${this.appName}_install_update`).removeClass('d-none');
+            $element.find(`#${this.appName}_install_update_div`).removeClass('d-none');
+            $element.find(`#${this.appName}_install_app`).addClass('d-none');
+            $element.find(`#${this.appName}_review_call`).removeClass('d-none');
+
+            // Осуществляем привязку событий к элементам меню
+            $element.find(`#${this.appName}_install_update`).on('click', function (){
+                // Обновление пакета
+                showError('JGC')
+                self.checkAppUpdate(true);
+            });
+            $element.find(`#${this.appName}_install_app`).on('click', function (){
+                // установка пакета
+                self.appInstall();
+            });
+        } else {
+            $text.text('не установлен').addClass(`text-${colorUninstalledApp}`).removeClass(`text-${colorInstalledApp}`);
+            $icon.addClass('ph-x').removeClass('ph-check').addClass(`bg-${colorUninstalledApp}`).removeClass(`bg-${colorInstalledApp}`);
+            $element.find(`#${this.appName}_simple_delete_modal_call`).addClass('d-none');
+            $element.find(`#${this.appName}_full_delete_modal_call`).addClass('d-none');
+            $element.find(`#${this.appName}_install_update`).addClass('d-none');
+            $element.find(`#${this.appName}_install_update_div`).addClass('d-none');
+            $element.find(`#${this.appName}_install_app`).removeClass('d-none');
+            $element.find(`#${this.appName}_review_call`).addClass('d-none');
+
+            $element.find(`#${this.appName}_install_update`).off('click');
+            $element.find(`#${this.appName}_install_app`).off('click');
+        }
+    }
 
     createAppVideoPreview() {
         // Добавляем к код модальные окна для предостмотра видео по каждому приложению

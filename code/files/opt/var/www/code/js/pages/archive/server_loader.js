@@ -247,18 +247,18 @@ class ServerRequester {
 
 // Пример общего применения
 
-// sendData.addToQueue('/api/v1/samovar/info');
-// sendData.addToQueue('/api/v1/samovar/info/version');
-// sendData.addToQueue('/api/v1/samovar/update');
+// sendData.addToQueue('/api/v1/CAMOBAP/info');
+// sendData.addToQueue('/api/v1/CAMOBAP/info/version');
+// sendData.addToQueue('/api/v1/CAMOBAP/update');
 // sendData.executeQueue();
 //
-// const lib1_data = sendData.getData('/api/v1/samovar/info');
+// const lib1_data = sendData.getData('/api/v1/CAMOBAP/info');
 // $('exp_1').html(lib1_data['version']);
 //
-// const lib1_data = sendData.getData('/api/v1/samovar/info/version');
+// const lib1_data = sendData.getData('/api/v1/CAMOBAP/info/version');
 // $('exp_1').html(lib1_data['value']);
 //
-// const lib2_data = sendData.getData('/api/v1/samovar/update');
+// const lib2_data = sendData.getData('/api/v1/CAMOBAP/update');
 // $('exp_3').html(lib2_data['status']);
 
 

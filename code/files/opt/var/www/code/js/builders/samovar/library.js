@@ -16,7 +16,7 @@ $(document).ready( function () {
 
         libraryPageLoader.add({id: '#page_header', file: root + 'pages/library/modules/header.html'});
         libraryPageLoader.add({id: '#page_breadcrumb', file: root + 'pages/library/modules/breadcrumb.html'});
-        // libraryPageLoader.add({id: '#kvas_history_modal', file: root + 'pages/library/modules/samovar/history.html'});
+        // libraryPageLoader.add({id: '#kvas_history_modal', file: root + 'pages/library/modules/CAMOBAP/history.html'});
 
 
         // Создаем карточки приложений для библиотеки Самовара
@@ -53,24 +53,10 @@ $(document).ready( function () {
 
         //
         libraryPageLoader.add(() => {
-            UserRouter.getDeviceInfo((deviceInfo) => {
-                $.each(appsData, function(app_name, app_data) {
-                    // Получаем рейтинг с сервера и устанавливаем его в каждой карточке приложения
-                    new Rating(app_name, deviceInfo);
-
-                });
-            });
-
-
+            // Для каждого приложения в массиве данных запрашиваем рейтинг
+            createRatingsForApps(appsData, ReviewsServer);
         });
 
-        // Восстанавливаем запомненные значения
-        // размера сетки главного окна
-        // вид окна: компактный или полный
-        libraryPageLoader.add(() => {
-            // Устанавливаем размер сетки главного окна с карточками приложения
-
-        });
 
         // libraryPageLoader.add(root + 'code/js/libraries/locals/select2.js');
 

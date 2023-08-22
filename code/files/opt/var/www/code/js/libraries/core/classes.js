@@ -3,21 +3,34 @@
 // Типы сообщений для функции showMessage
 //
 const MessageType = {
-    ERROR: 'danger',
-    INFO: 'info',
-    SUCCESS: 'success',
-    WARNING: 'warning',
-    ALERT: 'primary',
+    ERROR       : 'danger',
+    INFO        : 'info',
+    SUCCESS     : 'success',
+    WARNING     : 'warning',
+    ALERT       : 'primary',
 }
 
+const LayoutType = {
+    TOP             : 'top',
+    TOP_LEFT        : 'topLeft',
+    TOP_CENTER      : 'topCenter',
+    TOP_RIGHT       : 'topRight',
+    CENTER          : 'center',
+    CENTER_LEFT     : 'centerLeft',
+    CENTER_RIGHT    : 'centerRight',
+    BOTTOM          : 'bottom',
+    BOTTOM_LEFT     : 'bottomLeft',
+    BOTTOM_CENTER   : 'bottomCenter',
+    BOTTOM_RIGHT    : 'bottomRight'
+}
 //
 // Выводим сообщение на экран (правый верхний угол)
 //
-function showMessage(text,                              // текст сообщения
-                     type = MessageType.ALERT,   // тип сообщения (цвет фона)
-                     layout = 'topRight',        // позиционирование сообщения: top, topLeft, topCenter, topRight, center, centerLeft, centerRight, bottom, bottomLeft, bottomCenter, bottomRight
-                     timeout = 3000,            // Время показа сообщения
-                     modal = false              // модальное ли окно
+function showMessage(text,                                   // текст сообщения
+                     type = MessageType.ALERT,        // тип сообщения (цвет фона)
+                     layout = LayoutType.TOP_RIGHT,   // позиционирование сообщения: top, topLeft, topCenter, topRight, center, centerLeft, centerRight, bottom, bottomLeft, bottomCenter, bottomRight
+                     timeout = 3000,                // Время показа сообщения
+                     modal = false                  // модальное ли окно
 ) {
     new Noty({
         text: text,
@@ -31,9 +44,9 @@ function showMessage(text,                              // текст сообщ
 //
 // Показываем сообщение об ошибке
 //
-function showError(error){
+function showError(error, layout = LayoutType.TOP_RIGHT){
     console.log(error);
-    showMessage(error, MessageType.ERROR, 'topRight', 5000, true )
+    showMessage(error, MessageType.ERROR, LayoutType.TOP_RIGHT, 5000, true )
     return error;
 }
 
@@ -222,6 +235,7 @@ class PageBuilder {
         this.callStack.push({type: type, id: data.id, data: data});
     }
 
+
     /**
      * Загружает все данные из стека вызовов.
      * @returns {Promise} Promise, который разрешается, когда все данные загружены.
@@ -279,6 +293,7 @@ class PageBuilder {
                             loadNext();
                             break;
                     }
+
                 } else {
                     resolve();
                 }
@@ -400,9 +415,125 @@ function tryGetDataFromServer(server, request, data, callback, requestDescribe){
             }
         });
     } catch (error) {
-        console.log(showError(`Ошибка при запросе ${requestDescribe}: ${error.message}`));
+        console.log(showError(`Ошибка ${requestDescribe}: ${error.message}`));
     }
 }
+
+
+/**
+ * Класс для создания и управления анимацией вращения изображения.
+ */
+class ModalAnimation {
+    /**
+     * Создает новый экземпляр класса ModalAnimation.
+     * @param {string} imgSrc - Источник изображения.
+     * @param {number} imgSize - Размер изображения.
+     * @param {number} overlayOpacity - Непрозрачность затемнения.
+     * @param {number} cycleDuration - Продолжительность цикла анимации.
+     * @param {number} rotationSpeed - Скорость вращения.
+     * @param {number} acceleration - ускорение вращения.
+     */
+    constructor(imgSrc, imgSize, overlayOpacity, cycleDuration, rotationSpeed, acceleration) {
+        this.imgSize = imgSize;
+        this.cycleDuration = cycleDuration / 1000;
+        this.overlayOpacity = overlayOpacity;
+        this.imgSrc = imgSrc;
+        this.rotationSpeed = rotationSpeed;
+        this.interval = null;
+        this.$imgContainer = null;
+        this.$overlay = null;
+        this.acceleration = acceleration;
+    }
+
+    /**
+     * Запускает анимацию вращения изображения.
+     */
+    start() {
+        try {
+            // Создание элементов
+            this.$overlay = $('<div>').css({
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'black',
+                opacity: this.overlayOpacity / 100,
+                zIndex: 9998
+            });
+            this.$imgContainer = $('<div>').css({
+                borderRadius: '50%',
+                border: `${this.imgSize * 0.03}vh solid white`,
+                overflow: 'hidden',
+                position: 'fixed',
+                top: '40%',		// ориентация по высоте отображения анимации
+                left: '50%',  	// ориентация по ширине отображения анимации
+                transform: 'translate(-50%, -50%)',
+                width: `${this.imgSize}vh`,
+                height: `${this.imgSize}vh`,
+                zIndex: 9999,
+            });
+            const $img = $('<img>')
+                .attr('src', this.imgSrc)
+                .css({
+                    position: 'absolute',
+                    top: '-2%',
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    padding: '5%'
+                }).on('error', () => {
+                    // Обработка ошибки загрузки изображения
+                    console.error(`Ошибка загрузки изображения ${this.imgSrc}`);
+                    this.stop();
+                });
+            this.$imgContainer.append($img);
+            $('body').append(this.$overlay).append(this.$imgContainer);
+
+            // Анимация
+            let angle = 0;
+            let speed = 0;
+
+            // Функция для обновления анимации
+            const updateAnimation = (rotationType) => {
+                if (rotationType === 'clockwise') {
+                    angle += speed;
+                    if (angle >= 1) angle -= 1;
+                } else if (rotationType === 'counterclockwise') {
+                    angle -= speed;
+                    if (angle <= -1) angle += 1;
+                }
+                if (speed < this.rotationSpeed) speed += this.acceleration;
+                this.$imgContainer.css('transform', `translate(-50%, -50%)
+          		rotateY(${angle}deg)
+          		rotateX(${angle}deg)
+          		rotateY(${angle}deg)
+          		rotateX(${angle}deg)
+          		`);
+            };
+
+            // Запуск первого цикла анимации
+            this.interval = setInterval(() => updateAnimation('clockwise'), this.cycleDuration);
+
+        }
+        catch(error) {
+            console.error(`Ошибка при запуске анимации: ${error.message}`);
+            this.stop();
+        }
+    }
+    /**
+     * Останавливает анимацию вращения изображения.
+     */
+    stop() {
+        clearInterval(this.interval);
+        this.$imgContainer.remove();
+        this.$overlay.remove();
+    }
+
+}
+
+
+
 
 class NetworkRequestManager {
     /**
@@ -421,6 +552,9 @@ class NetworkRequestManager {
         this.messageContainer = $('#message-container');
         this.socket = null; // Переменная для хранения объекта Socket.IO
         this._initSocket(); // Инициализируем Socket.IO при создании экземпляра класса
+
+        const imgSrc = "assets/images/logo/loading.svg"
+        this.spinAnimated = new ModalAnimation(imgSrc, 15, 70, 1, 1, 3);
     }
 
     /**
@@ -456,8 +590,8 @@ class NetworkRequestManager {
         try {
 
             const url = `https://${this.serverName}:${this.port}${this.rootPath}/${path}`;
-            const response = $.ajax({
-                url,
+            $.ajax({
+                url: url,
                 type: 'POST',
                 data: JSON.stringify(data),
                 contentType: 'application/json',
@@ -482,10 +616,10 @@ class NetworkRequestManager {
 
     /**
      * Отправка Socket.IO-запроса
-     * @param {string} path - Путь для запроса.
-     * @param {Object} data - Данные для отправки.
-     * @param {Function} callback - Функция обработки пришедшего ответа.
-     * @param errorCallback - Функция обработки ошибки
+     * @param {string} path         - Путь для запроса.
+     * @param {Object} data         - Данные для отправки.
+     * @param {Function} callback   - Функция обработки пришедшего ответа.
+     * @param errorCallback         - Функция обработки ошибки
      */
     _sendSocketRequest(path, data, callback, errorCallback) {
         try {
@@ -501,18 +635,20 @@ class NetworkRequestManager {
 
     /**
      * Отправка запроса с выбором протокола
-     * @param {string} path - Путь для запроса.
-     * @param {Object} data - Данные для отправки.
-     * @param {Function} callback - Функция обработки пришедшего ответа.
-     * @param {boolean} allowDuplicate - Разрешить дублирование запроса в стеке.
+     * @param {string} path             - Путь для запроса.
+     * @param {Object} data             - Данные для отправки.
+     * @param {Function} callback       - Функция обработки пришедшего ответа.
+     * @param {boolean} allowDuplicate  - Разрешить дублирование запроса в стеке.
      */
     send(path, data, callback, allowDuplicate = false) {
+
         if (!allowDuplicate && this.stack.some(req => req.path === path && req.data === data)) {
             console.log(showError(`Ошибка при отправке HTTPS запроса: Запрос ${path}, с данными ${data} уже находится в стеке, дублирование запрещено.`));
             return;
         }
 
         this.stack.push({ path, data });
+        this.spinAnimated.start();		// запускаем анимацию до окончания загрузки
 
         if (this.httpsPriority === RequestPriority.RESTAPI) {
             let restapiError = false;
@@ -547,6 +683,8 @@ class NetworkRequestManager {
         } else {
             console.log(showError(`Неизвестный приоритет запроса: ${this.httpsPriority}`));
         }
+        // Обновление прогресс-бара
+        this.spinAnimated.stop();		// останавливаем анимацию до окончания загрузки
     }
 
     /**
@@ -556,6 +694,9 @@ class NetworkRequestManager {
      */
     _removeFromRequestStack(path, data) {
         this.stack = this.stack.filter(req => req.path !== path && req.data !== data);
+        // this.progressBarWidth = (this.stack.length > 0) ? (this.index / this.stack.length) * 100 : 0; // 100% максимальной ширины
+        // $('#page_load_progress .progress-bar').css('width', `${this.progressBarWidth}%`);
+
     }
 
 }
@@ -595,40 +736,41 @@ const ReviewContext = {
 class Rating {
     // Конструктор
     /**
-     * @param {string} appName - базовое имя программы на английском
-     * @param routerInfo - информация о текущем устройстве (роутере) с целью обезличенного закрепление данных
-     * @param {boolean} callRightPanel - необходимость вызывать правую панель после отправки отзыва
+     * @param {string} appName                  - базовое имя программы на английском
+     * @param {NetworkRequestManager} server    - объект типа NetworkRequestManager - сервер рейтингов
+     * @param {Object} routerInfo               - информация о текущем устройстве (роутере) с целью обезличенного закрепление данных
+     * @param {boolean} callRightPanel          - необходимость вызывать правую панель после отправки отзыва
      */
-    constructor(appName, routerInfo, callRightPanel = false) {
+    constructor(appName,
+                server,
+                routerInfo,
+                callRightPanel = false) {
 
-        this.starsId = appName + '_rating';
-        this.votedId = appName + '_voted'
-        this.reviewId = appName + '_review_call'
-        this.versionId = appName + '_version'
-        this.userNameId = appName + '_user_name';
-        this.userReviewId = appName + '_user_review';
-        this.userEmailId = appName + '_user_email';
-        this.reviewFormId = appName + '_form_review';
+        this.starsId            = appName + '_rating';
+        this.votedId            = appName + '_voted'
+        this.reviewId           = appName + '_review_call'
+        this.versionId          = appName + '_version'
+        this.userNameId         = appName + '_user_name';
+        this.userReviewId       = appName + '_user_review';
+        this.userEmailId        = appName + '_user_email';
+        this.reviewFormId       = appName + '_form_review';
 
-        this.reviewContext = null;
+        this.reviewContext      = null;
 
-        this.stars = null;
-        this.appName = appName;
-        this.appVersion = null;
-        this.storageKey = this.starsId;
+        this.stars              = null;
+        this.appName            = appName;
+        this.appVersion         = null;
+        this.storageKey         = this.starsId;
 
-        this.votedElem = $('#' + this.votedId);
-        this.reviewElem = $('#' + this.reviewId);
-        this.validator = new FormDataValidator(this.reviewFormId);
-        // this.router    = new DeviceManager();
+        this.validator          = new FormDataValidator(this.reviewFormId);
 
-        this.rightPannelShown = callRightPanel;
+        this.rightPannelShown   = callRightPanel;
 
-        this.routerInfo = routerInfo;
-        this.ratingServer = new NetworkRequestManager("api.zeleza.ru", 11211, '/api/v1');
+        this.routerInfo         = routerInfo;
+        this.ratingServer       = server;
 
         // после отладки - закомментировать
-        this.clearRatingOnLocalStorage();
+        // this.clearRatingOnLocalStorage();
         this._initNotyDialogs();
         this._getRatingFromServer();
 
@@ -705,7 +847,7 @@ class Rating {
         const starCount = $li.find('i').length
         if (starCount === 0) {
             $li.removeClass('placeholder placeholder-wave bg-black bg-opacity-20 wmin-300');
-            this.votedElem.removeClass('d-inline-block ')
+            $('#' + this.votedId).removeClass('d-inline-block ')
             // Создание и добавление элементов <i> (звезд) внутрь <li>
             for (let i = 0; i < 10; i++) {
                 $('<i>', {
@@ -713,10 +855,10 @@ class Rating {
                 }).prependTo($li);
             }
             this.stars = $(`#${this.starsId} .ph-star`)
-            this.stars.on(      'mouseover', this.setStarRatingWhenClickOn.bind(this));
-            this.stars.on(      'mouseout',  this._setRatingWhenHover.bind(this));
-            this.stars.on(      'click',     this.showRatingForm.bind(this));
-            this.reviewElem.on( 'click',     this.showReviewForm.bind(this));
+            this.stars.on(              'mouseover', this.setStarRatingWhenClickOn.bind(this));
+            this.stars.on(              'mouseout',  this._setRatingWhenHover.bind(this));
+            this.stars.on(              'click',     this.showRatingForm.bind(this));
+            $('#' + this.reviewId).on(  'click',     this.showReviewForm.bind(this));
         }
     }
 
@@ -766,7 +908,7 @@ class Rating {
                     // Обработка результата ответа от сервера после получения рейтинга приложения
                     if (response.app_name === this.appName ) {
                         this.rating = response.rating;
-                        this.votedElem.html('(' + response.voted + ')');
+                        $('#' + this.votedId).html('(' + response.voted + ')');
                         this.appVersion = response.version;
                         this._createStarsRating();
                         if (response.voted !== 0) {
@@ -778,7 +920,7 @@ class Rating {
     }
 
     //
-    // Получение рейтинга с сервера
+    // Получение крайней версии приложения с сервера
     //
     _getLastVersionFromServer(callback) {
         tryGetDataFromServer(this.ratingServer, 'get_last_version', {

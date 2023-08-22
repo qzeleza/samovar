@@ -23,5 +23,5 @@ using namespace testing;
 #include "../src/includes/samovar.hpp"
 #endif
 
-const std::string app_name = "samovar";
+const std::string app_name = "CAMOBAP";
 

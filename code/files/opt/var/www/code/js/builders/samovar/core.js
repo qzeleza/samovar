@@ -1,13 +1,16 @@
-let ReviewsServer, UserRouter, samovarApp, RouterServer;
-const RusNames = {
-    samovar: "Самовар",
-    kvas: "Квас",
-}
+let ReviewsServer, CAMOBAP, RouterServer, ROUTER_INFO;
+
+// При запуске в серию необходимо установить TEST_STAGE = false
+const PROD_ROUTER_URL = window.location.href;
+const TEST_ROUTER_URL = "kvas.zeleza.ru";
+const TEST_STAGE    = true
+const ROUTER_URL        = TEST_STAGE ? TEST_ROUTER_URL : PROD_ROUTER_URL
+
 
 function buildMainTemplatePage(root){
 
     const templateLoad = new PageBuilder();
-    const app_name = 'samovar';
+    const appName = 'samovar';
 
     // Загрузка необходимых страниц и аттрибутов элементов в них для всех страниц шаблона
     templateLoad.add({id:'#right_call_button', file: root + 'pages/core/parts/right_toolbar.html'});
@@ -63,50 +66,36 @@ function buildMainTemplatePage(root){
     // Загрузка необходимых страниц и аттрибутов элементов в них для всех страниц шаблона
     // templateLoad.add({id:'#samovar_delete_simple_modal', file: root + 'pages/all/modals/simple_del.html'});
     // templateLoad.add({id:'#samovar_delete_full_modal', file: root + 'pages/all/modals/full_del.html'});
-    // templateLoad.add({id:'#samovar_history_modal', file: root + 'pages/library/modules/samovar/history.html'});
+    // templateLoad.add({id:'#samovar_history_modal', file: root + 'pages/library/modules/CAMOBAP/history.html'});
 
     // Загрузка необходимых скриптов для всех страниц шаблона
     templateLoad.add(root + 'code/js/libraries/core/init.js');
-    templateLoad.add(root + 'code/js/libraries/core/router.js');
     templateLoad.add(root + 'code/js/libraries/core/apps.manager.js');
     templateLoad.add(root + 'assets/js/vendor/ui/dragula.min.js');
 
     // Устанавливаем экземпляры серверов для работы
     templateLoad.add(() => {
         RouterServer        = new NetworkRequestManager(ROUTER_URL, 11133, '/kvas/v1');
-        UserRouter          = new DeviceManager(RouterServer);
         ReviewsServer       = new NetworkRequestManager("api.zeleza.ru", 11211, '/api/v1');
+        CAMOBAP             = new AppsManager(appName, RouterServer,true);
     });
 
 
-    // Проверяем самовар на наличие обновлений
     templateLoad.add(() => {
-        UserRouter.getAppUpdateInfo(app_name, (response) => {
-            if (response.update) {
-                $('#' + app_name + '_new_version').html(response.version);
-                $('#' + app_name + '_update_box').removeClass('d-none');
-                const info = "Вышло обновление для <b>Самовара</b>.<br>Новая версия<b> " + response.version + ".</b>";
-                showMessage(info, MessageType.INFO);
-            }
-        })
-    });
+        // Проверяем самовар на наличие обновлений
+        CAMOBAP.checkAppUpdate(false);
+        // Получаем данные об истории версий (если есть) для запрошенного приложения
+        CAMOBAP.createAppVersionHistory(true);
 
-    // Связываем кнопку вызова истории версий для Самовара
-    // Получаем данные об истории версий (если есть) для запрошенного приложения
-    templateLoad.add(() => {
-        tryGetDataFromServer(RouterServer, 'get_app_history', {"app_name": app_name}, (jsonHistory) => {
-            createVersionHistory(jsonHistory);
-        }, `при запросе истории версий ${this.appName}`);
     });
 
     // Загрузка функции, которая подгружает классы
     // рейтинга и обратной связи всех страниц шаблона
     templateLoad.add(() => {
-        UserRouter.getDeviceInfo((deviceInfo) => {
-            new Rating(app_name, deviceInfo,true);
-        });
+        const data= {};
+        data[appName] = {}
+        createRatingsForApps(data, ReviewsServer);
     });
-
 
     return templateLoad;
 }

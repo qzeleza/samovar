@@ -1,5 +1,13 @@
-### Send POST request update
-POST https://kvas.zeleza.ru:11133/kvas/v1/update
+### Send POST request install update
+POST https://kvas.zeleza.ru:11133/kvas/v1/let_install
+Content-Type: application/json
+
+{
+  "app_name": "kvas"
+}
+
+### Send POST request check for update
+POST https://kvas.zeleza.ru:11133/kvas/v1/check_update
 Content-Type: application/json
 
 {

@@ -70,7 +70,7 @@ define Build/Compile
 endef
 
 #
-#define Package/samovar/conffiles
+#define Package/CAMOBAP/conffiles
 #	/opt/etc/nginx/conf.d/wui.conf
 #endef
 SOURCE_OPT_PATH=/apps/entware/package/master/samovar/files/opt

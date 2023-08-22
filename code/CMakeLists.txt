@@ -32,7 +32,7 @@ add_subdirectory(tests)
 
 
 #cmake_minimum_required(VERSION 3.10)
-#project(Samovar)
+#project(CAMOBAP)
 #project(TestsSamovar)
 #
 ## Подключение Google Test
@@ -60,7 +60,7 @@ add_subdirectory(tests)
 #
 #cmake_minimum_required(VERSION 3.3)
 #
-#project(samovar)
+#project(CAMOBAP)
 #
 #set(CMAKE_CXX_STANDARD 20)
 #find_package(Gettext REQUIRED)
@@ -72,12 +72,12 @@ add_subdirectory(tests)
 #add_subdirectory(tests)
 #
 
-#add_executable(main_samovar src/samovar.cpp)
+#add_executable(main_samovar src/CAMOBAP.cpp)
 #set(SAMOVAR_CORE_SRC
 #        src/api.cpp
 #        src/args.cpp src/locale.cpp src/server.cpp src/system.cpp src/includes/api.hpp src/includes/args.hpp src/includes/locale.hpp src/includes/codes.hpp src/includes/json.hpp src/includes/system.hpp)
 #add_library(core ${SAMOVAR_CORE_SRC})
-#add_executable(main_samovar src/samovar.cpp)
+#add_executable(main_samovar src/CAMOBAP.cpp)
 #target_link_libraries(main_samovar core ${GETTEXT_LIBRARIES})
 
 

@@ -24,13 +24,13 @@ protected:
 //    TEST_F(SamovarTest, DISABLED_SetupTest) {
 //        char* args[] = {(char*)app_name.c_str(), (char*)"setup", nullptr};
 //        int argc = 2;
-//        EXPECT_EQ(samovar(argc, args), 0);
+//        EXPECT_EQ(CAMOBAP(argc, args), 0);
 //    }
 //
 //    TEST_F(SamovarTest, StartTest) {
 //        char* args[] = {(char*)app_name.c_str(), (char*)"start", nullptr};
 //        int argc = 2;
-//        EXPECT_EQ(samovar(argc, args), SERVER_ALREADY_RUN);
+//        EXPECT_EQ(CAMOBAP(argc, args), SERVER_ALREADY_RUN);
 ////                EXPECT_THAT(get_captured_output(), HasSubstr(zb("Запускаем API сервер...")));
 //    }
 //
@@ -38,16 +38,16 @@ protected:
 //        char* args[] = {(char*)app_name.c_str(), (char*)"stop", nullptr};
 //        int argc = 2;
 //
-////        samovar(argc, argst);
-////        EXPECT_EQ(samovar(argc, argsp), SERVER_STOPPED);
-//        EXPECT_EQ(samovar(argc, args), SERVER_NOT_RUNNING);
+////        CAMOBAP(argc, argst);
+////        EXPECT_EQ(CAMOBAP(argc, argsp), SERVER_STOPPED);
+//        EXPECT_EQ(CAMOBAP(argc, args), SERVER_NOT_RUNNING);
 //    }
 //
 //    TEST_F(SamovarTest, InvalidTest) {
 //        capture_output();
 //        char* args[] = {(char*)app_name.c_str(), (char*)"", nullptr};
 //        int argc = 2;
-//        EXPECT_EQ(samovar(argc, args), TRIGGER_NOT_FOUND);
+//        EXPECT_EQ(CAMOBAP(argc, args), TRIGGER_NOT_FOUND);
 ////                EXPECT_THAT(get_captured_output(), HasSubstr("Аргументы не заданы или не существуют."));
 //    }
 //

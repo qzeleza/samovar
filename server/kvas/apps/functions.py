@@ -207,7 +207,7 @@ def get_app_history(data):
                 ]
             }
         },
-        'samovar': {
+        'CAMOBAP': {
             'app_name': app_name,
             'app_name_rus': 'Самовар',
             'version': {
@@ -264,7 +264,7 @@ def apps_update(data):
     app_name = data.get('app_name')
 
     versions = {
-        'samovar': '1.0.1',
+        'CAMOBAP': '1.0.1',
         'kvas': '1.4',
         'rodina': '1.0.2'
     }

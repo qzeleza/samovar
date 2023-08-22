@@ -1,10 +1,9 @@
 const numColumnCards = 'numColumnCards';    // Ключ числа колонок в главном окне для записи в localStorage
 const fullViewCards  = 'fullViewCards';     // Ключ состояния полного вида карточек в окне для записи в localStorage
-const sideBarResize = 'sideBarResize'       // Ключ состояния открытия правой боковой панели в окне для записи в localStorage
+const sideBarResize  = 'sideBarResize'      // Ключ состояния открытия правой боковой панели в окне для записи в localStorage
 
 
-
-/**
+    /**
  * Управление правой панелью.
  *
  * @param {string} [act='hide'] - Действие для выполнения. Возможные значения: 'hide' (скрыть) или 'show' (показать).
@@ -31,8 +30,6 @@ function rightPanelAct(act = 'hide', needToCallRightPanel = false) {
         }
     }
 }
-
-
 
 /**
  * Обновляет распределение элементов в столбцах и рядах в соответствии с заданными числами колонок и рядов.
@@ -314,6 +311,8 @@ function createVersionHistory(jsonHistory, root= '', historyTemplate = 'pages/co
     const $listModalWindows                  = $('#list_modal_windows');
 
     try {
+        // Удаляем предыдущий вариант истории, если он был
+        $(`#${historyModalDialogId}`).remove();
 
         // Загружаем содержимое HTML-шаблона и заменяем плейсхолдер на название приложения.
         const data = getHTMLCodeFromFile(root + historyTemplate);
@@ -443,6 +442,40 @@ function getModalDialogFromFile(modalID, htmlCardTemplFile){
         async: false
     }).responseText;
     return $historyModalDialog.append($(fileCont));
+}
+
+/**
+ * Создает экземпляры класса Rating для каждого приложения с передачей информации о роутере.
+ *
+ * @param {Object} appsData - Объект с данными о приложениях.
+ * @param {NetworkRequestManager} server    - объект типа NetworkRequestManager - сервер рейтингов
+ */
+function createRatingsForApps(appsData, server) {
+
+    if (!appsData || typeof appsData !== 'object') {
+        console.error(showError('Некорректные данные о приложениях.'));
+        return;
+    }
+
+    if (ROUTER_INFO) {
+        for (const app_name in appsData) {
+            if (appsData.hasOwnProperty(app_name)) {
+                const callRightPanel = app_name === 'samovar';
+                new Rating(app_name, server, ROUTER_INFO, callRightPanel);
+            }
+        }
+    } else {
+        tryGetDataFromServer(
+            RouterServer,
+            'get_router_data',
+            {},
+            (deviceInfo) => {
+                ROUTER_INFO = deviceInfo;
+                createRatingsForApps(appsData, server);
+            },
+            "при запросе информации о роутере пользователя"
+        );
+    }
 }
 
 
