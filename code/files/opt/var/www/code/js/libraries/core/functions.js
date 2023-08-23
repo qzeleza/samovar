@@ -3,7 +3,8 @@ const fullViewCards  = 'fullViewCards';     // Ключ состояния по�
 const sideBarResize  = 'sideBarResize'      // Ключ состояния открытия правой боковой панели в окне для записи в localStorage
 
 
-    /**
+
+/**
  * Управление правой панелью.
  *
  * @param {string} [act='hide'] - Действие для выполнения. Возможные значения: 'hide' (скрыть) или 'show' (показать).
@@ -11,7 +12,9 @@ const sideBarResize  = 'sideBarResize'      // Ключ состояния от�
  * @returns {void}
  */
 function rightPanelAct(act = 'hide', needToCallRightPanel = false) {
+
     const rightPanel = $('#right_panel');
+    const myOffcanvas = new bootstrap.Offcanvas(rightPanel);
 
     // Если действие равно 'hide' (скрыть)
     if (act === 'hide') {
@@ -22,8 +25,6 @@ function rightPanelAct(act = 'hide', needToCallRightPanel = false) {
     }
     // Если действие равно 'show' (показать)
     else if (act === 'show') {
-        const myOffcanvas = new bootstrap.Offcanvas(rightPanel);
-
         // Если нужно вызвать правую панель
         if (needToCallRightPanel) {
             myOffcanvas.show();
@@ -447,10 +448,11 @@ function getModalDialogFromFile(modalID, htmlCardTemplFile){
 /**
  * Создает экземпляры класса Rating для каждого приложения с передачей информации о роутере.
  *
- * @param {Object} appsData - Объект с данными о приложениях.
+ * @param {Object} appsData                 - Объект с данными о приложениях.
  * @param {NetworkRequestManager} server    - объект типа NetworkRequestManager - сервер рейтингов
+ * @param rightPanel                        - Объект правой панели
  */
-function createRatingsForApps(appsData, server) {
+function createRatingsForApps(appsData, server, rightPanel) {
 
     if (!appsData || typeof appsData !== 'object') {
         console.error(showError('Некорректные данные о приложениях.'));
@@ -461,7 +463,7 @@ function createRatingsForApps(appsData, server) {
         for (const app_name in appsData) {
             if (appsData.hasOwnProperty(app_name)) {
                 const callRightPanel = app_name === 'samovar';
-                new Rating(app_name, server, ROUTER_INFO, callRightPanel);
+                new Rating(app_name, server, ROUTER_INFO, rightPanel, callRightPanel);
             }
         }
     } else {
@@ -471,7 +473,7 @@ function createRatingsForApps(appsData, server) {
             {},
             (deviceInfo) => {
                 ROUTER_INFO = deviceInfo;
-                createRatingsForApps(appsData, server);
+                createRatingsForApps(appsData, server, rightPanel);
             },
             "при запросе информации о роутере пользователя"
         );

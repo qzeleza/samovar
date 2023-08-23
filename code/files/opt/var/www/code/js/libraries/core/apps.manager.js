@@ -4,14 +4,16 @@ class AppsManager {
      * Конструктор класса AppsLibManager
      * @param {string} app_name         - базовое имя программы на английском
      * @param {Object} routerServer     - сервер для получения информации с роутера
+     * @param {Object} rightPanel       - Объект Правой выезжающей панели
      * @param {boolean} callRightPanel  - флаг, указывающий, нужно ли вызывать правую панель после отправки отзыва
      * @param {string} root             - путь до корневой директории, требуемый для открытия файлов
      */
-    constructor(app_name, routerServer, callRightPanel = false, root = '') {
+    constructor(app_name, routerServer, rightPanel,  callRightPanel = false, root = '') {
         this.routerServer               = routerServer;
         this.root                       = root;
         this.appName                    = app_name;
         this.callRightPanel             = callRightPanel;
+        this.rightPanel                 = rightPanel;
         this.templeAppName              = '_@';
 
         this.storageKey                 = `#${this.appName}_history_modal_key`;
@@ -89,12 +91,12 @@ class AppsManager {
      *
      * @param {Object} appsData - Объект с данными о приложениях.
      */
-    createRatingsForApps() {
+    createRatingsForApps(appsData) {
 
         if (ROUTER_INFO) {
             for (const app_name in appsData) {
                 if (appsData.hasOwnProperty(app_name)) {
-                    new Rating(app_name, ROUTER_INFO, true);
+                    new Rating(app_name, ROUTER_INFO, this.rightPanel, true);
                 }
             }
         } else {
@@ -133,10 +135,11 @@ class AppsManager {
                 self._appDelete(method);
             });
             $appDeleteElem.find(`#${fullDeleteElemId}`).on('show.bs.modal', function() {
-                rightPanelAct('hide', this.callRightPanel);
+                this.rightPanel.hide(); // rightPanelAct('hide', this.callRightPanel);
             });
             $appDeleteElem.find(`#${fullDeleteElemId}`).on('hidden.bs.modal', function() {
-                rightPanelAct('show', this.callRightPanel);
+                if(this.callRightPanel) this.rightPanel.show();
+                // rightPanelAct('show', this.callRightPanel);
             });
             this.modalDialogsList.append($appDeleteElem);
         }

@@ -7,7 +7,7 @@ const TEST_STAGE    = true
 const ROUTER_URL        = TEST_STAGE ? TEST_ROUTER_URL : PROD_ROUTER_URL
 
 
-function buildMainTemplatePage(root){
+function buildMainTemplatePage(root, rightPanel){
 
     const templateLoad = new PageBuilder();
     const appName = 'samovar';
@@ -50,6 +50,7 @@ function buildMainTemplatePage(root){
 
     });
 
+
     // Загружаем код правой панели
     templateLoad.add({id:'#right_panel',file:  root + 'pages/core/parts/right_panel.html',
         attributes: {
@@ -77,7 +78,7 @@ function buildMainTemplatePage(root){
     templateLoad.add(() => {
         RouterServer        = new NetworkRequestManager(ROUTER_URL, 11133, '/kvas/v1');
         ReviewsServer       = new NetworkRequestManager("api.zeleza.ru", 11211, '/api/v1');
-        CAMOBAP             = new AppsManager(appName, RouterServer,true);
+        CAMOBAP             = new AppsManager(appName, RouterServer, rightPanel, true);
     });
 
 
@@ -94,8 +95,7 @@ function buildMainTemplatePage(root){
     templateLoad.add(() => {
         const data= {};
         data[appName] = {}
-        createRatingsForApps(data, ReviewsServer);
+        createRatingsForApps(data, ReviewsServer, rightPanel);
     });
-
     return templateLoad;
 }

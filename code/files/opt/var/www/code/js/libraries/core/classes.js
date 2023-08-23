@@ -197,6 +197,7 @@ class PageBuilder {
      */
     constructor() {
         this.callStack = []; // Стек вызовов
+        // this.progressBar = new ProgressBar('page_load_progress');
     }
 
     /**
@@ -648,7 +649,6 @@ class NetworkRequestManager {
         }
 
         this.stack.push({ path, data });
-        this.spinAnimated.start();		// запускаем анимацию до окончания загрузки
 
         if (this.httpsPriority === RequestPriority.RESTAPI) {
             let restapiError = false;
@@ -683,8 +683,6 @@ class NetworkRequestManager {
         } else {
             console.log(showError(`Неизвестный приоритет запроса: ${this.httpsPriority}`));
         }
-        // Обновление прогресс-бара
-        this.spinAnimated.stop();		// останавливаем анимацию до окончания загрузки
     }
 
     /**
@@ -694,8 +692,6 @@ class NetworkRequestManager {
      */
     _removeFromRequestStack(path, data) {
         this.stack = this.stack.filter(req => req.path !== path && req.data !== data);
-        // this.progressBarWidth = (this.stack.length > 0) ? (this.index / this.stack.length) * 100 : 0; // 100% максимальной ширины
-        // $('#page_load_progress .progress-bar').css('width', `${this.progressBarWidth}%`);
 
     }
 
@@ -738,11 +734,13 @@ class Rating {
     /**
      * @param {string} appName                  - базовое имя программы на английском
      * @param {NetworkRequestManager} server    - объект типа NetworkRequestManager - сервер рейтингов
+     * @param {Object} rightPanel               - Объект правой панели
      * @param {Object} routerInfo               - информация о текущем устройстве (роутере) с целью обезличенного закрепление данных
      * @param {boolean} callRightPanel          - необходимость вызывать правую панель после отправки отзыва
      */
     constructor(appName,
                 server,
+                rightPanel,
                 routerInfo,
                 callRightPanel = false) {
 
@@ -764,7 +762,9 @@ class Rating {
 
         this.validator          = new FormDataValidator(this.reviewFormId);
 
-        this.rightPannelShown   = callRightPanel;
+        this.rightPanelShown   = callRightPanel;
+        this.rightPanel        = rightPanel;
+
 
         this.routerInfo         = routerInfo;
         this.ratingServer       = server;
@@ -803,13 +803,15 @@ class Rating {
             ],
             callbacks:{
                 beforeShow: function() {
-                    rightPanelAct('hide', self.rightPannelShown);
+                    this.rightPanel.hide();
+                    // rightPanelAct('hide', self.rightPanelShown);
                 },
                 afterShow: function () {
                     $('#' + self.userReviewId).focus();
                 },
                 afterClose: function() {
-                    rightPanelAct('show', self.rightPannelShown);
+                    if(self.rightPanelShown) this.rightPanel.show();
+                    // rightPanelAct('show', self.rightPanelShown);
                 },
                 onClose: function() {
                     // костыль, который позволяет показывать окно при повторных вызовах
@@ -1065,3 +1067,105 @@ class Rating {
     }
 }
 
+
+const SpinnerType = {
+    SIMPLE: 'ph-spinner spinner me-2',
+    BORDER: 'spinner-border',
+    GROW:   'spinner-grow',
+}
+/**
+ * Класс для отображения спиннера.
+ */
+class Spinner {
+    /**
+     * Создает новый объект Spinner.
+     */
+    constructor(type = SpinnerType.SIMPLE) {
+        this.type = type;
+        this._modalClass = 'modal-open';
+        this.$spinnerElement = $(`.page-content .content-wrapper .content-inner .content`);
+    }
+    /**
+     * Запускает отображение спинера.
+     * @param {string} [loadingText='Ждите идет загрузка…'] - Текст, отображаемый рядом со спинером.
+     */
+
+    start(loadingText = 'Ждите идет загрузка…'){
+        const $spinnerText = $(`<strong>`).text(loadingText);
+        const $spinnerContainer = $(`<div>`).addClass(`d-flex justify-content-center align-items-center`);
+        const $subContainer = $(`<i>`).addClass(`${this.type}`);
+        $spinnerContainer.append($subContainer);
+        $spinnerContainer.append($spinnerText);
+        this.$spinnerElement.append($spinnerContainer);
+        this._disableScreen();
+    }
+
+    stop(){
+        this.$spinnerElement.empty();
+        this._enableScreen();
+    }
+    /**
+     * Заблокировать элементы экрана.
+     */
+    _disableScreen() {
+        // Блокировка элементов экрана
+        this.$spinnerElement.addClass(this._modalClass);
+    }
+
+    /**
+     * Разблокировать элементы экрана.
+     */
+    _enableScreen() {
+        // Разблокировка элементов экрана
+        this.$spinnerElement.removeClass(this._modalClass);
+    }
+}
+
+/**
+ * Класс для отображения прогресс-бара.
+ */
+class ProgressBar {
+    /**
+     * Создает новый объект ProgressBar.
+     * @param {string} elementId - Идентификатор элемента, в котором будет отображаться прогресс-бар.
+     * @param {number} [length] - Полная длина прогресс-бара.
+     */
+    constructor(elementId, length = 10) {
+        this.length = length;
+        this.$progressBarElement = $(`#${elementId}`);
+        this._step = -1;
+    }
+    /**
+     * Запускает отображение прогресс-бара.
+     */
+    start() {
+        const progbar = $(`<div>`).addClass('progress-bar').css('width', 0);
+        this.$progressBarElement.append(progbar);
+    }
+
+    /**
+     * Обновляет прогресс прогресс-бара.
+     * @param {number} step - Текущий шаг.
+     */
+    next(step= 1) {
+        if (this._step <= this.length || this._step >= 0){
+            this._step += step;
+            this._step = this._step > this.length ? this.length : this._step;
+            const percentComplete = (this._step / this.length) * 100;
+            const progressBar = this.$progressBarElement.find('.progress-bar');
+            progressBar.width(`${percentComplete}%`);
+
+        }
+    }
+
+    /**
+     * Завершает отображение прогресс-бара.
+     */
+    stop() {
+        const progressBar = this.$progressBarElement.find('.progress-bar');
+        progressBar.width('100%');
+        this._step = -1;
+    }
+
+
+}

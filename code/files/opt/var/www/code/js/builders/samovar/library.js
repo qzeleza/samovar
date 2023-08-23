@@ -8,11 +8,14 @@ $(document).ready( function () {
 
     const root = '';
     const appsData = {};
+    const progressBar = new ProgressBar('page_load_progress');
+    const rightPanel = new bootstrap.Offcanvas($('#right_panel'));
 
     try {
+        progressBar.start();
         // Добавление дополнительных модулей
-        const libraryPageLoader =  buildMainTemplatePage(root);
-        // const appName = 'kvas';
+        const libraryPageLoader =  buildMainTemplatePage(root, rightPanel);
+        progressBar.next();
 
         libraryPageLoader.add({id: '#page_header', file: root + 'pages/library/modules/header.html'});
         libraryPageLoader.add({id: '#page_breadcrumb', file: root + 'pages/library/modules/breadcrumb.html'});
@@ -21,6 +24,7 @@ $(document).ready( function () {
 
         // Создаем карточки приложений для библиотеки Самовара
         libraryPageLoader.add(() => {
+            progressBar.next();
             // Получаем данные о приложении с роутера
             tryGetDataFromServer(RouterServer, 'get_apps_data', {}, (data) => {
                 // проходимся по каждой карточке в присланном списке данных
@@ -43,20 +47,19 @@ $(document).ready( function () {
                     initRightPanelColumnsButtons($appsLibWindows, $numColumnsSelect);
                     // Инициализация вида карточек в окне
                     initViewState();
+                    progressBar.next();
                 });
-
+                progressBar.stop();
             }, `при запросе данных о приложениях!`);
 
         });
 
-
-
         //
         libraryPageLoader.add(() => {
             // Для каждого приложения в массиве данных запрашиваем рейтинг
-            createRatingsForApps(appsData, ReviewsServer);
+            createRatingsForApps(appsData, ReviewsServer, rightPanel);
+            progressBar.next();
         });
-
 
         // libraryPageLoader.add(root + 'code/js/libraries/locals/select2.js');
 
@@ -70,6 +73,7 @@ $(document).ready( function () {
 
                 // Установка триггера для других js файлов
                 $(document).trigger("appReady");
+                progressBar.stop();
 
             })
             .catch((error) => {
