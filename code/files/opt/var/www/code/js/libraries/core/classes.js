@@ -747,7 +747,7 @@ class Rating {
         this.starsId            = appName + '_rating';
         this.votedId            = appName + '_voted'
         this.reviewId           = appName + '_review_call'
-        this.versionId          = appName + '_version'
+        this.versionId          = appName + '_last_version'
         this.userNameId         = appName + '_user_name';
         this.userReviewId       = appName + '_user_review';
         this.userEmailId        = appName + '_user_email';
@@ -804,7 +804,7 @@ class Rating {
             ],
             callbacks:{
                 beforeShow: function() {
-                    self.rightPanel.hide();
+                    if(self.rightPanelShown) self.rightPanel.hide();
                     // rightPanelAct('hide', self.rightPanelShown);
                 },
                 afterShow: function () {
@@ -927,16 +927,17 @@ class Rating {
     // Получение крайней версии приложения с сервера
     //
     _getLastVersionFromServer(callback) {
+        const self = this
         tryGetDataFromServer(this.ratingServer, 'get_last_version', {
                 app_name: this.appName
             },
             (response)=> {
-                const versionElem = $('#' + this.versionId);
+                const versionElem = $('#' + self.versionId);
                 // Обработка результата ответа от сервера после получения рейтинга приложения
                 // if (response.app_name === this.appName ) {
-                this.appVersion = response[this.appName];
+                self.appVersion = response[self.appName];
                 versionElem.removeClass('placeholder placeholder-wave bg-black bg-opacity-20 wmin-300');
-                versionElem.html('v.' + this.appVersion);
+                versionElem.html(self.appVersion);
                 callback(response);
                 // }
             }, `при запросе крайней версии ${this.appName}`);

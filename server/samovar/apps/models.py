@@ -44,7 +44,7 @@ class Versions(database.Model):
     id = database.Column(database.Integer, primary_key=True)
     app_id = database.Column(database.Integer, database.ForeignKey('applications.id'), nullable=False)
     version = database.Column(database.String(20), nullable=False)
-    date = database.Column(database.DateTime, nullable=False)
+    date = database.Column(database.DateTime, nullable=False, index=True)
     __table_args__ = (database.UniqueConstraint(app_id, version, date, name="index_app_id_version_date"),)
 
     def __init__(self, app_id, version, date):

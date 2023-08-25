@@ -78,7 +78,7 @@ function buildMainTemplatePage(root, rightPanel){
     templateLoad.add(() => {
         RouterServer        = new NetworkRequestManager(ROUTER_URL, 11133, '/kvas/v1');
         ReviewsServer       = new NetworkRequestManager("api.zeleza.ru", 11211, '/api/v1');
-        CAMOBAP             = new AppsManager(appName, RouterServer, rightPanel, true);
+        CAMOBAP             = new AppsManager(appName, RouterServer, ReviewsServer, rightPanel, true);
     });
 
 

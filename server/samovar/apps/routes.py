@@ -11,6 +11,7 @@ from apps.functions import (show_apps_summary,
                             get_last_version,
                             update_db_from_config,
                             update_db_from_config_by_app_name,
+                            get_app_history
                             )
 
 logger = logging.getLogger(__name__)
@@ -22,6 +23,12 @@ def send_to_log(name_func):
 
 
 def register_routes(app, root_path):
+    # Получаем данные об истории версий для конкретного приложения
+    @app.route(root_path + '/get_history', methods=['POST'])
+    def get_app_history_route():
+        send_to_log(get_function_name())
+        app_name = request.json.get('app_name')
+        return jsonify(get_app_history(app_name))
 
     # Запрос для инициализации БД из файла конфигурации приложений
     @app.route(root_path + '/update_db_from_config', methods=['POST'])
@@ -90,12 +97,12 @@ def register_routes(app, root_path):
     @app.route(root_path + '/reviews_table_page', methods=['GET'])
     @check_data_and_key
     def show_reviews_table_route():
-        logger.debug(f"Вызвана функция '{get_function_name()}'")
+        send_to_log(get_function_name())
         return show_reviews_table(request)
 
     # Маршрут для просмотра списка всех приложений и их среднего рейтинга в браузере
     @app.route(root_path + '/summary_table_page', methods=['GET'])
     @check_data_and_key
     def show_apps_summary_route():
-        logger.debug(f"Вызвана функция '{get_function_name()}'")
+        send_to_log(get_function_name())
         return show_apps_summary()

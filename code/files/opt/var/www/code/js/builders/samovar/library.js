@@ -30,7 +30,7 @@ $(document).ready( function () {
                 // проходимся по каждой карточке в присланном списке данных
                 $.each(data, function(app_name, app_data) {
                     // if (app_name !== 'rodina'){
-                    appsData[app_name] = new AppsManager(app_name, RouterServer, root);
+                    appsData[app_name] = new AppsManager(app_name, RouterServer, ReviewsServer,  rightPanel, false);
                     // Создаем карточки на каждое приложение и регистрируем их в библиотеке
                     const $cardHTMLCode = appsData[app_name].createAppCard(app_data);
 
@@ -56,11 +56,15 @@ $(document).ready( function () {
         });
 
         //
-        libraryPageLoader.add(() => {
+//        libraryPageLoader.add(() => {
             // Для каждого приложения в массиве данных запрашиваем рейтинг
+//            $.each(appsData, function (app) {
+//                appsData[app].createRatingsForApps(appsData)
+//                progressBar.next();
+//            })
 //            createRatingsForApps(appsData, ReviewsServer, rightPanel);
-//            progressBar.next();
-        });
+//
+//        });
 
         // libraryPageLoader.add(root + 'code/js/libraries/locals/select2.js');
 

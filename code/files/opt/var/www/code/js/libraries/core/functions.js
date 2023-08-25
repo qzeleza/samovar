@@ -304,7 +304,21 @@ function formatDuration(duration) {
  */
 function createVersionHistory(jsonHistory, root= '', historyTemplate = 'pages/core/templates/history.html') {
     // Получаем элементы модального окна и контейнера для скроллинга.
-
+    //    Пример сформированной структуры ответа
+    //    {
+    //        "app_name": "kvas",
+    //        "rus_name": "Квас",
+    //        "versions": [
+    //        {
+    //            "version": "v1.1.4"
+    //            "date": "17 января 2023",
+    //            "items": [
+    //                "Доработан функция при обновлении правил, после которой происходил разрыв соединения <a href=\"https://github.com/qzeleza/kvas/issues/48\">тикет 48</a>.",
+    //                "Доработана функция по добавлению/удалению гостевой/VPN сети - команда kvas vpn guest.",
+    //                "Доработана функция получения entware интерфейса по IP, из-за чего происходило неверное распознавание данных."
+    //            ],
+    //        },
+    //    }
     const appName                            = jsonHistory.app_name;
     const historyModalDialogId        = `${appName}_history_modal`;
     const $historyModalDialog                = $('<div>').addClass("modal fade").attr({id: historyModalDialogId, tabindex: -1})
@@ -326,22 +340,23 @@ function createVersionHistory(jsonHistory, root= '', historyTemplate = 'pages/co
         const navigationContainer = htmlVersion.find(`#${appName}_history_navigation`);
         const headerModalWindow = htmlVersion.find(`#${appName}_history_header`);
         // Установим заголовок окна
-        headerModalWindow.text(`История версий расширения "${jsonHistory.app_name_rus}"`)
+        headerModalWindow.text(`История версий расширения "${jsonHistory.rus_name}"`)
         // Итерируем по версиям из JSON-данных.
-        for (const [version, items] of Object.entries(jsonHistory.version)) {
+        for (const [_, history] of Object.entries(jsonHistory.versions)) {
+//            const history = data[1];
             // Создаем контейнер для версии и добавляем заголовок с номером версии.
             const versionContainer = $('<div>').addClass("pb-1");
-            versionContainer.append($('<h6>').text(`Версия ${version}`));
+            versionContainer.append($('<h6>').html(`Версия ${history.version}<br><span class="text-muted fs-sm lift-up-5">${history.date}</span>`));
 
             // Создаем упорядоченный список для элементов версии.
             const listItems = $('<ol>').addClass('flex-column');
 
             // Итерируем по элементам текущей версии и их свойствам.
-            for (const item of items) {
-                for (const [, value] of Object.entries(item)) {
-                    // Добавляем элемент списка с текстом значения.
-                    listItems.append($('<li>').text(value));
-                }
+            for (const [_, value] of Object.entries(history.items)) {
+    //            for (const [, value] of Object.entries(item)) {
+                // Добавляем элемент списка с текстом значения.
+                listItems.append($('<li>').html(value));
+    //            }
             }
 
             // Добавляем список элементов к контейнеру версии.
@@ -350,10 +365,10 @@ function createVersionHistory(jsonHistory, root= '', historyTemplate = 'pages/co
 
             // Создаем пункт навигации для версий и ссылку.
             const navItem = $('<li>').addClass('nav-item');
-            const navLink = $('<a>').addClass('nav-link index').attr('href', '#').text(version);
+            const navLink = $('<a>').addClass('nav-link index').attr('href', '#').text(history.version);
 
             // Устанавливаем активное состояние для первой версии.
-            if (version === Object.keys(jsonHistory.version)[0]) {
+            if (history.version === jsonHistory.versions[0].version) {
                 navLink.addClass('active');
             }
 

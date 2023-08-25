@@ -1,4 +1,4 @@
-import os, math, re
+import os, math, re, json
 from telegram import Bot
 from flask import request, jsonify, render_template
 import logging
@@ -115,15 +115,14 @@ def update_db_from_config(do_update=False):
                 break
         if result['success']:
             # breakpoint()
-            app_list = ", ".join([ u[0] for u in db.session.query(Applications.eng_name).all()])
+            app_list = ", ".join([u[0] for u in db.session.query(Applications.eng_name).all()])
             app_count = Applications.query.count()
             result['description'] = f'Добавлено в БД [{app_list}] - {app_count} шт.'
 
     return result
 
 
-def update_db_from_config_by_app_name(eng_name, do_update):
-
+def update_db_from_config_by_app_name(eng_name, do_update=False):
     # Если такого приложения нет, то запрашиваем его из файла конфигурации
     (rus_name, desc, full_desc, history_dict) = get_config_data(eng_name)
     # breakpoint()
@@ -145,13 +144,19 @@ def update_db_from_config_by_app_name(eng_name, do_update):
     return result
 
 
-def get_data_from_str(str_date):
+def get_date_from_str(str_date):
     import datetime
     import locale
     locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
     # breakpoint()
     date = str_date.rstrip('года').strip(' ')
-    return datetime.datetime.strptime(date, '%d %B %Y')
+    return datetime.datetime.strptime(date, Config.JSON_DATE_FORMAT)
+
+
+def get_str_from_date(date):
+    import locale
+    locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
+    return date.strftime(f"{Config.JSON_DATE_FORMAT}")
 
 
 # получаем экземпляр Приложения по имени и версии
@@ -165,7 +170,7 @@ def get_ver_record(app, version, date):
             _, _, _, history_dict = get_config_data(app.eng_name)
             date = history_dict[version]['date']
 
-        date = get_data_from_str(date)
+        date = get_date_from_str(date)
 
         values = {'app_id': app.id, 'version': version, 'date': date}
         indexes = ['index_app_id_version_date']
@@ -328,6 +333,38 @@ def get_last_version(app_name):
         answer = {app_name: last_version}
 
     return answer
+
+
+# Возвращаем историю версий для конкретного приложения
+def get_app_history(app_name):
+    # Пример сформированной структуры ответа
+    # {
+    # "app_name": "kvas",
+    # "rus_name": "Квас",
+    # "versions": [
+    #     {
+    #         "version": "v1.1.4"
+    #         "date": "17 января 2023",
+    #         "items": [
+    #             "Доработан функция при обновлении правил, после которой происходил разрыв соединения <a href=\"https://github.com/qzeleza/kvas/issues/48\">тикет 48</a>.",
+    #             "Доработана функция по добавлению/удалению гостевой/VPN сети - команда kvas vpn guest.",
+    #             "Доработана функция получения entware интерфейса по IP, из-за чего происходило неверное распознавание данных."
+    #         ],
+    #     },
+    # }
+    app_obj = get_app_record(app_name)
+    data = []
+    ver_obj = db.session.query(Versions).order_by(db.desc(Versions.date)).filter_by(app_id=app_obj.id).all()
+    # ver_obj = db.session.query(Versions).filter_by(app_id=app_obj.id).all()
+    for ver in ver_obj:
+        hist_list = [x.item for x in db.session.query(History).filter_by(ver_id=ver.id).all()]
+        data.append({'version': ver.version, 'date': get_str_from_date(ver.date), 'items': hist_list})
+
+    return {
+        'app_name': app_name,
+        'rus_name': app_obj.rus_name,
+        'versions': data,
+    }
 
 
 # Получаем рейтинг по имени и номеру версии

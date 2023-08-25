@@ -8,6 +8,7 @@ class Config(object):
     FILE_CONFIG = './data/apps.ini'
     # Формат даты и времени для логирования
     DATE_FORMAT = "%d-%m-%Y %H:%M:%S"
+    JSON_DATE_FORMAT = '%d %B %Y'
 
     # Секретный ключ
     SECRET_KEY = os.getenv('SECRET_KEY', 'secret_key')

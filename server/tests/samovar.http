@@ -1,3 +1,13 @@
+### Отправка POST запроса update_db_from_config
+### с целью иницилизации БД данными из файла конфигурацции
+### для конкретного приложения
+POST https://api.zeleza.ru:11211/api/v1/get_history
+Content-Type: application/json
+
+{
+  "app_name": "kvas"
+}
+
 
 ### Отправка POST запроса update_db_from_config
 ### с целью иницилизации БД данными из файла конфигурацции
@@ -63,7 +73,7 @@ POST https://api.zeleza.ru:11211/api/v1/get_last_version
 Content-Type: application/json
 
 {
-  "app_name": "kvas"
+  "app_name": "samovar"
 }
 
 

@@ -3,13 +3,15 @@ class AppsManager {
     /**
      * Конструктор класса AppsLibManager
      * @param {string} app_name         - базовое имя программы на английском
-     * @param {Object} routerServer     - сервер для получения информации с роутера
+     * @param {NetworkRequestManager} routerServer     - сервер для получения информации с роутера
+     * @param {NetworkRequestManager} ratingServer     - сервер для получения информации о приложениях
      * @param {Object} rightPanel       - Объект Правой выезжающей панели
      * @param {boolean} callRightPanel  - флаг, указывающий, нужно ли вызывать правую панель после отправки отзыва
      * @param {string} root             - путь до корневой директории, требуемый для открытия файлов
      */
-    constructor(app_name, routerServer, rightPanel,  callRightPanel = false, root = '') {
+    constructor(app_name, routerServer, ratingServer, rightPanel,  callRightPanel = false, root = '') {
         this.routerServer               = routerServer;
+        this.ratingServer               = ratingServer
         this.root                       = root;
         this.appName                    = app_name;
         this.callRightPanel             = callRightPanel;
@@ -53,7 +55,7 @@ class AppsManager {
     _appRequestUpdate(){
         tryGetDataFromServer(this.routerServer, 'let_install', {"app_name": this.appName}, (response) => {
             if (response.success) {
-                createVersionHistory(response.history);
+                this.createAppVersionHistory(true);
                 showMessage(`Обновление пакета "${this.appName}" прошло УСПЕШНО!<br>Пакет был обновлен до версии v${response.version}`,
                     MessageType.SUCCESS, LayoutType.CENTER, 5000);
             } else {
@@ -77,7 +79,7 @@ class AppsManager {
         // или отсутствия сохраненного флага наличия привязки
         if (!localStorage.getItem(this.storageKey) || force) {
             // Привязываем функцию запроса данных с сервера к кнопке вызова
-            tryGetDataFromServer(this.routerServer, 'get_app_history', {"app_name": this.appName}, (jsonHistory) => {
+            tryGetDataFromServer(this.ratingServer, 'get_history', {"app_name": this.appName}, (jsonHistory) => {
                 createVersionHistory(jsonHistory);
                 localStorage.setItem(this.storageKey, 'stored');
             }, `при запросе истории версий ${this.appName}`);
@@ -96,7 +98,7 @@ class AppsManager {
         if (ROUTER_INFO) {
             for (const app_name in appsData) {
                 if (appsData.hasOwnProperty(app_name)) {
-                    new Rating(app_name, ROUTER_INFO, this.rightPanel, true);
+                    new Rating(app_name, this.ratingServer, this.rightPanel, ROUTER_INFO, this.callRightPanel);
                 }
             }
         } else {
@@ -135,7 +137,7 @@ class AppsManager {
                 self._appDelete(method);
             });
             $appDeleteElem.find(`#${fullDeleteElemId}`).on('show.bs.modal', function() {
-                this.rightPanel.hide(); // rightPanelAct('hide', this.callRightPanel);
+                if(this.callRightPanel) this.rightPanel.hide(); // rightPanelAct('hide', this.callRightPanel);
             });
             $appDeleteElem.find(`#${fullDeleteElemId}`).on('hidden.bs.modal', function() {
                 if(this.callRightPanel) this.rightPanel.show();

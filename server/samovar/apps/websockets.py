@@ -7,7 +7,8 @@ from apps.functions import (
     add_new_record,
     get_app_rating,
     get_review_list,
-    get_last_version
+    get_last_version,
+    get_app_history
     )
 
 logger = logging.getLogger(__name__)
@@ -68,6 +69,16 @@ def handle_ws_disconnect():
 
 
 # breakpoint()
+
+@socketio.on('get_history')
+def handle_ws_get_rating(json):
+    send_to_log(get_function_name(), json)
+
+    result = get_app_history(json.get('app_name'))
+
+    logger.debug(f'Отправляемые данные: {result}')
+    send_back(request, result)
+
 
 @socketio.on('get_rating')
 def handle_ws_get_rating(json):
