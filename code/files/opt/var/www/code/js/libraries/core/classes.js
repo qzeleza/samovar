@@ -757,6 +757,7 @@ class Rating {
 
         this.stars              = null;
         this.appName            = appName;
+        this.appRusName         = null
         this.appVersion         = null;
         this.storageKey         = this.starsId;
 
@@ -803,14 +804,14 @@ class Rating {
             ],
             callbacks:{
                 beforeShow: function() {
-                    this.rightPanel.hide();
+                    self.rightPanel.hide();
                     // rightPanelAct('hide', self.rightPanelShown);
                 },
                 afterShow: function () {
                     $('#' + self.userReviewId).focus();
                 },
                 afterClose: function() {
-                    if(self.rightPanelShown) this.rightPanel.show();
+                    if(self.rightPanelShown) self.rightPanel.show();
                     // rightPanelAct('show', self.rightPanelShown);
                 },
                 onClose: function() {
@@ -910,6 +911,7 @@ class Rating {
                     // Обработка результата ответа от сервера после получения рейтинга приложения
                     if (response.app_name === this.appName ) {
                         this.rating = response.rating;
+                        this.appRusName = response.rus_name
                         $('#' + this.votedId).html('(' + response.voted + ')');
                         this.appVersion = response.version;
                         this._createStarsRating();
@@ -1010,7 +1012,7 @@ class Rating {
             '<form id="' + this.reviewFormId + '" novalidate>' +
                 '<div class="ps-3 pb-1">' +
                     "<div class='d-flex flex-row align-items-baseline pt-2 '>" +
-                        '<div class="fs-3 mb-3 text-primary me-2">Отзыв на ' + RusNames[this.appName] + '</div>' +
+                        '<div class="fs-3 mb-3 text-primary me-2">Отзыв на ' + this.appRusName + '</div>' +
                         "<div class='badge bg-success bg-opacity-75 lift-up-3'>" + this.appVersion + "</div>" +
                     "</div>" +
                     '<div class="mb-2">Пишите по существу и самое главное</div>' +
@@ -1037,7 +1039,7 @@ class Rating {
             const reviewForm =
                 "<div class='ps-3 pe-3 pb-3'>" +
                     "<div class='d-flex flex-row align-items-baseline pt-2 pb-2 border-bottom '>" +
-                        "<div class='me-1 fs-4 fw-semibold'>" + RusNames[this.appName]  + "</div>" +
+                        "<div class='me-1 fs-4 fw-semibold'>" + this.appRusName  + "</div>" +
                         "<div class='badge bg-success bg-opacity-75 lift-up-3'>" + this.appVersion  + "</div>" +
                     "</div>" +
                     "<div class='fs-4 text-primary fw-semibold pt-2 pb-1'> Ваша оценка - " +  sRating + "/" + this.stars.length + "</div>" +

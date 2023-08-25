@@ -1,36 +1,80 @@
 
+### Отправка POST запроса update_db_from_config
+### с целью иницилизации БД данными из файла конфигурацции
+### для конкретного приложения
+POST https://api.zeleza.ru:11211/api/v1/update_db_from_config
+Content-Type: application/json
+
+{
+  "app_name": "kvas"
+}
+
+
+
+### Отправка POST запроса update_db_from_config
+### с целью иницилизации БД данными из файла конфигурацции
+### для всех приложений
+POST https://api.zeleza.ru:11211/api/v1/update_db_from_config
+Content-Type: application/json
+
+{}
+
+
+
+### Отправка POST запроса init_db_from_config
+### с целью иницилизации БД данными из файла конфигурацции
+### для конкретного приложения
+POST https://api.zeleza.ru:11211/api/v1/init_db_from_config
+Content-Type: application/json
+
+{
+  "app_name": "kvas"
+}
+
+### Отправка POST запроса init_db_from_config
+### с целью иницилизации БД данными из файла конфигурацции
+### для всех приложений
+POST https://api.zeleza.ru:11211/api/v1/init_db_from_config
+Content-Type: application/json
+
+{}
+
+
+### Отправка POST запроса get_rating c одним параметром
 POST https://api.zeleza.ru:11211/api/v1/get_rating
 Content-Type: application/json
 
 {
-  "app_name": "samovar"
+  "app_name": "kvas"
 }
 
-### Send GET request get_rating
+### Отправка POST запроса get_rating c двумя параметрами
+POST https://api.zeleza.ru:11211/api/v1/get_rating
+Content-Type: application/json
+
+{
+  "app_name": "rodina",
+  "version": "latest"
+}
+
+
+### Отправка POST запроса get_last_version
 POST https://api.zeleza.ru:11211/api/v1/get_last_version
 Content-Type: application/json
 
 {
-  "app_name": "samovar"
+  "app_name": "kvas"
 }
 
-### Send GET request get_rating
-POST https://api.zeleza.ru:11211/api/v1/get_rating
-Content-Type: application/json
 
-{
-  "app_name": "samovar",
-  "version": "latest"
-}
-
-### Send GET request new_record
+### Отправка POST запроса new_record (дабавление новой записи)
 POST https://api.zeleza.ru:11211/api/v1/new_record
 Content-Type: application/json
 
 {
-  "app_name": "samovar",
-  "rus_name": "Самовар",
-  "version": "1.0.1",
+  "app_name": "kvas",
+  "version": "latest",
+  "version_date": "11 ноября 2022 года",
   "name": "Bob",
   "email": "test@email.cc",
   "reviewElem": "Тестовый отзыв: программа отличная так держать! Супер11",
@@ -41,7 +85,8 @@ Content-Type: application/json
   "model": "Ultra KN-3118"
 }
 
-### Send POST request reviews_list
+### Отправка POST запроса reviews_list для просмотра всех
+### отзывов по заданном приложению и номеру версии
 POST https://api.zeleza.ru:11211/api/v1/reviews_list
 Content-Type: application/json
 
@@ -50,10 +95,12 @@ Content-Type: application/json
   "version": "latest"
 }
 
-### Send GET request reviews_table_page
+### Отправка GET запроса reviews_table_page
+### для отображения таблицы отзывов по всем приложеням
 GET https://api.zeleza.ru:11211/api/v1/reviews_table_page?key=secret_key&app_name=samovar
 
-### Send GET request summary_table_page
+### Отправка GET запроса summary_table_page
+### для отображения таблицы результатов рейтингов по всем приложеням
 GET https://api.zeleza.ru:11211/api/v1/summary_table_page?key=secret_key
 
 

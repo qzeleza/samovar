@@ -8,7 +8,10 @@ from apps.functions import (show_apps_summary,
                             add_new_record,
                             get_app_rating,
                             get_review_list,
-                            get_last_version)
+                            get_last_version,
+                            update_db_from_config,
+                            update_db_from_config_by_app_name,
+                            )
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +22,43 @@ def send_to_log(name_func):
 
 
 def register_routes(app, root_path):
-    # Маршрут для получения подсчитанного рейтинга для конкретного приложения
+
+    # Запрос для инициализации БД из файла конфигурации приложений
+    @app.route(root_path + '/update_db_from_config', methods=['POST'])
+    def update_db_from_config_route():
+        send_to_log(get_function_name())
+        app_name = request.json.get('app_name')
+        if app_name:
+            # если задано в POST запросе имя приложения
+            result = update_db_from_config_by_app_name(app_name, do_update=True)
+        else:
+            # если НЕ задано в POST запросе имя приложения,
+            # то проводим инициализацию по всем приложениям
+            result = update_db_from_config(do_update=True)
+
+        if 'app' in result:
+            del result['app']
+
+        return jsonify(result)
+
+    # Запрос для инициализации БД из файла конфигурации приложений
+    @app.route(root_path + '/init_db_from_config', methods=['POST'])
+    def init_db_from_config_route():
+        send_to_log(get_function_name())
+        app_name = request.json.get('app_name')
+        if app_name:
+            # если задано в POST запросе имя приложения
+            result = update_db_from_config_by_app_name(app_name)
+        else:
+            # если НЕ задано в POST запросе имя приложения,
+            # то проводим инициализацию по всем приложениям
+            result = update_db_from_config()
+
+        if 'app' in result:
+            del result['app']
+
+        return jsonify(result)
+
     # Маршрут для получения подсчитанного рейтинга для конкретного приложения
     @app.route(root_path + '/get_rating', methods=['POST'])
     def get_rating_route():

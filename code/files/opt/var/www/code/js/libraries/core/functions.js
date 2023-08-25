@@ -452,32 +452,32 @@ function getModalDialogFromFile(modalID, htmlCardTemplFile){
  * @param {NetworkRequestManager} server    - объект типа NetworkRequestManager - сервер рейтингов
  * @param rightPanel                        - Объект правой панели
  */
-function createRatingsForApps(appsData, server, rightPanel) {
-
-    if (!appsData || typeof appsData !== 'object') {
-        console.error(showError('Некорректные данные о приложениях.'));
-        return;
-    }
-
-    if (ROUTER_INFO) {
-        for (const app_name in appsData) {
-            if (appsData.hasOwnProperty(app_name)) {
-                const callRightPanel = app_name === 'samovar';
-                new Rating(app_name, server, ROUTER_INFO, rightPanel, callRightPanel);
-            }
-        }
-    } else {
-        tryGetDataFromServer(
-            RouterServer,
-            'get_router_data',
-            {},
-            (deviceInfo) => {
-                ROUTER_INFO = deviceInfo;
-                createRatingsForApps(appsData, server, rightPanel);
-            },
-            "при запросе информации о роутере пользователя"
-        );
-    }
-}
+//function createRatingsForApps(appsData, server, rightPanel) {
+//
+//    if (!appsData || typeof appsData !== 'object') {
+//        console.error(showError('Некорректные данные о приложениях.'));
+//        return;
+//    }
+//
+//    if (ROUTER_INFO) {
+//        for (const app_name in appsData) {
+//            if (appsData.hasOwnProperty(app_name)) {
+//                const callRightPanel = app_name === 'samovar';
+//                new Rating(app_name, server, rightPanel, ROUTER_INFO,  callRightPanel);
+//            }
+//        }
+//    } else {
+//        tryGetDataFromServer(
+//            RouterServer,
+//            'get_router_data',
+//            {},
+//            (deviceInfo) => {
+//                ROUTER_INFO = deviceInfo;
+//                createRatingsForApps(appsData, server, rightPanel);
+//            },
+//            "при запросе информации о роутере пользователя"
+//        );
+//    }
+//}
 
 

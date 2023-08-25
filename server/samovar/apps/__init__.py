@@ -21,8 +21,6 @@ def init_database(app):
             logger.debug(f"База данных создана заново: {app.config['DATABASE_PATH']}")
 
 
-
-
 # Инициализация экземпляра приложения
 def create_app(config):
     # Регистрация приложения Flask

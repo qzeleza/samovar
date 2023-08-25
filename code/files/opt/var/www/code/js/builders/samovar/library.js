@@ -47,6 +47,7 @@ $(document).ready( function () {
                     initRightPanelColumnsButtons($appsLibWindows, $numColumnsSelect);
                     // Инициализация вида карточек в окне
                     initViewState();
+                    appsData[app_name].createRatingsForApps(appsData)
                     progressBar.next();
                 });
                 progressBar.stop();
@@ -57,8 +58,8 @@ $(document).ready( function () {
         //
         libraryPageLoader.add(() => {
             // Для каждого приложения в массиве данных запрашиваем рейтинг
-            createRatingsForApps(appsData, ReviewsServer, rightPanel);
-            progressBar.next();
+//            createRatingsForApps(appsData, ReviewsServer, rightPanel);
+//            progressBar.next();
         });
 
         // libraryPageLoader.add(root + 'code/js/libraries/locals/select2.js');

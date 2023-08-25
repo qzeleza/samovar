@@ -95,7 +95,19 @@ function buildMainTemplatePage(root, rightPanel){
     templateLoad.add(() => {
         const data= {};
         data[appName] = {}
-        createRatingsForApps(data, ReviewsServer, rightPanel);
+        CAMOBAP.createRatingsForApps(data);
+
+        // createRatingsForApps(data, ReviewsServer, rightPanel);
     });
+
+    templateLoad.add(() => {
+        const appRusName = 'Самовар';
+        CAMOBAP.createAppVideoPreview();
+        CAMOBAP.initDeleteDialog('full', appRusName);
+        CAMOBAP.initDeleteDialog('simple', appRusName);
+    });
+
+
+
     return templateLoad;
 }

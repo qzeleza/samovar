@@ -18,6 +18,7 @@ from apps.logger import root_logger
 # from geventwebsocket.handler import WebSocketHandler
 
 from gevent import monkey
+
 monkey.patch_all()
 
 from apps import create_app
@@ -33,20 +34,19 @@ get_config_mode = 'Debug' if DEBUG else 'Production'
 try:
     # Load the configuration using the default values
     app_config = config_dict[get_config_mode.capitalize()]
+    app = create_app(app_config)
+
+    if DEBUG:
+        # Настраиваем логирование в файл
+        root_logger.info('ОТЛАДКА ВКЛЮЧЕНА')
+        root_logger.info('Логирование ведется в файл ' + app_config.LOG_DEBUG_FILE)
+        root_logger.info('Файл базы данных ' + app_config.DATABASE_PATH)
 
 except KeyError:
 
     error = "Недопустимый <config_mode>. Ожидалось одно из значений [Debug, Production]"
     root_logger.error(error)
     exit(error)
-
-app = create_app(app_config)
-
-if DEBUG:
-    # Настраиваем логирование в файл
-    root_logger.info('ОТЛАДКА ВКЛЮЧЕНА')
-    root_logger.info('Логирование ведется в файл ' + app_config.LOG_DEBUG_FILE)
-    root_logger.info('Файл базы данных ' + app_config.DATABASE_PATH)
 
 if __name__ == '__main__':
 
