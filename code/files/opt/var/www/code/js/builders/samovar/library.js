@@ -17,9 +17,9 @@ $(document).ready( function () {
         const libraryPageLoader =  buildMainTemplatePage(root, rightPanel);
         progressBar.next();
 
-        libraryPageLoader.add({id: '#page_header', file: root + 'pages/library/modules/header.html'});
-        libraryPageLoader.add({id: '#page_breadcrumb', file: root + 'pages/library/modules/breadcrumb.html'});
-        // libraryPageLoader.add({id: '#kvas_history_modal', file: root + 'pages/library/modules/CAMOBAP/history.html'});
+        libraryPageLoader.add({id: '#page_header', file: root + 'html/apps/samovar/core/header.html'});
+        libraryPageLoader.add({id: '#page_breadcrumb', file: root + 'html/apps/samovar/core/breadcrumb.html'});
+        // libraryPageLoader.add({id: '#kvas_history_modal', file: root + 'html/apps/samovar/modules/CAMOBAP/history.html'});
 
 
         // Создаем карточки приложений для библиотеки Самовара

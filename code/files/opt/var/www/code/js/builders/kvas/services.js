@@ -15,10 +15,10 @@ $(document).ready(function() {
 
         const servicePageLoader = buildMainTemplatePage(root);
 
-        servicePageLoader.add({id:'#page_header', file: root + 'pages/kvas/services/modules/header.html'});
-        servicePageLoader.add({id:'#page_breadcrumb', file: root + 'pages/kvas/services/modules/breadcrumb.html'});
-        servicePageLoader.add({id:'#app_kvas_card', file: root + 'pages/kvas/services/modules/card.html'});
-        servicePageLoader.add({id:'#modal_form_ssr_data', file: root + 'pages/kvas/services/modules/ssr_setup.html'});
+        servicePageLoader.add({id:'#page_header', file: root + 'html/apps/kvas/services/modules/header.html'});
+        servicePageLoader.add({id:'#page_breadcrumb', file: root + 'html/apps/kvas/services/modules/breadcrumb.html'});
+        servicePageLoader.add({id:'#app_kvas_card', file: root + 'html/apps/kvas/services/modules/card.html'});
+        servicePageLoader.add({id:'#modal_form_ssr_data', file: root + 'html/apps/kvas/services/modules/ssr_setup.html'});
 
         servicePageLoader.add(root + 'code/js/pages/all/select2.js');
         servicePageLoader.add(root + "code/js/pages/services/accordion.js");

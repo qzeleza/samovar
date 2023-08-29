@@ -12,9 +12,9 @@ $(document).ready(function() {
         // Добавление дополнительных модулей
         const wlistPageLoader = buildMainTemplatePage(root);
 
-        wlistPageLoader.add({id:'#page_header', file: root + 'pages/kvas/wlist/modules/header.html'});
-        wlistPageLoader.add({id:'#page_breadcrumb', file: root + 'pages/kvas/wlist/modules/breadcrumb.html'});
-        wlistPageLoader.add({id:'#app_kvas_card', file: root + 'pages/kvas/wlist/modules/card.html'});
+        wlistPageLoader.add({id:'#page_header', file: root + 'html/apps/kvas/wlist/modules/header.html'});
+        wlistPageLoader.add({id:'#page_breadcrumb', file: root + 'html/apps/kvas/wlist/modules/breadcrumb.html'});
+        wlistPageLoader.add({id:'#app_kvas_card', file: root + 'html/apps/kvas/wlist/modules/card.html'});
 
         // Добавление дополнительных функций
         wlistPageLoader.add(root + "code/js/pages/wlist/data_tables.js");

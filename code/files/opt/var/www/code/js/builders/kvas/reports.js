@@ -12,8 +12,8 @@ $(document).ready(function() {
         // Добавление дополнительных модулей
         const reportPageLoader = buildMainTemplatePage(root);
 
-        reportPageLoader.add({id:'#page_header', file: root + 'pages/kvas/reports/modules/header.html'});
-        reportPageLoader.add({id:'#page_breadcrumb', file: root + 'pages/kvas/reports/modules/breadcrumb.html'});
+        reportPageLoader.add({id:'#page_header', file: root + 'html/apps/kvas/reports/modules/header.html'});
+        reportPageLoader.add({id:'#page_breadcrumb', file: root + 'html/apps/kvas/reports/modules/breadcrumb.html'});
 
         reportPageLoader.add(root + 'code/js/pages/all/select2.js');
         reportPageLoader.add(() => {

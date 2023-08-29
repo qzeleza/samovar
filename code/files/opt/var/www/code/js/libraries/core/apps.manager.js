@@ -21,9 +21,9 @@ class AppsManager {
         this.storageKey                 = `#${this.appName}_history_modal_key`;
         this.modalDialogsList           = $('#list_modal_windows');
 
-        this.htmlCardTemplFile          = root + 'pages/core/templates/card.html'
-        this.htmlPreviewTemplFile       = root + 'pages/core/templates/preview.html'
-        this.htmlAppDeleteTemplFile     = root + 'pages/core/templates/app.delete.html'
+        this.htmlCardTemplFile          = root + 'html/core/templates/card.html'
+        this.htmlPreviewTemplFile       = root + 'html/core/templates/preview.html'
+        this.htmlAppDeleteTemplFile     = root + 'html/core/templates/app.delete.html'
 
     }
 

@@ -13,8 +13,8 @@ function buildMainTemplatePage(root, rightPanel){
     const appName = 'samovar';
 
     // Загрузка необходимых страниц и аттрибутов элементов в них для всех страниц шаблона
-    templateLoad.add({id:'#right_call_button', file: root + 'pages/core/parts/right_toolbar.html'});
-    templateLoad.add({ id: '#sidebar_panel', file: root + "pages/core/parts/sidebar.html",
+    templateLoad.add({id:'#right_call_button', file: root + 'html/core/parts/right_toolbar.html'});
+    templateLoad.add({ id: '#sidebar_panel', file: root + "html/core/parts/sidebar.html",
         attributes: {
             '#logo_images_link': {
                 href: root + 'index.html'
@@ -32,13 +32,13 @@ function buildMainTemplatePage(root, rightPanel){
                 href: root + 'index.html'
             },
             '#sidebar_kvas_services': {
-                href: root + 'pages/kvas/services/services.html'
+                href: root + 'html/apps/kvas/services/services.html'
             },
             '#sidebar_kvas_wlist': {
-                href: root + 'pages/kvas/wlist/wlist.html'
+                href: root + 'html/apps/kvas/wlist/wlist.html'
             },
             '#sidebar_kvas_reports': {
-                href: root + 'pages/kvas/reports/reports.html'
+                href: root + 'html/apps/kvas/reports/reports.html'
             },
             '#sidebar_menu .nav-link': {
                 class: ['-active']
@@ -52,7 +52,7 @@ function buildMainTemplatePage(root, rightPanel){
 
 
     // Загружаем код правой панели
-    templateLoad.add({id:'#right_panel',file:  root + 'pages/core/parts/right_panel.html',
+    templateLoad.add({id:'#right_panel',file:  root + 'html/core/parts/right_panel.html',
         attributes: {
             '#logo_samovar_color': {
                 src: root + 'assets/images/logo/logo_samovar_color.svg'

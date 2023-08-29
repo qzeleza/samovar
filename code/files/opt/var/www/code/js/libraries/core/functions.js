@@ -302,7 +302,7 @@ function formatDuration(duration) {
  * @param {string} root             - Путь к корневой директории
  * @param {string} historyTemplate  - Путь к файлу с HTML-шаблоном версионной истории.
  */
-function createVersionHistory(jsonHistory, root= '', historyTemplate = 'pages/core/templates/history.html') {
+function createVersionHistory(jsonHistory, root= '', historyTemplate = 'html/core/templates/history.html') {
     // Получаем элементы модального окна и контейнера для скроллинга.
     //    Пример сформированной структуры ответа
     //    {
