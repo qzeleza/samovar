@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask
 import os
 from flask_cors import CORS
@@ -6,6 +7,7 @@ import logging
 from apps.websockets import socketio
 from apps.models import database
 from apps.routes import register_routes
+from apps.database import update_db_from_config
 
 logger = logging.getLogger(__name__)
 
@@ -18,6 +20,7 @@ def init_database(app):
     if not os.path.exists(app.config['DATABASE_PATH']):
         with app.app_context():
             database.create_all()
+            update_db_from_config()
             logger.debug(f"База данных создана заново: {app.config['DATABASE_PATH']}")
 
 

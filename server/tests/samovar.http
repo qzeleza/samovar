@@ -5,7 +5,7 @@ POST https://api.zeleza.ru:11211/api/v1/get_history
 Content-Type: application/json
 
 {
-  "app_name": "kvas"
+  "app_name": "samovar"
 }
 
 
@@ -16,7 +16,7 @@ POST https://api.zeleza.ru:11211/api/v1/update_db_from_config
 Content-Type: application/json
 
 {
-  "app_name": "kvas"
+  "app_name": "samovar"
 }
 
 
@@ -30,24 +30,6 @@ Content-Type: application/json
 {}
 
 
-
-### Отправка POST запроса init_db_from_config
-### с целью иницилизации БД данными из файла конфигурацции
-### для конкретного приложения
-POST https://api.zeleza.ru:11211/api/v1/init_db_from_config
-Content-Type: application/json
-
-{
-  "app_name": "kvas"
-}
-
-### Отправка POST запроса init_db_from_config
-### с целью иницилизации БД данными из файла конфигурацции
-### для всех приложений
-POST https://api.zeleza.ru:11211/api/v1/init_db_from_config
-Content-Type: application/json
-
-{}
 
 
 ### Отправка POST запроса get_rating c одним параметром
@@ -63,7 +45,7 @@ POST https://api.zeleza.ru:11211/api/v1/get_rating
 Content-Type: application/json
 
 {
-  "app_name": "rodina",
+  "app_name": "samovar",
   "version": "latest"
 }
 
@@ -73,7 +55,7 @@ POST https://api.zeleza.ru:11211/api/v1/get_last_version
 Content-Type: application/json
 
 {
-  "app_name": "samovar"
+  "app_name": "kvas"
 }
 
 
@@ -87,7 +69,7 @@ Content-Type: application/json
   "version_date": "11 ноября 2022 года",
   "name": "Bob",
   "email": "test@email.cc",
-  "reviewElem": "Тестовый отзыв: программа отличная так держать! Супер11",
+  "review": "Тестовый отзыв: программа отличная так держать! Супер11",
   "rating": "9",
   "type": "Отзыв с рейтингом",
   "device_id": "42csr4rc435v34v2c5tc2",
@@ -101,13 +83,13 @@ POST https://api.zeleza.ru:11211/api/v1/reviews_list
 Content-Type: application/json
 
 {
-  "app_name": "samovar",
+  "app_name": "kvas",
   "version": "latest"
 }
 
 ### Отправка GET запроса reviews_table_page
 ### для отображения таблицы отзывов по всем приложеням
-GET https://api.zeleza.ru:11211/api/v1/reviews_table_page?key=secret_key&app_name=samovar
+GET https://api.zeleza.ru:11211/api/v1/reviews_table_page?key=secret_key&app_name=kvas
 
 ### Отправка GET запроса summary_table_page
 ### для отображения таблицы результатов рейтингов по всем приложеням

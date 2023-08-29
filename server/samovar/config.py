@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+# ------------------------------------------------------------------------------
+#
+#       Здесь описаны общие настройки для всего проекта
+#
+# ------------------------------------------------------------------------------
+
 import os, random, string
 
 
@@ -5,7 +12,8 @@ class Config(object):
     basedir = os.path.abspath(os.path.dirname(__file__))
 
     # Файл конфигурации всех существующих приложений для инициализации БД
-    FILE_CONFIG = './data/apps.ini'
+    FILE_CONFIG = '/apps/api/apps/history/apps.ini'
+    HISTORY_FILE_NAME = 'HISTORY.md'
     # Формат даты и времени для логирования
     DATE_FORMAT = "%d-%m-%Y %H:%M:%S"
     JSON_DATE_FORMAT = '%d %B %Y'

@@ -1,15 +1,30 @@
+# -*- coding: utf-8 -*-
+# ------------------------------------------------------------------------------
+#
+#       Здесь описаны функции для обработки запросов
+#       к серверу по протоколу Websocket
+#
+# ------------------------------------------------------------------------------
+
 from flask import request
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
 import logging
 
 from apps.logger import get_function_name
-from apps.functions import (
+
+from apps.restapi import (
     add_new_record,
     get_app_rating,
-    get_review_list,
     get_last_version,
     get_app_history
-    )
+)
+
+from apps.admin import (
+    show_apps_summary,
+    show_reviews_table,
+    get_review_list,
+)
+
 
 logger = logging.getLogger(__name__)
 

@@ -25,7 +25,7 @@ ufw enable
 rm /etc/nginx/sites-enabled/default
 ln -s ${API_PATH}/gunicorn.service /etc/systemd/system/samovar.service
 ln -s ${API_PATH}/uwsgi.ini /etc/uwsgi/apps-enabled/samovar.ini
-ln -s ${API_PATH}/nginx.conf /etc/nginx/apps-enabled/samovar.conf
+ln -s ${API_PATH}/nginx.conf /etc/nginx/sites-enabled/samovar.conf
 ln -s ${API_PATH}/logs/samovar.logrotate /etc/logrotate.d/samovar
 
 groupadd root

@@ -1,20 +1,36 @@
+# -*- coding: utf-8 -*-
+# ------------------------------------------------------------------------------
+#
+#       Здесь описаны функции для обработки непосредственно
+#       запросов к серверу через RESTAPI
+#
+# ------------------------------------------------------------------------------
+
 from flask import request, jsonify
 import logging
-
-from apps.decorators import check_data_and_key
 from apps.logger import get_function_name
-from apps.functions import (show_apps_summary,
-                            show_reviews_table,
-                            add_new_record,
-                            get_app_rating,
-                            get_review_list,
-                            get_last_version,
-                            update_db_from_config,
-                            update_db_from_config_by_app_name,
-                            get_app_history
-                            )
 
 logger = logging.getLogger(__name__)
+
+from apps.decorators import check_data_and_key
+
+from apps.restapi import (
+    add_new_record,
+    get_app_rating,
+    get_last_version,
+    get_app_history
+)
+
+from apps.database import (
+    update_db_from_config,
+    update_db_from_config_by_app_name,
+)
+
+from apps.admin import (
+    show_apps_summary,
+    show_reviews_table,
+    get_review_list,
+)
 
 
 def send_to_log(name_func):
@@ -33,24 +49,6 @@ def register_routes(app, root_path):
     # Запрос для инициализации БД из файла конфигурации приложений
     @app.route(root_path + '/update_db_from_config', methods=['POST'])
     def update_db_from_config_route():
-        send_to_log(get_function_name())
-        app_name = request.json.get('app_name')
-        if app_name:
-            # если задано в POST запросе имя приложения
-            result = update_db_from_config_by_app_name(app_name, do_update=True)
-        else:
-            # если НЕ задано в POST запросе имя приложения,
-            # то проводим инициализацию по всем приложениям
-            result = update_db_from_config(do_update=True)
-
-        if 'app' in result:
-            del result['app']
-
-        return jsonify(result)
-
-    # Запрос для инициализации БД из файла конфигурации приложений
-    @app.route(root_path + '/init_db_from_config', methods=['POST'])
-    def init_db_from_config_route():
         send_to_log(get_function_name())
         app_name = request.json.get('app_name')
         if app_name:
