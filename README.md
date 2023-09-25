@@ -31,7 +31,7 @@
 - Разработка проекта ведется на IDE от компании [JetBrains](https://www.jetbrains.com/ru-ru/).
 - Для проведения тестов, в проекте используется пакеты
   - [BATS](https://github.com/bats-core/bats-core/blob/master/LICENSE.md) от нескольких [АВТОРОВ](https://github.com/bats-core/bats-core/blob/master/AUTHORS).
-  - [Google Tests] (https://google.github.io/googletest/quickstart-cmake.html).
+  - [Google Tests](https://google.github.io/googletest/quickstart-cmake.html).
 
 ## Помощь в развитии проекта
 Лучшей поддержкой проекта будет Ваше участие в нем. Заявку на участие отправляйте на **mail собачка zeleza.ru**.
