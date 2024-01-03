@@ -1,5 +1,5 @@
 ### Send POST request install update
-POST https://kvas.zeleza.ru:11133/kvas/v1/let_install
+POST https://router.zeleza.ru:11133/kvas/v1/let_install
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
 }
 
 ### Send POST request check for update
-POST https://kvas.zeleza.ru:11133/kvas/v1/check_update
+POST https://router.zeleza.ru:11133/kvas/v1/check_update
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ### Send POST request get_app_history
-POST https://kvas.zeleza.ru:11133/kvas/v1/get_app_history
+POST https://router.zeleza.ru:11133/kvas/v1/get_app_history
 Content-Type: application/json
 
 {
@@ -24,10 +24,10 @@ Content-Type: application/json
 
 
 ### Send POST request get_router_data
-POST https://kvas.zeleza.ru:11133/kvas/v1/get_router_data
+POST https://router.zeleza.ru:11133/kvas/v1/get_router_data
 Content-Type: application/json
 
 ### Send POST request get_apps_data
-POST https://kvas.zeleza.ru:11133/kvas/v1/get_apps_data
+POST https://router.zeleza.ru:11133/kvas/v1/get_apps_data
 Content-Type: application/json
 

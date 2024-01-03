@@ -16,8 +16,8 @@ class Config(object):
 
     RESTAPI_ROOT_PATH = "/kvas/v1/"
 
-    CERT_PEM = basedir + '/certs/kvas.zeleza.ru.crt'
-    CERT_KEY = basedir + '/certs/kvas.zeleza.ru.key'
+    CERT_PEM = basedir + '/certs/router.zeleza.ru.crt'
+    CERT_KEY = basedir + '/certs/router.zeleza.ru.key'
 
 
 class ProductionConfig(Config):

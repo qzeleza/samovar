@@ -2,7 +2,7 @@ let ReviewsServer, CAMOBAP, RouterServer, ROUTER_INFO;
 
 // При запуске в серию необходимо установить TEST_STAGE = false
 const PROD_ROUTER_URL = window.location.href;
-const TEST_ROUTER_URL = "kvas.zeleza.ru";
+const TEST_ROUTER_URL = "router.zeleza.ru";
 const TEST_STAGE    = true
 const ROUTER_URL        = TEST_STAGE ? TEST_ROUTER_URL : PROD_ROUTER_URL
 

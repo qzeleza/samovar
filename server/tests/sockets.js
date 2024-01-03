@@ -1,6 +1,6 @@
 // sockets.js
 const serverSamovar = "wss://api.zeleza.ru:11211";
-const serverKvas = "wss://kvas.zeleza.ru:11133";
+const serverKvas = "wss://router.zeleza.ru:11133";
 let socket = null;
 
 $(document).ready(function() {

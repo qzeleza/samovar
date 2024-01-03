@@ -40,10 +40,10 @@ systemctl enable ${APP_NAME}.service
 systemctl restart logrotate.service
 
 # Проверка портов
-netstat -tuln | grep ":${API_PORT}"
+netstat -tuln | grep ":${API_PORT_OUTSIDE}"
 netstat -tuln | grep LISTEN
 lsof -i :${API_PORT}"
-lsof -i @api.zeleza.ru:${API_PORT}
+lsof -i @router.zeleza.ru:${API_PORT_OUTSIDE}
 
 Команды для отладки
 --------------------------
@@ -54,4 +54,15 @@ killall gevent
 systemctl restart gevent.service
 ps aux | grep api.py
 ufw status numbered
-ufw delete <num>
+ufw delete <num_port>
+
+
+# Переход на другой домен 
+
+1. У провайдера создай новый домен <new.domain.ru> и прикрепи его к рабочему сайту
+2. Получи у провайдера SSL сертификаты 
+3. Скопируй содержимое полученного сертификата CRT в файл /apps/kvas/cert/<new.domain.ru>.crt
+4. Скопируй содержимое полученного сертификата KEY в файл /apps/kvas/cert/<new.domain.ru>.key
+5. Поменяй в файлах проекта все упоминания старого доменного имени на новое
+6. Перезапусти сервер на timeweb.cloud командой kvs_rb
+7. В случае проблем используй команду kvs_py для зауска сервера в режиме отладки
